@@ -11,10 +11,7 @@
 		65F97E0E2AF669A000C0E501 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0D2AF669A000C0E501 /* ContentView.swift */; };
 		65F97E102AF669A000C0E501 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* Item.swift */; };
 		65F97E122AF669A100C0E501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F97E112AF669A100C0E501 /* Assets.xcassets */; };
-		65F97E162AF669A100C0E501 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F97E152AF669A100C0E501 /* Preview Assets.xcassets */; };
 		65F97E202AF669A100C0E501 /* PsycherosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E1F2AF669A100C0E501 /* PsycherosTests.swift */; };
-		65F97E2A2AF669A100C0E501 /* PsycherosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E292AF669A100C0E501 /* PsycherosUITests.swift */; };
-		65F97E2C2AF669A100C0E501 /* PsycherosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E2B2AF669A100C0E501 /* PsycherosUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,12 +38,9 @@
 		65F97E0F2AF669A000C0E501 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		65F97E112AF669A100C0E501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65F97E132AF669A100C0E501 /* Psycheros.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Psycheros.entitlements; sourceTree = "<group>"; };
-		65F97E152AF669A100C0E501 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		65F97E1B2AF669A100C0E501 /* PsycherosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PsycherosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F97E1F2AF669A100C0E501 /* PsycherosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosTests.swift; sourceTree = "<group>"; };
 		65F97E252AF669A100C0E501 /* PsycherosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PsycherosUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65F97E292AF669A100C0E501 /* PsycherosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosUITests.swift; sourceTree = "<group>"; };
-		65F97E2B2AF669A100C0E501 /* PsycherosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosUITestsLaunchTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +73,6 @@
 			children = (
 				65F97E0A2AF669A000C0E501 /* Psycheros */,
 				65F97E1E2AF669A100C0E501 /* PsycherosTests */,
-				65F97E282AF669A100C0E501 /* PsycherosUITests */,
 				65F97E092AF6699F00C0E501 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -97,22 +90,12 @@
 		65F97E0A2AF669A000C0E501 /* Psycheros */ = {
 			isa = PBXGroup;
 			children = (
-				65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */,
-				65F97E0D2AF669A000C0E501 /* ContentView.swift */,
-				65F97E0F2AF669A000C0E501 /* Item.swift */,
-				65F97E112AF669A100C0E501 /* Assets.xcassets */,
-				65F97E132AF669A100C0E501 /* Psycheros.entitlements */,
-				65F97E142AF669A100C0E501 /* Preview Content */,
+				65F97E3B2AF66DC000C0E501 /* Models */,
+				65F97E3A2AF66DB200C0E501 /* App */,
+				65F97E392AF66DA300C0E501 /* Config */,
+				65F97E382AF66D9A00C0E501 /* Assets */,
 			);
 			path = Psycheros;
-			sourceTree = "<group>";
-		};
-		65F97E142AF669A100C0E501 /* Preview Content */ = {
-			isa = PBXGroup;
-			children = (
-				65F97E152AF669A100C0E501 /* Preview Assets.xcassets */,
-			);
-			path = "Preview Content";
 			sourceTree = "<group>";
 		};
 		65F97E1E2AF669A100C0E501 /* PsycherosTests */ = {
@@ -123,13 +106,37 @@
 			path = PsycherosTests;
 			sourceTree = "<group>";
 		};
-		65F97E282AF669A100C0E501 /* PsycherosUITests */ = {
+		65F97E382AF66D9A00C0E501 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
-				65F97E292AF669A100C0E501 /* PsycherosUITests.swift */,
-				65F97E2B2AF669A100C0E501 /* PsycherosUITestsLaunchTests.swift */,
+				65F97E112AF669A100C0E501 /* Assets.xcassets */,
 			);
-			path = PsycherosUITests;
+			path = Assets;
+			sourceTree = "<group>";
+		};
+		65F97E392AF66DA300C0E501 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				65F97E132AF669A100C0E501 /* Psycheros.entitlements */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		65F97E3A2AF66DB200C0E501 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */,
+				65F97E0D2AF669A000C0E501 /* ContentView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		65F97E3B2AF66DC000C0E501 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				65F97E0F2AF669A000C0E501 /* Item.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,7 +243,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F97E162AF669A100C0E501 /* Preview Assets.xcassets in Resources */,
 				65F97E122AF669A100C0E501 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,8 +286,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F97E2A2AF669A100C0E501 /* PsycherosUITests.swift in Sources */,
-				65F97E2C2AF669A100C0E501 /* PsycherosUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -420,10 +424,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Psycheros/Psycheros.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Psycheros/Config/Psycheros.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Psycheros/Preview Content\"";
 				DEVELOPMENT_TEAM = SS5Y2A9M32;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -458,10 +461,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Psycheros/Psycheros.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Psycheros/Config/Psycheros.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Psycheros/Preview Content\"";
 				DEVELOPMENT_TEAM = SS5Y2A9M32;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
