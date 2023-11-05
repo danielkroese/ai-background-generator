@@ -6,11 +6,18 @@ protocol PromptGenerating {
 
 final class PromptGenerator: PromptGenerating {
     func writePrompt(with prompt: ImagePrompt) -> String {
-        var feelings: [String] = []
-        for feeling in prompt.feelings {
-            feelings.append(feeling.rawValue)
+        let feelings = parse(feelings: prompt.feelings)
+        
+        return "Generate a motivational image for someone who is feeling \(feelings), using the color \(prompt.color) in an iphone ratio"
+    }
+    
+    private func parse(feelings: [Feeling]) -> String {
+        var strings: [String] = []
+        
+        for feeling in feelings {
+            strings.append(feeling.rawValue)
         }
         
-        return "Generate a motivational image for someone who is feeling \(feelings.joined(separator: ", ")), using the color \(prompt.color) in an iphone ratio"
+        return strings.joined(separator: ", ")
     }
 }
