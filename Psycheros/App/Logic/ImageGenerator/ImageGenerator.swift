@@ -10,9 +10,9 @@ enum ImageGeneratingError: Error {
 
 final class ImageGenerator: ImageGenerating {
     func send(_ prompt: ImagePrompt) throws {
-        // ...
-        if prompt == ImagePrompt(color: "", feelings: []) {
-            throw ImageGeneratingError.invalidPrompt 
+        guard prompt.color.isEmpty == false,
+              prompt.feelings.isEmpty == false else {
+            throw ImageGeneratingError.invalidPrompt
         }
     }
 }
