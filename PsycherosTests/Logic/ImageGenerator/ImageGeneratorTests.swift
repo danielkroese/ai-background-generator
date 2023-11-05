@@ -1,12 +1,12 @@
 import XCTest
 
 final class ImageGeneratorTests: XCTestCase {
-    func test_zero() {
-        let sut = ImageGenerator()
+    private func createSut() -> ImageGenerator {
+        return ImageGenerator()
     }
     
     func test_sendPrompt() {
-        let sut = ImageGenerator()
+        let sut = createSut()
         
         let prompt = ImagePrompt(color: "yellow", feelings: [.happy])
         
@@ -20,13 +20,13 @@ final class ImageGeneratorTests: XCTestCase {
     func test_invalidPrompt_throws() {
         let expectation = XCTestExpectation(description: "throws invalidPrompt")
         
-        let sut = ImageGenerator()
+        let sut = createSut()
         
         let prompt = ImagePrompt(color: "", feelings: [])
         
         do {
             try sut.send(prompt)
-        } catch ImageGeneratingError.invalidPrompt {
+        } catch ImageGeneratingError.incompletePrompt {
             expectation.fulfill()
         } catch {
             XCTFail()
@@ -38,13 +38,13 @@ final class ImageGeneratorTests: XCTestCase {
     func test_invalidPrompt_emptyColor_throws() {
         let expectation = XCTestExpectation(description: "throws invalidPrompt")
         
-        let sut = ImageGenerator()
+        let sut = createSut()
         
         let prompt = ImagePrompt(color: "", feelings: [.anxious])
         
         do {
             try sut.send(prompt)
-        } catch ImageGeneratingError.invalidPrompt {
+        } catch ImageGeneratingError.incompletePrompt {
             expectation.fulfill()
         } catch {
             XCTFail()
