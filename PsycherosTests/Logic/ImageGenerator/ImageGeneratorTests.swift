@@ -1,4 +1,5 @@
 import XCTest
+import SwiftUI // ??
 import Combine
 
 final class ImageGeneratorTests: XCTestCase {
@@ -6,13 +7,13 @@ final class ImageGeneratorTests: XCTestCase {
         return ImageGenerator()
     }
     
-    func test_generate_withPrompt_doesntThrows() async {
+    func test_generate_withPrompt_doesNotThrow() async {
         let sut = createSut()
         
         let prompt = ImagePrompt(color: "yellow", feelings: [.happy])
         
         do {
-            try await sut.generate(from: prompt)
+            _ = try await sut.generate(from: prompt)
         } catch {
             XCTFail()
         }
@@ -26,7 +27,7 @@ final class ImageGeneratorTests: XCTestCase {
         let prompt = ImagePrompt(color: "", feelings: [])
         
         do {
-            try await sut.generate(from: prompt)
+            _ = try await sut.generate(from: prompt)
         } catch ImageGeneratingError.incompletePrompt {
             expectation.fulfill()
         } catch {
@@ -44,7 +45,7 @@ final class ImageGeneratorTests: XCTestCase {
         let prompt = ImagePrompt(color: "", feelings: [.anxious])
         
         do {
-            try await sut.generate(from: prompt)
+            _ = try await sut.generate(from: prompt)
         } catch ImageGeneratingError.incompletePrompt {
             expectation.fulfill()
         } catch {
@@ -55,7 +56,17 @@ final class ImageGeneratorTests: XCTestCase {
     }
     
     func test_generate_returnsImage() async {
+        let sut = createSut()
         
+        let prompt = ImagePrompt(color: "yellow", feelings: [.happy])
+        
+        do {
+            let image = try await sut.generate(from: prompt)
+            
+            XCTAssertEqual(image, Image(""))
+        } catch {
+            XCTFail()
+        }
     }
 }
 

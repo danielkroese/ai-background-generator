@@ -6,7 +6,7 @@ struct AIImage {
 }
 
 protocol ImageGenerating {
-    func generate(from: ImagePrompt) async throws
+    func generate(from: ImagePrompt) async throws -> Image
 }
 
 enum ImageGeneratingError: Error {
@@ -14,8 +14,10 @@ enum ImageGeneratingError: Error {
 }
 
 final class ImageGenerator: ImageGenerating {
-    func generate(from prompt: ImagePrompt) async throws {
+    func generate(from prompt: ImagePrompt) async throws -> Image {
         try assertNotEmpty(prompt)
+        
+        return await generateImage(from: prompt)
     }
     
     private func assertNotEmpty(_ prompt: ImagePrompt) throws {
