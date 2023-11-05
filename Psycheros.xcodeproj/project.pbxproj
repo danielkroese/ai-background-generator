@@ -10,6 +10,9 @@
 		65250CB42AF7D8AA006BB662 /* ImagePromptTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB32AF7D8AA006BB662 /* ImagePromptTests.swift */; };
 		65250CB62AF7DA87006BB662 /* ImagePrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB52AF7DA87006BB662 /* ImagePrompt.swift */; };
 		65250CB72AF7DA87006BB662 /* ImagePrompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB52AF7DA87006BB662 /* ImagePrompt.swift */; };
+		65250CBB2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CBA2AF7F3B3006BB662 /* ImageGenerator.swift */; };
+		65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CBA2AF7F3B3006BB662 /* ImageGenerator.swift */; };
+		65250CC02AF7F3D2006BB662 /* ImageGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CBF2AF7F3D2006BB662 /* ImageGeneratorTests.swift */; };
 		65AA66932AF7B29E00C2BCD6 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* JournalEntry.swift */; };
 		65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* JournalEntry.swift */; };
 		65AA66972AF7B2C500C2BCD6 /* JournalEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA66962AF7B2C500C2BCD6 /* JournalEntryTests.swift */; };
@@ -33,6 +36,8 @@
 		65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Psycheros.xctestplan; sourceTree = "<group>"; };
 		65250CB32AF7D8AA006BB662 /* ImagePromptTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePromptTests.swift; sourceTree = "<group>"; };
 		65250CB52AF7DA87006BB662 /* ImagePrompt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePrompt.swift; sourceTree = "<group>"; };
+		65250CBA2AF7F3B3006BB662 /* ImageGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerator.swift; sourceTree = "<group>"; };
+		65250CBF2AF7F3D2006BB662 /* ImageGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGeneratorTests.swift; sourceTree = "<group>"; };
 		65AA66962AF7B2C500C2BCD6 /* JournalEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryTests.swift; sourceTree = "<group>"; };
 		65F97E082AF6699F00C0E501 /* Psycheros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Psycheros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosApp.swift; sourceTree = "<group>"; };
@@ -62,6 +67,38 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		65250CB82AF7F38D006BB662 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				65250CB92AF7F394006BB662 /* ImageGenerator */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		65250CB92AF7F394006BB662 /* ImageGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				65250CBA2AF7F3B3006BB662 /* ImageGenerator.swift */,
+			);
+			path = ImageGenerator;
+			sourceTree = "<group>";
+		};
+		65250CBD2AF7F3B8006BB662 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				65250CBE2AF7F3C1006BB662 /* ImageGenerator */,
+			);
+			path = Logic;
+			sourceTree = "<group>";
+		};
+		65250CBE2AF7F3C1006BB662 /* ImageGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				65250CBF2AF7F3D2006BB662 /* ImageGeneratorTests.swift */,
+			);
+			path = ImageGenerator;
+			sourceTree = "<group>";
+		};
 		65AA66952AF7B2B900C2BCD6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +139,7 @@
 		65F97E1E2AF669A100C0E501 /* PsycherosTests */ = {
 			isa = PBXGroup;
 			children = (
+				65250CBD2AF7F3B8006BB662 /* Logic */,
 				65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */,
 				65AA66952AF7B2B900C2BCD6 /* Models */,
 			);
@@ -127,6 +165,7 @@
 		65F97E3A2AF66DB200C0E501 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				65250CB82AF7F38D006BB662 /* Logic */,
 				65F97E3B2AF66DC000C0E501 /* Models */,
 				65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */,
 				65F97E0D2AF669A000C0E501 /* ContentView.swift */,
@@ -244,6 +283,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AA66932AF7B29E00C2BCD6 /* JournalEntry.swift in Sources */,
+				65250CBB2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
 				65F97E3D2AF696FD00C0E501 /* NewEntryView.swift in Sources */,
 				65F97E0E2AF669A000C0E501 /* ContentView.swift in Sources */,
 				65F97E0C2AF669A000C0E501 /* PsycherosApp.swift in Sources */,
@@ -256,6 +296,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */,
+				65250CC02AF7F3D2006BB662 /* ImageGeneratorTests.swift in Sources */,
+				65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
 				65250CB72AF7DA87006BB662 /* ImagePrompt.swift in Sources */,
 				65AA66972AF7B2C500C2BCD6 /* JournalEntryTests.swift in Sources */,
 				65250CB42AF7D8AA006BB662 /* ImagePromptTests.swift in Sources */,
