@@ -1,23 +1,24 @@
 import XCTest
+import Combine
 
 final class ImageGeneratorTests: XCTestCase {
     private func createSut() -> ImageGenerator {
         return ImageGenerator()
     }
     
-    func test_sendPrompt() {
+    func test_generate_withPrompt_doesntThrows() async {
         let sut = createSut()
         
         let prompt = ImagePrompt(color: "yellow", feelings: [.happy])
         
         do {
-            try sut.send(prompt)
+            try await sut.generate(from: prompt)
         } catch {
             XCTFail()
         }
     }
     
-    func test_invalidPrompt_throws() {
+    func test_generate_withInvalidPrompt_throws() async {
         let expectation = XCTestExpectation(description: "throws invalidPrompt")
         
         let sut = createSut()
@@ -25,17 +26,17 @@ final class ImageGeneratorTests: XCTestCase {
         let prompt = ImagePrompt(color: "", feelings: [])
         
         do {
-            try sut.send(prompt)
+            try await sut.generate(from: prompt)
         } catch ImageGeneratingError.incompletePrompt {
             expectation.fulfill()
         } catch {
             XCTFail()
         }
         
-        wait(for: [expectation], timeout: 0.1)
+        await fulfillment(of: [expectation], timeout: 0.1)
     }
     
-    func test_invalidPrompt_emptyColor_throws() {
+    func test_generate_withInvalidPrompt_emptyColor_throws() async {
         let expectation = XCTestExpectation(description: "throws invalidPrompt")
         
         let sut = createSut()
@@ -43,14 +44,18 @@ final class ImageGeneratorTests: XCTestCase {
         let prompt = ImagePrompt(color: "", feelings: [.anxious])
         
         do {
-            try sut.send(prompt)
+            try await sut.generate(from: prompt)
         } catch ImageGeneratingError.incompletePrompt {
             expectation.fulfill()
         } catch {
             XCTFail()
         }
         
-        wait(for: [expectation], timeout: 0.1)
+        await fulfillment(of: [expectation], timeout: 0.1)
+    }
+    
+    func test_generate_returnsImage() async {
+        
     }
 }
 

@@ -1,7 +1,12 @@
-import Foundation
+import Combine
+import SwiftUI
+
+struct AIImage {
+    
+}
 
 protocol ImageGenerating {
-    func send(_: ImagePrompt) throws
+    func generate(from: ImagePrompt) async throws
 }
 
 enum ImageGeneratingError: Error {
@@ -9,14 +14,19 @@ enum ImageGeneratingError: Error {
 }
 
 final class ImageGenerator: ImageGenerating {
-    func send(_ prompt: ImagePrompt) throws {
+    func generate(from prompt: ImagePrompt) async throws {
         try assertNotEmpty(prompt)
     }
     
-    private func assertNotEmpty(_ prompt: ImagePrompt) throws{
+    private func assertNotEmpty(_ prompt: ImagePrompt) throws {
         guard prompt.color.isEmpty == false,
               prompt.feelings.isEmpty == false else {
             throw ImageGeneratingError.incompletePrompt
         }
+    }
+    
+    private func generateImage(from prompt: ImagePrompt) async -> Image {
+        let dummyImage = Image("")
+        return dummyImage
     }
 }
