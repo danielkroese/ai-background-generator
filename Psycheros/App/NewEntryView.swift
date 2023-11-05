@@ -1,8 +1,14 @@
-//
-//  NewEntryView.swift
-//  Psycheros
-//
-//  Created by Daniël Kroese on 04/11/2023.
-//
+import SwiftUI
 
-import Foundation
+struct NewEntryView: View {
+    
+    var body: some View {
+        HStack {
+            Text("Test")
+        }
+    }
+}
+
+#Preview {
+    NewEntryView()
+}

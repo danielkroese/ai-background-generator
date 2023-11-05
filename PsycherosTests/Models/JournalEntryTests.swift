@@ -1,8 +1,8 @@
-//
-//  JournalEntryTests.swift
-//  PsycherosTests
-//
-//  Created by Daniël Kroese on 05/11/2023.
-//
+import XCTest
 
-import Foundation
+final class JournalEntryTests: XCTestCase {
+    func test_zero() {
+        let sut = JournalEntry()
+        XCTFail()
+    }
+}

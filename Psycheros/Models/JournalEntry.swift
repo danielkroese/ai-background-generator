@@ -5,7 +5,7 @@ import SwiftData
 final class JournalEntry {
     var timestamp: Date
     
-    init(timestamp: Date) {
+    init(timestamp: Date = Date()) {
         self.timestamp = timestamp
     }
 }
