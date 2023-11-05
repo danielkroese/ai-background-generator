@@ -5,7 +5,7 @@ final class JournalEntryTests: XCTestCase {
         let expectedDate = Date()
         let expectedImage = "image"
         let expectedColor = "yellow"
-        let expectedFeelings: [Feeling] = [.ecstatic, .happy]
+        let expectedFeelings: [Feeling] = [.happy, .grateful]
         let expectedMotivationalTexts = ["text", "another text"]
         
         let sut = JournalEntry(timestamp: expectedDate,

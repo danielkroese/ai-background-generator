@@ -29,6 +29,5 @@ enum Feeling: String, Codable, Equatable {
          sad,
          anxious,
          grateful,
-         moody,
-         ecstatic
+         moody
 }
