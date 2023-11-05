@@ -9,7 +9,15 @@
     }
   ],
   "defaultOptions" : {
-
+    "codeCoverage" : {
+      "targets" : [
+        {
+          "containerPath" : "container:Psycheros.xcodeproj",
+          "identifier" : "65F97E072AF6699F00C0E501",
+          "name" : "Psycheros"
+        }
+      ]
+    }
   },
   "testTargets" : [
     {

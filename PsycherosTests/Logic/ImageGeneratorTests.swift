@@ -19,7 +19,7 @@ final class ImageGeneratorTests: XCTestCase {
     }
     
     func test_generate_withInvalidPrompt_emptyColor_throws() async {
-        let expectation = XCTestExpectation(description: "throws invalidPrompt")
+        let expectation = XCTestExpectation(description: "throws incompletePrompt")
         let prompt = ImagePrompt(color: "", feelings: [.anxious])
         
         do {

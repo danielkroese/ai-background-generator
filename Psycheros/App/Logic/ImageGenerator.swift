@@ -11,16 +11,11 @@ enum ImageGeneratingError: Error {
 
 final class ImageGenerator: ImageGenerating {
     func generate(from prompt: ImagePrompt) async throws -> Image {
-        try assertNotEmpty(prompt)
-        
-        return await generateImage(from: prompt)
-    }
-    
-    private func assertNotEmpty(_ prompt: ImagePrompt) throws {
-        guard prompt.color.isEmpty == false,
-              prompt.feelings.isEmpty == false else {
+        guard prompt.isEmpty == false else {
             throw ImageGeneratingError.incompletePrompt
         }
+        
+        return await generateImage(from: prompt)
     }
     
     private func generateImage(from prompt: ImagePrompt) async -> Image {
