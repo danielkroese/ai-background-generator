@@ -24,7 +24,7 @@ final class JournalEntry {
     }
 }
 
-enum Feeling: String, Codable {
+enum Feeling: String, Codable, Equatable {
     case happy,
          sad,
          anxious,
