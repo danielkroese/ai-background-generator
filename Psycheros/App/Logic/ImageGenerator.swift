@@ -10,16 +10,25 @@ enum ImageGeneratingError: Error {
 }
 
 final class ImageGenerator: ImageGenerating {
+    private let promptGenerator: PromptGenerating
+    
+    init(promptGenerator: PromptGenerating) {
+        self.promptGenerator = promptGenerator
+    }
+    
     func generate(from prompt: ImagePrompt) async throws -> Image {
         guard prompt.isEmpty == false else {
             throw ImageGeneratingError.incompletePrompt
         }
         
-        return await generateImage(from: prompt)
+        return try await generateImage(from: prompt)
     }
     
-    private func generateImage(from prompt: ImagePrompt) async -> Image {
+    private func generateImage(from prompt: ImagePrompt) async throws -> Image {
         let dummyImage = Image("")
+        
+        _ = try promptGenerator.writePrompt(with: prompt)
+        
         return dummyImage
     }
 }

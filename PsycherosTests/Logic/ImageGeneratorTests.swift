@@ -50,6 +50,19 @@ final class ImageGeneratorTests: XCTestCase {
             XCTFail()
         }
     }
+    
+    func test_generate_callsPromptGenerator() async {
+        do {
+            let spy = SpyPromptGenerator()
+            let sut = createSut(promptGenerator: spy)
+            
+            _ = try await sut.generate(from: dummyPrompt)
+            
+            XCTAssertEqual(spy.didCallWritePromptCount, 1)
+        } catch {
+            XCTFail()
+        }
+    }
 }
 
 // MARK: - Helpers
@@ -58,8 +71,8 @@ extension ImageGeneratorTests {
         ImagePrompt(color: "yellow", feelings: [.happy])
     }
     
-    private func createSut() -> ImageGenerator {
-        return ImageGenerator()
+    private func createSut(promptGenerator: PromptGenerating = SpyPromptGenerator()) -> ImageGenerator {
+        return ImageGenerator(promptGenerator: promptGenerator)
     }
     
     private func createSutAndGenerate(with prompt: ImagePrompt) async throws -> Image {

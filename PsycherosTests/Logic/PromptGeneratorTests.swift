@@ -32,7 +32,7 @@ final class PromptGeneratorTests: XCTestCase {
         let expectation = XCTestExpectation(description: "throws incompletePrompt")
         
         do {
-            let prompt = try createSutAndWrite(with: imagePrompt)
+            _ = try createSutAndWrite(with: imagePrompt)
             
             XCTFail()
         } catch PromptGeneratingError.incompletePrompt {
