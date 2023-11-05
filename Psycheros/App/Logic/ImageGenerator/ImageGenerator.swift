@@ -1,9 +1,5 @@
 import Combine
-import SwiftUI
-
-struct AIImage {
-    
-}
+import SwiftUI // ??
 
 protocol ImageGenerating {
     func generate(from: ImagePrompt) async throws -> Image
