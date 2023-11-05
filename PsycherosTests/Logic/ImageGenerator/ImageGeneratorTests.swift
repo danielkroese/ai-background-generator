@@ -68,4 +68,3 @@ extension ImageGeneratorTests {
         return try await sut.generate(from: prompt)
     }
 }
-

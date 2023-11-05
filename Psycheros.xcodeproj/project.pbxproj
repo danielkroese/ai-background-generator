@@ -13,6 +13,7 @@
 		65250CBB2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CBA2AF7F3B3006BB662 /* ImageGenerator.swift */; };
 		65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CBA2AF7F3B3006BB662 /* ImageGenerator.swift */; };
 		65250CC02AF7F3D2006BB662 /* ImageGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CBF2AF7F3D2006BB662 /* ImageGeneratorTests.swift */; };
+		65250CC52AF80BCE006BB662 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = 65250CC42AF80BCE006BB662 /* OpenAI */; };
 		65AA66932AF7B29E00C2BCD6 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* JournalEntry.swift */; };
 		65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* JournalEntry.swift */; };
 		65AA66972AF7B2C500C2BCD6 /* JournalEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA66962AF7B2C500C2BCD6 /* JournalEntryTests.swift */; };
@@ -54,6 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65250CC52AF80BCE006BB662 /* OpenAI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +101,13 @@
 			path = ImageGenerator;
 			sourceTree = "<group>";
 		};
+		65250CCC2AF82FFE006BB662 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		65AA66952AF7B2B900C2BCD6 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +123,7 @@
 				65F97E0A2AF669A000C0E501 /* Psycheros */,
 				65F97E1E2AF669A100C0E501 /* PsycherosTests */,
 				65F97E092AF6699F00C0E501 /* Products */,
+				65250CCC2AF82FFE006BB662 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -197,8 +207,12 @@
 			buildRules = (
 			);
 			dependencies = (
+				65250CD02AF83106006BB662 /* PBXTargetDependency */,
 			);
 			name = Psycheros;
+			packageProductDependencies = (
+				65250CC42AF80BCE006BB662 /* OpenAI */,
+			);
 			productName = Psycheros;
 			productReference = 65F97E082AF6699F00C0E501 /* Psycheros.app */;
 			productType = "com.apple.product-type.application";
@@ -249,6 +263,10 @@
 				Base,
 			);
 			mainGroup = 65F97DFF2AF6699F00C0E501;
+			packageReferences = (
+				65250CC32AF80BCD006BB662 /* XCRemoteSwiftPackageReference "OpenAI" */,
+				65250CC62AF82D55006BB662 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+			);
 			productRefGroup = 65F97E092AF6699F00C0E501 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -307,6 +325,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		65250CD02AF83106006BB662 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = 65250CCF2AF83106006BB662 /* SwiftLintPlugin */;
+		};
 		65F97E1D2AF669A100C0E501 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 65F97E072AF6699F00C0E501 /* Psycheros */;
@@ -367,10 +389,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -422,9 +446,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -459,7 +485,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.danielkroese.Psycheros;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -496,7 +522,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.danielkroese.Psycheros;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -518,7 +544,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.danielkroese.PsycherosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -541,7 +567,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.danielkroese.PsycherosTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = auto;
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -580,6 +606,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		65250CC32AF80BCD006BB662 /* XCRemoteSwiftPackageReference "OpenAI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/MacPaw/OpenAI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.2.4;
+			};
+		};
+		65250CC62AF82D55006BB662 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/realm/SwiftLint.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.53.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		65250CC42AF80BCE006BB662 /* OpenAI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65250CC32AF80BCD006BB662 /* XCRemoteSwiftPackageReference "OpenAI" */;
+			productName = OpenAI;
+		};
+		65250CCF2AF83106006BB662 /* SwiftLintPlugin */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65250CC62AF82D55006BB662 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			productName = "plugin:SwiftLintPlugin";
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 65F97E002AF6699F00C0E501 /* Project object */;
 }
