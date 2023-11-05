@@ -13,7 +13,6 @@
 		65F97E0C2AF669A000C0E501 /* PsycherosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */; };
 		65F97E0E2AF669A000C0E501 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0D2AF669A000C0E501 /* ContentView.swift */; };
 		65F97E122AF669A100C0E501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F97E112AF669A100C0E501 /* Assets.xcassets */; };
-		65F97E202AF669A100C0E501 /* PsycherosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E1F2AF669A100C0E501 /* PsycherosTests.swift */; };
 		65F97E3D2AF696FD00C0E501 /* NewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E3C2AF696FD00C0E501 /* NewEntryView.swift */; };
 /* End PBXBuildFile section */
 
@@ -28,6 +27,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Psycheros.xctestplan; sourceTree = "<group>"; };
 		65AA66962AF7B2C500C2BCD6 /* JournalEntryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntryTests.swift; sourceTree = "<group>"; };
 		65F97E082AF6699F00C0E501 /* Psycheros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Psycheros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosApp.swift; sourceTree = "<group>"; };
@@ -36,7 +36,6 @@
 		65F97E112AF669A100C0E501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65F97E132AF669A100C0E501 /* Psycheros.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Psycheros.entitlements; sourceTree = "<group>"; };
 		65F97E1B2AF669A100C0E501 /* PsycherosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PsycherosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65F97E1F2AF669A100C0E501 /* PsycherosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosTests.swift; sourceTree = "<group>"; };
 		65F97E3C2AF696FD00C0E501 /* NewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,10 +86,9 @@
 		65F97E0A2AF669A000C0E501 /* Psycheros */ = {
 			isa = PBXGroup;
 			children = (
-				65F97E3B2AF66DC000C0E501 /* Models */,
 				65F97E3A2AF66DB200C0E501 /* App */,
-				65F97E392AF66DA300C0E501 /* Config */,
 				65F97E382AF66D9A00C0E501 /* Assets */,
+				65F97E392AF66DA300C0E501 /* Config */,
 			);
 			path = Psycheros;
 			sourceTree = "<group>";
@@ -98,8 +96,8 @@
 		65F97E1E2AF669A100C0E501 /* PsycherosTests */ = {
 			isa = PBXGroup;
 			children = (
+				65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */,
 				65AA66952AF7B2B900C2BCD6 /* Models */,
-				65F97E1F2AF669A100C0E501 /* PsycherosTests.swift */,
 			);
 			path = PsycherosTests;
 			sourceTree = "<group>";
@@ -123,6 +121,7 @@
 		65F97E3A2AF66DB200C0E501 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				65F97E3B2AF66DC000C0E501 /* Models */,
 				65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */,
 				65F97E0D2AF669A000C0E501 /* ContentView.swift */,
 				65F97E3C2AF696FD00C0E501 /* NewEntryView.swift */,
@@ -249,7 +248,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */,
-				65F97E202AF669A100C0E501 /* PsycherosTests.swift in Sources */,
 				65AA66972AF7B2C500C2BCD6 /* JournalEntryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "4FB7C3A7-2021-45F6-8CB1-96E1002D8238",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Psycheros.xcodeproj",
+        "identifier" : "65F97E1A2AF669A100C0E501",
+        "name" : "PsycherosTests"
+      }
+    }
+  ],
+  "version" : 1
+}
