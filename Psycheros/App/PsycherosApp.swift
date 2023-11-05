@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import OpenAI
 
 @main
 struct PsycherosApp: App {
@@ -16,6 +17,10 @@ struct PsycherosApp: App {
             fatalError("Could not create ModelContainer: \(error)")
         }
     }()
+    
+//    var openAIService: OpenAIService {
+//        OpenAI(apiToken: "")
+//    }
 
     var body: some Scene {
         WindowGroup {
