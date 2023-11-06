@@ -22,13 +22,3 @@ final class OpenAIService: AIService {
         isRunning = true
     }
 }
-
-protocol AIServiceWrapper {
-    init(apiKey: String)
-}
-
-final class OpenAIServiceWrapper: AIServiceWrapper {
-    init(apiKey: String) {
-        <#code#>
-    }
-}

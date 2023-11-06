@@ -218,7 +218,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				65250CD02AF83106006BB662 /* PBXTargetDependency */,
+				651A16072AF98B25002AB363 /* PBXTargetDependency */,
 			);
 			name = Psycheros;
 			packageProductDependencies = (
@@ -341,9 +341,9 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		65250CD02AF83106006BB662 /* PBXTargetDependency */ = {
+		651A16072AF98B25002AB363 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			productRef = 65250CCF2AF83106006BB662 /* SwiftLintPlugin */;
+			productRef = 651A16062AF98B25002AB363 /* SwiftLintPlugin */;
 		};
 		65F97E1D2AF669A100C0E501 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -484,7 +484,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Psycheros/Info.plist;
+				INFOPLIST_FILE = Psycheros/Config/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -523,7 +523,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Psycheros/Info.plist;
+				INFOPLIST_FILE = Psycheros/Config/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -637,20 +637,12 @@
 				minimumVersion = 0.53.0;
 			};
 		};
-		65250CC62AF82D55006BB662 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/SwiftLint.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.53.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		65250CCF2AF83106006BB662 /* SwiftLintPlugin */ = {
+		651A16062AF98B25002AB363 /* SwiftLintPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 65250CC62AF82D55006BB662 /* XCRemoteSwiftPackageReference "SwiftLint" */;
+			package = 651A16052AF98991002AB363 /* XCRemoteSwiftPackageReference "SwiftLint" */;
 			productName = "plugin:SwiftLintPlugin";
 		};
 /* End XCSwiftPackageProductDependency section */
