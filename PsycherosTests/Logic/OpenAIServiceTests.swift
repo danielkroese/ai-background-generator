@@ -2,15 +2,13 @@ import XCTest
 
 final class OpenAIServiceTests: XCTestCase {
     func test_setup_runsService() {
-        let sut = OpenAIService()
-        
         do {
-            try sut.setup()
+            let sut = try createSutAndSetup()
+            
+            XCTAssertTrue(sut.isRunning)
         } catch {
             XCTFail("Unexpected error.")
         }
-        
-        XCTAssertTrue(sut.isRunning)
     }
     
     func test_noSetup_doesNotRunService() {
@@ -23,8 +21,7 @@ final class OpenAIServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "throws alreadySetup")
         
         do {
-            let sut = OpenAIService()
-            try sut.setup()
+            let sut = try createSutAndSetup()
             try sut.setup()
         } catch AIServiceError.alreadySetup {
             expectation.fulfill()
@@ -33,5 +30,15 @@ final class OpenAIServiceTests: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 0.1)
+    }
+}
+
+// MARK: - Test helpers
+extension OpenAIServiceTests {
+    private func createSutAndSetup() throws -> OpenAIService {
+        let sut = OpenAIService()
+        try sut.setup()
+        
+        return sut
     }
 }
