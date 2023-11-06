@@ -35,3 +35,7 @@ final class OpenAIServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 0.1)
     }
 }
+
+final class SpyOpenAI_APIWrapper: APIWrapper {
+    
+}

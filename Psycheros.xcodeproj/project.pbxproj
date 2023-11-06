@@ -41,7 +41,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		651A16032AF97E55002AB363 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
+		651A16032AF97E55002AB363 /* config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
 		65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Psycheros.xctestplan; sourceTree = "<group>"; };
 		65250CB32AF7D8AA006BB662 /* ImageQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQueryTests.swift; sourceTree = "<group>"; };
 		65250CB52AF7DA87006BB662 /* ImageQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQuery.swift; sourceTree = "<group>"; };
@@ -178,7 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				65F97E132AF669A100C0E501 /* Psycheros.entitlements */,
-				651A16032AF97E55002AB363 /* Config.xcconfig */,
+				651A16032AF97E55002AB363 /* config.xcconfig */,
 			);
 			path = Config;
 			sourceTree = "<group>";

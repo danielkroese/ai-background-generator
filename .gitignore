@@ -1,4 +1,5 @@
 ### Xcode ###
+config.xcconfig
 xcuserdata/
 *.xcodeproj/*
 !*.xcodeproj/project.pbxproj

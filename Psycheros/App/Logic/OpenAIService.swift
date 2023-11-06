@@ -22,3 +22,11 @@ final class OpenAIService: AIService {
         isRunning = true
     }
 }
+
+protocol APIWrapper {
+    
+}
+
+final class AIAPIWrapper {
+    
+}
