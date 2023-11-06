@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		65125BA72AF98E5200D6B8D3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 65125BA62AF98E5200D6B8D3 /* Alamofire */; };
 		65250CB42AF7D8AA006BB662 /* ImageQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB32AF7D8AA006BB662 /* ImageQueryTests.swift */; };
 		65250CB62AF7DA87006BB662 /* ImageQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB52AF7DA87006BB662 /* ImageQuery.swift */; };
 		65250CB72AF7DA87006BB662 /* ImageQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB52AF7DA87006BB662 /* ImageQuery.swift */; };
@@ -68,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65125BA72AF98E5200D6B8D3 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -101,13 +103,6 @@
 			path = Logic;
 			sourceTree = "<group>";
 		};
-		65250CCC2AF82FFE006BB662 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		6533D7052AF8421E00B15CFA /* Spy */ = {
 			isa = PBXGroup;
 			children = (
@@ -131,7 +126,6 @@
 				65F97E0A2AF669A000C0E501 /* Psycheros */,
 				65F97E1E2AF669A100C0E501 /* PsycherosTests */,
 				65F97E092AF6699F00C0E501 /* Products */,
-				65250CCC2AF82FFE006BB662 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,6 +216,7 @@
 			);
 			name = Psycheros;
 			packageProductDependencies = (
+				65125BA62AF98E5200D6B8D3 /* Alamofire */,
 			);
 			productName = Psycheros;
 			productReference = 65F97E082AF6699F00C0E501 /* Psycheros.app */;
@@ -275,6 +270,7 @@
 			mainGroup = 65F97DFF2AF6699F00C0E501;
 			packageReferences = (
 				651A16052AF98991002AB363 /* XCRemoteSwiftPackageReference "SwiftLint" */,
+				65125BA52AF98E5200D6B8D3 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 65F97E092AF6699F00C0E501 /* Products */;
 			projectDirPath = "";
@@ -629,6 +625,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		65125BA52AF98E5200D6B8D3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.8.1;
+			};
+		};
 		651A16052AF98991002AB363 /* XCRemoteSwiftPackageReference "SwiftLint" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/realm/SwiftLint.git";
@@ -640,6 +644,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		65125BA62AF98E5200D6B8D3 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 65125BA52AF98E5200D6B8D3 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
 		651A16062AF98B25002AB363 /* SwiftLintPlugin */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 651A16052AF98991002AB363 /* XCRemoteSwiftPackageReference "SwiftLint" */;

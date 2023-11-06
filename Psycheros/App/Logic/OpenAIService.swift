@@ -1,5 +1,4 @@
 import Foundation
-import OpenAI
 
 protocol AIService {
     var isRunning: Bool { get }
