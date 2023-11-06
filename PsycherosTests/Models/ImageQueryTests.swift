@@ -1,11 +1,11 @@
 import XCTest
 
-final class ImagePromptTests: XCTestCase {
+final class ImageQueryTests: XCTestCase {
     func test_init() {
         let expectedColor = "green"
         let expectedFeelings: [Feeling] = [.anxious, .sad]
         
-        let sut = ImagePrompt(color: expectedColor,
+        let sut = ImageQuery(color: expectedColor,
                               feelings: expectedFeelings)
         
         XCTAssertEqual(sut.color, expectedColor)

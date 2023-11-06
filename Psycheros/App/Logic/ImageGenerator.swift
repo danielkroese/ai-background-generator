@@ -1,8 +1,8 @@
 import Combine
-import SwiftUI // ??
+import SwiftUI // TODO: Prevent this import
 
 protocol ImageGenerating {
-    func generate(from: ImagePrompt) async throws -> Image
+    func generate(from: ImageQuery) async throws -> Image
 }
 
 enum ImageGeneratingError: Error {
@@ -16,7 +16,7 @@ final class ImageGenerator: ImageGenerating {
         self.promptGenerator = promptGenerator
     }
     
-    func generate(from prompt: ImagePrompt) async throws -> Image {
+    func generate(from prompt: ImageQuery) async throws -> Image {
         guard prompt.isEmpty == false else {
             throw ImageGeneratingError.incompletePrompt
         }
@@ -24,7 +24,7 @@ final class ImageGenerator: ImageGenerating {
         return try await generateImage(from: prompt)
     }
     
-    private func generateImage(from prompt: ImagePrompt) async throws -> Image {
+    private func generateImage(from prompt: ImageQuery) async throws -> Image {
         let dummyImage = Image("")
         
         _ = try promptGenerator.writePrompt(with: prompt)

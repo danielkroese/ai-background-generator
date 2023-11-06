@@ -1,7 +1,7 @@
 import Foundation
 
 protocol PromptGenerating {
-    func writePrompt(with prompt: ImagePrompt) throws -> String
+    func writePrompt(with query: ImageQuery) throws -> String
 }
 
 enum PromptGeneratingError: Error {
@@ -9,24 +9,24 @@ enum PromptGeneratingError: Error {
 }
 
 final class PromptGenerator: PromptGenerating {
-    func writePrompt(with prompt: ImagePrompt) throws -> String {
-        guard prompt.isEmpty == false else {
+    func writePrompt(with query: ImageQuery) throws -> String {
+        guard query.isEmpty == false else {
             throw PromptGeneratingError.incompletePrompt
         }
         
-        let feelings = parse(feelings: prompt.feelings)
+        return createPrompt(with: query)
+    }
+    
+    private func createPrompt(with query: ImageQuery) -> String {
+        let feelings = parse(feelings: query.feelings)
         
         return "Generate a motivational image " +
         "for someone who is feeling \(feelings), " +
-        "using the color \(prompt.color) in an iphone ratio"
+        "using the color \(query.color) in an iphone ratio"
     }
     
     private func parse(feelings: [Feeling]) -> String {
-        var strings: [String] = []
-        
-        for feeling in feelings {
-            strings.append(feeling.rawValue)
-        }
+        let strings = feelings.map { $0.rawValue }
         
         return strings.joined(separator: ", ")
     }

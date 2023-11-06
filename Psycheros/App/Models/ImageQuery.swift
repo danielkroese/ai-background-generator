@@ -1,6 +1,6 @@
 import Foundation
 
-struct ImagePrompt: Equatable {
+struct ImageQuery: Equatable {
     let color: String
     let feelings: [Feeling]
     
