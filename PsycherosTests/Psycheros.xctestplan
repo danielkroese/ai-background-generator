@@ -17,10 +17,12 @@
           "name" : "Psycheros"
         }
       ]
-    }
+    },
+    "testExecutionOrdering" : "random"
   },
   "testTargets" : [
     {
+      "parallelizable" : true,
       "target" : {
         "containerPath" : "container:Psycheros.xcodeproj",
         "identifier" : "65F97E1A2AF669A100C0E501",
