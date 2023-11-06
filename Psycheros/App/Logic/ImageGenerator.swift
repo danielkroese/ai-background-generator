@@ -6,7 +6,7 @@ protocol ImageGenerating {
 }
 
 enum ImageGeneratingError: Error {
-    case incompletePrompt
+    case incompleteQuery
 }
 
 final class ImageGenerator: ImageGenerating {
@@ -18,7 +18,7 @@ final class ImageGenerator: ImageGenerating {
     
     func generate(from prompt: ImageQuery) async throws -> Image {
         guard prompt.isEmpty == false else {
-            throw ImageGeneratingError.incompletePrompt
+            throw ImageGeneratingError.incompleteQuery
         }
         
         return try await generateImage(from: prompt)

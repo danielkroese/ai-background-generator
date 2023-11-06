@@ -29,13 +29,13 @@ final class PromptGeneratorTests: XCTestCase {
     
     func test_writePrompt_withIncompletePrompt_throws() {
         let imageQuery = ImageQuery(color: "", feelings: [.grateful, .happy])
-        let expectation = XCTestExpectation(description: "throws incompletePrompt")
+        let expectation = XCTestExpectation(description: "throws incompleteQuery")
         
         do {
             _ = try createSutAndWrite(with: imageQuery)
             
             XCTFail()
-        } catch PromptGeneratingError.incompletePrompt {
+        } catch PromptGeneratingError.incompleteQuery {
             expectation.fulfill()
         } catch {
             XCTFail()

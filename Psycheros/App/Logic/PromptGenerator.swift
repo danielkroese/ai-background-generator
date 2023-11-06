@@ -5,13 +5,13 @@ protocol PromptGenerating {
 }
 
 enum PromptGeneratingError: Error {
-    case incompletePrompt
+    case incompleteQuery
 }
 
 final class PromptGenerator: PromptGenerating {
     func writePrompt(with query: ImageQuery) throws -> String {
         guard query.isEmpty == false else {
-            throw PromptGeneratingError.incompletePrompt
+            throw PromptGeneratingError.incompleteQuery
         }
         
         return createPrompt(with: query)

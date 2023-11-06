@@ -4,12 +4,12 @@ import Combine
 
 final class ImageGeneratorTests: XCTestCase {
     func test_generate_withInvalidPrompt_throws() async {
-        let expectation = XCTestExpectation(description: "throws invalidPrompt")
+        let expectation = XCTestExpectation(description: "throws incompleteQuery")
         let prompt = ImageQuery(color: "", feelings: [])
         
         do {
             _ = try await createSutAndGenerate(with: prompt)
-        } catch ImageGeneratingError.incompletePrompt {
+        } catch ImageGeneratingError.incompleteQuery {
             expectation.fulfill()
         } catch {
             XCTFail()
@@ -19,12 +19,12 @@ final class ImageGeneratorTests: XCTestCase {
     }
     
     func test_generate_withInvalidPrompt_emptyColor_throws() async {
-        let expectation = XCTestExpectation(description: "throws incompletePrompt")
+        let expectation = XCTestExpectation(description: "throws incompleteQuery")
         let prompt = ImageQuery(color: "", feelings: [.anxious])
         
         do {
             _ = try await createSutAndGenerate(with: prompt)
-        } catch ImageGeneratingError.incompletePrompt {
+        } catch ImageGeneratingError.incompleteQuery {
             expectation.fulfill()
         } catch {
             XCTFail()
