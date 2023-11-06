@@ -23,10 +23,12 @@ final class OpenAIService: AIService {
     }
 }
 
-protocol APIWrapper {
-    
+protocol AIServiceWrapper {
+    init(apiKey: String)
 }
 
-final class AIAPIWrapper {
-    
+final class OpenAIServiceWrapper: AIServiceWrapper {
+    init(apiKey: String) {
+        <#code#>
+    }
 }
