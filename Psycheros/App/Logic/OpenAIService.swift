@@ -4,13 +4,21 @@ import OpenAI
 protocol AIService {
     var isRunning: Bool { get }
     
-    func setup()
+    func setup() throws
+}
+
+enum AIServiceError: Error {
+    case alreadySetup
 }
 
 final class OpenAIService: AIService {
     private(set) var isRunning = false
     
-    func setup() {
+    func setup() throws {
+        guard isRunning == false else {
+            throw AIServiceError.alreadySetup
+        }
+        
         isRunning = true
     }
 }
