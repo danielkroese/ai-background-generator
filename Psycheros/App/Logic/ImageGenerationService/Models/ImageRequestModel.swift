@@ -3,7 +3,7 @@ struct ImageRequestModel: Codable, Equatable {
     let width: Int
     let height: Int
     let seed: Int
-    let cfgScale: Double
+    let cfgScale: Int
     let samples: Int
     let textPrompts: [TextPrompt]
     
