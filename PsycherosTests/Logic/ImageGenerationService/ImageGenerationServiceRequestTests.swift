@@ -12,24 +12,29 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
             let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl)
                 .prompt("scape, landscape, ecstatic, happy, color blue")
             
-            let expectedHttpBody: [String: Any] = [
-                "steps": 40,
-                "width": 1024,
-                "height": 1024,
-                "seed": 0,
-                "cfg_scale": 5,
-                "samples": 1,
-                "text_prompts": [
-                  ["text": "scape, landscape, ecstatic, happy, color blue", "weight": 1],
-                  ["text": "blurry, bad, text", "weight": -1]
+            let expectedHttpBody = ImageRequestModel(
+                steps: 40,
+                width: 1024,
+                height: 1024,
+                seed: 0,
+                cfgScale: 5,
+                samples: 1,
+                textPrompts: [
+                    .init(text: "scape, landscape, ecstatic, happy, color blue", weight: 1),
+                    .init(text: "blurry, bad", weight: -1)
                 ]
-              ]
+            )
             
-            let jsonData = try JSONSerialization.data(withJSONObject: expectedHttpBody, options: [])
+            guard let sutHttpBody = sut.request.httpBody else {
+                XCTFail("No http body set")
+                return
+            }
             
-            XCTAssertEqual(jsonData), sut.request.httpBody)
+            let decodedHttpBody = try JSONDecoder().decode(ImageRequestModel.self, from: sutHttpBody)
+            
+            XCTAssertEqual(expectedHttpBody, decodedHttpBody)
         } catch {
-            XCTFail("could not encode dummy data")
+            XCTFail("Unexpected error: \(error.localizedDescription)")
             return
         }
     }

@@ -18,24 +18,23 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
     }
     
     func prompt(_ string: String) throws -> ImageGenerationServiceRequest {
-        let httpBody: [String: Any] = [
-            "steps": 40,
-            "width": 1024,
-            "height": 1024,
-            "seed": 0,
-            "cfg_scale": 5,
-            "samples": 1,
-            "text_prompts": [
-              ["text": string, "weight": 1],
-              ["text": "blurry, bad, text", "weight": -1]
+        let httpBody = ImageRequestModel(
+            steps: 40,
+            width: 1024,
+            height: 1024,
+            seed: 0,
+            cfgScale: 5,
+            samples: 1,
+            textPrompts: [
+                .init(text: string, weight: 1),
+                .init(text: "blurry, bad", weight: -1)
             ]
-          ]
+        )
         
-        let encodedHttpBody = try JSONSerialization.data(withJSONObject: httpBody, options: [])
+        let encodedHttpBody = try JSONEncoder().encode(httpBody)
         
         request.httpBody = encodedHttpBody
         
         return self
     }
 }
-
