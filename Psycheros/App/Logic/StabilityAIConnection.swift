@@ -7,7 +7,4 @@ enum StabilityAIConnectingError: Error {
 }
 
 final class StabilityAIConnection: StabilityAIConnecting {
-    init() {
-        
-    }
 }
