@@ -1,6 +1,6 @@
 import XCTest
 
-final class OpenAIServiceTests: XCTestCase {
+final class StabilityAIServiceTests: XCTestCase {
     func test_setup_runsService() {
         do {
             let sut = try createSutAndSetup()
@@ -12,7 +12,7 @@ final class OpenAIServiceTests: XCTestCase {
     }
     
     func test_noSetup_doesNotRunService() {
-        let sut = OpenAIService()
+        let sut = StabilityAIService()
         
         XCTAssertFalse(sut.isRunning)
     }
@@ -34,9 +34,9 @@ final class OpenAIServiceTests: XCTestCase {
 }
 
 // MARK: - Test helpers
-extension OpenAIServiceTests {
-    private func createSutAndSetup() throws -> OpenAIService {
-        let sut = OpenAIService()
+extension StabilityAIServiceTests {
+    private func createSutAndSetup() throws -> StabilityAIService {
+        let sut = StabilityAIService()
         try sut.setup()
         
         return sut

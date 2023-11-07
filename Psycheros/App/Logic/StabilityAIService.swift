@@ -10,7 +10,7 @@ enum AIServiceError: Error {
     case alreadySetup
 }
 
-final class OpenAIService: AIService {
+final class StabilityAIService: AIService {
     private(set) var isRunning = false
     
     func setup() throws {
