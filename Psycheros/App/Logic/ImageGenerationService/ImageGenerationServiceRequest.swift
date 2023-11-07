@@ -26,7 +26,7 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
             "cfg_scale": 5,
             "samples": 1,
             "text_prompts": [
-              ["text": "scape, landscape, ecstatic, happy, color blue", "weight": 1],
+              ["text": string, "weight": 1],
               ["text": "blurry, bad, text", "weight": -1]
             ]
           ]

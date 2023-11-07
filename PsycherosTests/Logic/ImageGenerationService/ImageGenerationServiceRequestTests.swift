@@ -2,22 +2,12 @@ import XCTest
 
 final class ImageGenerationServiceRequestTests: XCTestCase {
     func test_init_withEndpoint_setsRequestUrl() {
-        guard let dummyUrl = URL(string: "https://danielkroese.nl/") else {
-            XCTFail("expected url unexpectedly nil")
-            return
-        }
-        
         let sut = ImageGenerationServiceRequest(endpoint: dummyUrl)
         
         XCTAssertEqual(dummyUrl, sut.request.url)
     }
     
     func test_prompt_setsExpectedBody() {
-        guard let dummyUrl = URL(string: "https://danielkroese.nl/") else {
-            XCTFail("expected url unexpectedly nil")
-            return
-        }
-        
         do {
             let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl)
                 .prompt("scape, landscape, ecstatic, happy, color blue")
@@ -37,7 +27,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
             
             let jsonData = try JSONSerialization.data(withJSONObject: expectedHttpBody, options: [])
             
-            XCTAssertEqual(jsonData, sut.request.httpBody)
+            XCTAssertEqual(jsonData), sut.request.httpBody)
         } catch {
             XCTFail("could not encode dummy data")
             return
@@ -45,3 +35,13 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     }
 }
 
+extension ImageGenerationServiceRequestTests {
+    private var dummyUrl: URL {
+        guard let url = URL(string: "https://danielkroese.nl/") else {
+            XCTFail("url unexpectedly nil")
+            return .homeDirectory
+        }
+        
+        return url
+    }
+}
