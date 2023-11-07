@@ -1,6 +1,5 @@
 import SwiftUI
 import SwiftData
-import OpenAI
 
 @main
 struct PsycherosApp: App {
@@ -18,10 +17,6 @@ struct PsycherosApp: App {
         }
     }()
     
-//    var openAIService: OpenAIService {
-//        OpenAI(apiToken: "")
-//    }
-
     var body: some Scene {
         WindowGroup {
             ContentView()

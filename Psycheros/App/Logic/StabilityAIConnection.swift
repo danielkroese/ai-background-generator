@@ -1,21 +1,21 @@
 import Foundation
 
-protocol AIService {
+protocol StabilityAIConnecting {
     var isRunning: Bool { get }
     
     func setup() throws
 }
 
-enum AIServiceError: Error {
+enum StabilityAIConnectingError: Error {
     case alreadySetup
 }
 
-final class StabilityAIService: AIService {
+final class StabilityAIConnection: StabilityAIConnecting {
     private(set) var isRunning = false
     
     func setup() throws {
         guard isRunning == false else {
-            throw AIServiceError.alreadySetup
+            throw StabilityAIConnectingError.alreadySetup
         }
         
         isRunning = true

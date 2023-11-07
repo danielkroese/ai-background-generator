@@ -1,6 +1,6 @@
 import XCTest
 
-final class StabilityAIServiceTests: XCTestCase {
+final class StabilityAIConnectionTests: XCTestCase {
     func test_setup_runsService() {
         do {
             let sut = try createSutAndSetup()
@@ -12,7 +12,7 @@ final class StabilityAIServiceTests: XCTestCase {
     }
     
     func test_noSetup_doesNotRunService() {
-        let sut = StabilityAIService()
+        let sut = StabilityAIConnection()
         
         XCTAssertFalse(sut.isRunning)
     }
@@ -23,7 +23,7 @@ final class StabilityAIServiceTests: XCTestCase {
         do {
             let sut = try createSutAndSetup()
             try sut.setup()
-        } catch AIServiceError.alreadySetup {
+        } catch StabilityAIConnectingError.alreadySetup {
             expectation.fulfill()
         } catch {
             XCTFail("Unexpected error.")
@@ -34,9 +34,9 @@ final class StabilityAIServiceTests: XCTestCase {
 }
 
 // MARK: - Test helpers
-extension StabilityAIServiceTests {
-    private func createSutAndSetup() throws -> StabilityAIService {
-        let sut = StabilityAIService()
+extension StabilityAIConnectionTests {
+    private func createSutAndSetup() throws -> StabilityAIConnecting {
+        let sut = StabilityAIConnection()
         try sut.setup()
         
         return sut
