@@ -1,10 +1,15 @@
 import XCTest
 
 final class ImageGenerationServiceRequestTests: XCTestCase {
-    func test_url_prefixedWithHttps() {
-        let sut = ImageGenerationServiceRequest()
+    func test_init_withEndpoint_setsRequestUrl() {
+        guard let dummyUrl = URL(string: "https://danielkroese.nl/") else {
+            XCTFail("expected url unexpectedly nil")
+            return
+        }
         
-        XCTAssertTrue(sut.url.hasPrefix("https://"))
+        let sut = ImageGenerationServiceRequest(endpoint: dummyUrl)
+        
+        XCTAssertEqual(dummyUrl, sut.request.url)
     }
 }
 
