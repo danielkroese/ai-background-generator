@@ -42,6 +42,24 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
             return
         }
     }
+    
+    func test_prompt_setsExpectedHeaders() {
+        do {
+            let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl)
+                .prompt(
+                    "scape, landscape, ecstatic, happy, color blue",
+                    seed: 123,
+                    size: CGSize(width: 1024, height: 1024)
+                )
+            
+            XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Accept"), "application/json")
+            XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Authorization"), "Bearer dummy_key")
+            
+        } catch {
+            XCTFail("Unexpected error: \(error.localizedDescription)")
+            return
+        }
+    }
 }
 
 extension ImageGenerationServiceRequestTests {

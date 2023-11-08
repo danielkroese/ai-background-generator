@@ -44,6 +44,9 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
         
         request.httpBody = encodedHttpBody
         
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("Bearer dummy_key", forHTTPHeaderField: "Authorization")
+        
         return self
     }
 }
