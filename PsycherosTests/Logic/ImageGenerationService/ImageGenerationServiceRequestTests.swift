@@ -1,8 +1,10 @@
 import XCTest
 
 final class ImageGenerationServiceRequestTests: XCTestCase {
+    private typealias Error = ImageGenerationServiceRequestingError
+    
     func test_init_withEndpoint_setsRequestUrl() {
-        assertThrowsOnlyExpected {
+        assertNoThrow {
             let sut = try createSut()
             
             XCTAssertEqual(dummyUrl, sut.request.url)
@@ -10,22 +12,15 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     }
     
     func test_init_withInvalidEndpoint_throws() {
-        let expectation = XCTestExpectation(description: "throws invalidEndpoint")
-        let invalidUrl = URL(string: "")
-        
-        assertThrowsOnlyExpected {
-            do {
-                _ = try ImageGenerationServiceRequest(endpoint: invalidUrl, apiKey: "")
-            } catch ImageGenerationServiceRequestingError.invalidEndpoint {
-                expectation.fulfill()
-            }
+        assertThrows(expected: Error.invalidEndpoint) {
+            let invalidUrl = URL(string: "")
+            
+            _ = try ImageGenerationServiceRequest(endpoint: invalidUrl, apiKey: "")
         }
-        
-        wait(for: [expectation], timeout: 0.1)
     }
     
     func test_init_setsExpectedHeaders() {
-        assertThrowsOnlyExpected {
+        assertNoThrow {
             let sut = try createSut()
             
             XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Accept"), "application/json")
@@ -35,7 +30,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     }
     
     func test_prompt_setsExpectedBody() {
-        assertThrowsOnlyExpected {
+        assertNoThrow {
             let sut = try createSut()
                 .prompt(
                     "scape, landscape, ecstatic, happy, color blue",
@@ -68,41 +63,16 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     }
     
     func test_emptyPrompt_throws() {
-        let expectation = XCTestExpectation(description: "throws invalidPrompt")
-        
-        assertThrowsOnlyExpected {
-            do {
-                _ = try createSut()
-                    .prompt(
-                        "",
-                        seed: 321,
-                        size: CGSize(width: 1024, height: 1024)
-                    )
-            } catch ImageGenerationServiceRequestingError.invalidPrompt {
-                expectation.fulfill()
-            }
+        assertThrows(expected: Error.invalidPrompt) {
+            _ = try createSut().prompt("")
         }
-        
-        wait(for: [expectation], timeout: 0.1)
     }
     
     func test_init_hasExpectedMethod() {
-        assertThrowsOnlyExpected {
+        assertNoThrow {
             let sut = try createSut()
             
             XCTAssertEqual(sut.request.httpMethod, "POST")
-        }
-    }
-    
-    private func assertThrowsOnlyExpected(
-        file: StaticString = #file,
-        line: UInt = #line,
-        _ closure: (() throws -> Void)
-    ) {
-        do {
-            try closure()
-        } catch {
-            XCTFail("Unexpected error: \(error.localizedDescription)", file: file, line: line)
         }
     }
 }

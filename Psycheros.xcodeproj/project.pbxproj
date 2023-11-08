@@ -32,6 +32,7 @@
 		65F97E0E2AF669A000C0E501 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0D2AF669A000C0E501 /* ContentView.swift */; };
 		65F97E122AF669A100C0E501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F97E112AF669A100C0E501 /* Assets.xcassets */; };
 		65F97E3D2AF696FD00C0E501 /* NewEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E3C2AF696FD00C0E501 /* NewEntryView.swift */; };
+		65FC2C272AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		65F97E132AF669A100C0E501 /* Psycheros.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Psycheros.entitlements; sourceTree = "<group>"; };
 		65F97E1B2AF669A100C0E501 /* PsycherosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PsycherosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F97E3C2AF696FD00C0E501 /* NewEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryView.swift; sourceTree = "<group>"; };
+		65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +186,7 @@
 		65F97E1E2AF669A100C0E501 /* PsycherosTests */ = {
 			isa = PBXGroup;
 			children = (
+				65FC2C252AFC2F4300ED4EA3 /* Helpers */,
 				6533D7052AF8421E00B15CFA /* Spy */,
 				65250CBD2AF7F3B8006BB662 /* Logic */,
 				65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */,
@@ -229,6 +232,14 @@
 				65250CB52AF7DA87006BB662 /* ImageQuery.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		65FC2C252AFC2F4300ED4EA3 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -352,6 +363,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65FC2C272AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift in Sources */,
 				65250CD52AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				65250CDA2AF83491006BB662 /* PromptGeneratorTests.swift in Sources */,
 				65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */,
