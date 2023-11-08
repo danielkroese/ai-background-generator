@@ -2,22 +2,46 @@ import XCTest
 
 final class ImageGenerationServiceRequestTests: XCTestCase {
     func test_init_withEndpoint_setsRequestUrl() {
-        let sut = ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
+        do {
+            let sut = try createSut()
+            
+            XCTAssertEqual(dummyUrl, sut.request.url)
+        } catch {
+            XCTFail("Unexpected error: \(error.localizedDescription)")
+            return
+        }
+    }
+    
+    func test_init_withInvalidEndpoint_throws() {
+        let expectation = XCTestExpectation(description: "throws invalidEndpoint")
         
-        XCTAssertEqual(dummyUrl, sut.request.url)
+        do {
+            let invalidUrl = URL(string: "][][][][[")
+            let sut = try ImageGenerationServiceRequest(endpoint: invalidUrl, apiKey: "")
+        } catch ImageGenerationServiceRequestingError.invalidEndpoint {
+            expectation.fulfill()
+        } catch {
+            XCTFail("Unexpected error: \(error.localizedDescription)")
+            return
+        }
     }
     
     func test_prompt_setsExpectedHeaders() {
-        let sut = ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
-        
-        XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Accept"), "application/json")
-        XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Content-Type"), "application/json")
-        XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Authorization"), "Bearer dummy_key")
+        do {
+            let sut = try createSut()
+            
+            XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Accept"), "application/json")
+            XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Content-Type"), "application/json")
+            XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Authorization"), "Bearer dummy_key")
+        } catch {
+            XCTFail("Unexpected error: \(error.localizedDescription)")
+            return
+        }
     }
     
     func test_prompt_setsExpectedBody() {
         do {
-            let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
+            let sut = try createSut()
                 .prompt(
                     "scape, landscape, ecstatic, happy, color blue",
                     seed: 123,
@@ -55,7 +79,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
         let expectation = XCTestExpectation(description: "throws invalidPrompt")
         
         do {
-            let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
+            _ = try createSut()
                 .prompt(
                     "",
                     seed: 321,
@@ -72,7 +96,12 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     }
 }
 
+// MARK: - Test helpers
 extension ImageGenerationServiceRequestTests {
+    private func createSut() throws -> ImageGenerationServiceRequest {
+        return try ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
+    }
+    
     private var dummyUrl: URL {
         guard let url = URL(string: "https://danielkroese.nl/") else {
             XCTFail("url unexpectedly nil")

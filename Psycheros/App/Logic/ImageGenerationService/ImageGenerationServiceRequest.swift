@@ -7,7 +7,8 @@ protocol ImageGenerationServiceRequesting {
 }
 
 enum ImageGenerationServiceRequestingError: Error {
-    case invalidPrompt
+    case invalidEndpoint,
+         invalidPrompt
 }
 
 final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
@@ -18,9 +19,16 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
         static let cfgScale = 5
         static let samples = 1
         static let negativePrompt = "blurry, bad, text"
+        
+        static let endpoint = URL(string: "https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image")
     }
     
-    init(endpoint: URL, apiKey: String) {
+    init(endpoint: URL? = Constants.endpoint,
+         apiKey: String) throws {
+        guard let endpoint else {
+            throw ImageGenerationServiceRequestingError.invalidEndpoint
+        }
+        
         self.request = URLRequest(url: endpoint, timeoutInterval: 60.0)
         
         setHeaders(apiKey)
@@ -31,7 +39,7 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
     }
-    
+
     func prompt(_ string: String,
                 seed: Int = Int.random(in: Int.min...Int.max),
                 size: CGSize = CGSize(width: 1024, height: 1024)) throws -> ImageGenerationServiceRequest {
