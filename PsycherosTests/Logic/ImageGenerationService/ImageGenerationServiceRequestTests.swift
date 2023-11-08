@@ -2,45 +2,40 @@ import XCTest
 
 final class ImageGenerationServiceRequestTests: XCTestCase {
     func test_init_withEndpoint_setsRequestUrl() {
-        do {
+        assertThrowsOnlyExpected {
             let sut = try createSut()
             
             XCTAssertEqual(dummyUrl, sut.request.url)
-        } catch {
-            XCTFail("Unexpected error: \(error.localizedDescription)")
-            return
         }
     }
     
     func test_init_withInvalidEndpoint_throws() {
         let expectation = XCTestExpectation(description: "throws invalidEndpoint")
+        let invalidUrl = URL(string: "")
         
-        do {
-            let invalidUrl = URL(string: "][][][][[")
-            let sut = try ImageGenerationServiceRequest(endpoint: invalidUrl, apiKey: "")
-        } catch ImageGenerationServiceRequestingError.invalidEndpoint {
-            expectation.fulfill()
-        } catch {
-            XCTFail("Unexpected error: \(error.localizedDescription)")
-            return
+        assertThrowsOnlyExpected {
+            do {
+                _ = try ImageGenerationServiceRequest(endpoint: invalidUrl, apiKey: "")
+            } catch ImageGenerationServiceRequestingError.invalidEndpoint {
+                expectation.fulfill()
+            }
         }
+        
+        wait(for: [expectation], timeout: 0.1)
     }
     
     func test_init_setsExpectedHeaders() {
-        do {
+        assertThrowsOnlyExpected {
             let sut = try createSut()
             
             XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Accept"), "application/json")
             XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Content-Type"), "application/json")
             XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Authorization"), "Bearer dummy_key")
-        } catch {
-            XCTFail("Unexpected error: \(error.localizedDescription)")
-            return
         }
     }
     
     func test_prompt_setsExpectedBody() {
-        do {
+        assertThrowsOnlyExpected {
             let sut = try createSut()
                 .prompt(
                     "scape, landscape, ecstatic, happy, color blue",
@@ -69,40 +64,45 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
             let decodedHttpBody = try JSONDecoder().decode(ImageRequestModel.self, from: sutHttpBody)
             
             XCTAssertEqual(expectedHttpBody, decodedHttpBody)
-        } catch {
-            XCTFail("Unexpected error: \(error.localizedDescription)")
-            return
         }
     }
     
     func test_emptyPrompt_throws() {
         let expectation = XCTestExpectation(description: "throws invalidPrompt")
         
-        do {
-            _ = try createSut()
-                .prompt(
-                    "",
-                    seed: 321,
-                    size: CGSize(width: 1024, height: 1024)
-                )
-        } catch ImageGenerationServiceRequestingError.invalidPrompt {
-            expectation.fulfill()
-        } catch {
-            XCTFail("Unexpected error: \(error.localizedDescription)")
-            return
+        assertThrowsOnlyExpected {
+            do {
+                _ = try createSut()
+                    .prompt(
+                        "",
+                        seed: 321,
+                        size: CGSize(width: 1024, height: 1024)
+                    )
+            } catch ImageGenerationServiceRequestingError.invalidPrompt {
+                expectation.fulfill()
+            }
         }
         
         wait(for: [expectation], timeout: 0.1)
     }
     
     func test_init_hasExpectedMethod() {
-        do {
+        assertThrowsOnlyExpected {
             let sut = try createSut()
             
             XCTAssertEqual(sut.request.httpMethod, "POST")
+        }
+    }
+    
+    private func assertThrowsOnlyExpected(
+        file: StaticString = #file,
+        line: UInt = #line,
+        _ closure: (() throws -> Void)
+    ) {
+        do {
+            try closure()
         } catch {
-            XCTFail("Unexpected error: \(error.localizedDescription)")
-            return
+            XCTFail("Unexpected error: \(error.localizedDescription)", file: file, line: line)
         }
     }
 }
