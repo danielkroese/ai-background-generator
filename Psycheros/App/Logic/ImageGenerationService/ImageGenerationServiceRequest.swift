@@ -35,6 +35,8 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
     }
     
     private func setHeaders(_ apiKey: String) {
+        request.httpMethod = "POST"
+        
         request.setValue("application/json", forHTTPHeaderField: "Accept")
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")

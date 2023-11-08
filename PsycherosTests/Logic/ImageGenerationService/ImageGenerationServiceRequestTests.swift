@@ -26,7 +26,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
         }
     }
     
-    func test_prompt_setsExpectedHeaders() {
+    func test_init_setsExpectedHeaders() {
         do {
             let sut = try createSut()
             
@@ -93,6 +93,17 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
         }
         
         wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func test_init_hasExpectedMethod() {
+        do {
+            let sut = try createSut()
+            
+            XCTAssertEqual(sut.request.httpMethod, "POST")
+        } catch {
+            XCTFail("Unexpected error: \(error.localizedDescription)")
+            return
+        }
     }
 }
 
