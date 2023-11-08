@@ -15,11 +15,6 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
     private(set) var request: URLRequest
     
     private enum Constants {
-        static let steps = 40
-        static let cfgScale = 5
-        static let samples = 1
-        static let negativePrompt = "blurry, bad, text"
-        
         static let endpoint = URL(string: "https://api.stability.ai/v1/generation/stable-diffusion-xl-1024-v1-0/text-to-image")
     }
     
@@ -49,18 +44,7 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
             throw ImageGenerationServiceRequestingError.invalidPrompt
         }
         
-        let httpBody = ImageRequestModel(
-            steps: Constants.steps,
-            width: Int(size.width),
-            height: Int(size.height),
-            seed: seed,
-            cfgScale: Constants.cfgScale,
-            samples: Constants.samples,
-            textPrompts: [
-                .init(text: string, weight: 1),
-                .init(text: Constants.negativePrompt, weight: -1)
-            ]
-        )
+        let httpBody = ImageRequestModel(prompt: string, seed: seed, size: size)
         
         let encodedHttpBody = try JSONEncoder().encode(httpBody)
         
