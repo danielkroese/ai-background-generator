@@ -35,6 +35,10 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
     func prompt(_ string: String,
                 seed: Int = Int.random(in: Int.min...Int.max),
                 size: CGSize = CGSize(width: 1024, height: 1024)) throws -> ImageGenerationServiceRequest {
+        guard string.isEmpty == false else {
+            throw ImageGenerationServiceRequestingError.invalidPrompt
+        }
+        
         let httpBody = ImageRequestModel(
             steps: Constants.steps,
             width: Int(size.width),

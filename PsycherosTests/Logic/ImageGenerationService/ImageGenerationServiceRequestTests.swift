@@ -50,6 +50,26 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
             return
         }
     }
+    
+    func test_emptyPrompt_throws() {
+        let expectation = XCTestExpectation(description: "throws invalidPrompt")
+        
+        do {
+            let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
+                .prompt(
+                    "",
+                    seed: 321,
+                    size: CGSize(width: 1024, height: 1024)
+                )
+        } catch ImageGenerationServiceRequestingError.invalidPrompt {
+            expectation.fulfill()
+        } catch {
+            XCTFail("Unexpected error: \(error.localizedDescription)")
+            return
+        }
+        
+        wait(for: [expectation], timeout: 0.1)
+    }
 }
 
 extension ImageGenerationServiceRequestTests {
