@@ -41,4 +41,10 @@ struct ImageRequestModel: Codable, Equatable {
             .init(text: Constants.negativePrompt, weight: -1)
         ]
     }
+    
+    var isValid: Bool {
+        width > 0 &&
+        height > 0 &&
+        textPrompts.allSatisfy { $0.text.isEmpty == false }
+    }
 }

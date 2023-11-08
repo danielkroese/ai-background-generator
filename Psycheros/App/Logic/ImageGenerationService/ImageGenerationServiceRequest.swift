@@ -3,7 +3,7 @@ import Foundation
 protocol ImageGenerationServiceRequesting {
     var request: URLRequest { get }
     
-    func prompt(_ string: String, seed: Int, size: CGSize) throws -> Self
+    func prompt(with request: ImageRequestModel) throws -> Self
 }
 
 enum ImageGenerationServiceRequestingError: Error {
@@ -37,18 +37,12 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
         request.httpMethod = "POST"
     }
 
-    func prompt(_ string: String,
-                seed: Int = Int.random(in: Int.min...Int.max),
-                size: CGSize = CGSize(width: 1024, height: 1024)) throws -> ImageGenerationServiceRequest {
-        guard string.isEmpty == false else {
+    func prompt(with imageRequest: ImageRequestModel) throws -> ImageGenerationServiceRequest {
+        guard imageRequest.isValid else {
             throw ImageGenerationServiceRequestingError.invalidPrompt
         }
         
-        let httpBody = ImageRequestModel(prompt: string, seed: seed, size: size)
-        
-        let encodedHttpBody = try JSONEncoder().encode(httpBody)
-        
-        request.httpBody = encodedHttpBody
+        request.httpBody = try JSONEncoder().encode(imageRequest)
         
         return self
     }

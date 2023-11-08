@@ -31,18 +31,13 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     
     func test_prompt_setsExpectedBody() {
         assertNoThrow {
-            let sut = try createSut()
-                .prompt(
-                    "scape, landscape, ecstatic, happy, color blue",
-                    seed: 123,
-                    size: CGSize(width: 1024, height: 1024)
-                )
-            
             let expectedHttpBody = ImageRequestModel(
                 prompt: "scape, landscape, ecstatic, happy, color blue",
                 seed: 123,
                 size: CGSize(width: 1024, height: 1024)
             )
+            
+            let sut = try createSut().prompt(with: expectedHttpBody)
             
             guard let sutHttpBody = sut.request.httpBody else {
                 XCTFail("No http body set")
@@ -55,9 +50,18 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
         }
     }
     
-    func test_emptyPrompt_throws() {
+    func test_invalidPrompt_throws() {
         assertThrows(expected: Error.invalidPrompt) {
-            _ = try createSut().prompt("")
+            _ = try createSut()
+                .prompt(with: ImageRequestModel(prompt: ""))
+        }
+        
+        assertThrows(expected: Error.invalidPrompt) {
+            _ = try createSut()
+                .prompt(with: ImageRequestModel(
+                    prompt: "valid prompt",
+                    size: CGSize(width: -5, height: -5)
+                ))
         }
     }
     
