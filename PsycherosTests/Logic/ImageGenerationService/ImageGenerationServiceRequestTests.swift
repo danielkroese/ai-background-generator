@@ -2,14 +2,22 @@ import XCTest
 
 final class ImageGenerationServiceRequestTests: XCTestCase {
     func test_init_withEndpoint_setsRequestUrl() {
-        let sut = ImageGenerationServiceRequest(endpoint: dummyUrl)
+        let sut = ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
         
         XCTAssertEqual(dummyUrl, sut.request.url)
     }
     
+    func test_prompt_setsExpectedHeaders() {
+        let sut = ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
+        
+        XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Accept"), "application/json")
+        XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Content-Type"), "application/json")
+        XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Authorization"), "Bearer dummy_key")
+    }
+    
     func test_prompt_setsExpectedBody() {
         do {
-            let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl)
+            let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
                 .prompt(
                     "scape, landscape, ecstatic, happy, color blue",
                     seed: 123,
@@ -42,24 +50,6 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
             return
         }
     }
-    
-    func test_prompt_setsExpectedHeaders() {
-        do {
-            let sut = try ImageGenerationServiceRequest(endpoint: dummyUrl)
-                .prompt(
-                    "scape, landscape, ecstatic, happy, color blue",
-                    seed: 123,
-                    size: CGSize(width: 1024, height: 1024)
-                )
-            
-            XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Accept"), "application/json")
-            XCTAssertEqual(sut.request.value(forHTTPHeaderField: "Authorization"), "Bearer dummy_key")
-            
-        } catch {
-            XCTFail("Unexpected error: \(error.localizedDescription)")
-            return
-        }
-    }
 }
 
 extension ImageGenerationServiceRequestTests {
@@ -70,5 +60,9 @@ extension ImageGenerationServiceRequestTests {
         }
         
         return url
+    }
+    
+    private var dummyApiKey: String {
+        "dummy_key"
     }
 }

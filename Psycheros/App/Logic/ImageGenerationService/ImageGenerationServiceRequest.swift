@@ -20,8 +20,16 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
         static let negativePrompt = "blurry, bad, text"
     }
     
-    init(endpoint: URL) {
+    init(endpoint: URL, apiKey: String) {
         self.request = URLRequest(url: endpoint, timeoutInterval: 60.0)
+        
+        setHeaders(apiKey)
+    }
+    
+    private func setHeaders(_ apiKey: String) {
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
     }
     
     func prompt(_ string: String,
@@ -43,9 +51,6 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
         let encodedHttpBody = try JSONEncoder().encode(httpBody)
         
         request.httpBody = encodedHttpBody
-        
-        request.setValue("application/json", forHTTPHeaderField: "Accept")
-        request.setValue("Bearer dummy_key", forHTTPHeaderField: "Authorization")
         
         return self
     }
