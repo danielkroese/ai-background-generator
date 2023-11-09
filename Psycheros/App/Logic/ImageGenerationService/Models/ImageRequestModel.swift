@@ -36,10 +36,10 @@ struct ImageRequestModel: Codable, Equatable {
     
     init(prompt: String,
          seed: Int = Int.random(in: Constants.seedRange),
-         size: CGSize = CGSize(width: 1024, height: 1024)) throws {
+         size: ImageSize = .size1024x1024) throws {
         self.steps = Constants.steps
-        self.width = Int(size.width)
-        self.height = Int(size.height)
+        self.width = size.width
+        self.height = size.height
         self.seed = seed
         self.cfgScale = Constants.cfgScale
         self.samples = Constants.samples
@@ -48,10 +48,10 @@ struct ImageRequestModel: Codable, Equatable {
             .init(text: Constants.negativePrompt, weight: -1)
         ]
         
-        guard width > .zero, height > .zero else {
-            throw ImageRequestModelError.invalidSize
-        }
-        
+        try validate()
+    }
+    
+    private func validate() throws {
         guard (textPrompts.allSatisfy { $0.text.isEmpty == false }) else {
             throw ImageRequestModelError.emptyPrompt
         }

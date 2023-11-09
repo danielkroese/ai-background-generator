@@ -15,21 +15,11 @@ final class ImageRequestModelTests: XCTestCase {
         }
     }
     
-    func test_init_withNegativeHeight_throws() {
-        assertThrows(expected: ImageRequestModelError.invalidSize) {
-            _ = try ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: 100, height: -100))
-        }
-    }
-    
-    func test_init_withNegativeWidth_throws() {
-        assertThrows(expected: ImageRequestModelError.invalidSize) {
-            _ = try ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: -100, height: 100))
-        }
-    }
-    
-    func test_init_withPositiveWidth_succeeds() {
+    func test_init_withAnySize_succeeds() {
         assertNoThrow {
-            _ = try ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: 100, height: 100))
+            for size in ImageRequestModel.ImageSize.allCases {
+                _ = try ImageRequestModel(prompt: dummyPrompt, size: size)
+            }
         }
     }
     
@@ -38,5 +28,16 @@ final class ImageRequestModelTests: XCTestCase {
             _ = try ImageRequestModel(prompt: dummyPrompt, seed: -12)
         }
     }
+    
+    func test_init_withZeroSeed_succeeds() {
+        assertNoThrow {
+            _ = try ImageRequestModel(prompt: dummyPrompt, seed: .zero)
+        }
+    }
+    
+    func test_init_withTooBigSeed_throws() {
+        assertThrows(expected: ImageRequestModelError.invalidSeed) {
+            _ = try ImageRequestModel(prompt: dummyPrompt, seed: 4294967296)
+        }
+    }
 }
-
