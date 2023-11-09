@@ -37,7 +37,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
                 size: .size1024x1024
             )
             
-            let sut = try createSut().prompt(with: expectedHttpBody)
+            let sut = try createSut().requestImage(expectedHttpBody)
             
             guard let sutHttpBody = sut.request.httpBody else {
                 XCTFail("No http body set")
@@ -53,7 +53,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     func test_invalidPrompt_throws() {
         assertThrows(expected: ImageRequestModelError.emptyPrompt) {
             _ = try createSut()
-                .prompt(with: ImageRequestModel(prompt: ""))
+                .requestImage(ImageRequestModel(prompt: ""))
         }
     }
     

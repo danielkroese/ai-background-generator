@@ -3,7 +3,7 @@ import Foundation
 protocol ImageGenerationServiceRequesting {
     var request: URLRequest { get }
     
-    func prompt(with request: ImageRequestModel) throws -> Self
+    func requestImage(_ imageRequest: ImageRequestModel) throws -> Self
 }
 
 enum ImageGenerationServiceRequestingError: Error {
@@ -36,7 +36,7 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
         request.httpMethod = "POST"
     }
 
-    func prompt(with imageRequest: ImageRequestModel) throws -> ImageGenerationServiceRequest {
+    func requestImage(_ imageRequest: ImageRequestModel) throws -> ImageGenerationServiceRequest {
         request.httpBody = try JSONEncoder().encode(imageRequest)
         
         return self
