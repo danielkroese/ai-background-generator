@@ -77,7 +77,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
 // MARK: - Test helpers
 extension ImageGenerationServiceRequestTests {
     private func createSut() throws -> ImageGenerationServiceRequest {
-        return try ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
+        try ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
     }
     
     private var dummyUrl: URL {

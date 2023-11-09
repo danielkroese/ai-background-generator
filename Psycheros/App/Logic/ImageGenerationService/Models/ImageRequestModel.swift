@@ -24,11 +24,12 @@ struct ImageRequestModel: Codable, Equatable {
         static let steps = 40
         static let cfgScale = 5
         static let samples = 1
+        static let seedRange = 0...4294967295
         static let negativePrompt = "blurry, bad, text"
     }
     
     init(prompt: String,
-         seed: Int = Int.random(in: Int.min...Int.max),
+         seed: Int = Int.random(in: Constants.seedRange),
          size: CGSize = CGSize(width: 1024, height: 1024)) {
         self.steps = Constants.steps
         self.width = Int(size.width)
