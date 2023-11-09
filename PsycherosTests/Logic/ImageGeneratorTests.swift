@@ -25,11 +25,11 @@ final class ImageGeneratorTests: XCTestCase {
         }
     }
     
-    func test_generate_returnsUrl() async {
+    func test_generate_returnsImageFileUrl() async {
         await assertNoThrowAsync {
             let image = try await createSutAndGenerate(with: dummyQuery)
             
-            XCTAssertEqual(image, URL.picturesDirectory)
+            XCTAssertTrue(image.isFileURL)
         }
     }
     
@@ -43,6 +43,23 @@ final class ImageGeneratorTests: XCTestCase {
             XCTAssertEqual(spy.didCallWritePromptCount, 1)
         }
     }
+    
+    func test_generate_callsImageGenerationService_withExpectedQuery() async {
+        await assertNoThrowAsync {
+            let spyGenerator = SpyPromptGenerator()
+            let spyService = SpyImageGenerationService()
+            
+            let sut = createSut(
+                promptGenerator: spyGenerator,
+                imageGenerationService: spyService
+            )
+            
+            _ = try await sut.generate(from: dummyQuery)
+            
+            XCTAssertEqual(spyService.didCallFetchImageCount, 1)
+            XCTAssertEqual(spyGenerator.writePromptQuery, dummyQuery)
+        }
+    }
 }
 
 // MARK: - Helpers
@@ -51,8 +68,10 @@ extension ImageGeneratorTests {
         ImageQuery(color: "yellow", feelings: [.happy])
     }
     
-    private func createSut(promptGenerator: PromptGenerating = SpyPromptGenerator()) -> ImageGenerator {
-        return ImageGenerator(promptGenerator: promptGenerator)
+    private func createSut(promptGenerator: PromptGenerating = SpyPromptGenerator(),
+                           imageGenerationService: ImageGenerationServicing = SpyImageGenerationService()) -> ImageGenerator {
+        return ImageGenerator(promptGenerator: promptGenerator,
+                              imageGenerationService: imageGenerationService)
     }
     
     private func createSutAndGenerate(with prompt: ImageQuery) async throws -> URL {

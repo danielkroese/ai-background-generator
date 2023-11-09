@@ -1,5 +1,5 @@
 import Combine
-import SwiftUI // TODO: Prevent this import
+import SwiftUI
 
 protocol ImageGenerating {
     func generate(from: ImageQuery) async throws -> URL
@@ -11,26 +11,27 @@ enum ImageGeneratingError: Error {
 
 final class ImageGenerator: ImageGenerating {
     private let promptGenerator: PromptGenerating
+    private let imageGenerationService: ImageGenerationServicing
     
-    init(promptGenerator: PromptGenerating) {
+    init(promptGenerator: PromptGenerating, 
+         imageGenerationService: ImageGenerationServicing) {
         self.promptGenerator = promptGenerator
+        self.imageGenerationService = imageGenerationService
     }
     
-    func generate(from prompt: ImageQuery) async throws -> URL {
-        guard prompt.isNotEmpty else {
+    func generate(from query: ImageQuery) async throws -> URL {
+        guard query.isNotEmpty else {
             throw ImageGeneratingError.incompleteQuery
         }
         
-        return try await generateImage(from: prompt)
+        return try await generateImage(from: query)
     }
     
     private func generateImage(from query: ImageQuery) async throws -> URL {
-        let dummyImageUrl = URL.picturesDirectory
-        
         let prompt = try promptGenerator.writePrompt(with: query)
         let model = try ImageRequestModel(prompt: prompt)
+        let imageUrl = try await imageGenerationService.fetchImage(model: model)
         
-        
-        return dummyImageUrl
+        return imageUrl
     }
 }

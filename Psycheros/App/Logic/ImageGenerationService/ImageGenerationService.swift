@@ -30,6 +30,8 @@ final class ImageGenerationService: ImageGenerationServicing {
             .requestImage(model)
             .request
         
+        // mock url session to use here
+        
         return URL.homeDirectory
     }
 }

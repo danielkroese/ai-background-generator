@@ -33,6 +33,7 @@
 		65B545E72AFD6A6A00B75EDE /* ImageRequestModelImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545E52AFD6A3100B75EDE /* ImageRequestModelImageSize.swift */; };
 		65B545E92AFD6D3000B75EDE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545E82AFD6D3000B75EDE /* Extensions.swift */; };
 		65B545EA2AFD6D3000B75EDE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545E82AFD6D3000B75EDE /* Extensions.swift */; };
+		65B545ED2AFD92EE00B75EDE /* SpyImageGenerationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545EC2AFD92EE00B75EDE /* SpyImageGenerationService.swift */; };
 		65F97E0C2AF669A000C0E501 /* PsycherosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */; };
 		65F97E0E2AF669A000C0E501 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0D2AF669A000C0E501 /* ContentView.swift */; };
 		65F97E122AF669A100C0E501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F97E112AF669A100C0E501 /* Assets.xcassets */; };
@@ -70,6 +71,7 @@
 		65B545E32AFD600E00B75EDE /* ImageRequestModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequestModelTests.swift; sourceTree = "<group>"; };
 		65B545E52AFD6A3100B75EDE /* ImageRequestModelImageSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequestModelImageSize.swift; sourceTree = "<group>"; };
 		65B545E82AFD6D3000B75EDE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		65B545EC2AFD92EE00B75EDE /* SpyImageGenerationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyImageGenerationService.swift; sourceTree = "<group>"; };
 		65F97E082AF6699F00C0E501 /* Psycheros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Psycheros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosApp.swift; sourceTree = "<group>"; };
 		65F97E0D2AF669A000C0E501 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				6533D7062AF8422B00B15CFA /* SpyPromptGenerator.swift */,
+				65B545EC2AFD92EE00B75EDE /* SpyImageGenerationService.swift */,
 			);
 			path = Spy;
 			sourceTree = "<group>";
@@ -396,6 +399,7 @@
 				65250CD52AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				65250CDA2AF83491006BB662 /* PromptGeneratorTests.swift in Sources */,
 				65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */,
+				65B545ED2AFD92EE00B75EDE /* SpyImageGenerationService.swift in Sources */,
 				65250CC02AF7F3D2006BB662 /* ImageGeneratorTests.swift in Sources */,
 				65B545EA2AFD6D3000B75EDE /* Extensions.swift in Sources */,
 				65250CD82AF8346B006BB662 /* ImageGenerationService.swift in Sources */,
