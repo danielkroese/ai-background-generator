@@ -1,24 +1,22 @@
 import XCTest
 
 final class ImageRequestModelTests: XCTestCase {
-    private let dummyPrompt = "prompt"
-    
     func test_init_withEmptyPrompt_throws() {
         assertThrows(expected: ImageRequestModelError.emptyPrompt) {
-            _ = try ImageRequestModel(prompt: "")
+            _ = try createSut(prompt: "")
         }
     }
     
     func test_init_withValidPrompt_succeeds() {
         assertNoThrow {
-            _ = try ImageRequestModel(prompt: dummyPrompt)
+            _ = try createSut()
         }
     }
     
     func test_init_withAnySize_setsCorrectSizes() {
         assertNoThrow {
             for size in ImageRequestModel.ImageSize.allCases {
-                let sut = try ImageRequestModel(prompt: dummyPrompt, size: size)
+                let sut = try createSut(size: size)
                 
                 XCTAssertEqual(sut.width, size.width)
                 XCTAssertEqual(sut.height, size.height)
@@ -28,19 +26,38 @@ final class ImageRequestModelTests: XCTestCase {
     
     func test_init_withNegativeSeed_throws() {
         assertThrows(expected: ImageRequestModelError.invalidSeed) {
-            _ = try ImageRequestModel(prompt: dummyPrompt, seed: -12)
+            _ = try createSut(seed: -12)
         }
     }
     
     func test_init_withZeroSeed_succeeds() {
         assertNoThrow {
-            _ = try ImageRequestModel(prompt: dummyPrompt, seed: .zero)
+            _ = try createSut(seed: .zero)
         }
     }
     
     func test_init_withTooBigSeed_throws() {
         assertThrows(expected: ImageRequestModelError.invalidSeed) {
-            _ = try ImageRequestModel(prompt: dummyPrompt, seed: 4294967296)
+            _ = try createSut(seed: 4294967296)
         }
+    }
+    
+    func test_init_setsValidWeights() {
+        assertNoThrow {
+            let sut = try createSut()
+            
+            sut.textPrompts.forEach {
+                XCTAssertTrue($0.weight.isBetween(-1, and: 1))
+            }
+        }
+    }
+}
+
+// MARK: - Test helpers
+extension ImageRequestModelTests {
+    private func createSut(prompt: String = "prompt",
+                           seed: Int = 123,
+                           size: ImageRequestModel.ImageSize = .size1024x1024) throws -> ImageRequestModel {
+        try ImageRequestModel(prompt: prompt, seed: seed, size: size)
     }
 }
