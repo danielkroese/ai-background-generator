@@ -51,6 +51,16 @@ final class ImageRequestModelTests: XCTestCase {
             }
         }
     }
+    
+    func test_init_setsExpectedConstantValues() {
+        assertNoThrow {
+            let sut = try createSut()
+            
+            XCTAssertEqual(sut.steps, 40)
+            XCTAssertEqual(sut.cfgScale, 5)
+            XCTAssertEqual(sut.samples, 1)
+        }
+    }
 }
 
 // MARK: - Test helpers

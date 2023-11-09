@@ -26,10 +26,10 @@ struct ImageRequestModel: Codable, Equatable {
     }
     
     private enum Constants {
+        static let seedRange = 0...4294967295
         static let steps = 40
         static let cfgScale = 5
         static let samples = 1
-        static let seedRange = 0...4294967295
         static let negativePrompt = "blurry, bad, text"
     }
     
