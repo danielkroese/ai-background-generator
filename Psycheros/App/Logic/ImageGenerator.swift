@@ -24,10 +24,12 @@ final class ImageGenerator: ImageGenerating {
         return try await generateImage(from: prompt)
     }
     
-    private func generateImage(from prompt: ImageQuery) async throws -> Image {
+    private func generateImage(from query: ImageQuery) async throws -> Image {
         let dummyImage = Image("")
         
-        _ = try promptGenerator.writePrompt(with: prompt)
+        let prompt = try promptGenerator.writePrompt(with: query)
+        let model = try ImageRequestModel(prompt: prompt)
+        
         
         return dummyImage
     }

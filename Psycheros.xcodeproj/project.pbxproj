@@ -216,7 +216,6 @@
 				65250CBD2AF7F3B8006BB662 /* Logic */,
 				65AA66952AF7B2B900C2BCD6 /* Models */,
 				65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */,
-				6533D7052AF8421E00B15CFA /* Spy */,
 			);
 			path = PsycherosTests;
 			sourceTree = "<group>";
@@ -264,6 +263,7 @@
 		65FC2C252AFC2F4300ED4EA3 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				6533D7052AF8421E00B15CFA /* Spy */,
 				65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */,
 			);
 			path = Helpers;
