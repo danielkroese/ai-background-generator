@@ -17,7 +17,7 @@ final class ImageGenerator: ImageGenerating {
     }
     
     func generate(from prompt: ImageQuery) async throws -> Image {
-        guard prompt.isEmpty == false else {
+        guard prompt.isNotEmpty else {
             throw ImageGeneratingError.incompleteQuery
         }
         

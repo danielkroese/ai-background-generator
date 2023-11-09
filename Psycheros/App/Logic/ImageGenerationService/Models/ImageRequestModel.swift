@@ -2,7 +2,6 @@ import Foundation
 
 enum ImageRequestModelError: Error {
     case emptyPrompt,
-         invalidSize,
          invalidSeed
 }
 
@@ -52,7 +51,11 @@ struct ImageRequestModel: Codable, Equatable {
     }
     
     private func validate() throws {
-        guard (textPrompts.allSatisfy { $0.text.isEmpty == false }) else {
+        guard (textPrompts.allSatisfy { $0.text.isNotEmpty }) else {
+            throw ImageRequestModelError.emptyPrompt
+        }
+        
+        guard (textPrompts.allSatisfy { $0.weight.isBetween(-1, and: 1) }) else {
             throw ImageRequestModelError.emptyPrompt
         }
         

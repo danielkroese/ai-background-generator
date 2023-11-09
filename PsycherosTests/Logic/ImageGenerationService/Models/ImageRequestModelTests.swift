@@ -15,10 +15,13 @@ final class ImageRequestModelTests: XCTestCase {
         }
     }
     
-    func test_init_withAnySize_succeeds() {
+    func test_init_withAnySize_setsCorrectSizes() {
         assertNoThrow {
             for size in ImageRequestModel.ImageSize.allCases {
-                _ = try ImageRequestModel(prompt: dummyPrompt, size: size)
+                let sut = try ImageRequestModel(prompt: dummyPrompt, size: size)
+                
+                XCTAssertEqual(sut.width, size.width)
+                XCTAssertEqual(sut.height, size.height)
             }
         }
     }

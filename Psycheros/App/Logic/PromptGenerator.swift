@@ -10,7 +10,7 @@ enum PromptGeneratingError: Error {
 
 final class PromptGenerator: PromptGenerating {
     func writePrompt(with query: ImageQuery) throws -> String {
-        guard query.isEmpty == false else {
+        guard query.isNotEmpty else {
             throw PromptGeneratingError.incompleteQuery
         }
         

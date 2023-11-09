@@ -7,4 +7,8 @@ struct ImageQuery: Equatable {
     var isEmpty: Bool {
         color.isEmpty || feelings.isEmpty
     }
+    
+    var isNotEmpty: Bool {
+        isEmpty == false
+    }
 }
