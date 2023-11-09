@@ -3,40 +3,40 @@ import XCTest
 final class ImageRequestModelTests: XCTestCase {
     private let dummyPrompt = "prompt"
     
-    func test_isValid_withEmptyPrompt_false() {
-        let sut = ImageRequestModel(prompt: "")
-        
-        XCTAssertFalse(sut.isValid)
+    func test_init_withEmptyPrompt_throws() {
+        assertThrows(expected: ImageRequestModelError.emptyPrompt) {
+            _ = try ImageRequestModel(prompt: "")
+        }
     }
     
-    func test_isValid_withValidPrompt_true() {
-        let sut = ImageRequestModel(prompt: dummyPrompt)
-        
-        XCTAssertTrue(sut.isValid)
+    func test_init_withValidPrompt_succeeds() {
+        assertNoThrow {
+            _ = try ImageRequestModel(prompt: dummyPrompt)
+        }
     }
     
-    func test_isValid_withNegativeHeight_false() {
-        let sut = ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: 100, height: -100))
-        
-        XCTAssertFalse(sut.isValid)
+    func test_init_withNegativeHeight_throws() {
+        assertThrows(expected: ImageRequestModelError.invalidSize) {
+            _ = try ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: 100, height: -100))
+        }
     }
     
-    func test_isValid_withNegativeWidth_false() {
-        let sut = ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: -100, height: 100))
-        
-        XCTAssertFalse(sut.isValid)
+    func test_init_withNegativeWidth_throws() {
+        assertThrows(expected: ImageRequestModelError.invalidSize) {
+            _ = try ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: -100, height: 100))
+        }
     }
     
-    func test_isValid_withPositiveWidth_true() {
-        let sut = ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: 100, height: 100))
-        
-        XCTAssertTrue(sut.isValid)
+    func test_init_withPositiveWidth_succeeds() {
+        assertNoThrow {
+            _ = try ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: 100, height: 100))
+        }
     }
     
-    func test_isValid_withNegativeSeed_false() {
-        let sut = ImageRequestModel(prompt: dummyPrompt, size: CGSize(width: 100, height: 100))
-        
-        XCTAssertTrue(sut.isValid)
+    func test_init_withNegativeSeed_throws() {
+        assertThrows(expected: ImageRequestModelError.invalidSeed) {
+            _ = try ImageRequestModel(prompt: dummyPrompt, seed: -12)
+        }
     }
 }
 

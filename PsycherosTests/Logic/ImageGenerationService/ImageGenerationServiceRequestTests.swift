@@ -31,7 +31,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     
     func test_prompt_setsExpectedBody() {
         assertNoThrow {
-            let expectedHttpBody = ImageRequestModel(
+            let expectedHttpBody = try ImageRequestModel(
                 prompt: "scape, landscape, ecstatic, happy, color blue",
                 seed: 123,
                 size: CGSize(width: 1024, height: 1024)
@@ -51,12 +51,12 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
     }
     
     func test_invalidPrompt_throws() {
-        assertThrows(expected: Error.invalidPrompt) {
+        assertThrows(expected: ImageRequestModelError.emptyPrompt) {
             _ = try createSut()
                 .prompt(with: ImageRequestModel(prompt: ""))
         }
         
-        assertThrows(expected: Error.invalidPrompt) {
+        assertThrows(expected: ImageRequestModelError.emptyPrompt) {
             _ = try createSut()
                 .prompt(with: ImageRequestModel(
                     prompt: "valid prompt",

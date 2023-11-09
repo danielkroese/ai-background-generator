@@ -7,8 +7,7 @@ protocol ImageGenerationServiceRequesting {
 }
 
 enum ImageGenerationServiceRequestingError: Error {
-    case invalidEndpoint,
-         invalidPrompt
+    case invalidEndpoint
 }
 
 final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
@@ -38,10 +37,6 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
     }
 
     func prompt(with imageRequest: ImageRequestModel) throws -> ImageGenerationServiceRequest {
-        guard imageRequest.isValid else {
-            throw ImageGenerationServiceRequestingError.invalidPrompt
-        }
-        
         request.httpBody = try JSONEncoder().encode(imageRequest)
         
         return self

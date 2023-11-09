@@ -1,5 +1,11 @@
 import Foundation
 
+enum ImageRequestModelError: Error {
+    case emptyPrompt,
+         invalidSize,
+         invalidSeed
+}
+
 struct ImageRequestModel: Codable, Equatable {
     let steps: Int
     let width: Int
@@ -30,7 +36,7 @@ struct ImageRequestModel: Codable, Equatable {
     
     init(prompt: String,
          seed: Int = Int.random(in: Constants.seedRange),
-         size: CGSize = CGSize(width: 1024, height: 1024)) {
+         size: CGSize = CGSize(width: 1024, height: 1024)) throws {
         self.steps = Constants.steps
         self.width = Int(size.width)
         self.height = Int(size.height)
@@ -41,11 +47,17 @@ struct ImageRequestModel: Codable, Equatable {
             .init(text: prompt, weight: 1),
             .init(text: Constants.negativePrompt, weight: -1)
         ]
-    }
-    
-    var isValid: Bool {
-        width > 0 &&
-        height > 0 &&
-        textPrompts.allSatisfy { $0.text.isEmpty == false }
+        
+        guard width > .zero, height > .zero else {
+            throw ImageRequestModelError.invalidSize
+        }
+        
+        guard (textPrompts.allSatisfy { $0.text.isEmpty == false }) else {
+            throw ImageRequestModelError.emptyPrompt
+        }
+        
+        guard Constants.seedRange.contains(seed) else {
+            throw ImageRequestModelError.invalidSeed
+        }
     }
 }
