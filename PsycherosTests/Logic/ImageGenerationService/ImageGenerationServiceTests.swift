@@ -13,7 +13,19 @@ final class ImageGenerationServiceTests: XCTestCase {
     func test_fetchImage_withoutKeyInBundle_throws() async {
         await assertThrowsAsync(expected: ImageGenerationServicingError.missingApiKey) {
             let sut = ImageGenerationService(bundle: Bundle())
-            let url = try await sut.fetchImage(model: .init(prompt: "test"))
+            
+            _ = try await sut.fetchImage(model: .init(prompt: "test"))
+        }
+    }
+    
+    func test_fetchImage_startsNetworkSession() async {
+        await assertNoThrowAsync {
+            let mockNetworkSession = MockNetworkSession()
+            let sut = ImageGenerationService(networkSession: mockNetworkSession)
+            
+            _ = try await sut.fetchImage(model: .init(prompt: "test"))
+            
+            XCTAssertEqual(mockNetworkSession.didCallDataCount, 1)
         }
     }
 }

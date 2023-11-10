@@ -10,9 +10,12 @@ enum ImageGenerationServicingError: Error {
 
 final class ImageGenerationService: ImageGenerationServicing {
     private let bundle: Bundle
+    private let networkSession: NetworkSession
     
-    init(bundle: Bundle = Bundle.main) {
+    init(bundle: Bundle = Bundle.main,
+         networkSession: NetworkSession = URLSession(configuration: .default)) {
         self.bundle = bundle
+        self.networkSession = networkSession
     }
     
     private var apiKey: String {
@@ -30,7 +33,7 @@ final class ImageGenerationService: ImageGenerationServicing {
             .requestImage(model)
             .request
         
-        // mock url session to use here
+        _ = try await networkSession.data(for: request)
         
         return URL.homeDirectory
     }
