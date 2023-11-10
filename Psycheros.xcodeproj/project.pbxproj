@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		652406802AFEBE7B00AE193D /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6524067F2AFEBE7B00AE193D /* NetworkSession.swift */; };
+		652406812AFEBE7B00AE193D /* NetworkSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6524067F2AFEBE7B00AE193D /* NetworkSession.swift */; };
+		652406832AFEBED400AE193D /* NetworkSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652406822AFEBED400AE193D /* NetworkSessionTests.swift */; };
 		65250CB42AF7D8AA006BB662 /* ImageQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB32AF7D8AA006BB662 /* ImageQueryTests.swift */; };
 		65250CB62AF7DA87006BB662 /* ImageQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB52AF7DA87006BB662 /* ImageQuery.swift */; };
 		65250CB72AF7DA87006BB662 /* ImageQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB52AF7DA87006BB662 /* ImageQuery.swift */; };
@@ -54,6 +57,8 @@
 /* Begin PBXFileReference section */
 		651A16032AF97E55002AB363 /* config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
 		651A16042AF9860F002AB363 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6524067F2AFEBE7B00AE193D /* NetworkSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSession.swift; sourceTree = "<group>"; };
+		652406822AFEBED400AE193D /* NetworkSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionTests.swift; sourceTree = "<group>"; };
 		65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Psycheros.xctestplan; sourceTree = "<group>"; };
 		65250CB32AF7D8AA006BB662 /* ImageQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQueryTests.swift; sourceTree = "<group>"; };
 		65250CB52AF7DA87006BB662 /* ImageQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQuery.swift; sourceTree = "<group>"; };
@@ -133,9 +138,10 @@
 		659A92C52AFAD75100A6F351 /* ImageGenerationService */ = {
 			isa = PBXGroup;
 			children = (
-				659A92CD2AFAF4EF00A6F351 /* Models */,
+				6524067F2AFEBE7B00AE193D /* NetworkSession.swift */,
 				65250CD62AF8346B006BB662 /* ImageGenerationService.swift */,
 				659A92C62AFAD77D00A6F351 /* ImageGenerationServiceRequest.swift */,
+				659A92CD2AFAF4EF00A6F351 /* Models */,
 			);
 			path = ImageGenerationService;
 			sourceTree = "<group>";
@@ -143,9 +149,10 @@
 		659A92C92AFADA8C00A6F351 /* ImageGenerationService */ = {
 			isa = PBXGroup;
 			children = (
-				65B545E22AFD600000B75EDE /* Models */,
-				65250CDB2AF8349B006BB662 /* ImageGenerationServiceTests.swift */,
 				659A92CA2AFADB2600A6F351 /* ImageGenerationServiceRequestTests.swift */,
+				65250CDB2AF8349B006BB662 /* ImageGenerationServiceTests.swift */,
+				65B545E22AFD600000B75EDE /* Models */,
+				652406822AFEBED400AE193D /* NetworkSessionTests.swift */,
 			);
 			path = ImageGenerationService;
 			sourceTree = "<group>";
@@ -383,6 +390,7 @@
 				65250CBB2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
 				65250CD72AF8346B006BB662 /* ImageGenerationService.swift in Sources */,
 				65B545E62AFD6A3100B75EDE /* ImageRequestModelImageSize.swift in Sources */,
+				652406802AFEBE7B00AE193D /* NetworkSession.swift in Sources */,
 				65F97E3D2AF696FD00C0E501 /* NewEntryView.swift in Sources */,
 				65F97E0E2AF669A000C0E501 /* ContentView.swift in Sources */,
 				65F97E0C2AF669A000C0E501 /* PsycherosApp.swift in Sources */,
@@ -396,11 +404,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				65FC2C272AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift in Sources */,
+				652406812AFEBE7B00AE193D /* NetworkSession.swift in Sources */,
 				65250CD52AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				65250CDA2AF83491006BB662 /* PromptGeneratorTests.swift in Sources */,
 				65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */,
 				65B545ED2AFD92EE00B75EDE /* SpyImageGenerationService.swift in Sources */,
 				65250CC02AF7F3D2006BB662 /* ImageGeneratorTests.swift in Sources */,
+				652406832AFEBED400AE193D /* NetworkSessionTests.swift in Sources */,
 				65B545EA2AFD6D3000B75EDE /* Extensions.swift in Sources */,
 				65250CD82AF8346B006BB662 /* ImageGenerationService.swift in Sources */,
 				659A92D02AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
