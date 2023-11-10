@@ -15,8 +15,10 @@ final class ImageGenerationService: ImageGenerationServicing {
     private let bundle: Bundle
     private let networkSession: NetworkSession
     
-    init(bundle: Bundle = Bundle.main,
-         networkSession: NetworkSession = URLSession(configuration: .default)) {
+    init(
+        bundle: Bundle = Bundle.main,
+        networkSession: NetworkSession = URLSession(configuration: .default)
+    ) {
         self.bundle = bundle
         self.networkSession = networkSession
     }

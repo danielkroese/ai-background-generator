@@ -18,8 +18,8 @@ final class MockNetworkSession: NetworkSession {
         return (mockData ?? Data(), mockResponse ?? URLResponse())
     }
     
-    func setResponse(statusCode: Int = 200,
-                     mimeType: String? = "application/json") throws {
+    func setResponse(statusCode: Int,
+                     mimeType: String) throws {
         guard let response = MockHTTPURLResponse(
             url: .homeDirectory,
             statusCode: statusCode,
