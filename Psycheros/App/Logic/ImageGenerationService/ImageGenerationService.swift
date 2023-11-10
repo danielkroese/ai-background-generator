@@ -6,9 +6,6 @@ protocol ImageGenerationServicing {
 
 enum ImageGenerationServicingError: Error {
     case missingApiKey
-    case invalidResponseType
-    case invalidMimeType
-    case serverError(statusCode: Int)
 }
 
 final class ImageGenerationService: ImageGenerationServicing {
@@ -40,17 +37,7 @@ final class ImageGenerationService: ImageGenerationServicing {
         
         let (data, response) = try await networkSession.data(for: request)
         
-        guard let httpResponse = response as? HTTPURLResponse else {
-            throw ImageGenerationServicingError.invalidResponseType
-        }
-        
-        guard (200...299).contains(httpResponse.statusCode) else {
-            throw ImageGenerationServicingError.serverError(statusCode: httpResponse.statusCode)
-        }
-        
-        guard httpResponse.mimeType == "application/json" else {
-            throw ImageGenerationServicingError.invalidMimeType
-        }
+        try NetworkResponseValidator.validate(response)
         
         return URL.homeDirectory
     }
