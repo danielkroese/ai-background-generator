@@ -4,7 +4,7 @@ protocol NetworkResponseValidating {
     static func validate(_ response: URLResponse?) throws
 }
 
-enum NetworkResponseValidatingError: Error {
+enum NetworkResponseValidatingError: Error, Equatable {
     case invalidResponseType
     case invalidMimeType
     case serverError(statusCode: Int)

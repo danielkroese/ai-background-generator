@@ -9,7 +9,7 @@ extension XCTestCase {
         do {
             try closure()
         } catch {
-            fail(with: error)
+            fail(withUnexpected: error)
         }
     }
     
@@ -21,49 +21,50 @@ extension XCTestCase {
         do {
             try await closure()
         } catch {
-            fail(with: error)
+            fail(withUnexpected: error)
         }
     }
     
-    func assertThrows<T: Error>(
+    func assertThrows<T: Error & Equatable>(
         expected error: T,
         file: StaticString = #file,
         line: UInt = #line,
         _ closure: (() throws -> Void)
     ) {
-        let expectation = XCTestExpectation(description: "throws expected error \(error.localizedDescription)")
-        
         do {
             try closure()
-        } catch _ as T {
-            expectation.fulfill()
+            fail(withNotThrown: error)
+        } catch let caughtError as T {
+            XCTAssertEqual(caughtError, error, "Unexpected error of type \(T.self) thrown", file: file, line: line)
         } catch {
-            fail(with: error)
+            fail(withUnexpected: error)
         }
-        
-        wait(for: [expectation], timeout: 0.1)
     }
     
-    func assertAsyncThrows<T: Error>(
+    func assertAsyncThrows<T: Error & Equatable>(
         expected error: T,
         file: StaticString = #file,
         line: UInt = #line,
         _ closure: (() async throws -> Void)
     ) async {
-        let expectation = XCTestExpectation(description: "throws expected error \(error.localizedDescription)")
-        
         do {
             try await closure()
-        } catch _ as T {
-            expectation.fulfill()
+            fail(withNotThrown: error)
+        } catch let caughtError as T {
+            XCTAssertEqual(caughtError, error, "Unexpected error of type \(T.self) thrown", file: file, line: line)
         } catch {
-            fail(with: error)
+            fail(withUnexpected: error)
         }
-        
-        await fulfillment(of: [expectation], timeout: 0.1)
     }
     
-    private func fail(with error: Error,
+    private func fail(withUnexpected error: Error,
+                      file: StaticString = #file,
+                      line: UInt = #line) {
+        let errorString = error.localizedDescription
+        XCTFail("Unexpected error: \(errorString)", file: file, line: line)
+    }
+    
+    private func fail(withNotThrown error: Error,
                       file: StaticString = #file,
                       line: UInt = #line) {
         let errorString = error.localizedDescription
