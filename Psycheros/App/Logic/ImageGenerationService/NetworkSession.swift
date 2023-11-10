@@ -1,9 +1,11 @@
 import Foundation
 
-protocol NetworkSessionInterface {
-    
+protocol NetworkSession {
+    func data(for request: URLRequest) async throws -> (Data, URLResponse)
 }
 
-final class NetworkSession: NetworkSessionInterface {
-    
+extension URLSession: NetworkSession {
+    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+        return try await data(for: request, delegate: nil)
+    }
 }
