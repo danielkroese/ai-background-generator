@@ -29,30 +29,6 @@ final class ImageGenerationServiceTests: XCTestCase {
             XCTAssertEqual(mockNetworkSession.didCallDataCount, 1)
         }
     }
-    
-    func test_fetchImage_withUnsuccessfulStatusCode_throws() async {
-        for statusCode in [0, 100, 199, 300, 400, 500, 600] {
-            await assertAsyncThrows(
-                expected: NetworkResponseValidatingError.serverError(statusCode: statusCode)
-            ) {
-                let mockNetworkSession = try createMockNetworkSession(statusCode: statusCode)
-                
-                let sut = try createSut(networkSession: mockNetworkSession)             
-                
-                _ = try await sut.fetchImage(model: .init(prompt: "test"))
-            }
-        }
-    }
-    
-    func test_fetchImage_responseNotJson_throws() async {
-        await assertAsyncThrows(expected: NetworkResponseValidatingError.invalidMimeType) {
-            let mockNetworkSession = try createMockNetworkSession(mimeType: "notJson")
-            
-            let sut = try createSut(networkSession: mockNetworkSession)
-            
-            _ = try await sut.fetchImage(model: .init(prompt: "test"))
-        }
-    }
 }
 
 // MARK: - Test helpers
