@@ -6,6 +6,7 @@ protocol ImageGenerationServicing {
 
 enum ImageGenerationServicingError: Error {
     case missingApiKey
+    case serverError(statusCode: Int?)
 }
 
 final class ImageGenerationService: ImageGenerationServicing {
@@ -33,7 +34,15 @@ final class ImageGenerationService: ImageGenerationServicing {
             .requestImage(model)
             .request
         
-        _ = try await networkSession.data(for: request)
+        let (data, response) = try await networkSession.data(for: request)
+        
+        guard let httpResponse = response as? HTTPURLResponse else {
+            throw ImageGenerationServicingError.serverError(statusCode: nil)
+        }
+        
+        guard (200...299).contains(httpResponse.statusCode) else {
+            throw ImageGenerationServicingError.serverError(statusCode: httpResponse.statusCode)
+        }
         
         return URL.homeDirectory
     }

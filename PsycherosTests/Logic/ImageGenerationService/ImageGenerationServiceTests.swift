@@ -28,4 +28,17 @@ final class ImageGenerationServiceTests: XCTestCase {
             XCTAssertEqual(mockNetworkSession.didCallDataCount, 1)
         }
     }
+    
+    func test_fetchImage_withUnsuccessfulStatusCode_throws() async {
+        for statusCode in [0, 100, 199, 300, 400, 500, 600] {
+            await assertThrowsAsync(expected: ImageGenerationServicingError.serverError(statusCode: statusCode)) {
+                let mockNetworkSession = MockNetworkSession()
+                let sut = ImageGenerationService(networkSession: mockNetworkSession)
+                
+                try mockNetworkSession.setResponse(statusCode: statusCode)
+                
+                _ = try await sut.fetchImage(model: .init(prompt: "test"))
+            }
+        }
+    }
 }
