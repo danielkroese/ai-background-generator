@@ -21,6 +21,8 @@ final class ImageGenerationServiceTests: XCTestCase {
     func test_fetchImage_startsNetworkSession() async {
         await assertNoThrowAsync {
             let mockNetworkSession = MockNetworkSession()
+            try mockNetworkSession.setResponse()
+            
             let sut = ImageGenerationService(networkSession: mockNetworkSession)
             
             _ = try await sut.fetchImage(model: .init(prompt: "test"))
@@ -39,6 +41,17 @@ final class ImageGenerationServiceTests: XCTestCase {
                 
                 _ = try await sut.fetchImage(model: .init(prompt: "test"))
             }
+        }
+    }
+    
+    func test_fetchImage_responseNotJson_throws() async {
+        await assertThrowsAsync(expected: ImageGenerationServicingError.invalidMimeType) {
+            let mockNetworkSession = MockNetworkSession()
+            let sut = ImageGenerationService(networkSession: mockNetworkSession)
+            
+            try mockNetworkSession.setResponse(mimeType: "notJson")
+            
+            _ = try await sut.fetchImage(model: .init(prompt: "test"))
         }
     }
 }

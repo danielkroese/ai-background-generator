@@ -7,22 +7,20 @@ enum MockNetworkSessionError: Error {
 final class MockNetworkSession: NetworkSession {
     private(set) var didCallDataCount = 0
     private(set) var request: URLRequest?
-    private(set) var data = Data()
-    private(set) var response = HTTPURLResponse()
+    
+    var mockData: Data?
+    var mockResponse: URLResponse?
     
     func data(for request: URLRequest) async throws -> (Data, URLResponse) {
         self.didCallDataCount += 1
         self.request = request
         
-        return (data, response)
+        return (mockData ?? Data(), mockResponse ?? URLResponse())
     }
     
-    func setData(_ data: Data) {
-        self.data = data
-    }
-    
-    func setResponse(statusCode: Int) throws {
-        guard let response = HTTPURLResponse(
+    func setResponse(statusCode: Int = 200,
+                     mimeType: String? = "application/json") throws {
+        guard let response = MockHTTPURLResponse(
             url: .homeDirectory,
             statusCode: statusCode,
             httpVersion: nil,
@@ -31,6 +29,16 @@ final class MockNetworkSession: NetworkSession {
             throw MockNetworkSessionError.couldNotMockResponse
         }
         
-        self.response = response
+        response.mockMimeType = mimeType
+        
+        self.mockResponse = response
+    }
+}
+
+final class MockHTTPURLResponse: HTTPURLResponse {
+    var mockMimeType: String?
+
+    override var mimeType: String? {
+        return mockMimeType ?? super.mimeType
     }
 }
