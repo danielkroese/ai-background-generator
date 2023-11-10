@@ -1,5 +1,4 @@
 import XCTest
-import SwiftUI // ??
 import Combine
 
 final class ImageGeneratorTests: XCTestCase {
@@ -33,31 +32,14 @@ final class ImageGeneratorTests: XCTestCase {
         }
     }
     
-    func test_generate_callsPromptGenerator() async {
+    func test_generate_callsImageGenerationService() async {
         await assertNoAsyncThrow {
-            let spy = SpyPromptGenerator()
-            let sut = createSut(promptGenerator: spy)
-            
-            _ = try await sut.generate(from: dummyQuery)
-            
-            XCTAssertEqual(spy.didCallWritePromptCount, 1)
-        }
-    }
-    
-    func test_generate_callsImageGenerationService_withExpectedQuery() async {
-        await assertNoAsyncThrow {
-            let spyGenerator = SpyPromptGenerator()
             let spyService = SpyImageGenerationService()
-            
-            let sut = createSut(
-                promptGenerator: spyGenerator,
-                imageGenerationService: spyService
-            )
+            let sut = createSut(imageGenerationService: spyService)
             
             _ = try await sut.generate(from: dummyQuery)
             
             XCTAssertEqual(spyService.didCallFetchImageCount, 1)
-            XCTAssertEqual(spyGenerator.writePromptQuery, dummyQuery)
         }
     }
 }
@@ -68,10 +50,10 @@ extension ImageGeneratorTests {
         ImageQuery(color: "yellow", feelings: [.happy])
     }
     
-    private func createSut(promptGenerator: PromptGenerating = SpyPromptGenerator(),
-                           imageGenerationService: ImageGenerationServicing = SpyImageGenerationService()) -> ImageGenerator {
-        return ImageGenerator(promptGenerator: promptGenerator,
-                              imageGenerationService: imageGenerationService)
+    private func createSut(
+        imageGenerationService: ImageGenerationServicing = SpyImageGenerationService()
+    ) -> ImageGenerator {
+        return ImageGenerator(imageGenerationService: imageGenerationService)
     }
     
     private func createSutAndGenerate(with prompt: ImageQuery) async throws -> URL {

@@ -1,7 +1,7 @@
 import XCTest
 
 final class JournalEntryTests: XCTestCase {
-    func test_init() {
+    func test_init_setsExpected() {
         let expectedDate = Date()
         let expectedImage = "image"
         let expectedColor = "yellow"

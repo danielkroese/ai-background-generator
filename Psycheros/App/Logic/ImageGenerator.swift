@@ -10,12 +10,9 @@ enum ImageGeneratingError: Error {
 }
 
 final class ImageGenerator: ImageGenerating {
-    private let promptGenerator: PromptGenerating
     private let imageGenerationService: ImageGenerationServicing
     
-    init(promptGenerator: PromptGenerating, 
-         imageGenerationService: ImageGenerationServicing) {
-        self.promptGenerator = promptGenerator
+    init(imageGenerationService: ImageGenerationServicing) {
         self.imageGenerationService = imageGenerationService
     }
     
@@ -28,7 +25,7 @@ final class ImageGenerator: ImageGenerating {
     }
     
     private func generateImage(from query: ImageQuery) async throws -> URL {
-        let prompt = try promptGenerator.writePrompt(with: query)
+        let prompt = try PromptGenerator.writePrompt(with: query)
         let model = try ImageRequestModel(prompt: prompt)
         let imageUrl = try await imageGenerationService.fetchImage(model: model)
         

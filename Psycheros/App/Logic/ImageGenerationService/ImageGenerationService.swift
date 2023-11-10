@@ -39,6 +39,8 @@ final class ImageGenerationService: ImageGenerationServicing {
         
         try NetworkResponseValidator.validate(response)
         
+        // do something with data
+        
         return URL.homeDirectory
     }
 }

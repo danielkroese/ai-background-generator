@@ -2,11 +2,12 @@ import XCTest
 
 final class NetworkResponseValidatorTests: XCTestCase {
     private typealias Sut = NetworkResponseValidator
+    private typealias Error = NetworkResponseValidatingError
     
     func test_validate_withUnsuccessfulStatusCode_throws() {
         for statusCode in [0, 100, 199, 300, 400, 500, 600] {
             assertThrows(
-                expected: NetworkResponseValidatingError.serverError(statusCode: statusCode)
+                expected: Error.serverError(statusCode: statusCode)
             ) {
                 let mockResponse = try createMockNetworkResponse(statusCode: statusCode)
                 
@@ -16,7 +17,7 @@ final class NetworkResponseValidatorTests: XCTestCase {
     }
     
     func test_validate_responseNotJson_throws() {
-        assertThrows(expected: NetworkResponseValidatingError.invalidMimeType) {
+        assertThrows(expected: Error.invalidMimeType) {
             let mockResponse = try createMockNetworkResponse(mimeType: "notJson")
             
             try Sut.validate(mockResponse)
@@ -24,7 +25,7 @@ final class NetworkResponseValidatorTests: XCTestCase {
     }
     
     func test_validate_withInvalidResponse_throws() async {
-        assertThrows(expected: NetworkResponseValidatingError.invalidResponseType) {
+        assertThrows(expected: Error.invalidResponseType) {
             let mockResponse = URLResponse()
             
             try Sut.validate(mockResponse)

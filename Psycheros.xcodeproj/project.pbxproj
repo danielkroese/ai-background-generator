@@ -25,7 +25,6 @@
 		65250CD82AF8346B006BB662 /* ImageGenerationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CD62AF8346B006BB662 /* ImageGenerationService.swift */; };
 		65250CDA2AF83491006BB662 /* PromptGeneratorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CD92AF83491006BB662 /* PromptGeneratorTests.swift */; };
 		65250CDC2AF8349B006BB662 /* ImageGenerationServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CDB2AF8349B006BB662 /* ImageGenerationServiceTests.swift */; };
-		6533D7072AF8422B00B15CFA /* SpyPromptGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6533D7062AF8422B00B15CFA /* SpyPromptGenerator.swift */; };
 		659A92C72AFAD77D00A6F351 /* ImageGenerationServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659A92C62AFAD77D00A6F351 /* ImageGenerationServiceRequest.swift */; };
 		659A92C82AFAD77D00A6F351 /* ImageGenerationServiceRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659A92C62AFAD77D00A6F351 /* ImageGenerationServiceRequest.swift */; };
 		659A92CC2AFADB2600A6F351 /* ImageGenerationServiceRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659A92CA2AFADB2600A6F351 /* ImageGenerationServiceRequestTests.swift */; };
@@ -73,7 +72,6 @@
 		65250CD62AF8346B006BB662 /* ImageGenerationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationService.swift; sourceTree = "<group>"; };
 		65250CD92AF83491006BB662 /* PromptGeneratorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromptGeneratorTests.swift; sourceTree = "<group>"; };
 		65250CDB2AF8349B006BB662 /* ImageGenerationServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationServiceTests.swift; sourceTree = "<group>"; };
-		6533D7062AF8422B00B15CFA /* SpyPromptGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyPromptGenerator.swift; sourceTree = "<group>"; };
 		659A92C62AFAD77D00A6F351 /* ImageGenerationServiceRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationServiceRequest.swift; sourceTree = "<group>"; };
 		659A92CA2AFADB2600A6F351 /* ImageGenerationServiceRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationServiceRequestTests.swift; sourceTree = "<group>"; };
 		659A92CE2AFAF4FC00A6F351 /* ImageRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequestModel.swift; sourceTree = "<group>"; };
@@ -142,7 +140,6 @@
 		6533D7052AF8421E00B15CFA /* Spy */ = {
 			isa = PBXGroup;
 			children = (
-				6533D7062AF8422B00B15CFA /* SpyPromptGenerator.swift */,
 				65B545EC2AFD92EE00B75EDE /* SpyImageGenerationService.swift */,
 			);
 			path = Spy;
@@ -431,7 +428,6 @@
 				659A92D02AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
 				65B545E72AFD6A6A00B75EDE /* ImageRequestModelImageSize.swift in Sources */,
 				65B545E42AFD600E00B75EDE /* ImageRequestModelTests.swift in Sources */,
-				6533D7072AF8422B00B15CFA /* SpyPromptGenerator.swift in Sources */,
 				652406862AFEC4C100AE193D /* MockNetworkSession.swift in Sources */,
 				65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
 				6524068B2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift in Sources */,

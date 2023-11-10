@@ -1,7 +1,7 @@
 import XCTest
 
 final class ImageQueryTests: XCTestCase {
-    func test_init() {
+    func test_init_setsExpected() {
         let expectedColor = "green"
         let expectedFeelings: [Feeling] = [.anxious, .sad]
         

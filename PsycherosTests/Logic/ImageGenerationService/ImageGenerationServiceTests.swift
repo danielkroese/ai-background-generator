@@ -1,6 +1,8 @@
 import XCTest
 
 final class ImageGenerationServiceTests: XCTestCase {
+    private typealias Error = ImageGenerationServicingError
+    
     func test_fetchImage_returnsFileUrl() async {
         await assertNoAsyncThrow {
             let sut = try createSut()
@@ -11,7 +13,7 @@ final class ImageGenerationServiceTests: XCTestCase {
     }
     
     func test_fetchImage_withoutKeyInBundle_throws() async {
-        await assertAsyncThrows(expected: ImageGenerationServicingError.missingApiKey) {
+        await assertAsyncThrows(expected: Error.missingApiKey) {
             let sut = try createSut(bundle: Bundle())
             
             _ = try await sut.fetchImage(model: .init(prompt: "test"))
