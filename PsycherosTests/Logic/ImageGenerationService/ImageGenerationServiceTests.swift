@@ -2,7 +2,7 @@ import XCTest
 
 final class ImageGenerationServiceTests: XCTestCase {
     func test_fetchImage_returnsFileUrl() async {
-        await assertNoThrowAsync {
+        await assertNoAsyncThrow {
             let sut = ImageGenerationService()
             let url = try await sut.fetchImage(model: .init(prompt: "test"))
             
@@ -11,7 +11,7 @@ final class ImageGenerationServiceTests: XCTestCase {
     }
     
     func test_fetchImage_withoutKeyInBundle_throws() async {
-        await assertThrowsAsync(expected: ImageGenerationServicingError.missingApiKey) {
+        await assertAsyncThrows(expected: ImageGenerationServicingError.missingApiKey) {
             let sut = ImageGenerationService(bundle: Bundle())
             
             _ = try await sut.fetchImage(model: .init(prompt: "test"))
@@ -19,7 +19,7 @@ final class ImageGenerationServiceTests: XCTestCase {
     }
     
     func test_fetchImage_startsNetworkSession() async {
-        await assertNoThrowAsync {
+        await assertNoAsyncThrow {
             let mockNetworkSession = MockNetworkSession()
             try mockNetworkSession.setResponse()
             
@@ -33,7 +33,7 @@ final class ImageGenerationServiceTests: XCTestCase {
     
     func test_fetchImage_withUnsuccessfulStatusCode_throws() async {
         for statusCode in [0, 100, 199, 300, 400, 500, 600] {
-            await assertThrowsAsync(expected: ImageGenerationServicingError.serverError(statusCode: statusCode)) {
+            await assertAsyncThrows(expected: ImageGenerationServicingError.serverError(statusCode: statusCode)) {
                 let mockNetworkSession = MockNetworkSession()
                 let sut = ImageGenerationService(networkSession: mockNetworkSession)
                 
@@ -45,7 +45,7 @@ final class ImageGenerationServiceTests: XCTestCase {
     }
     
     func test_fetchImage_responseNotJson_throws() async {
-        await assertThrowsAsync(expected: ImageGenerationServicingError.invalidMimeType) {
+        await assertAsyncThrows(expected: ImageGenerationServicingError.invalidMimeType) {
             let mockNetworkSession = MockNetworkSession()
             let sut = ImageGenerationService(networkSession: mockNetworkSession)
             

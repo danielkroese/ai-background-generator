@@ -4,7 +4,7 @@ import Combine
 
 final class ImageGeneratorTests: XCTestCase {
     func test_generate_withInvalidPrompt_throws() async {
-        await assertThrowsAsync(expected: ImageGeneratingError.incompleteQuery) {
+        await assertAsyncThrows(expected: ImageGeneratingError.incompleteQuery) {
             let prompt = ImageQuery(color: "", feelings: [])
             
             _ = try await createSutAndGenerate(with: prompt)
@@ -12,7 +12,7 @@ final class ImageGeneratorTests: XCTestCase {
     }
     
     func test_generate_withInvalidPrompt_emptyColor_throws() async {
-        await assertThrowsAsync(expected: ImageGeneratingError.incompleteQuery) {
+        await assertAsyncThrows(expected: ImageGeneratingError.incompleteQuery) {
             let prompt = ImageQuery(color: "", feelings: [.anxious])
             
             _ = try await createSutAndGenerate(with: prompt)
@@ -20,13 +20,13 @@ final class ImageGeneratorTests: XCTestCase {
     }
     
     func test_generate_withValidPrompt_doesNotThrow() async {
-        await assertNoThrowAsync {
+        await assertNoAsyncThrow {
             _ = try await createSutAndGenerate(with: dummyQuery)
         }
     }
     
     func test_generate_returnsImageFileUrl() async {
-        await assertNoThrowAsync {
+        await assertNoAsyncThrow {
             let image = try await createSutAndGenerate(with: dummyQuery)
             
             XCTAssertTrue(image.isFileURL)
@@ -34,7 +34,7 @@ final class ImageGeneratorTests: XCTestCase {
     }
     
     func test_generate_callsPromptGenerator() async {
-        await assertNoThrowAsync {
+        await assertNoAsyncThrow {
             let spy = SpyPromptGenerator()
             let sut = createSut(promptGenerator: spy)
             
@@ -45,7 +45,7 @@ final class ImageGeneratorTests: XCTestCase {
     }
     
     func test_generate_callsImageGenerationService_withExpectedQuery() async {
-        await assertNoThrowAsync {
+        await assertNoAsyncThrow {
             let spyGenerator = SpyPromptGenerator()
             let spyService = SpyImageGenerationService()
             
