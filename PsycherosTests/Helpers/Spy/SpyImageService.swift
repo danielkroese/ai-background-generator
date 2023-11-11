@@ -1,6 +1,6 @@
 import XCTest
 
-final class SpyImageGenerationService: ImageGenerationServicing {
+final class SpyImageService: ImageServicing {
     private(set) var didCallFetchImageCount = 0
     var url: URL = .homeDirectory
     

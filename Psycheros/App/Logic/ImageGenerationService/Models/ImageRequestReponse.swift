@@ -1,12 +1,12 @@
 import Foundation
 
-enum ImageGenerationServiceResponseError: Error {
+enum ImageServiceResponseError: Error {
     case invalidJsonResponse,
          emptyResponse,
          invalidImageData
 }
 
-struct ImageGenerationServiceResponse: Codable, Equatable {
+struct ImageServiceResponse: Codable, Equatable {
     let base64: String
     let finishReason: FinishReason
     let seed: Int
@@ -27,32 +27,32 @@ struct ImageGenerationServiceResponse: Codable, Equatable {
     var imageData: Data {
         get throws {
             guard let imageData = Data(base64Encoded: base64) else {
-                throw ImageGenerationServiceResponseError.invalidImageData
+                throw ImageServiceResponseError.invalidImageData
             }
             
             return imageData
         }
     }
     
-    static func decode(_ data: Data) throws -> [ImageGenerationServiceResponse] {
+    static func decode(_ data: Data) throws -> [ImageServiceResponse] {
         guard let decodedResponse = try? JSONDecoder().decode(
-            [[ImageGenerationServiceResponse]].self,
+            [[ImageServiceResponse]].self,
             from: data
         ) else {
-            throw ImageGenerationServiceResponseError.invalidJsonResponse
+            throw ImageServiceResponseError.invalidJsonResponse
         }
         
         guard let unpackedResponse = decodedResponse.first,
               unpackedResponse.isEmpty == false else {
-            throw ImageGenerationServiceResponseError.emptyResponse
+            throw ImageServiceResponseError.emptyResponse
         }
         
         return unpackedResponse
     }
     
-    static func decodeFirstResponse(of data: Data) throws -> ImageGenerationServiceResponse {
+    static func decodeFirstResponse(of data: Data) throws -> ImageServiceResponse {
         guard let firstResult = try decode(data).first else {
-            throw ImageGenerationServiceResponseError.emptyResponse
+            throw ImageServiceResponseError.emptyResponse
         }
         
         return firstResult

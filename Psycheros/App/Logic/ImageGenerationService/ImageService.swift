@@ -1,14 +1,14 @@
 import Foundation
 
-protocol ImageGenerationServicing {
+protocol ImageServicing {
     func fetchImage(model: ImageRequestModel) async throws -> URL
 }
 
-enum ImageGenerationServicingError: Error {
+enum ImageServicingError: Error {
     case missingApiKey
 }
 
-final class ImageGenerationService: ImageGenerationServicing {
+final class ImageService: ImageServicing {
     private let bundle: Bundle
     private let networkSession: NetworkSession
     
@@ -23,7 +23,7 @@ final class ImageGenerationService: ImageGenerationServicing {
     private var apiKey: String {
         get throws {
             guard let apiKey = bundle.object(forInfoDictionaryKey: "STABILITY_API_KEY") as? String else {
-                throw ImageGenerationServicingError.missingApiKey
+                throw ImageServicingError.missingApiKey
             }
             
             return apiKey
@@ -31,7 +31,7 @@ final class ImageGenerationService: ImageGenerationServicing {
     }
     
     func fetchImage(model: ImageRequestModel) async throws -> URL {
-        let request = try ImageGenerationServiceRequest(apiKey: apiKey)
+        let request = try ImageServiceRequest(apiKey: apiKey)
             .requestImage(model)
             .request
         
@@ -39,7 +39,7 @@ final class ImageGenerationService: ImageGenerationServicing {
         
         try NetworkResponseValidator.validate(response)
         
-        let imageData = try ImageGenerationServiceResponse
+        let imageData = try ImageServiceResponse
             .decodeFirstResponse(of: data)
             .imageData
                 

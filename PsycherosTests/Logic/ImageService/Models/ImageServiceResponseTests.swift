@@ -1,17 +1,17 @@
 import XCTest
 
-final class ImageGenerationServiceResponseTests: XCTestCase {
-    private typealias Error = ImageGenerationServiceResponseError
+final class ImageServiceResponseTests: XCTestCase {
+    private typealias Error = ImageServiceResponseError
     
     func test_decodedFromJson_hasExpectedValues() {
         assertNoThrow {
-            let expectedFirstResult = ImageGenerationServiceResponse(
+            let expectedFirstResult = ImageServiceResponse(
                 base64: "...very long string...",
                 finishReason: .success,
                 seed: 1050625087
             )
             
-            let expectedSecondResult = ImageGenerationServiceResponse(
+            let expectedSecondResult = ImageServiceResponse(
                 base64: "...very long string...",
                 finishReason: .contentFiltered,
                 seed: 1229191277
@@ -37,7 +37,7 @@ final class ImageGenerationServiceResponseTests: XCTestCase {
                 return
             }
             
-            guard let decodedResults = try JSONDecoder().decode([[ImageGenerationServiceResponse]].self, from: jsonData).first else {
+            guard let decodedResults = try JSONDecoder().decode([[ImageServiceResponse]].self, from: jsonData).first else {
                 XCTFail("Could not decode mock json data.")
                 return
             }
@@ -49,7 +49,7 @@ final class ImageGenerationServiceResponseTests: XCTestCase {
     
     func test_decode_withInvalidJsonResponse_throws() async {
         await assertAsyncThrows(expected: Error.invalidJsonResponse) {
-            _ = try ImageGenerationServiceResponse.decode(Data())
+            _ = try ImageServiceResponse.decode(Data())
         }
     }
     
@@ -60,13 +60,13 @@ final class ImageGenerationServiceResponseTests: XCTestCase {
                 return
             }
             
-            _ = try ImageGenerationServiceResponse.decode(mockData)
+            _ = try ImageServiceResponse.decode(mockData)
         }
     }
     
     func test_imageData_withInvalidBase64_throws() async {
-        await assertAsyncThrows(expected: ImageGenerationServiceResponseError.invalidImageData) {
-            let mockResponse = ImageGenerationServiceResponse(
+        await assertAsyncThrows(expected: Error.invalidImageData) {
+            let mockResponse = ImageServiceResponse(
                 base64: "???",
                 finishReason: .success,
                 seed: 123123

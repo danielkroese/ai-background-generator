@@ -1,7 +1,7 @@
 import XCTest
 
-final class ImageGenerationServiceRequestTests: XCTestCase {
-    private typealias Error = ImageGenerationServiceRequestingError
+final class ImageServiceRequestTests: XCTestCase {
+    private typealias Error = ImageServiceRequestingError
     
     func test_init_withEndpoint_setsRequestUrl() {
         assertNoThrow {
@@ -15,7 +15,7 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
         assertThrows(expected: Error.invalidEndpoint) {
             let invalidUrl = URL(string: "")
             
-            _ = try ImageGenerationServiceRequest(endpoint: invalidUrl, apiKey: "")
+            _ = try ImageServiceRequest(endpoint: invalidUrl, apiKey: "")
         }
     }
     
@@ -67,9 +67,9 @@ final class ImageGenerationServiceRequestTests: XCTestCase {
 }
 
 // MARK: - Test helpers
-extension ImageGenerationServiceRequestTests {
-    private func createSut() throws -> ImageGenerationServiceRequest {
-        try ImageGenerationServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
+extension ImageServiceRequestTests {
+    private func createSut() throws -> ImageServiceRequest {
+        try ImageServiceRequest(endpoint: dummyUrl, apiKey: dummyApiKey)
     }
     
     private var dummyUrl: URL {

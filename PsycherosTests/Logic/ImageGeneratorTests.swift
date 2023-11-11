@@ -32,10 +32,10 @@ final class ImageGeneratorTests: XCTestCase {
         }
     }
     
-    func test_generate_callsImageGenerationService() async {
+    func test_generate_callsImageService() async {
         await assertNoAsyncThrow {
-            let spyService = SpyImageGenerationService()
-            let sut = createSut(imageGenerationService: spyService)
+            let spyService = SpyImageService()
+            let sut = createSut(imageService: spyService)
             
             _ = try await sut.generate(from: dummyQuery)
             
@@ -51,9 +51,9 @@ extension ImageGeneratorTests {
     }
     
     private func createSut(
-        imageGenerationService: ImageGenerationServicing = SpyImageGenerationService()
+        imageService: ImageServicing = SpyImageService()
     ) -> ImageGenerator {
-        return ImageGenerator(imageGenerationService: imageGenerationService)
+        return ImageGenerator(imageService: imageService)
     }
     
     private func createSutAndGenerate(with prompt: ImageQuery) async throws -> URL {

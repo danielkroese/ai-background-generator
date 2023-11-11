@@ -1,16 +1,16 @@
 import Foundation
 
-protocol ImageGenerationServiceRequesting {
+protocol ImageServiceRequesting {
     var request: URLRequest { get }
     
     func requestImage(_ imageRequest: ImageRequestModel) throws -> Self
 }
 
-enum ImageGenerationServiceRequestingError: Error {
+enum ImageServiceRequestingError: Error {
     case invalidEndpoint
 }
 
-final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
+final class ImageServiceRequest: ImageServiceRequesting {
     private(set) var request: URLRequest
     
     private enum Constants {
@@ -20,7 +20,7 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
     init(endpoint: URL? = Constants.endpoint,
          apiKey: String) throws {
         guard let endpoint else {
-            throw ImageGenerationServiceRequestingError.invalidEndpoint
+            throw ImageServiceRequestingError.invalidEndpoint
         }
         
         self.request = URLRequest(url: endpoint, timeoutInterval: 60.0)
@@ -36,7 +36,7 @@ final class ImageGenerationServiceRequest: ImageGenerationServiceRequesting {
         request.httpMethod = "POST"
     }
 
-    func requestImage(_ imageRequest: ImageRequestModel) throws -> ImageGenerationServiceRequest {
+    func requestImage(_ imageRequest: ImageRequestModel) throws -> ImageServiceRequest {
         request.httpBody = try JSONEncoder().encode(imageRequest)
         
         return self

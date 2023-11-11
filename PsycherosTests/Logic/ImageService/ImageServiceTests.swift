@@ -1,7 +1,7 @@
 import XCTest
 
-final class ImageGenerationServiceTests: XCTestCase {
-    private typealias Error = ImageGenerationServicingError
+final class ImageServiceTests: XCTestCase {
+    private typealias Error = ImageServicingError
     
     func test_fetchImage_returnsFileUrl() async {
         await assertNoAsyncThrow {
@@ -36,12 +36,12 @@ final class ImageGenerationServiceTests: XCTestCase {
 }
 
 // MARK: - Test helpers
-extension ImageGenerationServiceTests {
+extension ImageServiceTests {
     private func createSut(
         bundle: Bundle = Bundle.main,
         networkSession: NetworkSession? = nil
-    ) throws -> ImageGenerationService {
-        try ImageGenerationService(
+    ) throws -> ImageService {
+        try ImageService(
             bundle: bundle,
             networkSession: networkSession ?? createMockNetworkSession()
         )
@@ -61,7 +61,7 @@ extension ImageGenerationServiceTests {
     }
     
     private func createMockResponseData(base64: String? = nil) throws -> Data {
-        let mockResponse = [[ImageGenerationServiceResponse(
+        let mockResponse = [[ImageServiceResponse(
             base64: base64 ?? dummyBase64Image,
             finishReason: .success,
             seed: 1234
