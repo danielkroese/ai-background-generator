@@ -6,7 +6,7 @@ final class ImageGenerationServiceTests: XCTestCase {
     func test_fetchImage_returnsFileUrl() async {
         await assertNoAsyncThrow {
             let sut = try createSut()
-            let url = try await sut.fetchImage(model: .init(prompt: "test"))
+            let url = try await sut.fetchImage(model: dummyModel)
             
             XCTAssertTrue(url.isFileURL)
         }
@@ -16,7 +16,7 @@ final class ImageGenerationServiceTests: XCTestCase {
         await assertAsyncThrows(expected: Error.missingApiKey) {
             let sut = try createSut(bundle: Bundle())
             
-            _ = try await sut.fetchImage(model: .init(prompt: "test"))
+            _ = try await sut.fetchImage(model: dummyModel)
         }
     }
     
@@ -26,11 +26,24 @@ final class ImageGenerationServiceTests: XCTestCase {
             
             let sut = try createSut(networkSession: mockNetworkSession)
             
-            _ = try await sut.fetchImage(model: .init(prompt: "test"))
+            _ = try await sut.fetchImage(model: dummyModel)
             
             XCTAssertEqual(mockNetworkSession.didCallDataCount, 1)
         }
     }
+    
+    func test_fetchImage_withInvalidImageData_throws() async {
+        await assertAsyncThrows(expected: Error.invalidImageData) {
+            let mockReponseData = try createMockResponseData(base64: "???")
+            let mockNetworkSession = try createMockNetworkSession(responseData: mockReponseData)
+            
+            let sut = try createSut(networkSession: mockNetworkSession)
+            
+            _ = try await sut.fetchImage(model: dummyModel)
+        }
+    }
+    
+    // handle finish reason errors
 }
 
 // MARK: - Test helpers
@@ -58,9 +71,22 @@ extension ImageGenerationServiceTests {
         return mock
     }
     
-    private func createMockResponseData() throws -> Data {
-        let mockResponse = [[ImageGenerationServiceResponse(base64: "image", finishReason: .success, seed: 1234)]]
+    private func createMockResponseData(base64: String? = nil) throws -> Data {
+        let mockResponse = [[ImageGenerationServiceResponse(
+            base64: base64 ?? dummyBase64Image,
+            finishReason: .success,
+            seed: 1234
+        )]]
         
         return try JSONEncoder().encode(mockResponse)
+    }
+    
+    private var dummyModel: ImageRequestModel {
+        get throws {
+            try ImageRequestModel(prompt: "fake")
+        }
+    }
+    
+    private var dummyBase64Image: String { "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QgQChUkFOfjAAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAANSURBVAjXY2AAAAACAAHiIjUNAAAAAElFTkSuQmCC"
     }
 }

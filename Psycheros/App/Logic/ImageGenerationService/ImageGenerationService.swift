@@ -5,7 +5,8 @@ protocol ImageGenerationServicing {
 }
 
 enum ImageGenerationServicingError: Error {
-    case missingApiKey
+    case missingApiKey,
+         invalidImageData
 }
 
 final class ImageGenerationService: ImageGenerationServicing {
@@ -40,6 +41,10 @@ final class ImageGenerationService: ImageGenerationServicing {
         try NetworkResponseValidator.validate(response)
         
         let imageResult = try ImageGenerationServiceResponse.decodeFirst(data)
+        
+        guard let imageData = Data(base64Encoded: imageResult.base64) else {
+            throw ImageGenerationServicingError.invalidImageData
+        }
                 
         return URL.homeDirectory
     }
