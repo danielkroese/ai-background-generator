@@ -32,17 +32,6 @@ final class ImageGenerationServiceTests: XCTestCase {
         }
     }
     
-    func test_fetchImage_withInvalidImageData_throws() async {
-        await assertAsyncThrows(expected: Error.invalidImageData) {
-            let mockReponseData = try createMockResponseData(base64: "???")
-            let mockNetworkSession = try createMockNetworkSession(responseData: mockReponseData)
-            
-            let sut = try createSut(networkSession: mockNetworkSession)
-            
-            _ = try await sut.fetchImage(model: dummyModel)
-        }
-    }
-    
     // handle finish reason errors
 }
 

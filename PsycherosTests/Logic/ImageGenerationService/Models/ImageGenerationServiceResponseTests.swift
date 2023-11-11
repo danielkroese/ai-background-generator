@@ -63,5 +63,17 @@ final class ImageGenerationServiceResponseTests: XCTestCase {
             _ = try ImageGenerationServiceResponse.decode(mockData)
         }
     }
+    
+    func test_imageData_withInvalidBase64_throws() async {
+        await assertAsyncThrows(expected: ImageGenerationServiceResponseError.invalidImageData) {
+            let mockResponse = ImageGenerationServiceResponse(
+                base64: "???",
+                finishReason: .success,
+                seed: 123123
+            )
+            
+            _ = try mockResponse.imageData
+        }
+    }
 }
 

@@ -2,7 +2,8 @@ import Foundation
 
 enum ImageGenerationServiceResponseError: Error {
     case invalidJsonResponse,
-         emptyResponse
+         emptyResponse,
+         invalidImageData
 }
 
 struct ImageGenerationServiceResponse: Codable, Equatable {
@@ -23,6 +24,16 @@ struct ImageGenerationServiceResponse: Codable, Equatable {
         }
     }
     
+    var imageData: Data {
+        get throws {
+            guard let imageData = Data(base64Encoded: base64) else {
+                throw ImageGenerationServiceResponseError.invalidImageData
+            }
+            
+            return imageData
+        }
+    }
+    
     static func decode(_ data: Data) throws -> [ImageGenerationServiceResponse] {
         guard let decodedResponse = try? JSONDecoder().decode(
             [[ImageGenerationServiceResponse]].self,
@@ -39,7 +50,7 @@ struct ImageGenerationServiceResponse: Codable, Equatable {
         return unpackedResponse
     }
     
-    static func decodeFirst(_ data: Data) throws -> ImageGenerationServiceResponse {
+    static func decodeFirstResponse(of data: Data) throws -> ImageGenerationServiceResponse {
         guard let firstResult = try decode(data).first else {
             throw ImageGenerationServiceResponseError.emptyResponse
         }
