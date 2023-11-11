@@ -31,8 +31,6 @@ final class ImageServiceTests: XCTestCase {
             XCTAssertEqual(mockNetworkSession.didCallDataCount, 1)
         }
     }
-    
-    // handle finish reason errors
 }
 
 // MARK: - Test helpers
@@ -60,11 +58,15 @@ extension ImageServiceTests {
         return mock
     }
     
-    private func createMockResponseData(base64: String? = nil) throws -> Data {
+    private func createMockResponseData(
+        base64: String = "",
+        finishReason: ImageServiceResponse.FinishReason = .success,
+        seed: Int = 0
+    ) throws -> Data {
         let mockResponse = [[ImageServiceResponse(
-            base64: base64 ?? dummyBase64Image,
-            finishReason: .success,
-            seed: 1234
+            base64: base64,
+            finishReason: finishReason,
+            seed: seed
         )]]
         
         return try JSONEncoder().encode(mockResponse)
@@ -74,8 +76,5 @@ extension ImageServiceTests {
         get throws {
             try ImageRequestModel(prompt: "fake")
         }
-    }
-    
-    private var dummyBase64Image: String { "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QgQChUkFOfjAAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAANSURBVAjXY2AAAAACAAHiIjUNAAAAAElFTkSuQmCC"
     }
 }

@@ -1,9 +1,10 @@
 import Foundation
 
-enum ImageServiceResponseError: Error {
+enum ImageServiceResponseError: Error, Equatable {
     case invalidJsonResponse,
          emptyResponse,
-         invalidImageData
+         invalidImageData,
+         finishedUnsuccesfully(ImageServiceResponse.FinishReason)
 }
 
 struct ImageServiceResponse: Codable, Equatable {
@@ -26,6 +27,10 @@ struct ImageServiceResponse: Codable, Equatable {
     
     var imageData: Data {
         get throws {
+            guard finishReason == .success else {
+                throw ImageServiceResponseError.finishedUnsuccesfully(finishReason)
+            }
+            
             guard let imageData = Data(base64Encoded: base64) else {
                 throw ImageServiceResponseError.invalidImageData
             }

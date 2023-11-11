@@ -37,7 +37,10 @@ final class ImageServiceResponseTests: XCTestCase {
                 return
             }
             
-            guard let decodedResults = try JSONDecoder().decode([[ImageServiceResponse]].self, from: jsonData).first else {
+            guard let decodedResults = try JSONDecoder().decode(
+                [[ImageServiceResponse]].self,
+                from: jsonData
+            ).first else {
                 XCTFail("Could not decode mock json data.")
                 return
             }
@@ -74,6 +77,29 @@ final class ImageServiceResponseTests: XCTestCase {
             
             _ = try mockResponse.imageData
         }
+    }
+    
+    func test_imageData_withoutFinishReasonSuccess_throws() async {
+        let unsuccesfulFinishReasons: [ImageServiceResponse.FinishReason] = [
+            .error,
+            .contentFiltered,
+            .unknown
+        ]
+        
+        for finishReason in unsuccesfulFinishReasons {
+            await assertAsyncThrows(expected: Error.finishedUnsuccesfully(finishReason)) {
+                let mockResponse = ImageServiceResponse(
+                    base64: dummyBase64Image,
+                    finishReason: finishReason,
+                    seed: 123123
+                )
+                
+                _ = try mockResponse.imageData
+            }
+        }
+    }
+    
+    private var dummyBase64Image: String { "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QgQChUkFOfjAAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAANSURBVAjXY2AAAAACAAHiIjUNAAAAAElFTkSuQmCC"
     }
 }
 
