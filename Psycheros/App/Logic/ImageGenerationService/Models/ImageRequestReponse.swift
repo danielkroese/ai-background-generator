@@ -5,14 +5,14 @@ struct ImageGenerationServiceResponse: Codable {
     let finishReason: FinishReason
     let seed: Int
     
-    enum FinishReason: String, Codable {
+    enum FinishReason: String, Codable, Equatable {
         case success,
              error,
              contentFiltered = "content_filtered",
              unknown
         
-        init(fromRawValue rawValue: String) {
-            self = Self(rawValue: rawValue.lowercased()) ?? .unknown
+        init(_ rawValue: String) {
+            self = FinishReason(rawValue: rawValue) ?? .unknown
         }
     }
 }
