@@ -1,6 +1,11 @@
 import Foundation
 
-struct ImageGenerationServiceResponse: Codable {
+enum ImageGenerationServiceResponseError: Error {
+    case invalidJsonResponse,
+         emptyResponse
+}
+
+struct ImageGenerationServiceResponse: Codable, Equatable {
     let base64: String
     let finishReason: FinishReason
     let seed: Int
@@ -23,13 +28,22 @@ struct ImageGenerationServiceResponse: Codable {
             [[ImageGenerationServiceResponse]].self,
             from: data
         ) else {
-            throw ImageGenerationServicingError.invalidJsonResponse
+            throw ImageGenerationServiceResponseError.invalidJsonResponse
         }
         
-        guard let unpackedResponse = decodedResponse.first else {
-            throw ImageGenerationServicingError.emptyResponse
+        guard let unpackedResponse = decodedResponse.first,
+              unpackedResponse.isEmpty == false else {
+            throw ImageGenerationServiceResponseError.emptyResponse
         }
         
         return unpackedResponse
+    }
+    
+    static func decodeFirst(_ data: Data) throws -> ImageGenerationServiceResponse {
+        guard let firstResult = try decode(data).first else {
+            throw ImageGenerationServiceResponseError.emptyResponse
+        }
+        
+        return firstResult
     }
 }
