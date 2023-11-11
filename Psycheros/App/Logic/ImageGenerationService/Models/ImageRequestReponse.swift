@@ -17,4 +17,19 @@ struct ImageGenerationServiceResponse: Codable {
             self = FinishReason(rawValue: rawValue) ?? .unknown
         }
     }
+    
+    static func decode(_ data: Data) throws -> [ImageGenerationServiceResponse] {
+        guard let decodedResponse = try? JSONDecoder().decode(
+            [[ImageGenerationServiceResponse]].self,
+            from: data
+        ) else {
+            throw ImageGenerationServicingError.invalidJsonResponse
+        }
+        
+        guard let unpackedResponse = decodedResponse.first else {
+            throw ImageGenerationServicingError.emptyResponse
+        }
+        
+        return unpackedResponse
+    }
 }

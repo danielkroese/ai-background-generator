@@ -41,27 +41,12 @@ final class ImageGenerationService: ImageGenerationServicing {
         
         try NetworkResponseValidator.validate(response)
         
-        let imageResult = try decode(data)
+        let imageResult = try ImageGenerationServiceResponse.decode(data)
         
         guard let firstResult = imageResult.first else {
             throw ImageGenerationServicingError.emptyResponse
         }
                 
         return URL.homeDirectory
-    }
-    
-    private func decode(_ data: Data) throws -> [ImageGenerationServiceResponse] {
-        guard let decodedResponse = try? JSONDecoder().decode(
-            [[ImageGenerationServiceResponse]].self,
-            from: data
-        ) else {
-            throw ImageGenerationServicingError.invalidJsonResponse
-        }
-        
-        guard let unpackedResponse = decodedResponse.first else {
-            throw ImageGenerationServicingError.emptyResponse
-        }
-        
-        return unpackedResponse
     }
 }
