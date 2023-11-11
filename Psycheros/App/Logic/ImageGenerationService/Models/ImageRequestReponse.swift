@@ -12,8 +12,10 @@ struct ImageGenerationServiceResponse: Codable {
              unknown
         
         init(_ rawValue: String) {
-            self = FinishReason(rawValue: rawValue) ?? .unknown
+            self = FinishReason(rawValue: rawValue.lowercased()) ?? .unknown
         }
+        
+        
     }
 }
 
