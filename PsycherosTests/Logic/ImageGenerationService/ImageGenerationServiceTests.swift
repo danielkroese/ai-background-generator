@@ -41,6 +41,21 @@ final class ImageGenerationServiceTests: XCTestCase {
             _ = try await sut.fetchImage(model: .init(prompt: "test"))
         }
     }
+    
+    func test_fetchImage_withEmptyResponse_throws() async {
+        await assertAsyncThrows(expected: Error.emptyResponse) {
+            guard let mockData = "[[]]".data(using: .utf8) else {
+                XCTFail("Could not create mock json data.")
+                return
+            }
+            
+            let mockNetworkSession = try createMockNetworkSession(responseData: mockData)
+            
+            let sut = try createSut(networkSession: mockNetworkSession)
+            
+            _ = try await sut.fetchImage(model: .init(prompt: "test"))
+        }
+    }
 }
 
 // MARK: - Test helpers
@@ -69,7 +84,7 @@ extension ImageGenerationServiceTests {
     }
     
     private func createMockResponseData() throws -> Data {
-        let mockResponse = ImageGenerationServiceResponse(base64: "image", finishReason: .success, seed: 1234)
+        let mockResponse = [[ImageGenerationServiceResponse(base64: "image", finishReason: .success, seed: 1234)]]
         
         return try JSONEncoder().encode(mockResponse)
     }

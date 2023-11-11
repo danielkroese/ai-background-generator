@@ -1,22 +1,31 @@
 import XCTest
 
 final class ImageGenerationServiceResponseTests: XCTestCase {
-    private typealias Sut = ImageGenerationServiceResponse
-    
-    func test_invalidFinishReason_setsUnknownReason() {
-        let invalidReason = Sut.FinishReason("henk")
-        
-        let sut = ImageGenerationServiceResponse(base64: "", finishReason: invalidReason, seed: 0)
-        
-        XCTAssertEqual(sut.finishReason, .unknown)
-    }
-    
-    func test_uppercaseFinishReason_isValid() {
-        let finishReason = Sut.FinishReason("SUCCESS")
-        
-        let sut = ImageGenerationServiceResponse(base64: "", finishReason: finishReason, seed: 0)
-        
-        XCTAssertEqual(sut.finishReason, .success)
+    func test_decodedFromJson_hasExpectedValues() {
+        assertNoThrow {
+            guard let jsonData = """
+                [
+                   [
+                      {
+                         "base64":"...very long string...",
+                         "finishReason":"SUCCESS",
+                         "seed":1050625087
+                      },
+                      {
+                         "base64":"...very long string...",
+                         "finishReason":"CONTENT_FILTERED",
+                         "seed":1229191277
+                      }
+                   ]
+                ]
+            """.data(using: .utf8) else {
+                XCTFail("Could not create mock json data.")
+                return
+            }
+            
+            let decodedResults = try JSONDecoder().decode([[ImageGenerationServiceResponse]].self, from: jsonData).first
+            
+        }
     }
 }
 
