@@ -31,6 +31,16 @@ final class ImageGenerationServiceTests: XCTestCase {
             XCTAssertEqual(mockNetworkSession.didCallDataCount, 1)
         }
     }
+    
+    func test_fetchImage_withInvalidJsonResponse_throws() async {
+        await assertAsyncThrows(expected: Error.invalidJsonResponse) {
+            let mockNetworkSession = try createMockNetworkSession(responseData: Data())
+            
+            let sut = try createSut(networkSession: mockNetworkSession)
+            
+            _ = try await sut.fetchImage(model: .init(prompt: "test"))
+        }
+    }
 }
 
 // MARK: - Test helpers
@@ -47,11 +57,20 @@ extension ImageGenerationServiceTests {
     
     private func createMockNetworkSession(
         statusCode: Int = 200,
-        mimeType: String = "application/json"
+        mimeType: String = "application/json",
+        responseData: Data? = nil
     ) throws -> MockNetworkSession {
         let mock = MockNetworkSession()
         try mock.setResponse(statusCode: statusCode, mimeType: mimeType)
         
+        mock.mockData = try responseData ?? createMockResponseData()
+        
         return mock
+    }
+    
+    private func createMockResponseData() throws -> Data {
+        let mockResponse = ImageGenerationServiceResponse(base64: "image", finishReason: .success, seed: 1234)
+        
+        return try JSONEncoder().encode(mockResponse)
     }
 }

@@ -6,6 +6,7 @@ protocol ImageGenerationServicing {
 
 enum ImageGenerationServicingError: Error {
     case missingApiKey
+    case invalidJsonResponse
 }
 
 final class ImageGenerationService: ImageGenerationServicing {
@@ -39,7 +40,11 @@ final class ImageGenerationService: ImageGenerationServicing {
         
         try NetworkResponseValidator.validate(response)
         
-        // do something with data
+        do {
+            let json = try JSONDecoder().decode(ImageGenerationServiceResponse.self, from: data)
+        } catch {
+            throw ImageGenerationServicingError.invalidJsonResponse
+        }
         
         return URL.homeDirectory
     }
