@@ -15,6 +15,7 @@
 		6524068B2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6524068A2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift */; };
 		6524068F2AFF8EEC00AE193D /* ImageRequestReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6524068E2AFF8EEC00AE193D /* ImageRequestReponse.swift */; };
 		652406902AFF8EEC00AE193D /* ImageRequestReponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6524068E2AFF8EEC00AE193D /* ImageRequestReponse.swift */; };
+		652406942AFF98E900AE193D /* ImageGenerationServiceResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652406932AFF98E900AE193D /* ImageGenerationServiceResponseTests.swift */; };
 		65250CB42AF7D8AA006BB662 /* ImageQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB32AF7D8AA006BB662 /* ImageQueryTests.swift */; };
 		65250CB62AF7DA87006BB662 /* ImageQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB52AF7DA87006BB662 /* ImageQuery.swift */; };
 		65250CB72AF7DA87006BB662 /* ImageQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65250CB52AF7DA87006BB662 /* ImageQuery.swift */; };
@@ -66,6 +67,7 @@
 		652406872AFEEB5C00AE193D /* NetworkResponseValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseValidator.swift; sourceTree = "<group>"; };
 		6524068A2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseValidatorTests.swift; sourceTree = "<group>"; };
 		6524068E2AFF8EEC00AE193D /* ImageRequestReponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequestReponse.swift; sourceTree = "<group>"; };
+		652406932AFF98E900AE193D /* ImageGenerationServiceResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageGenerationServiceResponseTests.swift; sourceTree = "<group>"; };
 		65250CB22AF7BDFA006BB662 /* Psycheros.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = Psycheros.xctestplan; sourceTree = "<group>"; };
 		65250CB32AF7D8AA006BB662 /* ImageQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQueryTests.swift; sourceTree = "<group>"; };
 		65250CB52AF7DA87006BB662 /* ImageQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageQuery.swift; sourceTree = "<group>"; };
@@ -129,6 +131,14 @@
 			path = Network;
 			sourceTree = "<group>";
 		};
+		652406922AFF981300AE193D /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				6524068A2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
 		65250CB82AF7F38D006BB662 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +153,7 @@
 		65250CBD2AF7F3B8006BB662 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				652406922AFF981300AE193D /* Network */,
 				659A92C92AFADA8C00A6F351 /* ImageGenerationService */,
 				65250CBF2AF7F3D2006BB662 /* ImageGeneratorTests.swift */,
 				65250CD92AF83491006BB662 /* PromptGeneratorTests.swift */,
@@ -174,7 +185,6 @@
 				659A92CA2AFADB2600A6F351 /* ImageGenerationServiceRequestTests.swift */,
 				65250CDB2AF8349B006BB662 /* ImageGenerationServiceTests.swift */,
 				65B545E22AFD600000B75EDE /* Models */,
-				6524068A2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift */,
 			);
 			path = ImageGenerationService;
 			sourceTree = "<group>";
@@ -202,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				65B545E32AFD600E00B75EDE /* ImageRequestModelTests.swift */,
+				652406932AFF98E900AE193D /* ImageGenerationServiceResponseTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -451,6 +462,7 @@
 				659A92CC2AFADB2600A6F351 /* ImageGenerationServiceRequestTests.swift in Sources */,
 				65250CB42AF7D8AA006BB662 /* ImageQueryTests.swift in Sources */,
 				652406892AFEEB5C00AE193D /* NetworkResponseValidator.swift in Sources */,
+				652406942AFF98E900AE193D /* ImageGenerationServiceResponseTests.swift in Sources */,
 				65250CDC2AF8349B006BB662 /* ImageGenerationServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

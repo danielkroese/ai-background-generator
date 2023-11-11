@@ -40,12 +40,18 @@ final class ImageGenerationService: ImageGenerationServicing {
         
         try NetworkResponseValidator.validate(response)
         
+        let imageResponse = try decode(data)
+        
+        _ = imageResponse.base64
+        
+        return URL.homeDirectory
+    }
+    
+    private func decode(_ data: Data) throws -> ImageGenerationServiceResponse {
         do {
-            let json = try JSONDecoder().decode(ImageGenerationServiceResponse.self, from: data)
+            return try JSONDecoder().decode(ImageGenerationServiceResponse.self, from: data)
         } catch {
             throw ImageGenerationServicingError.invalidJsonResponse
         }
-        
-        return URL.homeDirectory
     }
 }
