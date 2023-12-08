@@ -31,17 +31,30 @@ final class ImageServiceTests: XCTestCase {
             XCTAssertEqual(mockNetworkSession.didCallDataCount, 1)
         }
     }
+    
+    func test_fetchImage_callsDataParser() async {
+        await assertNoAsyncThrow {
+            let spyDataParser = SpyImageDataParser()
+            let sut = try createSut(imageDataParser: spyDataParser)
+            
+            _ = try await sut.fetchImage(model: dummyModel)
+            
+            XCTAssertEqual(spyDataParser.didCallParseDataCount, 1)
+        }
+    }
 }
 
 // MARK: - Test helpers
 extension ImageServiceTests {
     private func createSut(
         bundle: Bundle = Bundle.main,
-        networkSession: NetworkSession? = nil
+        networkSession: NetworkSession? = nil,
+        imageDataParser: DataParsing = SpyImageDataParser()
     ) throws -> ImageService {
         try ImageService(
             bundle: bundle,
-            networkSession: networkSession ?? createMockNetworkSession()
+            networkSession: networkSession ?? createMockNetworkSession(),
+            imageDataParser: imageDataParser
         )
     }
     
@@ -76,5 +89,16 @@ extension ImageServiceTests {
         get throws {
             try ImageRequestModel(prompt: "fake")
         }
+    }
+}
+
+// TODO: Create file
+final class SpyImageDataParser: DataParsing {
+    private(set) var didCallParseDataCount = 0
+    
+    func parse(_ data: Data) -> URL {
+        didCallParseDataCount += 1
+        
+        return URL.applicationDirectory
     }
 }

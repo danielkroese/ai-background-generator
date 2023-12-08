@@ -11,13 +11,16 @@ enum ImageServicingError: Error {
 final class ImageService: ImageServicing {
     private let bundle: Bundle
     private let networkSession: NetworkSession
+    private let imageDataParser: DataParsing
     
     init(
         bundle: Bundle = Bundle.main,
-        networkSession: NetworkSession = URLSession(configuration: .default)
+        networkSession: NetworkSession = URLSession(configuration: .default),
+        imageDataParser: DataParsing
     ) {
         self.bundle = bundle
         self.networkSession = networkSession
+        self.imageDataParser = imageDataParser
     }
     
     private var apiKey: String {
@@ -43,8 +46,8 @@ final class ImageService: ImageServicing {
             .decodeFirstResponse(of: data)
             .imageData
         
-        
+        let imageUrl = imageDataParser.parse(imageData)
                 
-        return URL.homeDirectory
+        return imageUrl
     }
 }
