@@ -42,6 +42,9 @@
 		65B545E92AFD6D3000B75EDE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545E82AFD6D3000B75EDE /* Extensions.swift */; };
 		65B545EA2AFD6D3000B75EDE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545E82AFD6D3000B75EDE /* Extensions.swift */; };
 		65B545ED2AFD92EE00B75EDE /* SpyImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545EC2AFD92EE00B75EDE /* SpyImageService.swift */; };
+		65E034DA2B23CC05001B5F99 /* ImageDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E034D92B23CC05001B5F99 /* ImageDataParser.swift */; };
+		65E034DC2B23CC18001B5F99 /* ImageDataParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E034DB2B23CC18001B5F99 /* ImageDataParserTests.swift */; };
+		65E034DD2B23CC9F001B5F99 /* ImageDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E034D92B23CC05001B5F99 /* ImageDataParser.swift */; };
 		65F97E0C2AF669A000C0E501 /* PsycherosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */; };
 		65F97E0E2AF669A000C0E501 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0D2AF669A000C0E501 /* ContentView.swift */; };
 		65F97E122AF669A100C0E501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F97E112AF669A100C0E501 /* Assets.xcassets */; };
@@ -85,6 +88,8 @@
 		65B545E52AFD6A3100B75EDE /* ImageRequestModelImageSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRequestModelImageSize.swift; sourceTree = "<group>"; };
 		65B545E82AFD6D3000B75EDE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		65B545EC2AFD92EE00B75EDE /* SpyImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyImageService.swift; sourceTree = "<group>"; };
+		65E034D92B23CC05001B5F99 /* ImageDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataParser.swift; sourceTree = "<group>"; };
+		65E034DB2B23CC18001B5F99 /* ImageDataParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataParserTests.swift; sourceTree = "<group>"; };
 		65F97E082AF6699F00C0E501 /* Psycheros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Psycheros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosApp.swift; sourceTree = "<group>"; };
 		65F97E0D2AF669A000C0E501 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -175,6 +180,7 @@
 				659A92CD2AFAF4EF00A6F351 /* Models */,
 				65250CD62AF8346B006BB662 /* ImageService.swift */,
 				659A92C62AFAD77D00A6F351 /* ImageServiceRequest.swift */,
+				65E034D92B23CC05001B5F99 /* ImageDataParser.swift */,
 			);
 			path = ImageGenerationService;
 			sourceTree = "<group>";
@@ -184,6 +190,7 @@
 			children = (
 				659A92CA2AFADB2600A6F351 /* ImageServiceRequestTests.swift */,
 				65250CDB2AF8349B006BB662 /* ImageServiceTests.swift */,
+				65E034DB2B23CC18001B5F99 /* ImageDataParserTests.swift */,
 				65B545E22AFD600000B75EDE /* Models */,
 			);
 			path = ImageService;
@@ -420,6 +427,7 @@
 			files = (
 				6524068F2AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
 				65250CD42AF83425006BB662 /* PromptGenerator.swift in Sources */,
+				65E034DA2B23CC05001B5F99 /* ImageDataParser.swift in Sources */,
 				659A92CF2AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
 				659A92C72AFAD77D00A6F351 /* ImageServiceRequest.swift in Sources */,
 				65AA66932AF7B29E00C2BCD6 /* BackgroundEntry.swift in Sources */,
@@ -456,7 +464,9 @@
 				65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
 				6524068B2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift in Sources */,
 				652406902AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
+				65E034DD2B23CC9F001B5F99 /* ImageDataParser.swift in Sources */,
 				659A92C82AFAD77D00A6F351 /* ImageServiceRequest.swift in Sources */,
+				65E034DC2B23CC18001B5F99 /* ImageDataParserTests.swift in Sources */,
 				65250CB72AF7DA87006BB662 /* ImageQuery.swift in Sources */,
 				65AA66972AF7B2C500C2BCD6 /* JournalEntryTests.swift in Sources */,
 				659A92CC2AFADB2600A6F351 /* ImageServiceRequestTests.swift in Sources */,
