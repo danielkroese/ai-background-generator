@@ -1,11 +1,11 @@
 import Foundation
 
 protocol DataParsing {
-    func parseData() -> URL
+    func parse(_ data: Data) -> URL
 }
 
 final class ImageDataParser: DataParsing {
-    func parseData() -> URL {
+    func parse(_ data: Data) -> URL {
         return URL.desktopDirectory
     }
 }
