@@ -2,10 +2,10 @@ import Foundation
 
 struct ImageQuery: Equatable {
     let color: String
-    let feelings: [Feeling]
+    let themes: [Theme]
     
     var isEmpty: Bool {
-        color.isEmpty || feelings.isEmpty
+        color.isEmpty || themes.isEmpty
     }
     
     var isNotEmpty: Bool {

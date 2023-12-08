@@ -5,19 +5,19 @@ final class JournalEntryTests: XCTestCase {
         let expectedDate = Date()
         let expectedImage = "image"
         let expectedColor = "yellow"
-        let expectedFeelings: [Feeling] = [.happy, .grateful]
+        let expectedThemes: [Theme] = [.cyberpunk, .space]
         let expectedMotivationalTexts = ["text", "another text"]
         
-        let sut = JournalEntry(timestamp: expectedDate,
+        let sut = BackgroundEntry(timestamp: expectedDate,
                                  image: expectedImage,
                                  color: expectedColor,
-                                 feelings: expectedFeelings,
+                                 themes: expectedThemes,
                                  motivationalTexts: expectedMotivationalTexts)
         
         XCTAssertEqual(sut.timestamp, expectedDate)
         XCTAssertEqual(sut.image, expectedImage)
         XCTAssertEqual(sut.color, expectedColor)
-        XCTAssertEqual(sut.feelings, expectedFeelings)
+        XCTAssertEqual(sut.themes, expectedThemes)
         XCTAssertEqual(sut.motivationalTexts, expectedMotivationalTexts)
     }
 }

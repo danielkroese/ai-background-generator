@@ -33,8 +33,8 @@
 		659A92CC2AFADB2600A6F351 /* ImageServiceRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659A92CA2AFADB2600A6F351 /* ImageServiceRequestTests.swift */; };
 		659A92CF2AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659A92CE2AFAF4FC00A6F351 /* ImageRequestModel.swift */; };
 		659A92D02AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659A92CE2AFAF4FC00A6F351 /* ImageRequestModel.swift */; };
-		65AA66932AF7B29E00C2BCD6 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* JournalEntry.swift */; };
-		65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* JournalEntry.swift */; };
+		65AA66932AF7B29E00C2BCD6 /* BackgroundEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* BackgroundEntry.swift */; };
+		65AA66942AF7B2A600C2BCD6 /* BackgroundEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0F2AF669A000C0E501 /* BackgroundEntry.swift */; };
 		65AA66972AF7B2C500C2BCD6 /* JournalEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65AA66962AF7B2C500C2BCD6 /* JournalEntryTests.swift */; };
 		65B545E42AFD600E00B75EDE /* ImageRequestModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545E32AFD600E00B75EDE /* ImageRequestModelTests.swift */; };
 		65B545E62AFD6A3100B75EDE /* ImageRequestModelImageSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B545E52AFD6A3100B75EDE /* ImageRequestModelImageSize.swift */; };
@@ -88,7 +88,7 @@
 		65F97E082AF6699F00C0E501 /* Psycheros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Psycheros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosApp.swift; sourceTree = "<group>"; };
 		65F97E0D2AF669A000C0E501 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		65F97E0F2AF669A000C0E501 /* JournalEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JournalEntry.swift; sourceTree = "<group>"; };
+		65F97E0F2AF669A000C0E501 /* BackgroundEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundEntry.swift; sourceTree = "<group>"; };
 		65F97E112AF669A100C0E501 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		65F97E132AF669A100C0E501 /* Psycheros.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Psycheros.entitlements; sourceTree = "<group>"; };
 		65F97E1B2AF669A100C0E501 /* PsycherosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PsycherosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -298,7 +298,7 @@
 		65F97E3B2AF66DC000C0E501 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				65F97E0F2AF669A000C0E501 /* JournalEntry.swift */,
+				65F97E0F2AF669A000C0E501 /* BackgroundEntry.swift */,
 				65250CB52AF7DA87006BB662 /* ImageQuery.swift */,
 			);
 			path = Models;
@@ -370,7 +370,6 @@
 					};
 					65F97E1A2AF669A100C0E501 = {
 						CreatedOnToolsVersion = 15.0;
-						TestTargetID = 65F97E072AF6699F00C0E501;
 					};
 				};
 			};
@@ -422,7 +421,7 @@
 				65250CD42AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				659A92CF2AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
 				659A92C72AFAD77D00A6F351 /* ImageServiceRequest.swift in Sources */,
-				65AA66932AF7B29E00C2BCD6 /* JournalEntry.swift in Sources */,
+				65AA66932AF7B29E00C2BCD6 /* BackgroundEntry.swift in Sources */,
 				65250CBB2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
 				65250CD72AF8346B006BB662 /* ImageService.swift in Sources */,
 				65B545E62AFD6A3100B75EDE /* ImageRequestModelImageSize.swift in Sources */,
@@ -444,7 +443,7 @@
 				652406812AFEBE7B00AE193D /* NetworkSession.swift in Sources */,
 				65250CD52AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				65250CDA2AF83491006BB662 /* PromptGeneratorTests.swift in Sources */,
-				65AA66942AF7B2A600C2BCD6 /* JournalEntry.swift in Sources */,
+				65AA66942AF7B2A600C2BCD6 /* BackgroundEntry.swift in Sources */,
 				65B545ED2AFD92EE00B75EDE /* SpyImageService.swift in Sources */,
 				65250CC02AF7F3D2006BB662 /* ImageGeneratorTests.swift in Sources */,
 				65B545EA2AFD6D3000B75EDE /* Extensions.swift in Sources */,
@@ -683,7 +682,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SS5Y2A9M32;
@@ -698,7 +696,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Psycheros.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Psycheros";
 			};
 			name = Debug;
 		};
@@ -706,7 +703,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = SS5Y2A9M32;
@@ -721,7 +717,6 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Psycheros.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Psycheros";
 			};
 			name = Release;
 		};

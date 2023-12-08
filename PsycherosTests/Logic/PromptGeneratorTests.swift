@@ -5,8 +5,8 @@ final class PromptGeneratorTests: XCTestCase {
     
     func test_writePrompt_withGreen_returnsExpectedTextPrompt() {
         assertNoThrow {
-            let imageQuery = ImageQuery(color: "green", feelings: [.anxious])
-            let expectedPrompt = "Generate a motivational image for someone who is feeling anxious, using the color green in an iphone ratio"
+            let imageQuery = ImageQuery(color: "green", themes: [.cyberpunk])
+            let expectedPrompt = "a cyberpunk style landscape, with an overwhelming amount of the color green, in an iphone portrait ratio"
             
             let prompt = try Sut.writePrompt(with: imageQuery)
             
@@ -16,8 +16,8 @@ final class PromptGeneratorTests: XCTestCase {
     
     func test_writePrompt_withBlue_returnsExpectedTextPrompt() {
         assertNoThrow {
-            let imageQuery = ImageQuery(color: "blue", feelings: [.grateful, .happy])
-            let expectedPrompt = "Generate a motivational image for someone who is feeling grateful, happy, using the color blue in an iphone ratio"
+            let imageQuery = ImageQuery(color: "blue", themes: [.island, .nature])
+            let expectedPrompt = "a beautiful island with blue waters, with a lush tropical nature forest, with an overwhelming amount of the color blue, in an iphone portrait ratio"
             
             let prompt = try Sut.writePrompt(with: imageQuery)
             
@@ -27,7 +27,7 @@ final class PromptGeneratorTests: XCTestCase {
     
     func test_writePrompt_withIncompletePrompt_throws() {
         assertThrows(expected: PromptGeneratingError.incompleteQuery) {
-            let imageQuery = ImageQuery(color: "", feelings: [.grateful, .happy])
+            let imageQuery = ImageQuery(color: "", themes: [.nature, .space])
             
             _ = try Sut.writePrompt(with: imageQuery)
         }

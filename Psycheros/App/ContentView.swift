@@ -3,7 +3,7 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    @Query private var items: [JournalEntry]
+    @Query private var items: [BackgroundEntry]
 
     var body: some View {
         NavigationSplitView {
@@ -35,7 +35,7 @@ struct ContentView: View {
 
     private func addItem() {
         withAnimation {
-            let newItem = JournalEntry()
+            let newItem = BackgroundEntry()
             modelContext.insert(newItem)
         }
     }
@@ -51,5 +51,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: JournalEntry.self, inMemory: true)
+        .modelContainer(for: BackgroundEntry.self, inMemory: true)
 }

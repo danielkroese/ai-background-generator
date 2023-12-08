@@ -18,16 +18,28 @@ struct PromptGenerator: PromptGenerating {
     }
     
     private static func createPrompt(with query: ImageQuery) -> String {
-        let feelings = parse(feelings: query.feelings)
+        let themes = parse(themes: query.themes)
         
-        return "Generate a motivational image " +
-        "for someone who is feeling \(feelings), " +
-        "using the color \(query.color) in an iphone ratio"
+        return "\(themes), " +
+        "with an overwhelming amount of the color \(query.color), " +
+        "in an iphone portrait ratio"
     }
     
-    private static func parse(feelings: [Feeling]) -> String {
-        let strings = feelings.map { $0.rawValue }
+    private static func parse(themes: [Theme]) -> String {
+        let strings = themes.map { theme in
+            return switch theme {
+            case .space:
+                "outer space with galaxies and nebulas"
+            case .island:
+                "a beautiful island with blue waters"
+            case .nature:
+                "a lush tropical nature forest"
+            case .cyberpunk:
+                "a cyberpunk style landscape"
+            }
+        }
         
-        return strings.joined(separator: ", ")
+        
+        return strings.joined(separator: ", with ")
     }
 }

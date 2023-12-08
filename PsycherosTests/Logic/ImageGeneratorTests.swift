@@ -4,7 +4,7 @@ import Combine
 final class ImageGeneratorTests: XCTestCase {
     func test_generate_withInvalidPrompt_throws() async {
         await assertAsyncThrows(expected: ImageGeneratingError.incompleteQuery) {
-            let prompt = ImageQuery(color: "", feelings: [])
+            let prompt = ImageQuery(color: "", themes: [])
             
             _ = try await createSutAndGenerate(with: prompt)
         }
@@ -12,7 +12,7 @@ final class ImageGeneratorTests: XCTestCase {
     
     func test_generate_withInvalidPrompt_emptyColor_throws() async {
         await assertAsyncThrows(expected: ImageGeneratingError.incompleteQuery) {
-            let prompt = ImageQuery(color: "", feelings: [.anxious])
+            let prompt = ImageQuery(color: "", themes: [.cyberpunk])
             
             _ = try await createSutAndGenerate(with: prompt)
         }
@@ -47,7 +47,7 @@ final class ImageGeneratorTests: XCTestCase {
 // MARK: - Helpers
 extension ImageGeneratorTests {
     private var dummyQuery: ImageQuery {
-        ImageQuery(color: "yellow", feelings: [.happy])
+        ImageQuery(color: "yellow", themes: [.island])
     }
     
     private func createSut(

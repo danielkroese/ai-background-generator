@@ -9,7 +9,7 @@ extension XCTestCase {
         do {
             try closure()
         } catch {
-            fail(withUnexpected: error)
+            fail(withUnexpected: error, file: file, line: line)
         }
     }
     
@@ -21,7 +21,7 @@ extension XCTestCase {
         do {
             try await closure()
         } catch {
-            fail(withUnexpected: error)
+            fail(withUnexpected: error, file: file, line: line)
         }
     }
     
@@ -33,11 +33,11 @@ extension XCTestCase {
     ) {
         do {
             try closure()
-            fail(withNotThrown: error)
+            fail(withNotThrown: error, file: file, line: line)
         } catch let caughtError as T {
             XCTAssertEqual(caughtError, error, "Unexpected error of type \(T.self) thrown", file: file, line: line)
         } catch {
-            fail(withUnexpected: error)
+            fail(withUnexpected: error, file: file, line: line)
         }
     }
     
@@ -49,11 +49,11 @@ extension XCTestCase {
     ) async {
         do {
             try await closure()
-            fail(withNotThrown: error)
+            fail(withNotThrown: error, file: file, line: line)
         } catch let caughtError as T {
             XCTAssertEqual(caughtError, error, "Unexpected error of type \(T.self) thrown", file: file, line: line)
         } catch {
-            fail(withUnexpected: error)
+            fail(withUnexpected: error, file: file, line: line)
         }
     }
     

@@ -3,13 +3,13 @@ import XCTest
 final class ImageQueryTests: XCTestCase {
     func test_init_setsExpected() {
         let expectedColor = "green"
-        let expectedFeelings: [Feeling] = [.anxious, .sad]
+        let expectedThemes: [Theme] = [.cyberpunk, .island]
         
         let sut = ImageQuery(color: expectedColor,
-                              feelings: expectedFeelings)
+                             themes: expectedThemes)
         
         XCTAssertEqual(sut.color, expectedColor)
-        XCTAssertEqual(sut.feelings, expectedFeelings)
+        XCTAssertEqual(sut.themes, expectedThemes)
     }
 }
 

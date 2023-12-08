@@ -2,32 +2,31 @@ import Foundation
 import SwiftData
 
 @Model
-final class JournalEntry {
+final class BackgroundEntry {
     let timestamp: Date
     var image: String // for now
     var color: String // for now
-    @Relationship(deleteRule: .cascade) var feelings: [Feeling]
+    @Relationship(deleteRule: .cascade) var themes: [Theme]
     @Relationship(deleteRule: .cascade) var motivationalTexts: [String]
     
     init(
         timestamp: Date = Date(),
         image: String = "",
         color: String = "",
-        feelings: [Feeling] = [],
+        themes: [Theme] = [],
         motivationalTexts: [String] = []
     ) {
         self.timestamp = timestamp
         self.image = image
         self.color = color
-        self.feelings = feelings
+        self.themes = themes
         self.motivationalTexts = motivationalTexts
     }
 }
 
-enum Feeling: String, Codable, Equatable {
-    case happy,
-         sad,
-         anxious,
-         grateful,
-         moody
+enum Theme: String, Codable, Equatable {
+    case space,
+         island,
+         nature,
+         cyberpunk
 }
