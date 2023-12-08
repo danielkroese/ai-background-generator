@@ -16,7 +16,7 @@ final class ImageService: ImageServicing {
     init(
         bundle: Bundle = Bundle.main,
         networkSession: NetworkSession = URLSession(configuration: .default),
-        imageDataParser: DataParsing
+        imageDataParser: DataParsing = ImageDataParser()
     ) {
         self.bundle = bundle
         self.networkSession = networkSession

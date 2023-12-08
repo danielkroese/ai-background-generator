@@ -6,6 +6,6 @@ protocol DataParsing {
 
 final class ImageDataParser: DataParsing {
     func parse(_ data: Data) -> URL {
-        return URL.desktopDirectory
+        return URL(dataRepresentation: data, relativeTo: URL.picturesDirectory)!
     }
 }

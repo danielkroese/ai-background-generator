@@ -12,7 +12,7 @@ enum ImageGeneratingError: Error {
 final class ImageGenerator: ImageGenerating {
     private let imageService: ImageServicing
     
-    init(imageService: ImageServicing) {
+    init(imageService: ImageServicing = ImageService()) {
         self.imageService = imageService
     }
     
