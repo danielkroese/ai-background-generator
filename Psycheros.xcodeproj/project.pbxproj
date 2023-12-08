@@ -370,6 +370,7 @@
 					};
 					65F97E1A2AF669A100C0E501 = {
 						CreatedOnToolsVersion = 15.0;
+						TestTargetID = 65F97E072AF6699F00C0E501;
 					};
 				};
 			};
@@ -636,6 +637,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Psycheros.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Psycheros";
 			};
 			name = Debug;
 		};
@@ -675,6 +677,7 @@
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Psycheros.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Psycheros";
 			};
 			name = Release;
 		};
@@ -696,6 +699,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Psycheros.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Psycheros";
 			};
 			name = Debug;
 		};
@@ -717,6 +721,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Psycheros.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Psycheros";
 			};
 			name = Release;
 		};

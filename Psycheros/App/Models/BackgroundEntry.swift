@@ -1,13 +1,11 @@
 import Foundation
-import SwiftData
 
-@Model
 final class BackgroundEntry {
     let timestamp: Date
     var image: String // for now
     var color: String // for now
-    @Relationship(deleteRule: .cascade) var themes: [Theme]
-    @Relationship(deleteRule: .cascade) var motivationalTexts: [String]
+    var themes: [Theme]
+    var motivationalTexts: [String]
     
     init(
         timestamp: Date = Date(),
