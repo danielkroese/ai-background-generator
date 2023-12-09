@@ -68,21 +68,7 @@ final class ImageServiceResponseTests: XCTestCase {
         }
     }
     
-    func test_imageData_withInvalidBase64_throws() async {
-        await assertAsyncThrows(expected: Error.invalidImageData) {
-            let mockResponse = ImageServiceResponse(
-                artifacts: [[ImageServiceResponse.Artifact(
-                    base64: "???",
-                    finishReason: .success,
-                    seed: 123123
-                )]]
-            )
-            
-            _ = try mockResponse.artifacts.first?.first?.imageData
-        }
-    }
-    
-    func test_imageData_withoutFinishReasonSuccess_throws() async {
+    func test_decodeFirstArtifact_withoutFinishReasonSuccess_throws() async {
         let unsuccesfulFinishReasons: [ImageServiceResponse.FinishReason] = [
             .error,
             .contentFiltered,
@@ -99,12 +85,15 @@ final class ImageServiceResponseTests: XCTestCase {
                     )]]
                 )
                 
-                _ = try mockResponse.artifacts.first?.first?.imageData
+                let encodedResponse = try JSONEncoder().encode(mockResponse)
+                
+                _ = try ImageServiceResponse.decodeFirstArtifact(of: encodedResponse)
             }
         }
     }
     
-    private var dummyBase64Image: String { "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QgQChUkFOfjAAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAANSURBVAjXY2AAAAACAAHiIjUNAAAAAElFTkSuQmCC"
+    private var dummyBase64Image: String {
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAB3RJTUUH5QgQChUkFOfjAAAAABl0RVh0Q29tbWVudABDcmVhdGVkIHdpdGggR0lNUFeBDhcAAAANSURBVAjXY2AAAAACAAHiIjUNAAAAAElFTkSuQmCC"
     }
 }
 

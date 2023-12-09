@@ -20,17 +20,9 @@ struct ImageServiceResponse: Codable, Equatable {
         let finishReason: FinishReason
         let seed: Int
         
-        var imageData: Data {
-            get throws {
-                guard finishReason == .success else {
-                    throw ImageServiceResponseError.finishedUnsuccesfully(finishReason)
-                }
-                
-                guard let imageData = Data(base64Encoded: base64) else {
-                    throw ImageServiceResponseError.invalidImageData
-                }
-                
-                return imageData
+        func verify() throws {
+            guard finishReason == .success else {
+                throw ImageServiceResponseError.finishedUnsuccesfully(finishReason)
             }
         }
     }
@@ -67,6 +59,8 @@ struct ImageServiceResponse: Codable, Equatable {
             throw ImageServiceResponseError.emptyResponse
         }
         
+        try firstResult.verify()
+        
         return firstResult
     }
     
@@ -79,6 +73,10 @@ struct ImageServiceResponse: Codable, Equatable {
             throw ImageServiceResponseError.artifactIndexNotFound
         }
         
-        return artifacts[index]
+        let artifact = artifacts[index]
+        
+        try artifact.verify()
+        
+        return artifact
     }
 }
