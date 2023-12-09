@@ -4,7 +4,6 @@ enum ImageServiceResponseError: Error, Equatable {
     case invalidJsonResponse(DecodingError?),
          emptyResponse,
          artifactIndexNotFound,
-         invalidImageData,
          finishedUnsuccesfully(ImageServiceResponse.FinishReason)
     
     static func == (lhs: Self, rhs: Self) -> Bool {

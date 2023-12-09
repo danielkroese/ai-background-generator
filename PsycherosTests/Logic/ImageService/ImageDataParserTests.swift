@@ -12,10 +12,14 @@ final class ImageDataParserTests: XCTestCase {
     }
     
     func test_parseData_withInvalidBase64_throws() async {
-        await assertAsyncThrows(expected: ImageServiceResponseError.invalidImageData) {
+        await assertAsyncThrows(expected: DataParsingError.invalidImageData) {
             let sut = ImageDataParser()
-            let url = try sut.parse("???")
+            _ = try sut.parse("???")
         }
+    }
+    
+    func test_parseData_returnsExpectedFileNameFormat() {
+        
     }
     
     private var dummyBase64Image: String {
