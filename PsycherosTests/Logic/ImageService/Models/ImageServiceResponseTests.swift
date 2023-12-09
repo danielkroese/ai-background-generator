@@ -5,77 +5,80 @@ final class ImageServiceResponseTests: XCTestCase {
     
     func test_decodedFromJson_hasExpectedValues() {
         assertNoThrow {
-            let expectedFirstResult = ImageServiceResponse(
-                base64: "...very long string...",
-                finishReason: .success,
-                seed: 1050625087
-            )
-            
-            let expectedSecondResult = ImageServiceResponse(
-                base64: "...very long string...",
-                finishReason: .contentFiltered,
-                seed: 1229191277
+            let expectedResult = ImageServiceResponse(
+                artifacts: [[
+                    ImageServiceResponse.Artifact(
+                        base64: "...very long string...",
+                        finishReason: .success,
+                        seed: 1050625087
+                    ),
+                    ImageServiceResponse.Artifact(
+                        base64: "...very long string...",
+                        finishReason: .contentFiltered,
+                        seed: 1229191277
+                    )
+                ]]
             )
             
             guard let jsonData = """
+            {
+              "artifacts": [
                 [
-                   [
-                      {
-                         "base64":"...very long string...",
-                         "finishReason":"SUCCESS",
-                         "seed":1050625087
-                      },
-                      {
-                         "base64":"...very long string...",
-                         "finishReason":"CONTENT_FILTERED",
-                         "seed":1229191277
-                      }
-                   ]
+                  {
+                    "base64": "...very long string...",
+                    "finishReason": "SUCCESS",
+                    "seed": 1050625087
+                  },
+                  {
+                    "base64": "...very long string...",
+                    "finishReason": "CONTENT_FILTERED",
+                    "seed": 1229191277
+                  }
                 ]
+              ]
+            }
             """.data(using: .utf8) else {
                 XCTFail("Could not create mock json data.")
                 return
             }
             
-            guard let decodedResults = try JSONDecoder().decode(
-                [[ImageServiceResponse]].self,
+            let decodedResults = try JSONDecoder().decode(
+                ImageServiceResponse.self,
                 from: jsonData
-            ).first else {
-                XCTFail("Could not decode mock json data.")
-                return
-            }
+            )
             
-            XCTAssertTrue(decodedResults.contains { $0 == expectedFirstResult })
-            XCTAssertTrue(decodedResults.contains { $0 == expectedSecondResult })
+            XCTAssertEqual(decodedResults.artifacts, expectedResult.artifacts)
         }
     }
     
     func test_decode_withInvalidJsonResponse_throws() async {
-        await assertAsyncThrows(expected: Error.invalidJsonResponse) {
+        await assertAsyncThrows(expected: Error.invalidJsonResponse(nil)) {
             _ = try ImageServiceResponse.decode(Data())
         }
     }
     
-    func test_decode_withEmptyResponse_throws() async {
+    func test_decodeFirstArtifact_withEmptyResponse_throws() async {
         await assertAsyncThrows(expected: Error.emptyResponse) {
-            guard let mockData = "[[]]".data(using: .utf8) else {
+            guard let mockData = "{\"artifacts\": [[]]}".data(using: .utf8) else {
                 XCTFail("Could not create mock json data.")
                 return
             }
             
-            _ = try ImageServiceResponse.decode(mockData)
+            _ = try ImageServiceResponse.decodeFirstArtifact(of: mockData)
         }
     }
     
     func test_imageData_withInvalidBase64_throws() async {
         await assertAsyncThrows(expected: Error.invalidImageData) {
             let mockResponse = ImageServiceResponse(
-                base64: "???",
-                finishReason: .success,
-                seed: 123123
+                artifacts: [[ImageServiceResponse.Artifact(
+                    base64: "???",
+                    finishReason: .success,
+                    seed: 123123
+                )]]
             )
             
-            _ = try mockResponse.imageData
+            _ = try mockResponse.artifacts.first?.first?.imageData
         }
     }
     
@@ -89,12 +92,14 @@ final class ImageServiceResponseTests: XCTestCase {
         for finishReason in unsuccesfulFinishReasons {
             await assertAsyncThrows(expected: Error.finishedUnsuccesfully(finishReason)) {
                 let mockResponse = ImageServiceResponse(
-                    base64: dummyBase64Image,
-                    finishReason: finishReason,
-                    seed: 123123
+                    artifacts: [[ImageServiceResponse.Artifact(
+                        base64: dummyBase64Image,
+                        finishReason: finishReason,
+                        seed: 123123
+                    )]]
                 )
                 
-                _ = try mockResponse.imageData
+                _ = try mockResponse.artifacts.first?.first?.imageData
             }
         }
     }

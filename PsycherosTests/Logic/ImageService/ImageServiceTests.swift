@@ -76,11 +76,13 @@ extension ImageServiceTests {
         finishReason: ImageServiceResponse.FinishReason = .success,
         seed: Int = 0
     ) throws -> Data {
-        let mockResponse = [[ImageServiceResponse(
-            base64: base64,
-            finishReason: finishReason,
-            seed: seed
-        )]]
+        let mockResponse = ImageServiceResponse(
+            artifacts: [[ImageServiceResponse.Artifact(
+                base64: base64,
+                finishReason: finishReason,
+                seed: seed
+            )]]
+        )
         
         return try JSONEncoder().encode(mockResponse)
     }

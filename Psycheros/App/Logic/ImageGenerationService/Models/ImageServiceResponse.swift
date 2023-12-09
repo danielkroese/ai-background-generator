@@ -1,16 +1,39 @@
 import Foundation
 
 enum ImageServiceResponseError: Error, Equatable {
-    case invalidJsonResponse,
+    case invalidJsonResponse(DecodingError?),
          emptyResponse,
+         artifactIndexNotFound,
          invalidImageData,
          finishedUnsuccesfully(ImageServiceResponse.FinishReason)
+    
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.localizedDescription == rhs.localizedDescription
+    }
 }
 
 struct ImageServiceResponse: Codable, Equatable {
-    let base64: String
-    let finishReason: FinishReason
-    let seed: Int
+    let artifacts: [[Artifact]]
+    
+    struct Artifact: Codable, Equatable {
+        let base64: String
+        let finishReason: FinishReason
+        let seed: Int
+        
+        var imageData: Data {
+            get throws {
+                guard finishReason == .success else {
+                    throw ImageServiceResponseError.finishedUnsuccesfully(finishReason)
+                }
+                
+                guard let imageData = Data(base64Encoded: base64) else {
+                    throw ImageServiceResponseError.invalidImageData
+                }
+                
+                return imageData
+            }
+        }
+    }
     
     enum FinishReason: String, Codable {
         case success,
@@ -25,41 +48,37 @@ struct ImageServiceResponse: Codable, Equatable {
         }
     }
     
-    var imageData: Data {
-        get throws {
-            guard finishReason == .success else {
-                throw ImageServiceResponseError.finishedUnsuccesfully(finishReason)
-            }
+    static func decode(_ data: Data) throws -> ImageServiceResponse {
+        let decoder = JSONDecoder()
+        
+        do {
+            let decodedResponse = try decoder.decode(ImageServiceResponse.self, from: data)
             
-            guard let imageData = Data(base64Encoded: base64) else {
-                throw ImageServiceResponseError.invalidImageData
-            }
-            
-            return imageData
+            return decodedResponse
+        } catch let decodingError as DecodingError {
+            throw ImageServiceResponseError.invalidJsonResponse(decodingError)
+        } catch {
+            throw error
         }
     }
     
-    static func decode(_ data: Data) throws -> [ImageServiceResponse] {
-        guard let decodedResponse = try? JSONDecoder().decode(
-            [[ImageServiceResponse]].self,
-            from: data
-        ) else {
-            throw ImageServiceResponseError.invalidJsonResponse
-        }
-        
-        guard let unpackedResponse = decodedResponse.first,
-              unpackedResponse.isEmpty == false else {
-            throw ImageServiceResponseError.emptyResponse
-        }
-        
-        return unpackedResponse
-    }
-    
-    static func decodeFirstResponse(of data: Data) throws -> ImageServiceResponse {
-        guard let firstResult = try decode(data).first else {
+    static func decodeFirstArtifact(of data: Data) throws -> Artifact {
+        guard let firstResult = try decode(data).artifacts.first?.first else {
             throw ImageServiceResponseError.emptyResponse
         }
         
         return firstResult
+    }
+    
+    static func artifact(_ index: Int, of data: Data) throws -> Artifact {
+        guard let artifacts = try decode(data).artifacts.first else {
+            throw ImageServiceResponseError.emptyResponse
+        }
+        
+        guard artifacts.indices.contains(index) else {
+            throw ImageServiceResponseError.artifactIndexNotFound
+        }
+        
+        return artifacts[index]
     }
 }

@@ -43,7 +43,7 @@ final class ImageService: ImageServicing {
         try NetworkResponseValidator.validate(response)
         
         let imageData = try ImageServiceResponse
-            .decodeFirstResponse(of: data)
+            .decodeFirstArtifact(of: data)
             .imageData
         
         let imageUrl = imageDataParser.parse(imageData)
