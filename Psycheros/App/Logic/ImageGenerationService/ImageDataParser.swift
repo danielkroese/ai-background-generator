@@ -41,7 +41,7 @@ final class ImageDataParser: DataParsing {
     
     private var fileUrl: URL {
         get throws {
-            let uniqueFileName = "background-\(UUID().uuidString)"
+            let uniqueFileName = "background-\(Date().ISO8601Format())"
             
             return try documentDirectory.appendingPathComponent("\(uniqueFileName).png")
         }

@@ -12,7 +12,7 @@ enum ImageServiceResponseError: Error, Equatable {
 }
 
 struct ImageServiceResponse: Codable, Equatable {
-    let artifacts: [[Artifact]]
+    let artifacts: [Artifact]
     
     struct Artifact: Codable, Equatable {
         let base64: String
@@ -41,6 +41,7 @@ struct ImageServiceResponse: Codable, Equatable {
             
             return decodedResponse
         } catch let decodingError as DecodingError {
+            let error = decodingError.localizedDescription
             throw ImageServiceResponseError.invalidJsonResponse(decodingError)
         } catch {
             throw error
@@ -52,8 +53,9 @@ struct ImageServiceResponse: Codable, Equatable {
     }
     
     static func artifact(_ index: Int, of data: Data) throws -> Artifact {
-        guard let artifacts = try decode(data).artifacts.first,
-              artifacts.isEmpty == false else {
+        let artifacts = try decode(data).artifacts
+        
+        guard artifacts.isEmpty == false else {
             throw ImageServiceResponseError.emptyResponse
         }
         

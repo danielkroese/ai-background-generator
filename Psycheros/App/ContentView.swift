@@ -3,6 +3,8 @@ import SwiftData
 
 struct ContentView: View {
     
+    @State private var text: String = ""
+    
     var body: some View {
         VStack {
             Button {
@@ -10,6 +12,8 @@ struct ContentView: View {
             } label: {
                 Text("Coming soon")
             }
+            
+            Text(text)
         }
     }
     
@@ -17,11 +21,11 @@ struct ContentView: View {
         Task {
             let generator = ImageGenerator()
             do {
-                let image = try await generator.generate(from: ImageQuery(color: "blue", themes: [.cyberpunk]))
+                let image = try await generator.generate(from: ImageQuery(color: "blue", themes: [.cyberpunk], size: .size896x1152))
                 
-                print(image.absoluteString)
+                text = image.absoluteString
             } catch {
-                print(error.localizedDescription)
+                text = error.localizedDescription
             }
         }
     }

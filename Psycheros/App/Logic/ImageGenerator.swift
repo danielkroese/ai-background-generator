@@ -26,7 +26,7 @@ final class ImageGenerator: ImageGenerating {
     
     private func generateImage(from query: ImageQuery) async throws -> URL {
         let prompt = try PromptGenerator.writePrompt(with: query)
-        let model = try ImageRequestModel(prompt: prompt)
+        let model = try ImageRequestModel(prompt: prompt, size: query.size)
         let imageUrl = try await imageService.fetchImage(model: model)
         
         return imageUrl

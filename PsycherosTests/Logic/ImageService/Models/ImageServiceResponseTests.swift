@@ -6,7 +6,7 @@ final class ImageServiceResponseTests: XCTestCase {
     func test_decodedFromJson_hasExpectedValues() {
         assertNoThrow {
             let expectedResult = ImageServiceResponse(
-                artifacts: [[
+                artifacts: [
                     ImageServiceResponse.Artifact(
                         base64: "...very long string...",
                         finishReason: .success,
@@ -17,13 +17,12 @@ final class ImageServiceResponseTests: XCTestCase {
                         finishReason: .contentFiltered,
                         seed: 1229191277
                     )
-                ]]
+                ]
             )
             
             guard let jsonData = """
             {
               "artifacts": [
-                [
                   {
                     "base64": "...very long string...",
                     "finishReason": "SUCCESS",
@@ -35,7 +34,6 @@ final class ImageServiceResponseTests: XCTestCase {
                     "seed": 1229191277
                   }
                 ]
-              ]
             }
             """.data(using: .utf8) else {
                 XCTFail("Could not create mock json data.")
@@ -59,7 +57,7 @@ final class ImageServiceResponseTests: XCTestCase {
     
     func test_decodeFirstArtifact_withEmptyResponse_throws() async {
         await assertAsyncThrows(expected: Error.emptyResponse) {
-            guard let mockData = "{\"artifacts\": [[]]}".data(using: .utf8) else {
+            guard let mockData = "{\"artifacts\": []}".data(using: .utf8) else {
                 XCTFail("Could not create mock json data.")
                 return
             }
@@ -78,11 +76,11 @@ final class ImageServiceResponseTests: XCTestCase {
         for finishReason in unsuccesfulFinishReasons {
             await assertAsyncThrows(expected: Error.finishedUnsuccesfully(finishReason)) {
                 let mockResponse = ImageServiceResponse(
-                    artifacts: [[ImageServiceResponse.Artifact(
+                    artifacts: [ImageServiceResponse.Artifact(
                         base64: dummyBase64Image,
                         finishReason: finishReason,
                         seed: 123123
-                    )]]
+                    )]
                 )
                 
                 let encodedResponse = try JSONEncoder().encode(mockResponse)
