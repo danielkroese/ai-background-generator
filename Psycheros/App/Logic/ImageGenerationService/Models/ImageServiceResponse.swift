@@ -19,12 +19,6 @@ struct ImageServiceResponse: Codable, Equatable {
         let base64: String
         let finishReason: FinishReason
         let seed: Int
-        
-        func verify() throws {
-            guard finishReason == .success else {
-                throw ImageServiceResponseError.finishedUnsuccesfully(finishReason)
-            }
-        }
     }
     
     enum FinishReason: String, Codable {
@@ -55,17 +49,12 @@ struct ImageServiceResponse: Codable, Equatable {
     }
     
     static func decodeFirstArtifact(of data: Data) throws -> Artifact {
-        guard let firstResult = try decode(data).artifacts.first?.first else {
-            throw ImageServiceResponseError.emptyResponse
-        }
-        
-        try firstResult.verify()
-        
-        return firstResult
+        return try artifact(.zero, of: data)
     }
     
     static func artifact(_ index: Int, of data: Data) throws -> Artifact {
-        guard let artifacts = try decode(data).artifacts.first else {
+        guard let artifacts = try decode(data).artifacts.first,
+              artifacts.isEmpty == false else {
             throw ImageServiceResponseError.emptyResponse
         }
         
@@ -75,7 +64,9 @@ struct ImageServiceResponse: Codable, Equatable {
         
         let artifact = artifacts[index]
         
-        try artifact.verify()
+        guard artifact.finishReason == .success else {
+            throw ImageServiceResponseError.finishedUnsuccesfully(artifact.finishReason)
+        }
         
         return artifact
     }
