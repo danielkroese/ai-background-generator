@@ -41,10 +41,7 @@ struct ImageServiceResponse: Codable, Equatable {
             
             return decodedResponse
         } catch let decodingError as DecodingError {
-            let error = decodingError.localizedDescription
             throw ImageServiceResponseError.invalidJsonResponse(decodingError)
-        } catch {
-            throw error
         }
     }
     

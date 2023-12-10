@@ -5,14 +5,14 @@ final class ImageServiceResponseTests: XCTestCase {
     
     func test_decodedFromJson_hasExpectedValues() {
         assertNoThrow {
-            let expectedResult = ImageServiceResponse(
+            let expectedResult = createReponse(
                 artifacts: [
-                    ImageServiceResponse.Artifact(
+                    createArtifact(
                         base64: "...very long string...",
                         finishReason: .success,
                         seed: 1050625087
                     ),
-                    ImageServiceResponse.Artifact(
+                    createArtifact(
                         base64: "...very long string...",
                         finishReason: .contentFiltered,
                         seed: 1229191277
@@ -75,12 +75,8 @@ final class ImageServiceResponseTests: XCTestCase {
         
         for finishReason in unsuccesfulFinishReasons {
             await assertAsyncThrows(expected: Error.finishedUnsuccesfully(finishReason)) {
-                let mockResponse = ImageServiceResponse(
-                    artifacts: [ImageServiceResponse.Artifact(
-                        base64: dummyBase64Image,
-                        finishReason: finishReason,
-                        seed: 123123
-                    )]
+                let mockResponse = createReponse(
+                    artifacts: [createArtifact(finishReason: finishReason)]
                 )
                 
                 let encodedResponse = try JSONEncoder().encode(mockResponse)
@@ -88,6 +84,38 @@ final class ImageServiceResponseTests: XCTestCase {
                 _ = try ImageServiceResponse.decodeFirstArtifact(of: encodedResponse)
             }
         }
+    }
+    
+    func test_artifact_invalidIndex_throws() {
+        assertThrows(expected: Error.artifactIndexNotFound) {
+            let mockResponse = createReponse()
+            let encodedResponse = try JSONEncoder().encode(mockResponse)
+            
+            _ = try ImageServiceResponse.artifact(2, of: encodedResponse)
+        }
+    }
+}
+
+// MARK: - Test helpers
+extension ImageServiceResponseTests {
+    private func createReponse(
+        artifacts: [ImageServiceResponse.Artifact]? = nil
+    ) -> ImageServiceResponse {
+        ImageServiceResponse(
+            artifacts: artifacts ?? [createArtifact()]
+        )
+    }
+    
+    private func createArtifact(
+        base64: String? = nil,
+        finishReason: ImageServiceResponse.FinishReason = .success,
+        seed: Int = 123123
+    ) -> ImageServiceResponse.Artifact {
+        ImageServiceResponse.Artifact(
+            base64: base64 ?? dummyBase64Image,
+            finishReason: finishReason,
+            seed: seed
+        )
     }
     
     private var dummyBase64Image: String {
