@@ -6,7 +6,8 @@ final class ImageQueryTests: XCTestCase {
         let expectedThemes: [Theme] = [.cyberpunk, .island]
         
         let sut = ImageQuery(color: expectedColor,
-                             themes: expectedThemes)
+                             themes: expectedThemes, 
+                             size: .size1024x1024)
         
         XCTAssertEqual(sut.color, expectedColor)
         XCTAssertEqual(sut.themes, expectedThemes)

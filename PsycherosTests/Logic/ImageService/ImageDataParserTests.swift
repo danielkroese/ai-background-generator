@@ -19,7 +19,14 @@ final class ImageDataParserTests: XCTestCase {
     }
     
     func test_parseData_returnsExpectedFileNameFormat() {
-        
+        assertNoThrow {
+            let sut = ImageDataParser()
+            
+            let url = try sut.parse(dummyBase64Image)
+            let date = Date().ISO8601Format()
+            
+            XCTAssertEqual(url.lastPathComponent, "background-\(date).png")
+        }
     }
     
     private var dummyBase64Image: String {

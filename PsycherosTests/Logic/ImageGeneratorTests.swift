@@ -4,29 +4,29 @@ import Combine
 final class ImageGeneratorTests: XCTestCase {
     func test_generate_withInvalidPrompt_throws() async {
         await assertAsyncThrows(expected: ImageGeneratingError.incompleteQuery) {
-            let prompt = ImageQuery(color: "", themes: [])
+            let query = createQuery(color: "", themes: [])
             
-            _ = try await createSutAndGenerate(with: prompt)
+            _ = try await createSutAndGenerate(with: query)
         }
     }
     
     func test_generate_withInvalidPrompt_emptyColor_throws() async {
         await assertAsyncThrows(expected: ImageGeneratingError.incompleteQuery) {
-            let prompt = ImageQuery(color: "", themes: [.cyberpunk])
+            let query = createQuery(color: "", themes: [.cyberpunk])
             
-            _ = try await createSutAndGenerate(with: prompt)
+            _ = try await createSutAndGenerate(with: query)
         }
     }
     
     func test_generate_withValidPrompt_doesNotThrow() async {
         await assertNoAsyncThrow {
-            _ = try await createSutAndGenerate(with: dummyQuery)
+            _ = try await createSutAndGenerate(with: createQuery())
         }
     }
     
     func test_generate_returnsImageFileUrl() async {
         await assertNoAsyncThrow {
-            let image = try await createSutAndGenerate(with: dummyQuery)
+            let image = try await createSutAndGenerate(with: createQuery())
             
             XCTAssertTrue(image.isFileURL)
         }
@@ -37,7 +37,7 @@ final class ImageGeneratorTests: XCTestCase {
             let spyService = SpyImageService()
             let sut = createSut(imageService: spyService)
             
-            _ = try await sut.generate(from: dummyQuery)
+            _ = try await sut.generate(from: createQuery())
             
             XCTAssertEqual(spyService.didCallFetchImageCount, 1)
         }
@@ -46,10 +46,6 @@ final class ImageGeneratorTests: XCTestCase {
 
 // MARK: - Helpers
 extension ImageGeneratorTests {
-    private var dummyQuery: ImageQuery {
-        ImageQuery(color: "yellow", themes: [.island])
-    }
-    
     private func createSut(
         imageService: ImageServicing = SpyImageService()
     ) -> ImageGenerator {
@@ -60,5 +56,13 @@ extension ImageGeneratorTests {
         let sut = createSut()
         
         return try await sut.generate(from: prompt)
+    }
+    
+    private func createQuery(
+        color: String = "yellow",
+        themes: [Theme] = [.island],
+        size: ImageRequestModel.ImageSize = .size1024x1024
+    ) -> ImageQuery {
+        ImageQuery(color: color, themes: themes, size: size)
     }
 }
