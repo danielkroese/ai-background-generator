@@ -1,9 +1,10 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View {
+struct GenerateImageView: View {
     
     @State private var text: String = ""
+    @State private var uiImage: UIImage = UIImage()
     
     var body: some View {
         VStack {
@@ -14,6 +15,8 @@ struct ContentView: View {
             }
             
             Text(text)
+            
+            Image(uiImage: uiImage)
         }
     }
     
@@ -21,9 +24,9 @@ struct ContentView: View {
         Task {
             let generator = ImageGenerator()
             do {
-                let image = try await generator.generate(from: ImageQuery(color: "blue", themes: [.cyberpunk], size: .size896x1152))
+                let imageUrl = try await generator.generate(from: ImageQuery(color: "yellow", themes: [.nature, .island], size: .size896x1152))
                 
-                text = image.absoluteString
+                uiImage = UIImage(data: try Data(contentsOf: imageUrl)) ?? UIImage()
             } catch {
                 text = error.localizedDescription
             }
@@ -32,5 +35,5 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView()
+    GenerateImageView()
 }

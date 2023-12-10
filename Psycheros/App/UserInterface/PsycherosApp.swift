@@ -5,7 +5,7 @@ import SwiftData
 struct PsycherosApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GenerateImageView()
         }
     }
 }
