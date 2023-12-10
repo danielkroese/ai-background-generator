@@ -5,8 +5,8 @@ final class PromptGeneratorTests: XCTestCase {
     
     func test_writePrompt_withGreen_returnsExpectedTextPrompt() {
         assertNoThrow {
-            let imageQuery = createQuery(color: "green", themes: [.cyberpunk])
-            let expectedPrompt = "a cyberpunk style landscape, with an overwhelming amount of the color green, in an iphone portrait ratio"
+            let imageQuery = createQuery(color: "green", themes: [.cyberpunk, .space])
+            let expectedPrompt = "a cyberpunk style landscape, with outer space with galaxies and nebulas, with an overwhelming amount of the color green, in an iphone portrait ratio"
             
             let prompt = try Sut.writePrompt(with: imageQuery)
             
