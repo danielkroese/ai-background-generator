@@ -26,24 +26,24 @@ final class ImageDataParser: DataParsing {
         return imageData
     }
     
-    private var documentDirectory: URL {
+    private var directory: URL {
         get throws {
-            guard let documentDirectory = FileManager.default.urls(
+            guard let directory = FileManager.default.urls(
                 for: .documentDirectory,
                 in: .userDomainMask
             ).first else {
                 throw DataParsingError.saveDirectoryNotFound
             }
             
-            return documentDirectory
+            return directory
         }
     }
     
     private var fileUrl: URL {
         get throws {
-            let uniqueFileName = "background-\(Date().ISO8601Format())"
+            let fileName = "background-\(Date().ISO8601Format()).png"
             
-            return try documentDirectory.appendingPathComponent("\(uniqueFileName).png")
+            return try directory.appendingPathComponent(fileName)
         }
     }
 }
