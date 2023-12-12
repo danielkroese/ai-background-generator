@@ -1,13 +1,12 @@
 import SwiftUI
 
-struct GenerateImageView: View {
-    @State private var errorText: String = ""
-    @State private var uiImage: UIImage = UIImage()
+struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
+    @ObservedObject private(set) var viewModel: ViewModel
     
     var body: some View {
         ZStack {
             Button {
-                generateImage()
+                viewModel.tappedGenerateImage()
             } label: {
                 Image(systemName: "wand.and.stars")
                     .resizable()
@@ -22,29 +21,16 @@ struct GenerateImageView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             .padding(32)
             
-            Text(errorText)
+            Text(viewModel.errorText)
                 .foregroundStyle(Color.accentColor)
                 .font(.headline)
                 .padding(32)
             
-            Image(uiImage: uiImage)
+            Image(uiImage: viewModel.uiImage)
                 .aspectRatio(contentMode: .fill)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
         .background(Color.accentColor.opacity(0.3))
-    }
-    
-    private func generateImage() {
-        Task {
-            let generator = ImageGenerator()
-            do {
-                let imageUrl = try await generator.generate(from: ImageQuery(color: "yellow", themes: [.nature, .island], size: .size896x1152))
-                
-                uiImage = UIImage(data: try Data(contentsOf: imageUrl)) ?? UIImage()
-            } catch {
-                errorText = error.localizedDescription
-            }
-        }
     }
 }
 
