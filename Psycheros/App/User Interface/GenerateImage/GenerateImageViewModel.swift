@@ -1,16 +1,18 @@
 import Foundation
-import UIKit
+import SwiftUI
 
 protocol GenerateImageViewModeling: ObservableObject {
-    var errorText: String { get }
-    var uiImage: UIImage { get }
+    var isLoading: Bool { get }
+    var errorText: String? { get }
+    var generatedImage: Image? { get }
     
     func tappedGenerateImage()
 }
 
 final class GenerateImageViewModel: GenerateImageViewModeling {
-    @Published private(set) var errorText: String = ""
-    @Published private(set) var uiImage: UIImage = UIImage()
+    @Published private(set) var isLoading: Bool = false
+    @Published private(set) var errorText: String?
+    @Published private(set) var generatedImage: Image?
     
     private var imageTask: Task<(), Never>?
     
@@ -25,6 +27,8 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     }
     
     func tappedGenerateImage() {
+        setLoading(true)
+        
         let query = ImageQuery(
             color: "yellow",
             themes: [.nature, .island],
@@ -33,20 +37,27 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         
         imageTask = Task {
             do {
-                let imageUrl = try await imageGenerator.generate(from: query)
-                
+                let image = try await imageGenerator.generate(from: query)
                 try Task.checkCancellation()
                 
-                setImage(from: imageUrl)
+                setImage(from: image)
             } catch {
                 setError(error)
             }
+            
+            setLoading(false)
         }
     }
     
-    private func setImage(from imageUrl: URL) {
+    private func setLoading(_ value: Bool) {
         Task { @MainActor in
-            uiImage = UIImage(data: try Data(contentsOf: imageUrl)) ?? UIImage()
+            isLoading = value
+        }
+    }
+    
+    private func setImage(from image: Image) {
+        Task { @MainActor in
+            generatedImage = image
         }
     }
     

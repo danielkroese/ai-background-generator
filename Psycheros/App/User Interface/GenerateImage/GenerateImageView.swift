@@ -21,19 +21,23 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
             .padding(32)
             
-            Text(viewModel.errorText)
-                .foregroundStyle(Color.accentColor)
-                .font(.headline)
-                .padding(32)
+            if let errorText = viewModel.errorText {
+                Text(errorText)
+                    .foregroundStyle(Color.accentColor)
+                    .font(.headline)
+                    .padding(32)
+            }
             
-            Image(uiImage: viewModel.uiImage)
-                .aspectRatio(contentMode: .fill)
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            if let image = viewModel.generatedImage {
+                image
+                    .aspectRatio(contentMode: .fill)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
         .background(Color.accentColor.opacity(0.3))
     }
 }
 
 #Preview {
-    GenerateImageView()
+    GenerateImageView(viewModel: GenerateImageViewModel())
 }

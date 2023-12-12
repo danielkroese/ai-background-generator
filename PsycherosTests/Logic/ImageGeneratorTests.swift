@@ -1,4 +1,5 @@
 import XCTest
+import SwiftUI
 import Combine
 
 final class ImageGeneratorTests: XCTestCase {
@@ -24,11 +25,9 @@ final class ImageGeneratorTests: XCTestCase {
         }
     }
     
-    func test_generate_returnsImageFileUrl() async {
+    func test_generate_returnsImage() async {
         await assertNoAsyncThrow {
-            let image = try await createSutAndGenerate(with: createQuery())
-            
-            XCTAssertTrue(image.isFileURL)
+            _ = try await createSutAndGenerate(with: createQuery())
         }
     }
     
@@ -52,7 +51,7 @@ extension ImageGeneratorTests {
         return ImageGenerator(imageService: imageService)
     }
     
-    private func createSutAndGenerate(with prompt: ImageQuery) async throws -> URL {
+    private func createSutAndGenerate(with prompt: ImageQuery) async throws -> Image {
         let sut = createSut()
         
         return try await sut.generate(from: prompt)
