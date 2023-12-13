@@ -32,12 +32,13 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         let query = ImageQuery(
             color: "yellow",
             themes: [.nature, .island],
-            size: .size896x1152
+            size: .size768x1344
         )
         
         imageTask = Task {
             do {
                 let image = try await imageGenerator.generate(from: query)
+                
                 try Task.checkCancellation()
                 
                 setImage(from: image)
