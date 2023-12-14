@@ -12,17 +12,29 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                     .padding(32)
             }
             
-            Image(systemName: "wand.and.stars")
-                .resizable()
-                .frame(width: 48, height: 48)
-                .circleButtonModifier(action: viewModel.tappedGenerateImage)
-                .disabled(viewModel.isLoading)
+            generateButton
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
                 .padding(32)
         }
         .background(background)
         .transition(.opacity)
         .animation(.easeInOut, value: viewModel.generatedImage)
+    }
+    
+    @State var buttonOffset = -200.0
+    
+    @ViewBuilder
+    private var generateButton: some View {
+        Image(systemName: "wand.and.stars")
+            .resizable()
+            .frame(width: 48, height: 48)
+            .circleButtonModifier(action: viewModel.tappedGenerateImage)
+            .disabled(viewModel.isLoading)
+            .offset(y: -buttonOffset)
+            .animation(.bouncy(duration: 1.0), value: buttonOffset)
+            .onAppear {
+                buttonOffset = 0
+            }
     }
     
     @ViewBuilder

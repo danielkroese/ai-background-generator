@@ -8,11 +8,13 @@ struct CircleButtonModifier: ViewModifier {
             content
                 .padding()
                 .foregroundStyle(.white)
-                .background(Color.accentColor.opacity(0.8))
+                .background(Color.accentColor.opacity(0.2))
                 .clipShape(Circle())
         }
-        .background(Color.accentColor.opacity(0.5))
+        .blurBackground(effect: .systemUltraThinMaterial)
         .clipShape(Circle())
+        .shadow(color: .black.opacity(0.6), radius: 10, y: 10)
+        .shadow(color: .black.opacity(0.2), radius: 20, y: 20)
     }
 }
 
