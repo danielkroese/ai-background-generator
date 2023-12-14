@@ -56,19 +56,23 @@ final class GenerateImageViewModelTests: XCTestCase {
     func test_tappedGenerateImage_togglesIsLoading() {
         let sut = createSut()
         
-        let expectation = XCTestExpectation(description: "toggles isLoading")
-        expectation.expectedFulfillmentCount = 2
+        let expectation1 = XCTestExpectation(description: "enables isLoading")
+        let expectation2 = XCTestExpectation(description: "disables isLoading")
         
         sut.$isLoading
             .dropFirst()
-            .sink { _ in
-                expectation.fulfill()
+            .sink { value in
+                if value {
+                    expectation1.fulfill()
+                } else {
+                    expectation2.fulfill()
+                }
             }
             .store(in: &subscriptions)
         
         sut.tappedGenerateImage()
         
-        wait(for: [expectation], timeout: 0.1)
+        wait(for: [expectation1, expectation2], timeout: 0.1)
         
         XCTAssertFalse(sut.isLoading)
     }

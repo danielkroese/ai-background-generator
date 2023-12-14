@@ -14,7 +14,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published private(set) var errorText: String?
     @Published private(set) var generatedImage: Image?
     
-    private var imageTask: Task<(), Never>?
+    private(set) var imageTask: Task<(), Never>?
     
     private let imageGenerator: ImageGenerating
     
@@ -27,27 +27,15 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     }
     
     func tappedGenerateImage() {
+        guard isLoading == false else {
+            return
+        }
+        
         setLoading(true)
         
-        let query = ImageQuery(
-            color: "yellow",
-            themes: [.nature, .island],
-            size: .size768x1344
-        )
+        let query = createQuery()
         
-        imageTask = Task {
-            do {
-                let image = try await imageGenerator.generate(from: query)
-                
-                try Task.checkCancellation()
-                
-                setImage(from: image)
-            } catch {
-                setError(error)
-            }
-            
-            setLoading(false)
-        }
+        generateImage(from: query)
     }
     
     private func setLoading(_ value: Bool) {
@@ -65,6 +53,32 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     private func setError(_ error: Error) {
         Task { @MainActor in
             errorText = error.localizedDescription
+        }
+    }
+    
+    private func createQuery() -> ImageQuery {
+        ImageQuery(
+            color: "yellow",
+            themes: [.nature, .island],
+            size: .size768x1344
+        )
+    }
+    
+    private func generateImage(from query: ImageQuery) {
+        imageTask = Task {
+            defer {
+                setLoading(false)
+            }
+            
+            do {
+                let image = try await imageGenerator.generate(from: query)
+                
+                try Task.checkCancellation()
+                
+                setImage(from: image)
+            } catch {
+                setError(error)
+            }
         }
     }
 }
