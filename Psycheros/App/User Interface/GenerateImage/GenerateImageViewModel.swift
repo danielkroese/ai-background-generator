@@ -52,7 +52,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     
     private func setError(_ error: Error) {
         Task { @MainActor in
-            errorText = error.localizedDescription
+            errorText = (error as? ImageGeneratingError)?.rawValue ?? error.localizedDescription
         }
     }
     

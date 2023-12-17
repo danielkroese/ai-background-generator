@@ -5,8 +5,9 @@ protocol ImageGenerating {
     func generate(from: ImageQuery) async throws -> Image
 }
 
-enum ImageGeneratingError: Error {
+enum ImageGeneratingError: String, Error {
     case incompleteQuery
+    case inPreviewMode
 }
 
 final class ImageGenerator: ImageGenerating {
@@ -19,6 +20,10 @@ final class ImageGenerator: ImageGenerating {
     func generate(from query: ImageQuery) async throws -> Image {
         guard query.isNotEmpty else {
             throw ImageGeneratingError.incompleteQuery
+        }
+        
+        guard isPreview == false else {
+            throw ImageGeneratingError.inPreviewMode
         }
         
         return try await generateImage(from: query)
@@ -40,5 +45,9 @@ final class ImageGenerator: ImageGenerating {
         }
         
         return Image(uiImage: uiImage)
+    }
+    
+    private var isPreview: Bool {
+        ProcessInfo.processInfo.environment["XCODE_RUNNING_FOR_PREVIEWS"] == "1"
     }
 }

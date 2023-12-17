@@ -11,7 +11,7 @@ struct ShapeButtonModifier<S: Shape>: ViewModifier {
                 .foregroundStyle(.foreground.opacity(0.8))
                 .clipShape(shape)
         }
-        .blurBackground(effect: .systemUltraThinMaterial)
+        .blurBackground(effect: .systemThinMaterial)
         .clipShape(shape)
         .shadowModifier()
     }
