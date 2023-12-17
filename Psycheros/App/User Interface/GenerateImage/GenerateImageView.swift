@@ -39,9 +39,15 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
     @ViewBuilder
     private var generateButton: some View {
         Button(action: viewModel.tappedGenerateImage) {
-            Image(systemName: "wand.and.stars")
-                .resizable()
-                .frame(width: 32, height: 32)
+            HStack(spacing: 16) {
+                Image(systemName: "wand.and.stars")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+                
+                if viewModel.isLoading {
+                    Text("Loading...")
+                }
+            }
         }
         .disabled(viewModel.isLoading)
         .buttonStyle(
@@ -49,6 +55,8 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 shape: PillButtonShape(part: .trailing, innerCornerRadius: 8, outerCornerRadius: 32)
             )
         )
+        .transition(.scale)
+        .animation(.bouncy(duration: 0.5), value: viewModel.isLoading)
     }
     
     @ViewBuilder

@@ -4,7 +4,8 @@ struct PillButtonShape: Shape {
     enum Part: CaseIterable {
         case leading,
              center,
-             trailing
+             trailing,
+             all
     }
     
     let part: Part
@@ -22,26 +23,33 @@ struct PillButtonShape: Shape {
     private var cornerRadii: RectangleCornerRadii {
         switch part {
         case .leading:
-                .init(
-                    topLeading: outerCornerRadius,
-                    bottomLeading: outerCornerRadius,
-                    bottomTrailing: innerCornerRadius,
-                    topTrailing: innerCornerRadius
-                )
+            RectangleCornerRadii(
+                topLeading: outerCornerRadius,
+                bottomLeading: outerCornerRadius,
+                bottomTrailing: innerCornerRadius,
+                topTrailing: innerCornerRadius
+            )
         case .center:
-                .init(
-                    topLeading: innerCornerRadius,
-                    bottomLeading: innerCornerRadius,
-                    bottomTrailing: innerCornerRadius,
-                    topTrailing: innerCornerRadius
-                )
+            RectangleCornerRadii(
+                topLeading: innerCornerRadius,
+                bottomLeading: innerCornerRadius,
+                bottomTrailing: innerCornerRadius,
+                topTrailing: innerCornerRadius
+            )
         case .trailing:
-                .init(
-                    topLeading: innerCornerRadius,
-                    bottomLeading: innerCornerRadius,
-                    bottomTrailing: outerCornerRadius,
-                    topTrailing: outerCornerRadius
-                )
+            RectangleCornerRadii(
+                topLeading: innerCornerRadius,
+                bottomLeading: innerCornerRadius,
+                bottomTrailing: outerCornerRadius,
+                topTrailing: outerCornerRadius
+            )
+        case .all:
+            RectangleCornerRadii(
+                topLeading: outerCornerRadius,
+                bottomLeading: outerCornerRadius,
+                bottomTrailing: outerCornerRadius,
+                topTrailing: outerCornerRadius
+            )
         }
     }
 }
@@ -50,7 +58,7 @@ struct PillButtonShape: Shape {
     HStack(spacing: 8) {
         ForEach(PillButtonShape.Part.allCases, id: \.hashValue) { part in
             Button(action: { return }) {
-                Text("Button")
+                Text("Part")
             }
             .buttonStyle(ShapeButtonStyle(shape: PillButtonShape(part: part, innerCornerRadius: 8, outerCornerRadius: 32)))
         }

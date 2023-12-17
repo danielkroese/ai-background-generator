@@ -23,6 +23,8 @@ final class ImageGenerator: ImageGenerating {
         }
         
         guard isPreview == false else {
+            try await Task.sleep(nanoseconds: 3_000_000_000)
+            
             throw ImageGeneratingError.inPreviewMode
         }
         
