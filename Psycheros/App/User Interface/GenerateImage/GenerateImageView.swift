@@ -12,16 +12,30 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                     .padding(32)
             }
             
-            generateButton
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottomTrailing)
+            VStack {
+                HStack(spacing: 32) {
+                    generateButton
+                }
                 .padding(32)
+                .frame(maxWidth: .infinity, maxHeight: 200, alignment: .topTrailing)
+            }
+            .blurBackground(effect: .systemMaterial)
+            .ignoresSafeArea(.keyboard, edges: .all)
+            .ignoresSafeArea()
+            .border(.black.opacity(0.1), width: 1)
+            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+            .offset(y: -toolsOffset)
+            .animation(.bouncy(duration: 1.0), value: toolsOffset)
+            .onAppear {
+                toolsOffset = -100
+            }
         }
         .background(background)
         .transition(.opacity)
         .animation(.easeInOut, value: viewModel.generatedImage)
     }
     
-    @State var buttonOffset = -200.0
+    @State var toolsOffset = -400.0
     
     @ViewBuilder
     private var generateButton: some View {
@@ -30,11 +44,6 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             .frame(width: 32, height: 32)
             .shapeButtonModifier(action: viewModel.tappedGenerateImage)
             .disabled(viewModel.isLoading)
-            .offset(y: -buttonOffset)
-            .animation(.bouncy(duration: 1.0), value: buttonOffset)
-            .onAppear {
-                buttonOffset = 0
-            }
     }
     
     @ViewBuilder
