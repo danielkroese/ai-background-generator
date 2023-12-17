@@ -19,10 +19,10 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 .padding(32)
                 .frame(maxWidth: .infinity, maxHeight: 200, alignment: .topTrailing)
             }
-            .blurBackground(effect: .systemMaterial)
+            .blurBackground(effect: .systemThinMaterial)
+            .clipShape(RoundedRectangle(cornerRadius: 64))
             .ignoresSafeArea(.keyboard, edges: .all)
             .ignoresSafeArea()
-            .border(.black.opacity(0.1), width: 1)
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             .offset(y: -toolsOffset)
             .animation(.bouncy(duration: 1.0), value: toolsOffset)
@@ -42,7 +42,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
         Image(systemName: "wand.and.stars")
             .resizable()
             .frame(width: 32, height: 32)
-            .shapeButtonModifier(action: viewModel.tappedGenerateImage)
+            .shapeButtonModifier(shape: UnevenRoundedRectangle(cornerRadii: .init(topLeading: 8, bottomLeading: 8, bottomTrailing: 32, topTrailing: 32)), action: viewModel.tappedGenerateImage)
             .disabled(viewModel.isLoading)
     }
     
@@ -55,13 +55,13 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                     .ignoresSafeArea()
                     .aspectRatio(contentMode: .fill)
             } else {
-                Image(.dummyBackground)
-                    .resizable()
-                    .ignoresSafeArea()
-                    .aspectRatio(contentMode: .fill)
-//                Color.accentColor
-//                    .opacity(0.3)
+//                Image(.dummyBackground)
+//                    .resizable()
 //                    .ignoresSafeArea()
+//                    .aspectRatio(contentMode: .fill)
+                Color.accentColor
+                    .opacity(0.3)
+                    .ignoresSafeArea()
             }
         }
         .transition(.opacity)
