@@ -1,6 +1,6 @@
 import XCTest
 
-final class JournalEntryTests: XCTestCase {
+final class BackgroundEntryTests: XCTestCase {
     func test_init_setsExpected() {
         let expectedDate = Date()
         let expectedImage = "image"
