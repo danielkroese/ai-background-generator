@@ -3,6 +3,8 @@ import SwiftUI
 struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
     @ObservedObject private(set) var viewModel: ViewModel
     
+    @State var toolsOffset = -400.0
+    
     var body: some View {
         ZStack {
             if let errorText = viewModel.errorText {
@@ -17,25 +19,22 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                     generateButton
                 }
                 .padding(32)
-                .frame(maxWidth: .infinity, maxHeight: 200, alignment: .topTrailing)
+                .frame(maxWidth: .infinity, maxHeight: 196, alignment: .topTrailing)
             }
             .blurBackground(effect: .systemThinMaterial)
             .clipShape(RoundedRectangle(cornerRadius: 64))
-            .ignoresSafeArea(.keyboard, edges: .all)
             .ignoresSafeArea()
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
             .offset(y: -toolsOffset)
             .animation(.bouncy(duration: 1.0), value: toolsOffset)
             .onAppear {
-                toolsOffset = -100
+                toolsOffset = -86
             }
         }
         .background(background)
         .transition(.opacity)
         .animation(.easeInOut, value: viewModel.generatedImage)
     }
-    
-    @State var toolsOffset = -400.0
     
     @ViewBuilder
     private var generateButton: some View {
