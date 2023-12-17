@@ -27,8 +27,8 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
     private var generateButton: some View {
         Image(systemName: "wand.and.stars")
             .resizable()
-            .frame(width: 48, height: 48)
-            .circleButtonModifier(action: viewModel.tappedGenerateImage)
+            .frame(width: 32, height: 32)
+            .shapeButtonModifier(action: viewModel.tappedGenerateImage)
             .disabled(viewModel.isLoading)
             .offset(y: -buttonOffset)
             .animation(.bouncy(duration: 1.0), value: buttonOffset)
