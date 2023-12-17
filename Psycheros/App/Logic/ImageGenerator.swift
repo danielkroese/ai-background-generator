@@ -6,8 +6,8 @@ protocol ImageGenerating {
 }
 
 enum ImageGeneratingError: String, Error {
-    case incompleteQuery
-    case inPreviewMode
+    case incompleteQuery,
+         inPreviewMode
 }
 
 final class ImageGenerator: ImageGenerating {

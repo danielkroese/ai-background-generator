@@ -38,11 +38,17 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
     
     @ViewBuilder
     private var generateButton: some View {
-        Image(systemName: "wand.and.stars")
-            .resizable()
-            .frame(width: 32, height: 32)
-            .shapeButtonModifier(shape: UnevenRoundedRectangle(cornerRadii: .init(topLeading: 8, bottomLeading: 8, bottomTrailing: 32, topTrailing: 32)), action: viewModel.tappedGenerateImage)
-            .disabled(viewModel.isLoading)
+        Button(action: viewModel.tappedGenerateImage) {
+            Image(systemName: "wand.and.stars")
+                .resizable()
+                .frame(width: 32, height: 32)
+        }
+        .disabled(viewModel.isLoading)
+        .buttonStyle(
+            ShapeButtonStyle(
+                shape: PillButtonShape(part: .trailing, innerCornerRadius: 8, outerCornerRadius: 32)
+            )
+        )
     }
     
     @ViewBuilder
