@@ -57,6 +57,7 @@
 		65F97E0E2AF669A000C0E501 /* GenerateImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0D2AF669A000C0E501 /* GenerateImageView.swift */; };
 		65F97E122AF669A100C0E501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F97E112AF669A100C0E501 /* Assets.xcassets */; };
 		65FC2C272AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */; };
+		7B0CC2A42B30DFD000268FFF /* AnimatedHue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */; };
 		7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E72B2F4047008667AB /* ShadowModifier.swift */; };
 		7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */; };
 /* End PBXBuildFile section */
@@ -114,6 +115,7 @@
 		65F97E132AF669A100C0E501 /* Psycheros.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Psycheros.entitlements; sourceTree = "<group>"; };
 		65F97E1B2AF669A100C0E501 /* PsycherosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PsycherosTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtensions.swift; sourceTree = "<group>"; };
+		7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedHue.swift; sourceTree = "<group>"; };
 		7B9928E72B2F4047008667AB /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonShape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -216,6 +218,7 @@
 				6550CBDE2B2A2DFE00B27030 /* ShapeButtonStyle.swift */,
 				65F8219E2B2B8E6400B5F745 /* BlurEffectModifier.swift */,
 				7B9928E72B2F4047008667AB /* ShadowModifier.swift */,
+				7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B0CC2A42B30DFD000268FFF /* AnimatedHue.swift in Sources */,
 				6524068F2AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
 				6550C7EE2B28F3E800B27030 /* GenerateImageViewModel.swift in Sources */,
 				65250CD42AF83425006BB662 /* PromptGenerator.swift in Sources */,

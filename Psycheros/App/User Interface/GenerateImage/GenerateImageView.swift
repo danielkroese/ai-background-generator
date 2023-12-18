@@ -65,16 +65,19 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             if let image = viewModel.generatedImage {
                 image
                     .resizable()
+                    .animatedHue(isActive: viewModel.isLoading)
                     .ignoresSafeArea()
                     .aspectRatio(contentMode: .fill)
             } else {
-//                Image(.dummyBackground)
-//                    .resizable()
-//                    .ignoresSafeArea()
-//                    .aspectRatio(contentMode: .fill)
-                Color.accentColor
-                    .opacity(0.3)
+                Image(.dummyBackground)
+                    .resizable()
+                    .animatedHue(isActive: viewModel.isLoading)
                     .ignoresSafeArea()
+                    .aspectRatio(contentMode: .fill)
+//                Color.accentColor
+//                    .opacity(0.3)
+//                    .animatedHue(isActive: viewModel.isLoading)
+//                    .ignoresSafeArea()
             }
         }
         .transition(.opacity)
