@@ -10,21 +10,40 @@ final class GenerateImageViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_tappedGenerateImage_withSuccess_setsImage() {
+    func test_selectedTheme_withNoSelection_setsErrorText() {
         let sut = createSut()
         
-        let expectation = XCTestExpectation(description: "sets image")
         
-        sut.$generatedImage
+        let expectation = XCTestExpectation(description: "sets error")
+        
+        sut.$errorText
             .dropFirst()
             .sink { _ in
                 expectation.fulfill()
             }
             .store(in: &subscriptions)
         
-        sut.tappedGenerateImage()
+        sut.selected(themes: [])
         
         wait(for: [expectation], timeout: 0.1)
+    }
+    
+    func test_selectedTheme_setsSelectedThemesToQuery() async {
+        let mockImageGenerator = MockImageGenerator()
+        let sut = createSut(imageGenerator: mockImageGenerator)
+        
+        let dummyThemes: [Theme] = [.cyberpunk, .nature]
+        sut.selected(themes: dummyThemes)
+        
+        await waitForGeneratedImage(in: sut)
+        
+        XCTAssertEqual(mockImageGenerator.passedImageQuery?.themes, dummyThemes)
+    }
+    
+    func test_tappedGenerateImage_withSuccess_setsImage() async {
+        let sut = createSut()
+        
+        await waitForGeneratedImage(in: sut)
         
         XCTAssertNil(sut.errorText)
         XCTAssertFalse(sut.isLoading)
@@ -84,5 +103,20 @@ extension GenerateImageViewModelTests {
         imageGenerator: ImageGenerating = MockImageGenerator()
     ) -> GenerateImageViewModel {
         GenerateImageViewModel(imageGenerator: imageGenerator)
+    }
+    
+    private func waitForGeneratedImage(in sut: GenerateImageViewModel) async {
+        let expectation = XCTestExpectation(description: "sets image")
+        
+        sut.$generatedImage
+            .dropFirst()
+            .sink { _ in
+                expectation.fulfill()
+            }
+            .store(in: &subscriptions)
+        
+        sut.tappedGenerateImage()
+        
+        await fulfillment(of: [expectation], timeout: 0.1)
     }
 }

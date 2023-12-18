@@ -4,9 +4,11 @@ final class MockImageGenerator: ImageGenerating {
     var generateImageResponse: Image?
     var generateImageError: Error?
     private(set) var didCallGenerateImageCount = 0
+    private(set) var passedImageQuery: ImageQuery?
     
-    func generate(from: ImageQuery) async throws -> Image {
+    func generate(from query: ImageQuery) async throws -> Image {
         didCallGenerateImageCount += 1
+        passedImageQuery = query
         
         if let error = generateImageError {
             throw error

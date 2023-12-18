@@ -6,6 +6,8 @@ protocol GenerateImageViewModeling: ObservableObject {
     var errorText: String? { get }
     var generatedImage: Image? { get }
     
+    func selected(themes: [Theme])
+    func selected(color: Color)
     func tappedGenerateImage()
 }
 
@@ -13,8 +15,14 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorText: String?
     @Published private(set) var generatedImage: Image?
-    
+        
     private(set) var imageTask: Task<(), Never>?
+    
+    private var imageQuery = ImageQuery(
+        color: "yellow",
+        themes: [.nature, .island],
+        size: .size768x1344
+    )
     
     private let imageGenerator: ImageGenerating
     
@@ -26,16 +34,26 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         imageTask?.cancel()
     }
     
+    func selected(themes: [Theme]) {
+        guard themes.isEmpty == false else {
+            errorText = "Theme required"
+            return
+        }
+        
+        imageQuery.themes = themes
+    }
+    
+    func selected(color: Color) {
+        
+    }
+    
     func tappedGenerateImage() {
         guard isLoading == false else {
             return
         }
         
         setLoading(true)
-        
-        let query = createQuery()
-        
-        generateImage(from: query)
+        generateImage(from: imageQuery)
     }
     
     private func setLoading(_ value: Bool) {
@@ -54,14 +72,6 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         Task { @MainActor in
             errorText = (error as? ImageGeneratingError)?.rawValue ?? error.localizedDescription
         }
-    }
-    
-    private func createQuery() -> ImageQuery {
-        ImageQuery(
-            color: "yellow",
-            themes: [.nature, .island],
-            size: .size768x1344
-        )
     }
     
     private func generateImage(from query: ImageQuery) {
