@@ -44,7 +44,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     }
     
     func selected(color: Color) {
-        
+        imageQuery.color = color.description
     }
     
     func tappedGenerateImage() {

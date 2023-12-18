@@ -32,6 +32,19 @@ final class GenerateImageViewModelTests: XCTestCase {
         XCTAssertEqual(mockImageGenerator.passedImageQuery?.themes, dummyThemes)
     }
     
+    func test_selectedColor_setsSelectedColorToQuery() async {
+        let mockImageGenerator = MockImageGenerator()
+        let sut = createSut(imageGenerator: mockImageGenerator)
+        
+        sut.selected(color: .red)
+        
+        await expectGeneratedImage(in: sut) {
+            sut.tappedGenerateImage()
+        }
+        
+        XCTAssertEqual(mockImageGenerator.passedImageQuery?.color, "red")
+    }
+    
     func test_tappedGenerateImage_withSuccess_setsImage() async {
         let sut = createSut()
         
