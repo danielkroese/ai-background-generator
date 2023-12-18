@@ -10,22 +10,12 @@ final class GenerateImageViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_selectedTheme_withNoSelection_setsErrorText() {
+    func test_selectedTheme_withNoSelection_setsErrorText() async {
         let sut = createSut()
         
-        
-        let expectation = XCTestExpectation(description: "sets error")
-        
-        sut.$errorText
-            .dropFirst()
-            .sink { _ in
-                expectation.fulfill()
-            }
-            .store(in: &subscriptions)
-        
-        sut.selected(themes: [])
-        
-        wait(for: [expectation], timeout: 0.1)
+        await expectError(in: sut) {
+            sut.selected(themes: [])
+        }
     }
     
     func test_selectedTheme_setsSelectedThemesToQuery() async {
@@ -35,7 +25,9 @@ final class GenerateImageViewModelTests: XCTestCase {
         let dummyThemes: [Theme] = [.cyberpunk, .nature]
         sut.selected(themes: dummyThemes)
         
-        await waitForGeneratedImage(in: sut)
+        await expectGeneratedImage(in: sut) {
+            sut.tappedGenerateImage()
+        }
         
         XCTAssertEqual(mockImageGenerator.passedImageQuery?.themes, dummyThemes)
     }
@@ -43,30 +35,23 @@ final class GenerateImageViewModelTests: XCTestCase {
     func test_tappedGenerateImage_withSuccess_setsImage() async {
         let sut = createSut()
         
-        await waitForGeneratedImage(in: sut)
+        await expectGeneratedImage(in: sut) {
+            sut.tappedGenerateImage()
+        }
         
         XCTAssertNil(sut.errorText)
         XCTAssertFalse(sut.isLoading)
     }
     
-    func test_tappedGenerateImage_withError_setsErrorText() {
+    func test_tappedGenerateImage_withError_setsErrorText() async {
         let mockImageGenerator = MockImageGenerator()
         let sut = createSut(imageGenerator: mockImageGenerator)
         
         mockImageGenerator.generateImageError = ImageGeneratingError.incompleteQuery
         
-        let expectation = XCTestExpectation(description: "sets error")
-        
-        sut.$errorText
-            .dropFirst()
-            .sink { _ in
-                expectation.fulfill()
-            }
-            .store(in: &subscriptions)
-        
-        sut.tappedGenerateImage()
-        
-        wait(for: [expectation], timeout: 0.1)
+        await expectError(in: sut) {
+            sut.tappedGenerateImage()
+        }
         
         XCTAssertNil(sut.generatedImage)
         XCTAssertFalse(sut.isLoading)
@@ -105,17 +90,25 @@ extension GenerateImageViewModelTests {
         GenerateImageViewModel(imageGenerator: imageGenerator)
     }
     
-    private func waitForGeneratedImage(in sut: GenerateImageViewModel) async {
-        let expectation = XCTestExpectation(description: "sets image")
+    private func expectError(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
+        await expectValue(from: sut.$errorText, action: action)
+    }
+    
+    private func expectGeneratedImage(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
+        await expectValue(from: sut.$generatedImage, action: action)
+    }
+    
+    private func expectValue<T>(from publisher: Published<T>.Publisher, action: @escaping () -> Void) async {
+        let expectation = XCTestExpectation(description: "sets value")
         
-        sut.$generatedImage
+        publisher
             .dropFirst()
             .sink { _ in
                 expectation.fulfill()
             }
             .store(in: &subscriptions)
         
-        sut.tappedGenerateImage()
+        action()
         
         await fulfillment(of: [expectation], timeout: 0.1)
     }
