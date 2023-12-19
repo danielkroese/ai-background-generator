@@ -3,37 +3,50 @@ import SwiftUI
 struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
     @ObservedObject private(set) var viewModel: ViewModel
     
-    @State var toolsOffset = -400.0
+    @State private var toolsOffset = -400.0
+    @State private var toolsDetent: PresentationDetent = .height(0)
     
     var body: some View {
-        ZStack {
-            if let errorText = viewModel.errorText {
-                Text(errorText)
-                    .foregroundStyle(Color.accentColor)
-                    .font(.headline)
+        background
+            .transition(.opacity)
+            .animation(.easeInOut, value: viewModel.generatedImage)
+            .sheet(isPresented: .constant(true)) {
+                VStack {
+                    HStack(spacing: 32) {
+                        generateButton
+                    }
                     .padding(32)
-            }
-            
-            VStack {
-                HStack(spacing: 32) {
-                    generateButton
+                    .frame(maxWidth: .infinity, maxHeight: 196, alignment: .trailing)
+                    
+                    if let errorText = viewModel.errorText {
+                        Text(errorText)
+                            .foregroundStyle(Color.accentColor)
+                            .font(.headline)
+                            .padding(32)
+                    }
                 }
-                .padding(32)
-                .frame(maxWidth: .infinity, maxHeight: 196, alignment: .topTrailing)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                .ignoresSafeArea()
+                .interactiveDismissDisabled()
+                .presentationContentInteraction(.scrolls)
+                .presentationDragIndicator(.hidden)
+                .presentationDetents([.height(120), .medium], selection: $toolsDetent)
+                .presentationCornerRadius(64)
+                .presentationBackgroundInteraction(.enabled)
+                .presentationBackground {
+                    BlurEffect(effect: .systemUltraThinMaterial)
+                }
             }
-            .blurBackground(effect: .systemThinMaterial)
-            .clipShape(RoundedRectangle(cornerRadius: 64))
-            .ignoresSafeArea()
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-            .offset(y: -toolsOffset)
-            .animation(.bouncy(duration: 1.0), value: toolsOffset)
             .onAppear {
-                toolsOffset = -86
+                withAnimation(.bouncy) {
+                    toolsDetent = .height(120)
+                }
             }
-        }
-        .background(background)
-        .transition(.opacity)
-        .animation(.easeInOut, value: viewModel.generatedImage)
+            .onTapGesture {
+                withAnimation(.bouncy) {
+                    toolsDetent = .height(120)
+                }
+            }
     }
     
     @ViewBuilder
@@ -71,6 +84,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             } else {
                 Image(.dummyBackground)
                     .resizable()
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .animatedHue(isActive: viewModel.isLoading)
                     .ignoresSafeArea()
                     .aspectRatio(contentMode: .fill)
@@ -80,6 +94,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
 //                    .ignoresSafeArea()
             }
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
         .transition(.opacity)
         .animation(.easeInOut, value: viewModel.generatedImage)
     }
