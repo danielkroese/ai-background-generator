@@ -13,7 +13,7 @@ final class GenerateImageViewModelTests: XCTestCase {
     func test_selectedTheme_withNoSelection_setsErrorText() async {
         let sut = createSut()
         
-        await expectError(in: sut) {
+        await expectedError(in: sut) {
             sut.selected(themes: [])
         }
     }
@@ -25,7 +25,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         let dummyThemes: [Theme] = [.cyberpunk, .nature]
         sut.selected(themes: dummyThemes)
         
-        await expectGeneratedImage(in: sut) {
+        await expectedGeneratedImage(in: sut) {
             sut.tappedGenerateImage()
         }
         
@@ -38,7 +38,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         sut.selected(color: .red)
         
-        await expectGeneratedImage(in: sut) {
+        await expectedGeneratedImage(in: sut) {
             sut.tappedGenerateImage()
         }
         
@@ -48,7 +48,7 @@ final class GenerateImageViewModelTests: XCTestCase {
     func test_tappedGenerateImage_withSuccess_setsImage() async {
         let sut = createSut()
         
-        await expectGeneratedImage(in: sut) {
+        await expectedGeneratedImage(in: sut) {
             sut.tappedGenerateImage()
         }
         
@@ -62,7 +62,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         mockImageGenerator.generateImageError = ImageGeneratingError.incompleteQuery
         
-        await expectError(in: sut) {
+        await expectedError(in: sut) {
             sut.tappedGenerateImage()
         }
         
@@ -103,15 +103,15 @@ extension GenerateImageViewModelTests {
         GenerateImageViewModel(imageGenerator: imageGenerator)
     }
     
-    private func expectError(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
-        await expectValue(from: sut.$errorText, action: action)
+    private func expectedError(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
+        await expectedValue(from: sut.$errorText, action: action)
     }
     
-    private func expectGeneratedImage(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
-        await expectValue(from: sut.$generatedImage, action: action)
+    private func expectedGeneratedImage(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
+        await expectedValue(from: sut.$generatedImage, action: action)
     }
     
-    private func expectValue<T>(from publisher: Published<T>.Publisher, action: @escaping () -> Void) async {
+    private func expectedValue<T>(from publisher: Published<T>.Publisher, action: @escaping () -> Void) async {
         let expectation = XCTestExpectation(description: "sets value")
         
         publisher
