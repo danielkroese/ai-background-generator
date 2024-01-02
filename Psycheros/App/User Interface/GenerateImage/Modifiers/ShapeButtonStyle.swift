@@ -7,7 +7,7 @@ struct ShapeButtonStyle<S: Shape>: ButtonStyle {
         configuration.label
             .padding(24)
             .foregroundStyle(.foreground.opacity(0.8))
-            .blurBackground(effect: .systemThinMaterial)
+            .background(.thinMaterial)
             .clipShape(shape)
             .opacity(configuration.isPressed ? 0.8 : 1.0)
             .shadowModifier(opacity: configuration.isPressed ? .zero : 0.1)

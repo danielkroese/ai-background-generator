@@ -52,7 +52,6 @@
 		65E034DC2B23CC18001B5F99 /* ImageDataParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E034DB2B23CC18001B5F99 /* ImageDataParserTests.swift */; };
 		65E034DD2B23CC9F001B5F99 /* ImageDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E034D92B23CC05001B5F99 /* ImageDataParser.swift */; };
 		65E034DF2B23D1A4001B5F99 /* SpyImageDataParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65E034DE2B23D1A4001B5F99 /* SpyImageDataParser.swift */; };
-		65F8219F2B2B8E6400B5F745 /* BlurEffectModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8219E2B2B8E6400B5F745 /* BlurEffectModifier.swift */; };
 		65F97E0C2AF669A000C0E501 /* PsycherosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */; };
 		65F97E0E2AF669A000C0E501 /* GenerateImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F97E0D2AF669A000C0E501 /* GenerateImageView.swift */; };
 		65F97E122AF669A100C0E501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F97E112AF669A100C0E501 /* Assets.xcassets */; };
@@ -106,7 +105,6 @@
 		65E034D92B23CC05001B5F99 /* ImageDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataParser.swift; sourceTree = "<group>"; };
 		65E034DB2B23CC18001B5F99 /* ImageDataParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDataParserTests.swift; sourceTree = "<group>"; };
 		65E034DE2B23D1A4001B5F99 /* SpyImageDataParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyImageDataParser.swift; sourceTree = "<group>"; };
-		65F8219E2B2B8E6400B5F745 /* BlurEffectModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlurEffectModifier.swift; sourceTree = "<group>"; };
 		65F97E082AF6699F00C0E501 /* Psycheros.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Psycheros.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F97E0B2AF669A000C0E501 /* PsycherosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PsycherosApp.swift; sourceTree = "<group>"; };
 		65F97E0D2AF669A000C0E501 /* GenerateImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImageView.swift; sourceTree = "<group>"; };
@@ -216,7 +214,6 @@
 			children = (
 				7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */,
 				6550CBDE2B2A2DFE00B27030 /* ShapeButtonStyle.swift */,
-				65F8219E2B2B8E6400B5F745 /* BlurEffectModifier.swift */,
 				7B9928E72B2F4047008667AB /* ShadowModifier.swift */,
 				7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */,
 			);
@@ -520,7 +517,6 @@
 				652406882AFEEB5C00AE193D /* NetworkResponseValidator.swift in Sources */,
 				65F97E0E2AF669A000C0E501 /* GenerateImageView.swift in Sources */,
 				65F97E0C2AF669A000C0E501 /* PsycherosApp.swift in Sources */,
-				65F8219F2B2B8E6400B5F745 /* BlurEffectModifier.swift in Sources */,
 				65250CB62AF7DA87006BB662 /* ImageQuery.swift in Sources */,
 				65B545E92AFD6D3000B75EDE /* Extensions.swift in Sources */,
 			);

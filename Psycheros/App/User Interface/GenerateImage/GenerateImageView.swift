@@ -4,7 +4,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
     @ObservedObject private(set) var viewModel: ViewModel
     
     @State private var toolsOffset = -400.0
-    @State private var toolsDetent: PresentationDetent = .height(0)
+    @State private var toolsDetent: PresentationDetent = .height(120)
     
     var body: some View {
         background
@@ -33,9 +33,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 .presentationDetents([.height(120), .medium], selection: $toolsDetent)
                 .presentationCornerRadius(64)
                 .presentationBackgroundInteraction(.enabled)
-                .presentationBackground {
-                    BlurEffect(effect: .systemUltraThinMaterial)
-                }
+                .presentationBackground(.ultraThinMaterial)
             }
             .onAppear {
                 withAnimation(.bouncy) {
