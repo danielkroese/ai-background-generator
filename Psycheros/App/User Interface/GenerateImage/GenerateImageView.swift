@@ -14,17 +14,15 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                         themeButton
                         generateButton
                     }
-                    .frame(maxWidth: .infinity, maxHeight: 196, alignment: .trailing)
                     
                     if let errorText = viewModel.errorText {
-                        Text(errorText)
-                            .foregroundStyle(Color.accentColor)
-                            .font(.headline)
+                        Text("Error: \(errorText)")
+                            .foregroundStyle(.primary)
+                            .font(.title)
                             .padding(32)
                     }
                 }
                 .padding(32)
-                .frame(maxHeight: 500, alignment: .top)
             }
     }
     
@@ -87,7 +85,6 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 }
             }
         }
-        .layoutPriority(1)
         .disabled(viewModel.isLoading)
         .buttonStyle(
             ShapeButtonStyle(
