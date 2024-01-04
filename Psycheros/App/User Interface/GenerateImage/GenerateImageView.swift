@@ -8,19 +8,70 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             .transition(.opacity)
             .animation(.easeInOut, value: viewModel.generatedImage)
             .toolSheet(isPresented: .constant(true)) {
-                HStack(spacing: 32) {
-                    generateButton
+                VStack {
+                    HStack(spacing: 16) {
+                        colorButton
+                        themeButton
+                        generateButton
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: 196, alignment: .trailing)
+                    
+                    if let errorText = viewModel.errorText {
+                        Text(errorText)
+                            .foregroundStyle(Color.accentColor)
+                            .font(.headline)
+                            .padding(32)
+                    }
                 }
                 .padding(32)
-                .frame(maxWidth: .infinity, maxHeight: 196, alignment: .trailing)
-                
-                if let errorText = viewModel.errorText {
-                    Text(errorText)
-                        .foregroundStyle(Color.accentColor)
-                        .font(.headline)
-                        .padding(32)
-                }
+                .frame(maxHeight: 500, alignment: .top)
             }
+    }
+    
+    private var colorButton: some View {
+        Button(action: { }) {
+            HStack(spacing: 16) {
+                Image(systemName: "paintbrush.fill")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+            }
+            .frame(maxWidth: .infinity, maxHeight: 32)
+        }
+        .disabled(viewModel.isLoading)
+        .buttonStyle(
+            ShapeButtonStyle(
+                shape: PillButtonShape(
+                    part: .leading,
+                    innerCornerRadius: 8,
+                    outerCornerRadius: 32
+                )
+            )
+        )
+        .transition(.scale)
+        .animation(.bouncy(duration: 0.5), value: viewModel.isLoading)
+    }
+    
+    private var themeButton: some View {
+        Button(action: { }) {
+            HStack(spacing: 16) {
+                Image(systemName: "scope")
+                    .resizable()
+                    .frame(width: 32, height: 32)
+            }
+            .frame(maxWidth: .infinity, maxHeight: 32)
+        }
+        .disabled(viewModel.isLoading)
+        .buttonStyle(
+            ShapeButtonStyle(
+                shape: PillButtonShape(
+                    part: .center,
+                    innerCornerRadius: 8,
+                    outerCornerRadius: 32
+                )
+            )
+        )
+        .transition(.scale)
+        .animation(.bouncy(duration: 0.5), value: viewModel.isLoading)
     }
     
     private var generateButton: some View {
@@ -32,9 +83,11 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 
                 if viewModel.isLoading {
                     Text("Loading...")
+                        .fixedSize()
                 }
             }
         }
+        .layoutPriority(1)
         .disabled(viewModel.isLoading)
         .buttonStyle(
             ShapeButtonStyle(
