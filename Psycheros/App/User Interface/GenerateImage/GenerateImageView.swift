@@ -3,6 +3,9 @@ import SwiftUI
 struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
     @ObservedObject private(set) var viewModel: ViewModel
     
+    @State private var selectedColor: Color = .blue
+    @State private var selectedThemes: [Theme] = []
+    
     var body: some View {
         background
             .transition(.opacity)
@@ -27,7 +30,9 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
     }
     
     private var colorButton: some View {
-        Button(action: { }) {
+        Button {
+            viewModel.selected(color: selectedColor)
+        } label: {
             HStack(spacing: 16) {
                 Image(systemName: "paintbrush.fill")
                     .resizable()
@@ -50,7 +55,9 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
     }
     
     private var themeButton: some View {
-        Button(action: { }) {
+        Button {
+            viewModel.selected(themes: selectedThemes)
+        } label:  {
             HStack(spacing: 16) {
                 Image(systemName: "scope")
                     .resizable()
