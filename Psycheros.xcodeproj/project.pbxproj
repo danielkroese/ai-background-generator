@@ -58,6 +58,7 @@
 		65FC2C272AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */; };
 		7B0CC2A42B30DFD000268FFF /* AnimatedHue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */; };
 		7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A96C62B475A1A00B9B112 /* GeoReader.swift */; };
+		7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A986A2B49A94900B9B112 /* Shimmer.swift */; };
 		7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E72B2F4047008667AB /* ShadowModifier.swift */; };
 		7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */; };
 		7BCB68F62B44AB5600CD700E /* ToolSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB68F52B44AB5600CD700E /* ToolSheet.swift */; };
@@ -117,6 +118,7 @@
 		65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtensions.swift; sourceTree = "<group>"; };
 		7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedHue.swift; sourceTree = "<group>"; };
 		7B7A96C62B475A1A00B9B112 /* GeoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReader.swift; sourceTree = "<group>"; };
+		7B7A986A2B49A94900B9B112 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		7B9928E72B2F4047008667AB /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonShape.swift; sourceTree = "<group>"; };
 		7BCB68F52B44AB5600CD700E /* ToolSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolSheet.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 				7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */,
 				6550CBDE2B2A2DFE00B27030 /* ShapeButtonStyle.swift */,
 				7BCB68F52B44AB5600CD700E /* ToolSheet.swift */,
+				7B7A986A2B49A94900B9B112 /* Shimmer.swift */,
 				7B9928E72B2F4047008667AB /* ShadowModifier.swift */,
 				7B7A96C62B475A1A00B9B112 /* GeoReader.swift */,
 				7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */,
@@ -508,6 +511,7 @@
 				7B0CC2A42B30DFD000268FFF /* AnimatedHue.swift in Sources */,
 				6524068F2AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
 				7BCB68F62B44AB5600CD700E /* ToolSheet.swift in Sources */,
+				7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */,
 				6550C7EE2B28F3E800B27030 /* GenerateImageViewModel.swift in Sources */,
 				65250CD42AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				65E034DA2B23CC05001B5F99 /* ImageDataParser.swift in Sources */,

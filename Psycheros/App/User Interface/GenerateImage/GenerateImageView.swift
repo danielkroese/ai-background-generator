@@ -105,6 +105,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
         )
         .transition(.scale)
         .animation(.bouncy(duration: 0.5), value: viewModel.isLoading)
+        .shimmer(viewModel.isLoading)
     }
     
     private var background: some View {
