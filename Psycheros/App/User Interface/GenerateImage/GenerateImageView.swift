@@ -84,6 +84,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             HStack(spacing: 16) {
                 Image(systemName: "wand.and.stars")
                     .resizable()
+                    .foregroundStyle(.blue)
                     .frame(width: 32, height: 32)
                 
                 if viewModel.isLoading {

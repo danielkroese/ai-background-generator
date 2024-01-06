@@ -22,7 +22,7 @@ struct ToolSheet<ToolsContent: View>: ViewModifier {
                     .presentationDetents([.height(sheetHeight)])
                     .presentationCornerRadius(64)
                     .presentationBackgroundInteraction(.enabled)
-                    .presentationBackground(.ultraThinMaterial)
+                    .presentationBackground(.clear)
                     .onAppear {
                         withAnimation {
                             isAnimated = true
