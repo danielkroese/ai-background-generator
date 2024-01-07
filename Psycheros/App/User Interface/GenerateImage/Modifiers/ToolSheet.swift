@@ -1,40 +1,26 @@
 import SwiftUI
 
 struct ToolSheet<ToolsContent: View>: ViewModifier {
-    @Binding var isPresented: Bool
+    let isPresented: Bool
     
     @ViewBuilder let toolsContent: () -> ToolsContent
     
-    @State private var sheetHeight = 0.0
-    @State private var isAnimated = false
-    
     func body(content: Content) -> some View {
-        content
-            .sheet(isPresented: $isPresented) {
-                toolsContent()
-                    .geometryReader { geometry in
-                        if isAnimated {
-                            sheetHeight = geometry.size.height
-                        }
-                    }
-                    .interactiveDismissDisabled()
-                    .presentationDragIndicator(.hidden)
-                    .presentationDetents([.height(sheetHeight)])
-                    .presentationCornerRadius(64)
-                    .presentationBackgroundInteraction(.enabled)
-                    .presentationBackground(.clear)
-                    .onAppear {
-                        withAnimation {
-                            isAnimated = true
-                        }
-                    }
-            }
+        ZStack {
+            content
+            
+            toolsContent()
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+                .offset(y: isPresented ? .zero : 350.0)
+                .transition(.scale)
+                .animation(.bouncy(duration: 1.5), value: isPresented)
+        }
     }
 }
 
 extension View {
     func toolSheet(
-        isPresented: Binding<Bool>,
+        isPresented: Bool,
         @ViewBuilder toolsContent: @escaping () -> some View
     ) -> some View {
         self.modifier(ToolSheet(isPresented: isPresented, toolsContent: toolsContent))
@@ -43,7 +29,7 @@ extension View {
 
 #Preview {
     Text("Hello, world!")
-        .toolSheet(isPresented: .constant(true)) {
+        .toolSheet(isPresented: true) {
             HStack(spacing: 32) {
                 Text("Here be some tools!")
             }

@@ -3,6 +3,7 @@ import SwiftUI
 struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
     @ObservedObject private(set) var viewModel: ViewModel
     
+    @State private var isShowingTools = false
     @State private var selectedColor: Color = .blue
     @State private var selectedThemes: [Theme] = []
     
@@ -10,22 +11,25 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
         background
             .transition(.opacity)
             .animation(.easeInOut, value: viewModel.generatedImage)
-            .toolSheet(isPresented: .constant(true)) {
+            .toolSheet(isPresented: isShowingTools) {
                 VStack {
-                    HStack(spacing: 16) {
-                        colorButton
-                        themeButton
-                        generateButton
-                    }
-                    
                     if let errorText = viewModel.errorText {
                         Text("Error: \(errorText)")
                             .foregroundStyle(.primary)
                             .font(.title)
                             .padding(32)
                     }
+                    
+                    HStack(spacing: 16) {
+                        colorButton
+                        themeButton
+                        generateButton
+                    }
                 }
-                .padding(32)
+                .padding(.horizontal, 32)
+            }
+            .onAppear {
+                isShowingTools = true
             }
     }
     
