@@ -1,37 +1,26 @@
 import SwiftUI
 
-struct PillButton: View {
-    let rounded: PillButtonPart
-    let imageName: String
-    let action: () -> Void
-    
-    var body: some View {
-        Button(action: action) {
-            HStack(spacing: 16) {
-                Image(systemName: imageName)
-                    .resizable()
-                    .frame(width: 32, height: 32)
-            }
-            .frame(maxWidth: .infinity, maxHeight: 32)
-        }
-        .buttonStyle(
-            ShapeButtonStyle(
-                shape: PillButtonShape(
-                    rounded: rounded,
-                    innerCornerRadius: 8,
-                    outerCornerRadius: 32
-                )
-            )
-        )
-    }
-}
-
-struct LoadingPillButton: View {
+struct PillButton<Label>: View where Label: View{
     let rounded: PillButtonPart
     let imageName: String
     let isLoading: Bool
-    var loadingText: String? = nil
     let action: () -> Void
+    
+    @ViewBuilder let label: () -> Label
+    
+    init(
+        rounded: PillButtonPart,
+        imageName: String,
+        isLoading: Bool = false,
+        action: @escaping () -> Void,
+        @ViewBuilder label: @escaping () -> Label = { EmptyView() }
+    ) {
+        self.rounded = rounded
+        self.imageName = imageName
+        self.isLoading = isLoading
+        self.action = action
+        self.label = label
+    }
     
     var body: some View {
         Button(action: action) {
@@ -40,10 +29,7 @@ struct LoadingPillButton: View {
                     .resizable()
                     .frame(width: 32, height: 32)
                 
-                if isLoading, let loadingText {
-                    Text(loadingText)
-                        .fixedSize()
-                }
+                label()
             }
             .frame(maxWidth: .infinity, maxHeight: 32)
         }

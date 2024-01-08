@@ -39,13 +39,17 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 }
                 .disabled(viewModel.isLoading)
                 
-                LoadingPillButton(
+                PillButton(
                     rounded: .trailing,
                     imageName: "wand.and.stars",
-                    isLoading: viewModel.isLoading,
-                    loadingText: "Loading..."
+                    isLoading: viewModel.isLoading
                 ) {
                     viewModel.tappedGenerateImage()
+                } label: {
+                    if viewModel.isLoading {
+                        Text("Loading...")
+                            .fixedSize()
+                    }
                 }
                 .disabled(viewModel.isLoading)
             }
