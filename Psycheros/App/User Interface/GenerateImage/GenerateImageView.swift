@@ -17,6 +17,9 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             .onAppear {
                 isShowingTools = true
             }
+            .onTapGesture {
+                isShowingTools.toggle()
+            }
     }
     
     private var toolsContent: some View {

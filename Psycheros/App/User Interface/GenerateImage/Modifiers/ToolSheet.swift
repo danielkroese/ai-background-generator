@@ -5,15 +5,18 @@ struct ToolSheet<ToolsContent: View>: ViewModifier {
     
     @ViewBuilder let toolsContent: () -> ToolsContent
     
+    @State var toolsHeight = 0.0
+    
     func body(content: Content) -> some View {
         ZStack {
             content
             
             toolsContent()
+                .geometryReader { toolsHeight = $0.size.height }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .offset(y: isPresented ? .zero : 350.0)
+                .offset(y: isPresented ? .zero : 2 * toolsHeight)
                 .transition(.scale)
-                .animation(.bouncy(duration: 1.5), value: isPresented)
+                .animation(.bouncy(duration: 1.0), value: isPresented)
         }
     }
 }
