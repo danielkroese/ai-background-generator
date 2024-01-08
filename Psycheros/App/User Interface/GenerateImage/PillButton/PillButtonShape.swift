@@ -56,7 +56,7 @@ struct PillButtonShape: Shape {
 
 #Preview {
     HStack(spacing: 8) {
-        ForEach(PillButton.Part.allCases, id: \.hashValue) { part in
+        ForEach(PillButtonPart.allCases, id: \.hashValue) { part in
             Button(action: { return }) {
                 Text("Part")
             }
