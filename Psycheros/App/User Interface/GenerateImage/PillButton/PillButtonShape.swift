@@ -1,14 +1,7 @@
 import SwiftUI
 
 struct PillButtonShape: Shape {
-    enum Part: CaseIterable {
-        case leading,
-             center,
-             trailing,
-             all
-    }
-    
-    let part: Part
+    let rounded: PillButtonPart
     let innerCornerRadius: Double
     let outerCornerRadius: Double
     
@@ -21,7 +14,7 @@ struct PillButtonShape: Shape {
     }
     
     private var cornerRadii: RectangleCornerRadii {
-        switch part {
+        switch rounded {
         case .leading:
             RectangleCornerRadii(
                 topLeading: outerCornerRadius,
@@ -50,17 +43,24 @@ struct PillButtonShape: Shape {
                 bottomTrailing: outerCornerRadius,
                 topTrailing: outerCornerRadius
             )
+        case .none:
+            RectangleCornerRadii(
+                topLeading: innerCornerRadius,
+                bottomLeading: innerCornerRadius,
+                bottomTrailing: innerCornerRadius,
+                topTrailing: innerCornerRadius
+            )
         }
     }
 }
 
 #Preview {
     HStack(spacing: 8) {
-        ForEach(PillButtonShape.Part.allCases, id: \.hashValue) { part in
+        ForEach(PillButton.Part.allCases, id: \.hashValue) { part in
             Button(action: { return }) {
                 Text("Part")
             }
-            .buttonStyle(ShapeButtonStyle(shape: PillButtonShape(part: part, innerCornerRadius: 8, outerCornerRadius: 32)))
+            .buttonStyle(ShapeButtonStyle(shape: PillButtonShape(rounded: part, innerCornerRadius: 8, outerCornerRadius: 32)))
         }
     }
     .frame(maxWidth: .infinity, maxHeight: .infinity)
