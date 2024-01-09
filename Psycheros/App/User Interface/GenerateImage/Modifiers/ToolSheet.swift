@@ -16,7 +16,7 @@ struct ToolSheet<ToolsContent: View>: ViewModifier {
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
                 .offset(y: isPresented ? .zero : 2 * toolsHeight)
                 .transition(.scale)
-                .animation(.bouncy(duration: 1.0), value: isPresented)
+                .animation(.bouncy, value: isPresented)
         }
     }
 }
