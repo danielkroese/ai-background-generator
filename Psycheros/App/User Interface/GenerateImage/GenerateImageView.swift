@@ -4,6 +4,9 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
     @ObservedObject private(set) var viewModel: ViewModel
     
     @State private var isShowingTools = false
+    @State private var isShowingColors = false
+    @State private var isShowingThemes = false
+    
     @State private var selectedColor: Color = .blue
     @State private var selectedThemes: [Theme] = []
     
@@ -14,11 +17,19 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             .toolSheet(isPresented: isShowingTools) {
                 toolsContent
             }
+            .modal(isPresented: isShowingColors) {
+                Text("Colors go here")
+            }
+            .modal(isPresented: isShowingThemes) {
+                Text("Themes go here")
+            }
             .onAppear {
                 isShowingTools = true
             }
             .onTapGesture {
-                isShowingTools.toggle()
+                if viewModel.isLoading == false {
+                    isShowingTools.toggle()
+                }
             }
     }
     
@@ -33,12 +44,14 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             
             HStack(spacing: 16) {
                 PillButton(rounded: .leading, imageName: "paintbrush.fill") {
-                    viewModel.selected(color: selectedColor)
+                    isShowingColors.toggle()
+//                    viewModel.selected(color: selectedColor)
                 }
                 .disabled(viewModel.isLoading)
                 
                 PillButton(rounded: .center, imageName: "scope") {
-                    viewModel.selected(themes: selectedThemes)
+                    isShowingThemes.toggle()
+//                    viewModel.selected(themes: selectedThemes)
                 }
                 .disabled(viewModel.isLoading)
                 
