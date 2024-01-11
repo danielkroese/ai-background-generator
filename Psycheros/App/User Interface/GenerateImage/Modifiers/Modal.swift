@@ -6,12 +6,12 @@ struct Modal<ModalContent: View>: ViewModifier {
     @ViewBuilder let modalContent: () -> ModalContent
     
     @State private var modalContentSize: CGSize = .zero
-    @State private var contentHeight = 0.0
+    @State private var contentSize: CGSize = .zero
     
     func body(content: Content) -> some View {
         ZStack {
             content
-                .geometryReader { contentHeight = $0.size.height }
+                .geometryReader { contentSize = $0.size }
             
             RoundedRectangle(cornerRadius: 24)
                 .fill(.background)
@@ -21,13 +21,16 @@ struct Modal<ModalContent: View>: ViewModifier {
                 )
                 .overlay {
                     modalContent()
-                        .padding(32)
+                        .frame(
+                            maxWidth: contentSize.width,
+                            maxHeight: contentSize.height
+                        )
                         .fixedSize()
                         .geometryReader { modalContentSize = $0.size }
                 }
                 .transition(.scale)
                 .animation(.bouncy, value: isPresented)
-                .offset(y: isPresented ? .zero : contentHeight)
+                .offset(y: isPresented ? .zero : contentSize.height)
                 .shadowModifier()
         }
     }

@@ -1,5 +1,31 @@
 import SwiftUI
 
+enum AllowedColor: String, CaseIterable {
+    case red, blue, green, black, white,
+         gray, yellow, orange, pink, purple,
+         teal, mint, indigo, brown, cyan
+
+    var suiColor: Color {
+        switch self {
+        case .red: return .red
+        case .blue: return .blue
+        case .green: return .green
+        case .black: return .black
+        case .white: return .white
+        case .gray: return .gray
+        case .yellow: return .yellow
+        case .orange: return .orange
+        case .pink: return .pink
+        case .purple: return .purple
+        case .teal: return .teal
+        case .mint: return .mint
+        case .indigo: return .indigo
+        case .brown: return .brown
+        case .cyan: return .cyan
+        }
+    }
+}
+
 struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
     @ObservedObject private(set) var viewModel: ViewModel
     
@@ -18,10 +44,14 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 toolsContent
             }
             .modal(isPresented: isShowingColors) {
-                Text("Colors go here")
+                ColorModalContent { color in
+                    viewModel.selected(color: color)
+                    isShowingColors = false
+                }
             }
             .modal(isPresented: isShowingThemes) {
                 Text("Themes go here")
+                    .padding(32)
             }
             .onAppear {
                 isShowingTools = true
@@ -31,6 +61,32 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                     isShowingTools.toggle()
                 }
             }
+    }
+    
+    private struct ColorModalContent: View {
+        let action: (String) -> Void
+        
+        private var columnItems: [GridItem] {
+            Array(repeating: GridItem(.flexible()), count: 3)
+        }
+        
+        var body: some View {
+            ScrollView {
+                LazyVGrid(columns: columnItems, spacing: 32) {
+                    ForEach(AllowedColor.allCases, id: \.self) { color in
+                        Button {
+                            action(color.rawValue)
+                        } label: {
+                            RoundedRectangle(cornerRadius: 32)
+                                .fill(color.suiColor)
+                                .frame(width: 64, height: 64)
+                                .shadowModifier()
+                        }
+                    }
+                }
+                .padding(32)
+            }
+        }
     }
     
     private var toolsContent: some View {
@@ -45,13 +101,11 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             HStack(spacing: 16) {
                 PillButton(rounded: .leading, imageName: "paintbrush.fill") {
                     isShowingColors.toggle()
-//                    viewModel.selected(color: selectedColor)
                 }
                 .disabled(viewModel.isLoading)
                 
                 PillButton(rounded: .center, imageName: "scope") {
                     isShowingThemes.toggle()
-//                    viewModel.selected(themes: selectedThemes)
                 }
                 .disabled(viewModel.isLoading)
                 
@@ -64,7 +118,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 } label: {
                     if viewModel.isLoading {
                         Text("Loading...")
-                            .fixedSize()
+                            .fixedSize(horizontal: true, vertical: false)
                     }
                 }
                 .disabled(viewModel.isLoading)

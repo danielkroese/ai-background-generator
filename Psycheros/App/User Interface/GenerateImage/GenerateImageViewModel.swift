@@ -7,7 +7,7 @@ protocol GenerateImageViewModeling: ObservableObject {
     var generatedImage: Image? { get }
     
     func selected(themes: [Theme])
-    func selected(color: Color)
+    func selected(color: String)
     func tappedGenerateImage()
 }
 
@@ -43,8 +43,8 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         imageQuery.themes = themes
     }
     
-    func selected(color: Color) {
-        imageQuery.color = color.description
+    func selected(color: String) {
+        imageQuery.color = color
     }
     
     func tappedGenerateImage() {

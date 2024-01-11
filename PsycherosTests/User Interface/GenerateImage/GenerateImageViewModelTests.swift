@@ -36,7 +36,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         let mockImageGenerator = MockImageGenerator()
         let sut = createSut(imageGenerator: mockImageGenerator)
         
-        sut.selected(color: .red)
+        sut.selected(color: "red")
         
         await expectedGeneratedImage(in: sut) {
             sut.tappedGenerateImage()
