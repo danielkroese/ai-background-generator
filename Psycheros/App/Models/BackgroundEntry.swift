@@ -21,10 +21,3 @@ final class BackgroundEntry {
         self.motivationalTexts = motivationalTexts
     }
 }
-
-enum Theme: String, Codable, Equatable {
-    case space,
-         island,
-         nature,
-         cyberpunk
-}

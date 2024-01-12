@@ -58,6 +58,9 @@
 		65FC2C272AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */; };
 		7B0301712B4F33D1005DD8DC /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0301702B4F33D1005DD8DC /* Modal.swift */; };
 		7B0CC2A42B30DFD000268FFF /* AnimatedHue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */; };
+		7B0F26EB2B51D7B80037F32D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F26EA2B51D7B80037F32D /* Theme.swift */; };
+		7B0F26EC2B51D7C20037F32D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F26EA2B51D7B80037F32D /* Theme.swift */; };
+		7B0F26EE2B51D7D60037F32D /* AllowedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F26ED2B51D7D60037F32D /* AllowedColor.swift */; };
 		7B3C1B5A2B4C8EC10009409B /* PillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C1B592B4C8EC10009409B /* PillButton.swift */; };
 		7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A96C62B475A1A00B9B112 /* GeoReader.swift */; };
 		7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A986A2B49A94900B9B112 /* Shimmer.swift */; };
@@ -120,6 +123,8 @@
 		65FC2C262AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestCaseExtensions.swift; sourceTree = "<group>"; };
 		7B0301702B4F33D1005DD8DC /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedHue.swift; sourceTree = "<group>"; };
+		7B0F26EA2B51D7B80037F32D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		7B0F26ED2B51D7D60037F32D /* AllowedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedColor.swift; sourceTree = "<group>"; };
 		7B3C1B592B4C8EC10009409B /* PillButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButton.swift; sourceTree = "<group>"; };
 		7B7A96C62B475A1A00B9B112 /* GeoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReader.swift; sourceTree = "<group>"; };
 		7B7A986A2B49A94900B9B112 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
@@ -383,6 +388,8 @@
 			isa = PBXGroup;
 			children = (
 				65F97E0F2AF669A000C0E501 /* BackgroundEntry.swift */,
+				7B0F26EA2B51D7B80037F32D /* Theme.swift */,
+				7B0F26ED2B51D7D60037F32D /* AllowedColor.swift */,
 				65250CB52AF7DA87006BB662 /* ImageQuery.swift */,
 			);
 			path = Models;
@@ -539,8 +546,10 @@
 				65250CD72AF8346B006BB662 /* ImageService.swift in Sources */,
 				7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */,
 				65B545E62AFD6A3100B75EDE /* ImageRequestModelImageSize.swift in Sources */,
+				7B0F26EB2B51D7B80037F32D /* Theme.swift in Sources */,
 				652406802AFEBE7B00AE193D /* NetworkSession.swift in Sources */,
 				6550CBDF2B2A2DFE00B27030 /* ShapeButtonStyle.swift in Sources */,
+				7B0F26EE2B51D7D60037F32D /* AllowedColor.swift in Sources */,
 				652406882AFEEB5C00AE193D /* NetworkResponseValidator.swift in Sources */,
 				65F97E0E2AF669A000C0E501 /* GenerateImageView.swift in Sources */,
 				7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */,
@@ -570,6 +579,7 @@
 				6550C7EF2B28F3E800B27030 /* GenerateImageViewModel.swift in Sources */,
 				652406862AFEC4C100AE193D /* MockNetworkSession.swift in Sources */,
 				65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
+				7B0F26EC2B51D7C20037F32D /* Theme.swift in Sources */,
 				6524068B2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift in Sources */,
 				652406902AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
 				65E034DD2B23CC9F001B5F99 /* ImageDataParser.swift in Sources */,
