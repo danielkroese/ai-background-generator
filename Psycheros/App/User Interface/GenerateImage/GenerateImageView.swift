@@ -3,36 +3,57 @@ import SwiftUI
 struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
     @ObservedObject private(set) var viewModel: ViewModel
     
-    @State private var isShowingTools = false
-    @State private var isShowingColors = false
-    @State private var isShowingThemes = false
+    private enum Subview {
+        case tools, colors, themes
+    }
     
     @State private var selectedColor: Color = .blue
     @State private var selectedThemes: [Theme] = []
+    @State private var visibleSubviews = Set<Subview>()
+    
+    private func isPresenting(_ subview: Subview) -> Bool {
+        visibleSubviews.contains(subview)
+    }
+    
+    private func present(_ subview: Subview) {
+        visibleSubviews.insert(subview)
+    }
+    
+    private func dismiss(_ subview: Subview) {
+        visibleSubviews.remove(subview)
+    }
+    
+    private func toggle(_ subview: Subview) {
+        if isPresenting(subview) {
+            dismiss(subview)
+        } else {
+            present(subview)
+        }
+    }
     
     var body: some View {
         background
             .transition(.opacity)
             .animation(.easeInOut, value: viewModel.generatedImage)
-            .toolSheet(isPresented: isShowingTools) {
+            .toolSheet(isPresented: isPresenting(.tools)) {
                 toolsContent
             }
-            .modal(isPresented: isShowingColors) {
+            .modal(isPresented: isPresenting(.colors)) {
                 ColorModalContent { color in
                     viewModel.selected(color: color)
-                    isShowingColors = false
+                    dismiss(.colors)
                 }
             }
-            .modal(isPresented: isShowingThemes) {
+            .modal(isPresented: isPresenting(.themes)) {
                 Text("Themes go here")
                     .padding(32)
             }
             .onAppear {
-                isShowingTools = true
+                present(.tools)
             }
             .onTapGesture {
                 if viewModel.isLoading == false {
-                    isShowingTools.toggle()
+                    toggle(.tools)
                 }
             }
     }
@@ -74,12 +95,12 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             
             HStack(spacing: 16) {
                 PillButton(rounded: .leading, imageName: "paintbrush.fill") {
-                    isShowingColors.toggle()
+                    toggle(.colors)
                 }
                 .disabled(viewModel.isLoading)
                 
                 PillButton(rounded: .center, imageName: "scope") {
-                    isShowingThemes.toggle()
+                    toggle(.themes)
                 }
                 .disabled(viewModel.isLoading)
                 
