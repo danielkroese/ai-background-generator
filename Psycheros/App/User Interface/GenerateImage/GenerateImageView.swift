@@ -11,26 +11,6 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
     @State private var selectedThemes: [Theme] = []
     @State private var visibleSubviews = Set<Subview>()
     
-    private func isPresenting(_ subview: Subview) -> Bool {
-        visibleSubviews.contains(subview)
-    }
-    
-    private func present(_ subview: Subview) {
-        visibleSubviews.insert(subview)
-    }
-    
-    private func dismiss(_ subview: Subview) {
-        visibleSubviews.remove(subview)
-    }
-    
-    private func toggle(_ subview: Subview) {
-        if isPresenting(subview) {
-            dismiss(subview)
-        } else {
-            present(subview)
-        }
-    }
-    
     var body: some View {
         background
             .transition(.opacity)
@@ -45,8 +25,9 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 }
             }
             .modal(isPresented: isPresenting(.themes)) {
-                Text("Themes go here")
-                    .padding(32)
+                ThemeModalContent { themes in
+                    viewModel.selected(themes: themes)
+                }
             }
             .onAppear {
                 present(.tools)
@@ -56,6 +37,22 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                     toggle(.tools)
                 }
             }
+    }
+    
+    private func isPresenting(_ subview: Subview) -> Bool {
+        visibleSubviews.contains(subview)
+    }
+    
+    private func present(_ subview: Subview) {
+        visibleSubviews.insert(subview)
+    }
+    
+    private func dismiss(_ subview: Subview) {
+        visibleSubviews.remove(subview)
+    }
+    
+    private func toggle(_ subview: Subview) {
+        visibleSubviews.toggle(subview)
     }
     
     private struct ColorModalContent: View {
@@ -75,6 +72,42 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                             RoundedRectangle(cornerRadius: 32)
                                 .fill(color.suiColor)
                                 .frame(width: 64, height: 64)
+                                .shadowModifier()
+                        }
+                    }
+                }
+                .padding(32)
+            }
+        }
+    }
+    
+    private struct ThemeModalContent: View {
+        let action: ([Theme]) -> Void
+        
+        @State var selectedThemes = Set<Theme>()
+        
+        private var columnItems: [GridItem] {
+            Array(repeating: GridItem(.flexible()), count: 2)
+        }
+        
+        private func strokeBorder(for theme: Theme) -> Color {
+            selectedThemes.contains(theme) ? .accentColor : .clear
+        }
+        
+        var body: some View {
+            ScrollView {
+                LazyVGrid(columns: columnItems, spacing: 32) {
+                    ForEach(Theme.allCases, id: \.self) { theme in
+                        Button {
+                            selectedThemes.toggle(theme)
+                        } label: {
+                            RoundedRectangle(cornerRadius: 32)
+                                .strokeBorder(strokeBorder(for: theme))
+                                .frame(width: 128, height: 76)
+                                .overlay {
+                                    Text(theme.rawValue)
+                                        .font(.title2)
+                                }
                                 .shadowModifier()
                         }
                     }
@@ -147,4 +180,14 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
 
 #Preview {
     GenerateImageView(viewModel: GenerateImageViewModel())
+}
+
+extension Set {
+    mutating func toggle(_ element: Element) {
+        if contains(element) {
+            remove(element)
+        } else {
+            insert(element)
+        }
+    }
 }

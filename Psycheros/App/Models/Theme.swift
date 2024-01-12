@@ -1,4 +1,4 @@
-enum Theme: String, Codable, Equatable {
+enum Theme: String, Codable, Equatable, CaseIterable {
     case space,
          island,
          nature,
