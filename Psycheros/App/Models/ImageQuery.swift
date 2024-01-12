@@ -2,7 +2,7 @@ import Foundation
 
 struct ImageQuery: Equatable {
     var color: String
-    var themes: [Theme]
+    var themes: Set<Theme>
     var size: ImageRequestModel.ImageSize
     
     var isEmpty: Bool {

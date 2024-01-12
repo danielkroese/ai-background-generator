@@ -59,7 +59,7 @@ extension ImageGeneratorTests {
     
     private func createQuery(
         color: String = "yellow",
-        themes: [Theme] = [.island],
+        themes: Set<Theme> = [.island],
         size: ImageRequestModel.ImageSize = .size1024x1024
     ) -> ImageQuery {
         ImageQuery(color: color, themes: themes, size: size)

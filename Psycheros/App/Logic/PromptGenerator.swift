@@ -25,7 +25,7 @@ struct PromptGenerator: PromptGenerating {
         "in an iphone portrait ratio"
     }
     
-    private static func parse(themes: [Theme]) -> String {
+    private static func parse(themes: Set<Theme>) -> String {
         let strings = themes.map { theme in
             return switch theme {
             case .space:

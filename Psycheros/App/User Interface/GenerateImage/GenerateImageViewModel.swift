@@ -6,7 +6,7 @@ protocol GenerateImageViewModeling: ObservableObject {
     var errorText: String? { get }
     var generatedImage: Image? { get }
     
-    func selected(themes: [Theme])
+    func selected(themes: Set<Theme>)
     func selected(color: String)
     func tappedGenerateImage()
 }
@@ -34,7 +34,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         imageTask?.cancel()
     }
     
-    func selected(themes: [Theme]) {
+    func selected(themes: Set<Theme>) {
         guard themes.isEmpty == false else {
             errorText = "Theme required"
             return

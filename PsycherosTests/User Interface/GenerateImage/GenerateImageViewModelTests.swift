@@ -22,7 +22,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         let mockImageGenerator = MockImageGenerator()
         let sut = createSut(imageGenerator: mockImageGenerator)
         
-        let dummyThemes: [Theme] = [.cyberpunk, .nature]
+        let dummyThemes: Set<Theme> = [.cyberpunk, .nature]
         sut.selected(themes: dummyThemes)
         
         await expectedGeneratedImage(in: sut) {
