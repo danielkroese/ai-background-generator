@@ -3,13 +3,9 @@ import SwiftUI
 struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
     @ObservedObject private(set) var viewModel: ViewModel
     
-    private enum Subview {
-        case tools, colors, themes
-    }
-    
     @State private var selectedColor: AllowedColor = .blue
     @State private var selectedThemes = Set<Theme>()
-    @State private var visibleSubviews = Set<Subview>()
+    @State private var visibleSubviews = Set<GenerateImageSubview>()
     
     var body: some View {
         background
@@ -99,19 +95,19 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
         .animation(.easeInOut, value: viewModel.generatedImage)
     }
     
-    private func isPresenting(_ subview: Subview) -> Bool {
+    private func isPresenting(_ subview: GenerateImageSubview) -> Bool {
         visibleSubviews.contains(subview)
     }
     
-    private func present(_ subview: Subview) {
+    private func present(_ subview: GenerateImageSubview) {
         visibleSubviews.insert(subview)
     }
     
-    private func dismiss(_ subview: Subview) {
+    private func dismiss(_ subview: GenerateImageSubview) {
         visibleSubviews.remove(subview)
     }
     
-    private func toggle(_ subview: Subview) {
+    private func toggle(_ subview: GenerateImageSubview) {
         visibleSubviews.toggle(subview)
     }
     

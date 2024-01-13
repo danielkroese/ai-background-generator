@@ -59,6 +59,9 @@
 		7B0301712B4F33D1005DD8DC /* Modal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0301702B4F33D1005DD8DC /* Modal.swift */; };
 		7B042D742B52A1A700385BD8 /* ColorModalContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B042D732B52A1A700385BD8 /* ColorModalContent.swift */; };
 		7B042D762B52A1CA00385BD8 /* ThemeModalContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B042D752B52A1CA00385BD8 /* ThemeModalContent.swift */; };
+		7B042D792B52D78800385BD8 /* GenerateImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B042D772B52D78300385BD8 /* GenerateImageRouter.swift */; };
+		7B042D7B2B52D82B00385BD8 /* GenerateImageRouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B042D7A2B52D82B00385BD8 /* GenerateImageRouterTests.swift */; };
+		7B042D7C2B52D88E00385BD8 /* GenerateImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B042D772B52D78300385BD8 /* GenerateImageRouter.swift */; };
 		7B0CC2A42B30DFD000268FFF /* AnimatedHue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */; };
 		7B0F26EB2B51D7B80037F32D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F26EA2B51D7B80037F32D /* Theme.swift */; };
 		7B0F26EC2B51D7C20037F32D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F26EA2B51D7B80037F32D /* Theme.swift */; };
@@ -126,6 +129,8 @@
 		7B0301702B4F33D1005DD8DC /* Modal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modal.swift; sourceTree = "<group>"; };
 		7B042D732B52A1A700385BD8 /* ColorModalContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorModalContent.swift; sourceTree = "<group>"; };
 		7B042D752B52A1CA00385BD8 /* ThemeModalContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeModalContent.swift; sourceTree = "<group>"; };
+		7B042D772B52D78300385BD8 /* GenerateImageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImageRouter.swift; sourceTree = "<group>"; };
+		7B042D7A2B52D82B00385BD8 /* GenerateImageRouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateImageRouterTests.swift; sourceTree = "<group>"; };
 		7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedHue.swift; sourceTree = "<group>"; };
 		7B0F26EA2B51D7B80037F32D /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		7B0F26ED2B51D7D60037F32D /* AllowedColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllowedColor.swift; sourceTree = "<group>"; };
@@ -224,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				6550C7F22B28F43900B27030 /* GenerateImageViewModelTests.swift */,
+				7B042D7A2B52D82B00385BD8 /* GenerateImageRouterTests.swift */,
 			);
 			path = GenerateImage;
 			sourceTree = "<group>";
@@ -306,6 +312,7 @@
 				7B3C1B582B4C8EB80009409B /* PillButton */,
 				6550CBDD2B2A2C1300B27030 /* Modifiers */,
 				65F97E0D2AF669A000C0E501 /* GenerateImageView.swift */,
+				7B042D772B52D78300385BD8 /* GenerateImageRouter.swift */,
 				6550C7ED2B28F3E800B27030 /* GenerateImageViewModel.swift */,
 			);
 			path = GenerateImage;
@@ -550,6 +557,7 @@
 				7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */,
 				6550C7EE2B28F3E800B27030 /* GenerateImageViewModel.swift in Sources */,
 				65250CD42AF83425006BB662 /* PromptGenerator.swift in Sources */,
+				7B042D7C2B52D88E00385BD8 /* GenerateImageRouter.swift in Sources */,
 				65E034DA2B23CC05001B5F99 /* ImageDataParser.swift in Sources */,
 				659A92CF2AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
 				7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */,
@@ -582,6 +590,7 @@
 				65FC2C272AFC2F5900ED4EA3 /* XCTestCaseExtensions.swift in Sources */,
 				65E034DF2B23D1A4001B5F99 /* SpyImageDataParser.swift in Sources */,
 				652406812AFEBE7B00AE193D /* NetworkSession.swift in Sources */,
+				7B042D792B52D78800385BD8 /* GenerateImageRouter.swift in Sources */,
 				65250CD52AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				65250CDA2AF83491006BB662 /* PromptGeneratorTests.swift in Sources */,
 				65AA66942AF7B2A600C2BCD6 /* BackgroundEntry.swift in Sources */,
@@ -589,6 +598,7 @@
 				65250CC02AF7F3D2006BB662 /* ImageGeneratorTests.swift in Sources */,
 				65B545EA2AFD6D3000B75EDE /* Extensions.swift in Sources */,
 				65250CD82AF8346B006BB662 /* ImageService.swift in Sources */,
+				7B042D7B2B52D82B00385BD8 /* GenerateImageRouterTests.swift in Sources */,
 				659A92D02AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
 				65B545E72AFD6A6A00B75EDE /* ImageRequestModelImageSize.swift in Sources */,
 				65B545E42AFD600E00B75EDE /* ImageRequestModelTests.swift in Sources */,
