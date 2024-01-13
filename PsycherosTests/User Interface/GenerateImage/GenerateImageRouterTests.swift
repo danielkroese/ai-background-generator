@@ -44,6 +44,13 @@ final class GenerateImageRouterTests: XCTestCase {
         
         XCTAssertEqual(sut.presentedSubviews, [.tools])
     }
+    
+    func test_isPresenting() {
+        let sut = createSut(initialSubviews: [.colors])
+        
+        XCTAssertTrue(sut.isPresenting(.colors))
+        XCTAssertFalse(sut.isPresenting(.themes))
+    }
 }
 
 // MARK: - Test helpers

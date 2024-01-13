@@ -1,31 +1,31 @@
 import SwiftUI
 
-struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
+struct GenerateImageView<ViewModel, Router>: View where ViewModel: GenerateImageViewModeling & ObservableObject, Router: GenerateImageRouting {
     @ObservedObject private(set) var viewModel: ViewModel
+    @ObservedObject private(set) var router: Router
     
     @State private var selectedColor: AllowedColor = .blue
     @State private var selectedThemes = Set<Theme>()
-    @State private var visibleSubviews = Set<GenerateImageSubview>()
     
     var body: some View {
         background
             .transition(.opacity)
             .animation(.easeInOut, value: viewModel.generatedImage)
-            .toolSheet(isPresented: isPresenting(.tools)) {
+            .toolSheet(isPresented: router.isPresenting(.tools)) {
                 toolsContent
             }
-            .modal(isPresented: isPresenting(.colors)) {
+            .modal(isPresented: router.isPresenting(.colors)) {
                 ColorModalContent(selectedColor: $selectedColor)
             }
-            .modal(isPresented: isPresenting(.themes)) {
+            .modal(isPresented: router.isPresenting(.themes)) {
                 ThemeModalContent(selectedThemes: $selectedThemes)
             }
             .onAppear {
-                present(.tools)
+                router.present(.tools)
             }
             .onTapGesture {
                 if viewModel.isLoading == false {
-                    closeAllExceptTools()
+                    router.dismissAll(except: .tools)
                 }
             }
     }
@@ -41,14 +41,14 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             
             HStack(spacing: 16) {
                 PillButton(rounded: .leading, imageName: "paintbrush.fill") {
-                    closeAllExceptTools()
-                    toggle(.colors)
+                    router.dismissAll(except: .tools)
+                    router.toggle(.colors)
                 }
                 .disabled(viewModel.isLoading)
                 
                 PillButton(rounded: .center, imageName: "scope") {
-                    closeAllExceptTools()
-                    toggle(.themes)
+                    router.dismissAll(except: .tools)
+                    router.toggle(.themes)
                 }
                 .disabled(viewModel.isLoading)
                 
@@ -57,7 +57,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                     imageName: "wand.and.stars",
                     isLoading: viewModel.isLoading
                 ) {
-                    closeAllExceptTools()
+                    router.dismissAll(except: .tools)
                     viewModel.selected(themes: selectedThemes)
                     viewModel.selected(color: selectedColor.rawValue)
                     viewModel.tappedGenerateImage()
@@ -94,28 +94,11 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
         .transition(.opacity)
         .animation(.easeInOut, value: viewModel.generatedImage)
     }
-    
-    private func isPresenting(_ subview: GenerateImageSubview) -> Bool {
-        visibleSubviews.contains(subview)
-    }
-    
-    private func present(_ subview: GenerateImageSubview) {
-        visibleSubviews.insert(subview)
-    }
-    
-    private func dismiss(_ subview: GenerateImageSubview) {
-        visibleSubviews.remove(subview)
-    }
-    
-    private func toggle(_ subview: GenerateImageSubview) {
-        visibleSubviews.toggle(subview)
-    }
-    
-    private func closeAllExceptTools() {
-        visibleSubviews = visibleSubviews.filter { $0 == .tools }
-    }
 }
 
 #Preview {
-    GenerateImageView(viewModel: GenerateImageViewModel())
+    GenerateImageView(
+        viewModel: GenerateImageViewModel(),
+        router: GenerateImageRouter()
+    )
 }
