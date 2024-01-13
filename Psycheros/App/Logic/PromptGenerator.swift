@@ -39,7 +39,6 @@ struct PromptGenerator: PromptGenerating {
             }
         }
         
-        
-        return strings.joined(separator: ", with ")
+        return strings.sorted().joined(separator: ", with ")
     }
 }
