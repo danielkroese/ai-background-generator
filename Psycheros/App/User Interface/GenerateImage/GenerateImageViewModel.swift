@@ -9,26 +9,18 @@ protocol GenerateImageViewModeling: ObservableObject {
     var selectedColor: AllowedColor { get set }
     var selectedThemes: Set<Theme> { get set }
     
-    func selected(themes: Set<Theme>)
-    func selected(color: String)
     func tappedGenerateImage()
 }
 
 final class GenerateImageViewModel: GenerateImageViewModeling {
+    @Published var selectedColor: AllowedColor = .blue
+    @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
+    
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorText: String?
     @Published private(set) var generatedImage: Image?
-    
-    @Published var selectedColor: AllowedColor = .blue
-    @Published var selectedThemes = Set<Theme>()
         
     private(set) var imageTask: Task<(), Never>?
-    
-    private var imageQuery = ImageQuery(
-        color: "yellow",
-        themes: [.nature, .island],
-        size: .size768x1344
-    )
     
     private let imageGenerator: ImageGenerating
     
@@ -40,28 +32,19 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         imageTask?.cancel()
     }
     
-    func selected(themes: Set<Theme>) {
-        guard themes.isEmpty == false else {
-            errorText = "Theme required"
-            return
-        }
-        
-        imageQuery.themes = themes
-    }
-    
-    func selected(color: String) {
-        imageQuery.color = color
-    }
-    
     func tappedGenerateImage() {
         guard isLoading == false else {
             return
         }
         
+        guard selectedThemes.isEmpty == false else {
+            errorText = "Theme required"
+            return
+        }
+        
         setLoading(true)
         setError(nil)
-        selected(color: selectedColor.rawValue)
-        selected(themes: selectedThemes)
+        
         generateImage(from: imageQuery)
     }
     
@@ -104,5 +87,13 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
                 setError(error)
             }
         }
+    }
+    
+    private var imageQuery: ImageQuery {
+        ImageQuery(
+            color: selectedColor.rawValue,
+            themes: selectedThemes,
+            size: .size768x1344
+        )
     }
 }

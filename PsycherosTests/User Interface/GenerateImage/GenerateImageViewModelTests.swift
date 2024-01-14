@@ -10,12 +10,16 @@ final class GenerateImageViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_selectedTheme_withNoSelection_setsErrorText() async {
+    func test_tappedGenerateImage_withNoThemeSelection_setsErrorText() async {
         let sut = createSut()
         
+        sut.selectedThemes = []
+        
         await expectedError(in: sut) {
-            sut.selected(themes: [])
+            sut.tappedGenerateImage()
         }
+        
+        XCTAssertEqual(sut.errorText, "Theme required")
     }
     
     func test_selectedTheme_setsSelectedThemesToQuery() async {
@@ -23,7 +27,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         let sut = createSut(imageGenerator: mockImageGenerator)
         
         let dummyThemes: Set<Theme> = [.cyberpunk, .nature]
-        sut.selected(themes: dummyThemes)
+        sut.selectedThemes = dummyThemes
         
         await expectedGeneratedImage(in: sut) {
             sut.tappedGenerateImage()
@@ -36,7 +40,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         let mockImageGenerator = MockImageGenerator()
         let sut = createSut(imageGenerator: mockImageGenerator)
         
-        sut.selected(color: "red")
+        sut.selectedColor = .red
         
         await expectedGeneratedImage(in: sut) {
             sut.tappedGenerateImage()
