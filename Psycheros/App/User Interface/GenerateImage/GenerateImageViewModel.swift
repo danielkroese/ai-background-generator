@@ -6,6 +6,9 @@ protocol GenerateImageViewModeling: ObservableObject {
     var errorText: String? { get }
     var generatedImage: Image? { get }
     
+    var selectedColor: AllowedColor { get set }
+    var selectedThemes: Set<Theme> { get set }
+    
     func selected(themes: Set<Theme>)
     func selected(color: String)
     func tappedGenerateImage()
@@ -15,6 +18,9 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorText: String?
     @Published private(set) var generatedImage: Image?
+    
+    @Published var selectedColor: AllowedColor = .blue
+    @Published var selectedThemes = Set<Theme>()
         
     private(set) var imageTask: Task<(), Never>?
     
@@ -53,6 +59,9 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         }
         
         setLoading(true)
+        setError(nil)
+        selected(color: selectedColor.rawValue)
+        selected(themes: selectedThemes)
         generateImage(from: imageQuery)
     }
     
@@ -68,8 +77,13 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         }
     }
     
-    private func setError(_ error: Error) {
+    private func setError(_ error: Error?) {
         Task { @MainActor in
+            guard let error else {
+                errorText = nil
+                return
+            }
+            
             errorText = (error as? ImageGeneratingError)?.rawValue ?? error.localizedDescription
         }
     }

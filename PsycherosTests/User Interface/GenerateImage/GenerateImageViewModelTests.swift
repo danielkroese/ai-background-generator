@@ -59,15 +59,37 @@ final class GenerateImageViewModelTests: XCTestCase {
     func test_tappedGenerateImage_withError_setsErrorText() async {
         let mockImageGenerator = MockImageGenerator()
         let sut = createSut(imageGenerator: mockImageGenerator)
+        let dummyError = ImageGeneratingError.incompleteQuery
         
-        mockImageGenerator.generateImageError = ImageGeneratingError.incompleteQuery
+        mockImageGenerator.generateImageError = dummyError
         
         await expectedError(in: sut) {
             sut.tappedGenerateImage()
         }
         
         XCTAssertNil(sut.generatedImage)
+        XCTAssertEqual(sut.errorText, dummyError.rawValue)
         XCTAssertFalse(sut.isLoading)
+    }
+    
+    func test_tappedGenerateImage_resetsErrorText() async {
+        let mockImageGenerator = MockImageGenerator()
+        let sut = createSut(imageGenerator: mockImageGenerator)
+        let dummyError = ImageGeneratingError.incompleteQuery
+        
+        mockImageGenerator.generateImageError = dummyError
+        
+        await expectedError(in: sut) {
+            sut.tappedGenerateImage()
+        }
+        
+        mockImageGenerator.generateImageError = nil
+        
+        await expectedGeneratedImage(in: sut) {
+            sut.tappedGenerateImage()
+        }
+        
+        XCTAssertNil(sut.errorText)
     }
     
     func test_tappedGenerateImage_togglesIsLoading() {

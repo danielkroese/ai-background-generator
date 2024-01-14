@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct ToolSheet<ToolsContent: View>: ViewModifier {
+struct Toolbar<ToolsContent: View>: ViewModifier {
     let isPresented: Bool
     
     @ViewBuilder let toolsContent: () -> ToolsContent
@@ -22,17 +22,17 @@ struct ToolSheet<ToolsContent: View>: ViewModifier {
 }
 
 extension View {
-    func toolSheet(
+    func toolbar(
         isPresented: Bool,
         @ViewBuilder toolsContent: @escaping () -> some View
     ) -> some View {
-        self.modifier(ToolSheet(isPresented: isPresented, toolsContent: toolsContent))
+        self.modifier(Toolbar(isPresented: isPresented, toolsContent: toolsContent))
     }
 }
 
 #Preview {
     Text("Hello, world!")
-        .toolSheet(isPresented: true) {
+        .toolbar(isPresented: true) {
             HStack(spacing: 32) {
                 Text("Here be some tools!")
             }
