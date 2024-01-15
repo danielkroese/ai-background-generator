@@ -1,6 +1,6 @@
 import Foundation
 
-protocol GenerateImageRouting: ObservableObject {
+protocol GenerateImageRouting {
     var presentedSubviews: Set<GenerateImageSubview> { get }
     
     func toggle(_ subview: GenerateImageSubview)
@@ -16,12 +16,12 @@ extension GenerateImageRouting {
     }
 }
 
-enum GenerateImageSubview {
+enum GenerateImageSubview { // Rename to GenerateImageDestination?
     case tools, colors, themes, generate
 }
 
 final class GenerateImageRouter: GenerateImageRouting {
-    @Published var presentedSubviews: Set<GenerateImageSubview>
+    private(set) var presentedSubviews: Set<GenerateImageSubview>
     
     init(presentedSubviews: Set<GenerateImageSubview> = []) {
         self.presentedSubviews = presentedSubviews

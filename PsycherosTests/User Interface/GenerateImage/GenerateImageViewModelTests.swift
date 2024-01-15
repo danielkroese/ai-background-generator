@@ -16,7 +16,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         sut.selectedThemes = []
         
         await expectedError(in: sut) {
-            sut.tappedGenerateImage()
+            sut.tapped(on: .generate)
         }
         
         XCTAssertEqual(sut.errorText, "Theme required")
@@ -30,7 +30,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         sut.selectedThemes = dummyThemes
         
         await expectedGeneratedImage(in: sut) {
-            sut.tappedGenerateImage()
+            sut.tapped(on: .generate)
         }
         
         XCTAssertEqual(mockImageGenerator.passedImageQuery?.themes, dummyThemes)
@@ -43,7 +43,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         sut.selectedColor = .red
         
         await expectedGeneratedImage(in: sut) {
-            sut.tappedGenerateImage()
+            sut.tapped(on: .generate)
         }
         
         XCTAssertEqual(mockImageGenerator.passedImageQuery?.color, "red")
@@ -53,7 +53,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         let sut = createSut()
         
         await expectedGeneratedImage(in: sut) {
-            sut.tappedGenerateImage()
+            sut.tapped(on: .generate)
         }
         
         XCTAssertNil(sut.errorText)
@@ -68,7 +68,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         mockImageGenerator.generateImageError = dummyError
         
         await expectedError(in: sut) {
-            sut.tappedGenerateImage()
+            sut.tapped(on: .generate)
         }
         
         XCTAssertNil(sut.generatedImage)
@@ -84,13 +84,13 @@ final class GenerateImageViewModelTests: XCTestCase {
         mockImageGenerator.generateImageError = dummyError
         
         await expectedError(in: sut) {
-            sut.tappedGenerateImage()
+            sut.tapped(on: .generate)
         }
         
         mockImageGenerator.generateImageError = nil
         
         await expectedGeneratedImage(in: sut) {
-            sut.tappedGenerateImage()
+            sut.tapped(on: .generate)
         }
         
         XCTAssertNil(sut.errorText)
@@ -113,7 +113,7 @@ final class GenerateImageViewModelTests: XCTestCase {
             }
             .store(in: &subscriptions)
         
-        sut.tappedGenerateImage()
+        sut.tapped(on: .generate)
         
         wait(for: [expectation1, expectation2], timeout: 0.1)
         

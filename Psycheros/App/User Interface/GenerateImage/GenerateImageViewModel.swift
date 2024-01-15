@@ -2,14 +2,17 @@ import Foundation
 import SwiftUI
 
 protocol GenerateImageViewModeling: ObservableObject {
+    var selectedColor: AllowedColor { get set }
+    var selectedThemes: Set<Theme> { get set }
+    
     var isLoading: Bool { get }
     var errorText: String? { get }
     var generatedImage: Image? { get }
     
-    var selectedColor: AllowedColor { get set }
-    var selectedThemes: Set<Theme> { get set }
-    
-    func tappedGenerateImage()
+    func onAppear()
+    func isPresenting(_ subview: GenerateImageSubview) -> Bool
+    func tapped(on destination: GenerateImageSubview)
+    func tappedBackground()
 }
 
 final class GenerateImageViewModel: GenerateImageViewModeling {
@@ -23,16 +26,48 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     private(set) var imageTask: Task<(), Never>?
     
     private let imageGenerator: ImageGenerating
+    private let router: GenerateImageRouting
     
-    init(imageGenerator: ImageGenerating = ImageGenerator()) {
+    init(
+        imageGenerator: ImageGenerating = ImageGenerator(),
+        router: GenerateImageRouting = GenerateImageRouter()
+    ) {
         self.imageGenerator = imageGenerator
+        self.router = router
     }
     
     deinit {
         imageTask?.cancel()
     }
     
-    func tappedGenerateImage() {
+    func onAppear() {
+        router.present(.tools)
+    }
+    
+    func isPresenting(_ subview: GenerateImageSubview) -> Bool {
+        router.isPresenting(subview)
+    }
+    
+    func tappedBackground() {
+        if isLoading == false {
+            router.dismissAll(except: .tools)
+        }
+    }
+    
+    func tapped(on destination: GenerateImageSubview) {
+        router.dismissAll(except: .tools)
+        
+        switch destination {
+        case .colors, .themes: 
+            router.toggle(destination)
+        case .generate:
+            tappedGenerateImage()
+        case .tools:
+            break
+        }
+    }
+    
+    private func tappedGenerateImage() {
         guard isLoading == false else {
             return
         }
