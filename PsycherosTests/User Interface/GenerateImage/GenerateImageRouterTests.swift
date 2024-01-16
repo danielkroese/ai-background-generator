@@ -1,48 +1,57 @@
 import XCTest
+import Combine
 
 final class GenerateImageRouterTests: XCTestCase {
+    private var subscriptions = Set<AnyCancellable>()
+    
+    override func tearDown() {
+        subscriptions.removeAll()
+        
+        super.tearDown()
+    }
+    
     func test_toggle() {
         let sut = createSut(initialSubviews: [])
         
-        sut.toggle(.tools)
+        setsExpected(value: [.tools], on: sut.publisher, storeIn: &subscriptions) {
+            sut.toggle(.tools)
+        }
         
-        XCTAssertEqual(sut.presentedSubviews, [.tools])
-        
-        sut.toggle(.tools)
-        
-        XCTAssertEqual(sut.presentedSubviews, [])
+        setsExpected(value: [], on: sut.publisher, storeIn: &subscriptions) {
+            sut.toggle(.tools)
+        }
     }
     
     func test_present() {
         let sut = createSut()
         
-        sut.present(.colors)
-        
-        XCTAssertEqual(sut.presentedSubviews, [.colors])
+        setsExpected(value: [.colors], on: sut.publisher, storeIn: &subscriptions) {
+            sut.present(.colors)
+        }
     }
     
     func test_dismiss() {
         let sut = createSut(initialSubviews: [.tools, .themes])
         
-        sut.dismiss(.themes)
-        
-        XCTAssertEqual(sut.presentedSubviews, [.tools])
+        setsExpected(value: [.tools], on: sut.publisher, storeIn: &subscriptions) {
+            sut.dismiss(.themes)
+        }
     }
     
     func test_dismissAll() {
         let sut = createSut(initialSubviews: [.tools, .themes])
         
-        sut.dismissAll()
-        
-        XCTAssertEqual(sut.presentedSubviews, [])
+        setsExpected(value: [], on: sut.publisher, storeIn: &subscriptions) {
+            sut.dismissAll()
+        }
     }
     
     func test_dismissAll_withException() {
         let sut = createSut(initialSubviews: [.tools, .themes])
         
-        sut.dismissAll(except: .tools)
-        
-        XCTAssertEqual(sut.presentedSubviews, [.tools])
+        setsExpected(value: [.tools], on: sut.publisher, storeIn: &subscriptions) {
+            sut.dismissAll(except: .tools)
+        }
     }
     
     func test_isPresenting() {

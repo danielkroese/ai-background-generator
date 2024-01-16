@@ -1,7 +1,7 @@
-import Foundation
+import Combine
 
 protocol GenerateImageRouting {
-    var presentedSubviews: Set<GenerateImageSubview> { get }
+    var publisher: AnyPublisher<Set<GenerateImageSubview>, Never> { get }
     
     func toggle(_ subview: GenerateImageSubview)
     func present(_ subview: GenerateImageSubview)
@@ -21,7 +21,11 @@ enum GenerateImageSubview { // Rename to GenerateImageDestination?
 }
 
 final class GenerateImageRouter: GenerateImageRouting {
-    private(set) var presentedSubviews: Set<GenerateImageSubview>
+    var publisher: AnyPublisher<Set<GenerateImageSubview>, Never> {
+        $presentedSubviews.eraseToAnyPublisher()
+    }
+    
+    @Published private var presentedSubviews: Set<GenerateImageSubview>
     
     init(presentedSubviews: Set<GenerateImageSubview> = []) {
         self.presentedSubviews = presentedSubviews

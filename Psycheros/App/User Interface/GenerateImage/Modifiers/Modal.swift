@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Modal<ModalContent: View>: ViewModifier {
-    let isPresented: Bool
+    let isPresented: Binding<Bool>
     
     @ViewBuilder let modalContent: () -> ModalContent
     
@@ -29,8 +29,8 @@ struct Modal<ModalContent: View>: ViewModifier {
                         .geometryReader { modalContentSize = $0.size }
                 }
                 .transition(.scale)
-                .animation(.bouncy, value: isPresented)
-                .offset(y: isPresented ? .zero : contentSize.height)
+                .animation(.bouncy, value: isPresented.wrappedValue)
+                .offset(y: isPresented.wrappedValue ? .zero : contentSize.height)
                 .shadowModifier()
         }
     }
@@ -38,7 +38,7 @@ struct Modal<ModalContent: View>: ViewModifier {
 
 extension View {
     func modal(
-        isPresented: Bool,
+        isPresented: Binding<Bool>,
         @ViewBuilder modalContent: @escaping () -> some View
     ) -> some View {
         self.modifier(Modal(isPresented: isPresented, modalContent: modalContent))
@@ -47,7 +47,7 @@ extension View {
 
 #Preview {
     Text("Hello, world!")
-        .modal(isPresented: true) {
+        .modal(isPresented: .constant(true)) {
             HStack(spacing: 32) {
                 Text("Hello modal!")
             }

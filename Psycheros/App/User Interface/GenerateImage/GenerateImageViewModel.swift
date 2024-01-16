@@ -1,16 +1,18 @@
 import Foundation
 import SwiftUI
+import Combine
 
 protocol GenerateImageViewModeling: ObservableObject {
     var selectedColor: AllowedColor { get set }
     var selectedThemes: Set<Theme> { get set }
+    var currentSubviews: Set<GenerateImageSubview>{ get set }
     
     var isLoading: Bool { get }
     var errorText: String? { get }
     var generatedImage: Image? { get }
     
     func onAppear()
-    func isPresenting(_ subview: GenerateImageSubview) -> Bool
+    func isPresenting(_ subview: GenerateImageSubview) -> Binding<Bool>
     func tapped(on destination: GenerateImageSubview)
     func tappedBackground()
 }
@@ -18,6 +20,7 @@ protocol GenerateImageViewModeling: ObservableObject {
 final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published var selectedColor: AllowedColor = .blue
     @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
+    @Published var currentSubviews: Set<GenerateImageSubview> = []
     
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorText: String?
@@ -44,8 +47,19 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         router.present(.tools)
     }
     
-    func isPresenting(_ subview: GenerateImageSubview) -> Bool {
-        router.isPresenting(subview)
+    func isPresenting(_ subview: GenerateImageSubview) -> Binding<Bool> {
+        Binding<Bool>(
+            get: {
+                self.currentSubviews.contains(subview)
+            },
+            set: { isPresented in
+                if isPresented {
+                    self.currentSubviews.insert(subview)
+                } else {
+                    self.currentSubviews.remove(subview)
+                }
+            }
+        )
     }
     
     func tappedBackground() {

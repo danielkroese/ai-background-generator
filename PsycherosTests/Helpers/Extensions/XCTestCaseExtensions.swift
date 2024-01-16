@@ -1,4 +1,5 @@
 import XCTest
+import Combine
 
 extension XCTestCase {
     func assertNoThrow(
@@ -69,5 +70,31 @@ extension XCTestCase {
                       line: UInt = #line) {
         let errorString = error.localizedDescription
         XCTFail("Unexpected error: \(errorString)", file: file, line: line)
+    }
+}
+
+// MARK: - Combine
+extension XCTestCase {
+    func setsExpected<T: Equatable>(
+        value: T,
+        on publisher: some Publisher<T, Never>,
+        storeIn subscriptions: inout Set<AnyCancellable>,
+        action: () -> Void,
+        file: StaticString = #file,
+        line: UInt = #line
+    ) {
+        let expectation = XCTestExpectation(description: "Sets value")
+        
+        publisher
+            .dropFirst()
+            .sink { newValue in
+                XCTAssertEqual(newValue, value, file: file, line: line)
+                expectation.fulfill()
+            }
+            .store(in: &subscriptions)
+        
+        action()
+        
+        wait(for: [expectation], timeout: 0.1)
     }
 }

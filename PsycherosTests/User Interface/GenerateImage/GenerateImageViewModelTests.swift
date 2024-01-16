@@ -13,21 +13,21 @@ final class GenerateImageViewModelTests: XCTestCase {
     func test_onAppear_showsToolbar() {
         let sut = createSut()
         
-        sut.onAppear()
-        
-        XCTAssertTrue(sut.isPresenting(.tools))
+        setsExpected(value: [.tools], on: sut.$currentSubviews, storeIn: &subscriptions) {
+            sut.onAppear()
+        }
     }
     
     func test_tappedBackground_togglesToolbar() {
         let sut = createSut()
         
-        sut.tappedBackground()
+        setsExpected(value: [.tools], on: sut.$currentSubviews, storeIn: &subscriptions) {
+            sut.tappedBackground()
+        }
         
-        XCTAssertTrue(sut.isPresenting(.tools))
-        
-        sut.tappedBackground()
-        
-        XCTAssertFalse(sut.isPresenting(.tools))
+        setsExpected(value: [], on: sut.$currentSubviews, storeIn: &subscriptions) {
+            sut.tappedBackground()
+        }
     }
     
     func test_tappedGenerateImage_withNoThemeSelection_setsErrorText() async {

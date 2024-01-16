@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct Toolbar<ToolsContent: View>: ViewModifier {
-    let isPresented: Bool
+    let isPresented: Binding<Bool>
     
     @ViewBuilder let toolsContent: () -> ToolsContent
     
@@ -14,16 +14,16 @@ struct Toolbar<ToolsContent: View>: ViewModifier {
             toolsContent()
                 .geometryReader { toolsHeight = $0.size.height }
                 .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .offset(y: isPresented ? .zero : 2 * toolsHeight)
+                .offset(y: isPresented.wrappedValue ? .zero : 2 * toolsHeight)
                 .transition(.scale)
-                .animation(.bouncy, value: isPresented)
+                .animation(.bouncy, value: isPresented.wrappedValue)
         }
     }
 }
 
 extension View {
     func toolbar(
-        isPresented: Bool,
+        isPresented: Binding<Bool>,
         @ViewBuilder toolsContent: @escaping () -> some View
     ) -> some View {
         self.modifier(Toolbar(isPresented: isPresented, toolsContent: toolsContent))
@@ -32,7 +32,7 @@ extension View {
 
 #Preview {
     Text("Hello, world!")
-        .toolbar(isPresented: true) {
+        .toolbar(isPresented: .constant(true)) {
             HStack(spacing: 32) {
                 Text("Here be some tools!")
             }
