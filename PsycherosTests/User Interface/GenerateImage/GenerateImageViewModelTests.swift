@@ -10,6 +10,26 @@ final class GenerateImageViewModelTests: XCTestCase {
         super.tearDown()
     }
     
+    func test_onAppear_showsToolbar() {
+        let sut = createSut()
+        
+        sut.onAppear()
+        
+        XCTAssertTrue(sut.isPresenting(.tools))
+    }
+    
+    func test_tappedBackground_togglesToolbar() {
+        let sut = createSut()
+        
+        sut.tappedBackground()
+        
+        XCTAssertTrue(sut.isPresenting(.tools))
+        
+        sut.tappedBackground()
+        
+        XCTAssertFalse(sut.isPresenting(.tools))
+    }
+    
     func test_tappedGenerateImage_withNoThemeSelection_setsErrorText() async {
         let sut = createSut()
         
