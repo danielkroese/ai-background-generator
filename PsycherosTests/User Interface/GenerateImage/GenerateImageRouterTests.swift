@@ -13,12 +13,12 @@ final class GenerateImageRouterTests: XCTestCase {
     func test_toggle() {
         let sut = createSut(initialSubviews: [])
         
-        setsExpected(value: [.tools], on: sut.publisher, storeIn: &subscriptions) {
-            sut.toggle(.tools)
+        setsExpected(value: [.themes], on: sut.publisher, storeIn: &subscriptions) {
+            sut.toggle(.themes)
         }
         
         setsExpected(value: [], on: sut.publisher, storeIn: &subscriptions) {
-            sut.toggle(.tools)
+            sut.toggle(.themes)
         }
     }
     
