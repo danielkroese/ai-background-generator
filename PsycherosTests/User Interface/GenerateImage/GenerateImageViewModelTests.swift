@@ -1,6 +1,7 @@
 import XCTest
 import Combine
 
+@MainActor
 final class GenerateImageViewModelTests: XCTestCase {
     private var subscriptions = Set<AnyCancellable>()
     
@@ -10,24 +11,24 @@ final class GenerateImageViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_onAppear_showsToolbar() {
+    func test_onAppear_showsToolbar() async {
         let sut = createSut()
         
-        sut.onAppear()
-        
-        XCTAssertTrue(sut.isPresenting(.tools).wrappedValue)
+        await setsExpected(value: [.tools], on: sut.$currentSubviews) {
+            sut.onAppear()
+        }
     }
     
-    func test_tappedBackground_togglesToolbar() {
+    func test_tappedBackground_togglesToolbar() async {
         let sut = createSut()
         
-        sut.tappedBackground()
+        await setsExpected(value: [.tools], on: sut.$currentSubviews) {
+            sut.tappedBackground()
+        }
         
-        XCTAssertTrue(sut.isPresenting(.tools).wrappedValue)
-        
-        sut.tappedBackground()
-        
-        XCTAssertFalse(sut.isPresenting(.tools).wrappedValue)
+        await setsExpected(value: [], on: sut.$currentSubviews) {
+            sut.tappedBackground()
+        }
     }
     
     func test_tappedGenerateImage_withNoThemeSelection_setsErrorText() async {
@@ -144,9 +145,10 @@ final class GenerateImageViewModelTests: XCTestCase {
 // MARK: - Test helpers
 extension GenerateImageViewModelTests {
     private func createSut(
-        imageGenerator: ImageGenerating = MockImageGenerator()
+        imageGenerator: ImageGenerating = MockImageGenerator(),
+        router: GenerateImageRouting = GenerateImageRouter() // TODO: Mock?
     ) -> GenerateImageViewModel {
-        GenerateImageViewModel(imageGenerator: imageGenerator)
+        GenerateImageViewModel(imageGenerator: imageGenerator, router: router)
     }
     
     private func expectedError(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {

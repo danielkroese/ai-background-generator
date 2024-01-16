@@ -78,23 +78,24 @@ extension XCTestCase {
     func setsExpected<T: Equatable>(
         value: T,
         on publisher: some Publisher<T, Never>,
-        storeIn subscriptions: inout Set<AnyCancellable>,
         action: () -> Void,
         file: StaticString = #file,
         line: UInt = #line
-    ) {
-        let expectation = XCTestExpectation(description: "Sets value")
+    ) async {
+        let expectation = XCTestExpectation(description: "Sets value (line:\(line))")
         
-        publisher
+        let cancellable = publisher
+            .receive(on: DispatchQueue.main)
             .dropFirst()
             .sink { newValue in
                 XCTAssertEqual(newValue, value, file: file, line: line)
                 expectation.fulfill()
             }
-            .store(in: &subscriptions)
         
         action()
         
-        wait(for: [expectation], timeout: 0.1)
+        await fulfillment(of: [expectation], timeout: 0.2)
+        
+        cancellable.cancel()
     }
 }

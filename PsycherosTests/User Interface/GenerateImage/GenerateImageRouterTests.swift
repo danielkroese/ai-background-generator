@@ -10,51 +10,51 @@ final class GenerateImageRouterTests: XCTestCase {
         super.tearDown()
     }
     
-    func test_toggle() {
+    func test_toggle() async {
         let sut = createSut(initialSubviews: [])
         
-        setsExpected(value: [.themes], on: sut.publisher, storeIn: &subscriptions) {
+        await setsExpected(value: [.themes], on: sut.publisher) {
             sut.toggle(.themes)
         }
         
-        setsExpected(value: [], on: sut.publisher, storeIn: &subscriptions) {
+        await setsExpected(value: [], on: sut.publisher) {
             sut.toggle(.themes)
         }
     }
     
-    func test_present() {
+    func test_present() async {
         let sut = createSut()
         
-        setsExpected(value: [.colors], on: sut.publisher, storeIn: &subscriptions) {
+        await setsExpected(value: [.colors], on: sut.publisher) {
             sut.present(.colors)
         }
     }
     
-    func test_dismiss() {
+    func test_dismiss() async {
         let sut = createSut(initialSubviews: [.tools, .themes])
         
-        setsExpected(value: [.tools], on: sut.publisher, storeIn: &subscriptions) {
+        await setsExpected(value: [.tools], on: sut.publisher) {
             sut.dismiss(.themes)
         }
     }
     
-    func test_dismissAll() {
+    func test_dismissAll() async {
         let sut = createSut(initialSubviews: [.tools, .themes])
         
-        setsExpected(value: [], on: sut.publisher, storeIn: &subscriptions) {
+        await setsExpected(value: [], on: sut.publisher) {
             sut.dismissAll()
         }
     }
     
-    func test_dismissAll_withException() {
+    func test_dismissAll_withException() async {
         let sut = createSut(initialSubviews: [.tools, .themes])
         
-        setsExpected(value: [.tools], on: sut.publisher, storeIn: &subscriptions) {
+        await setsExpected(value: [.tools], on: sut.publisher) {
             sut.dismissAll(except: .tools)
         }
     }
     
-    func test_isPresenting() {
+    func test_isPresenting() async {
         let sut = createSut(initialSubviews: [.colors])
         
         XCTAssertTrue(sut.isPresenting(.colors))

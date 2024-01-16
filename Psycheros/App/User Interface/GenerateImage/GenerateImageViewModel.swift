@@ -37,6 +37,10 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     ) {
         self.imageGenerator = imageGenerator
         self.router = router
+        
+        router.publisher
+            .receive(on: DispatchQueue.main)
+            .assign(to: &$currentSubviews)
     }
     
     deinit {
@@ -68,9 +72,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         }
     }
     
-    func tapped(on destination: GenerateImageSubview) {
-        router.dismissAll(except: .tools)
-        
+    func tapped(on destination: GenerateImageSubview) {        
         switch destination {
         case .colors, .themes: 
             router.toggle(destination)
