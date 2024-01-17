@@ -16,6 +16,10 @@ struct ColorModalContent: View {
                     } label: {
                         RoundedRectangle(cornerRadius: 32)
                             .fill(color.suiColor)
+                            .strokeBorder(
+                                color == selectedColor ? .accent : .clear,
+                                lineWidth: 4
+                            )
                             .frame(width: 64, height: 64)
                             .shadowModifier()
                     }

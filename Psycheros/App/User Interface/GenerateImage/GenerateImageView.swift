@@ -18,7 +18,6 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             ToolbarContent(
                 errorText: viewModel.errorText,
                 isLoading: viewModel.isLoading,
-                selectedColor: viewModel.selectedColor.suiColor,
                 tappedSubviewButton: viewModel.tapped(on:)
             )
         }

@@ -19,7 +19,7 @@ struct ThemeModalContent: View {
                         selectedThemes.toggle(theme)
                     } label: {
                         RoundedRectangle(cornerRadius: 32)
-                            .strokeBorder(strokeBorder(for: theme))
+                            .strokeBorder(strokeBorder(for: theme), lineWidth: 4)
                             .frame(width: 128, height: 76)
                             .overlay {
                                 Text(theme.rawValue)
