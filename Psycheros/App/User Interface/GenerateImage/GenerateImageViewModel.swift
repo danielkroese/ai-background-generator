@@ -12,7 +12,7 @@ protocol GenerateImageViewModeling: ObservableObject {
     var generatedImage: Image? { get }
     
     func onAppear()
-    func isPresenting(_ subview: GenerateImageSubview) -> Binding<Bool>
+    func isPresenting(_ subview: GenerateImageSubview) -> Bool
     func tapped(on destination: GenerateImageSubview)
     func tappedBackground()
 }
@@ -51,19 +51,8 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         router.present(.tools)
     }
     
-    func isPresenting(_ subview: GenerateImageSubview) -> Binding<Bool> {
-        Binding<Bool>(
-            get: {
-                self.currentSubviews.contains(subview)
-            },
-            set: { isPresented in
-                if isPresented {
-                    self.currentSubviews.insert(subview)
-                } else {
-                    self.currentSubviews.remove(subview)
-                }
-            }
-        )
+    func isPresenting(_ subview: GenerateImageSubview) -> Bool {
+        currentSubviews.contains(subview)
     }
     
     func tappedBackground() {

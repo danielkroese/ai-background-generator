@@ -14,19 +14,20 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
         .onAppear {
             viewModel.onAppear()
         }
-        .toolbar(isPresented: viewModel.isPresenting(.tools)) {
+        .toolbar(isPresented: .constant(viewModel.isPresenting(.tools))) {
             ToolbarContent(
                 errorText: viewModel.errorText,
                 isLoading: viewModel.isLoading,
+                selectedColor: viewModel.selectedColor.suiColor,
                 tappedSubviewButton: viewModel.tapped(on:)
             )
         }
-        .modal(isPresented: viewModel.isPresenting(.colors)) {
+        .modal(isPresented: .constant(viewModel.isPresenting(.colors))) {
             ColorModalContent(
                 selectedColor: $viewModel.selectedColor
             )
         }
-        .modal(isPresented: viewModel.isPresenting(.themes)) {
+        .modal(isPresented: .constant(viewModel.isPresenting(.themes))) {
             ThemeModalContent(
                 selectedThemes: $viewModel.selectedThemes
             )
