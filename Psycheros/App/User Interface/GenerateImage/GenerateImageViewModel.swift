@@ -18,9 +18,13 @@ protocol GenerateImageViewModeling: ObservableObject {
 }
 
 final class GenerateImageViewModel: GenerateImageViewModeling {
-    @Published var selectedColor: AllowedColor = .blue
-    @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
     @Published var currentSubviews: Set<GenerateImageSubview> = []
+    @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
+    @Published var selectedColor: AllowedColor = .blue {
+        didSet {
+            router.dismiss(.colors)
+        }
+    }
     
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorText: String?
@@ -63,9 +67,10 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     
     func tapped(on destination: GenerateImageSubview) {        
         switch destination {
-        case .colors, .themes: 
+        case .colors, .themes:
             router.toggle(destination)
         case .generate:
+            router.dismissAll(except: .tools)
             tappedGenerateImage()
         case .tools:
             break
