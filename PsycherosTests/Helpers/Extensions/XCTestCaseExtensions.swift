@@ -92,10 +92,12 @@ extension XCTestCase {
                 expectation.fulfill()
             }
         
+        defer {
+            cancellable.cancel()
+        }
+        
         action()
         
         await fulfillment(of: [expectation], timeout: 0.2)
-        
-        cancellable.cancel()
     }
 }
