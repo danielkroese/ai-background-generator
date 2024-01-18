@@ -21,6 +21,14 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 tappedSubviewButton: viewModel.tapped(on:)
             )
         }
+        .toolbar(
+            isPresented: .constant(viewModel.isPresenting(.tools)),
+            alignment: .top
+        ) {
+            Text("Save button")
+                .padding(32)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+        }
         .modal(isPresented: .constant(viewModel.isPresenting(.colors))) {
             ColorModalContent(
                 selectedColor: $viewModel.selectedColor
