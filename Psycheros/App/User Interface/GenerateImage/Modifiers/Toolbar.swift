@@ -2,6 +2,7 @@ import SwiftUI
 
 struct Toolbar<ToolsContent: View>: ViewModifier {
     let isPresented: Binding<Bool>
+    let alignment: VerticalAlignment
     
     @ViewBuilder let toolsContent: () -> ToolsContent
     
@@ -13,20 +14,29 @@ struct Toolbar<ToolsContent: View>: ViewModifier {
             
             toolsContent()
                 .geometryReader { toolsHeight = $0.size.height }
-                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
-                .offset(y: isPresented.wrappedValue ? .zero : 2 * toolsHeight)
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: .infinity,
+                    alignment: Alignment(horizontal: .center, vertical: alignment)
+                )
+                .offset(y: yOffset)
                 .transition(.scale)
                 .animation(.bouncy, value: isPresented.wrappedValue)
         }
+    }
+    
+    private var yOffset: CGFloat {
+        (isPresented.wrappedValue ? .zero : 2 * toolsHeight) * (alignment == .top ? -1 : 1)
     }
 }
 
 extension View {
     func toolbar(
         isPresented: Binding<Bool>,
+        alignment: VerticalAlignment = .bottom,
         @ViewBuilder toolsContent: @escaping () -> some View
     ) -> some View {
-        self.modifier(Toolbar(isPresented: isPresented, toolsContent: toolsContent))
+        self.modifier(Toolbar(isPresented: isPresented, alignment: alignment, toolsContent: toolsContent))
     }
 }
 
