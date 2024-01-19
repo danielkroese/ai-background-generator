@@ -25,9 +25,16 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             isPresented: .constant(viewModel.isPresenting(.tools)),
             alignment: .top
         ) {
-            Text("Save button")
-                .padding(32)
-                .frame(maxWidth: .infinity, alignment: .trailing)
+            PillButton(
+                rounded: .all,
+                imageName: "square.and.arrow.down"
+            ) {
+                viewModel.tapped(on: .save)
+            }
+            .frame(maxWidth: 64)
+            .frame(maxWidth: .infinity, alignment: .trailing)
+            .padding(32)
+            
         }
         .modal(isPresented: .constant(viewModel.isPresenting(.colors))) {
             ColorModalContent(

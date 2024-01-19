@@ -27,6 +27,7 @@ struct PillButton<Label>: View where Label: View{
             HStack(spacing: 16) {
                 Image(systemName: imageName)
                     .resizable()
+                    .aspectRatio(contentMode: .fill)
                     .frame(width: 32, height: 32)
                 
                 label()

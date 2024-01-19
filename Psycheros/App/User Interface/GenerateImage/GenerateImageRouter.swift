@@ -17,7 +17,7 @@ extension GenerateImageRouting {
 }
 
 enum GenerateImageSubview { // Rename to GenerateImageDestination?
-    case tools, colors, themes, generate
+    case tools, colors, themes, generate, save
 }
 
 final class GenerateImageRouter: GenerateImageRouting {

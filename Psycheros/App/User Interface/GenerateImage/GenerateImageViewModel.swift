@@ -72,7 +72,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         case .generate:
             router.dismissAll(except: .tools)
             tappedGenerateImage()
-        case .tools:
+        case .tools, .save:
             break
         }
     }
