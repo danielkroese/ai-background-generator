@@ -5,20 +5,20 @@ import Combine
 protocol GenerateImageViewModeling: ObservableObject {
     var selectedColor: AllowedColor { get set }
     var selectedThemes: Set<Theme> { get set }
-    var currentSubviews: Set<GenerateImageSubview>{ get set }
+    var currentSubviews: Set<GenerateImageDestination>{ get set }
     
     var isLoading: Bool { get }
     var errorText: String? { get }
     var generatedImage: Image? { get }
     
     func onAppear()
-    func isPresenting(_ subview: GenerateImageSubview) -> Bool
-    func tapped(on destination: GenerateImageSubview)
+    func isPresenting(_ subview: GenerateImageDestination) -> Bool
+    func tapped(on destination: GenerateImageDestination)
     func tappedBackground()
 }
 
 final class GenerateImageViewModel: GenerateImageViewModeling {
-    @Published var currentSubviews: Set<GenerateImageSubview> = []
+    @Published var currentSubviews: Set<GenerateImageDestination> = []
     @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
     @Published var selectedColor: AllowedColor = .blue {
         didSet {
@@ -55,7 +55,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         router.present(.tools)
     }
     
-    func isPresenting(_ subview: GenerateImageSubview) -> Bool {
+    func isPresenting(_ subview: GenerateImageDestination) -> Bool {
         currentSubviews.contains(subview)
     }
     
@@ -65,7 +65,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         }
     }
     
-    func tapped(on destination: GenerateImageSubview) {        
+    func tapped(on destination: GenerateImageDestination) {        
         switch destination {
         case .colors, .themes:
             router.toggle(destination)

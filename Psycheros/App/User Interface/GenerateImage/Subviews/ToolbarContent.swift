@@ -3,7 +3,7 @@ import SwiftUI
 struct ToolbarContent: View {
     let errorText: String?
     let isLoading: Bool
-    let tappedSubviewButton: (GenerateImageSubview) -> Void
+    let tappedSubviewButton: (GenerateImageDestination) -> Void
     
     var body: some View {
         VStack {
