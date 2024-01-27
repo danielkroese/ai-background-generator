@@ -74,6 +74,9 @@
 		7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A986A2B49A94900B9B112 /* Shimmer.swift */; };
 		7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E72B2F4047008667AB /* ShadowModifier.swift */; };
 		7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */; };
+		7BBA31AD2B65AF5500358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
+		7BBA31AF2B65AFB200358A2E /* ImageSaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AE2B65AFB200358A2E /* ImageSaverTests.swift */; };
+		7BBA31B02B65AFD400358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
 		7BCB68F62B44AB5600CD700E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB68F52B44AB5600CD700E /* Toolbar.swift */; };
 /* End PBXBuildFile section */
 
@@ -144,6 +147,8 @@
 		7B7A986A2B49A94900B9B112 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		7B9928E72B2F4047008667AB /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonShape.swift; sourceTree = "<group>"; };
+		7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		7BBA31AE2B65AFB200358A2E /* ImageSaverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaverTests.swift; sourceTree = "<group>"; };
 		7BCB68F52B44AB5600CD700E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -197,6 +202,7 @@
 				652406912AFF8F4B00AE193D /* Network */,
 				659A92C52AFAD75100A6F351 /* ImageGenerationService */,
 				65250CBA2AF7F3B3006BB662 /* ImageGenerator.swift */,
+				7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */,
 				65250CD32AF83425006BB662 /* PromptGenerator.swift */,
 			);
 			path = Logic;
@@ -209,6 +215,7 @@
 				659A92C92AFADA8C00A6F351 /* ImageService */,
 				65250CBF2AF7F3D2006BB662 /* ImageGeneratorTests.swift */,
 				65250CD92AF83491006BB662 /* PromptGeneratorTests.swift */,
+				7BBA31AE2B65AFB200358A2E /* ImageSaverTests.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -564,6 +571,7 @@
 				7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */,
 				6550C7EE2B28F3E800B27030 /* GenerateImageViewModel.swift in Sources */,
 				65250CD42AF83425006BB662 /* PromptGenerator.swift in Sources */,
+				7BBA31AD2B65AF5500358A2E /* ImageSaver.swift in Sources */,
 				7B042D7C2B52D88E00385BD8 /* GenerateImageRouter.swift in Sources */,
 				65E034DA2B23CC05001B5F99 /* ImageDataParser.swift in Sources */,
 				659A92CF2AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
@@ -615,6 +623,7 @@
 				6550C7EF2B28F3E800B27030 /* GenerateImageViewModel.swift in Sources */,
 				652406862AFEC4C100AE193D /* MockNetworkSession.swift in Sources */,
 				65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
+				7BBA31AF2B65AFB200358A2E /* ImageSaverTests.swift in Sources */,
 				7B0F26EC2B51D7C20037F32D /* Theme.swift in Sources */,
 				6524068B2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift in Sources */,
 				652406902AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
@@ -626,6 +635,7 @@
 				6550C7F52B28F7B600B27030 /* MockImageGenerator.swift in Sources */,
 				65AA66972AF7B2C500C2BCD6 /* BackgroundEntryTests.swift in Sources */,
 				659A92CC2AFADB2600A6F351 /* ImageServiceRequestTests.swift in Sources */,
+				7BBA31B02B65AFD400358A2E /* ImageSaver.swift in Sources */,
 				65250CB42AF7D8AA006BB662 /* ImageQueryTests.swift in Sources */,
 				652406892AFEEB5C00AE193D /* NetworkResponseValidator.swift in Sources */,
 				652406942AFF98E900AE193D /* ImageServiceResponseTests.swift in Sources */,
