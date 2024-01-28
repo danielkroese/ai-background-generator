@@ -65,7 +65,7 @@ final class GenerateImageRouterTests: XCTestCase {
 // MARK: - Test helpers
 extension GenerateImageRouterTests {
     private func createSut(
-        initialSubviews: Set<GenerateImageSubview> = []
+        initialSubviews: Set<GenerateImageDestination> = []
     ) -> GenerateImageRouter {
         GenerateImageRouter(presentedSubviews: initialSubviews)
     }
