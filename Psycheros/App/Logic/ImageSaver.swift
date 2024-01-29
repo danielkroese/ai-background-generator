@@ -1,7 +1,7 @@
 import Foundation
 
 protocol ImageSaving {
-    func save(image: URL) async throws
+    func save(image: URL?) async throws
 }
 
 enum ImageSavingError: Error {
@@ -9,7 +9,9 @@ enum ImageSavingError: Error {
 }
 
 final class ImageSaver: ImageSaving {
-    func save(image: URL) async throws {
-        throw ImageSavingError.invalidUrl
+    func save(image imageUrl: URL?) async throws {
+        guard let imageUrl, imageUrl.isFileURL else {
+            throw ImageSavingError.invalidUrl
+        }
     }
 }
