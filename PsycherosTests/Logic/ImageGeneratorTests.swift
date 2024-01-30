@@ -51,7 +51,7 @@ extension ImageGeneratorTests {
         return ImageGenerator(imageService: imageService)
     }
     
-    private func createSutAndGenerate(with prompt: ImageQuery) async throws -> Image {
+    private func createSutAndGenerate(with prompt: ImageQuery) async throws -> UIImage {
         let sut = createSut()
         
         return try await sut.generate(from: prompt)

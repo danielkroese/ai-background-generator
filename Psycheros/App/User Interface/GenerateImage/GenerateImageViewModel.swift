@@ -9,7 +9,7 @@ protocol GenerateImageViewModeling: ObservableObject {
     
     var isLoading: Bool { get }
     var errorText: String? { get }
-    var generatedImage: Image? { get }
+    var generatedImage: UIImage? { get }
     
     func onAppear()
     func isPresenting(_ subview: GenerateImageDestination) -> Bool
@@ -28,7 +28,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorText: String?
-    @Published private(set) var generatedImage: Image?
+    @Published private(set) var generatedImage: UIImage?
         
     private(set) var imageTask: Task<(), Never>?
     
@@ -72,7 +72,10 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         case .generate:
             router.dismissAll(except: .tools)
             tappedGenerateImage()
-        case .tools, .save:
+        case .save:
+            router.dismissAll(except: .tools)
+            tappedSaveImage()
+        case .tools:
             break
         }
     }
@@ -93,13 +96,17 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         generateImage(from: imageQuery)
     }
     
+    private func tappedSaveImage() {
+        
+    }
+    
     private func setLoading(_ value: Bool) {
         Task { @MainActor in
             isLoading = value
         }
     }
     
-    private func setImage(from image: Image) {
+    private func setImage(from image: UIImage) {
         Task { @MainActor in
             generatedImage = image
         }

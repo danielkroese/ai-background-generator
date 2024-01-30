@@ -2,7 +2,7 @@ import Combine
 import SwiftUI
 
 protocol ImageGenerating {
-    func generate(from: ImageQuery) async throws -> Image
+    func generate(from: ImageQuery) async throws -> UIImage
 }
 
 enum ImageGeneratingError: String, Error {
@@ -17,7 +17,7 @@ final class ImageGenerator: ImageGenerating {
         self.imageService = imageService
     }
     
-    func generate(from query: ImageQuery) async throws -> Image {
+    func generate(from query: ImageQuery) async throws -> UIImage {
         guard query.isNotEmpty else {
             throw ImageGeneratingError.incompleteQuery
         }
@@ -31,7 +31,7 @@ final class ImageGenerator: ImageGenerating {
         return try await generateImage(from: query)
     }
     
-    private func generateImage(from query: ImageQuery) async throws -> Image {
+    private func generateImage(from query: ImageQuery) async throws -> UIImage {
         let prompt = try PromptGenerator.writePrompt(with: query)
         let model = try ImageRequestModel(prompt: prompt, size: query.size)
         let imageUrl = try await imageService.fetchImage(model: model)
@@ -40,13 +40,13 @@ final class ImageGenerator: ImageGenerating {
         return image
     }
     
-    private func createImage(from imageUrl: URL) -> Image {
+    private func createImage(from imageUrl: URL) -> UIImage {
         guard let dataFromUrl = try? Data(contentsOf: imageUrl),
               let uiImage = UIImage(data: dataFromUrl) else {
-            return Image(uiImage: UIImage())
+            return UIImage()
         }
         
-        return Image(uiImage: uiImage)
+        return uiImage
     }
     
     private var isPreview: Bool {

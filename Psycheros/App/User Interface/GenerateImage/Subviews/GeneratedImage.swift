@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct GeneratedImage: View {
-    let image: Image?
+    let image: UIImage?
     let isLoading: Bool
     
     var body: some View {
         VStack {
             if let image {
-                image
+                Image(uiImage: image)
                     .resizable()
                     .animatedHue(isActive: isLoading)
                     .ignoresSafeArea()
