@@ -75,7 +75,6 @@
 		7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E72B2F4047008667AB /* ShadowModifier.swift */; };
 		7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */; };
 		7BBA31AD2B65AF5500358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
-		7BBA31AF2B65AFB200358A2E /* ImageSaverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AE2B65AFB200358A2E /* ImageSaverTests.swift */; };
 		7BBA31B02B65AFD400358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
 		7BCB68F62B44AB5600CD700E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB68F52B44AB5600CD700E /* Toolbar.swift */; };
 /* End PBXBuildFile section */
@@ -148,7 +147,6 @@
 		7B9928E72B2F4047008667AB /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonShape.swift; sourceTree = "<group>"; };
 		7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
-		7BBA31AE2B65AFB200358A2E /* ImageSaverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaverTests.swift; sourceTree = "<group>"; };
 		7BCB68F52B44AB5600CD700E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -215,7 +213,6 @@
 				659A92C92AFADA8C00A6F351 /* ImageService */,
 				65250CBF2AF7F3D2006BB662 /* ImageGeneratorTests.swift */,
 				65250CD92AF83491006BB662 /* PromptGeneratorTests.swift */,
-				7BBA31AE2B65AFB200358A2E /* ImageSaverTests.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -623,7 +620,6 @@
 				6550C7EF2B28F3E800B27030 /* GenerateImageViewModel.swift in Sources */,
 				652406862AFEC4C100AE193D /* MockNetworkSession.swift in Sources */,
 				65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
-				7BBA31AF2B65AFB200358A2E /* ImageSaverTests.swift in Sources */,
 				7B0F26EC2B51D7C20037F32D /* Theme.swift in Sources */,
 				6524068B2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift in Sources */,
 				652406902AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
@@ -791,6 +787,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Psycheros/Config/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save your generated background";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -831,6 +828,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Psycheros/Config/Info.plist;
 				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save your generated background";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
