@@ -33,13 +33,16 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     private(set) var imageTask: Task<(), Never>?
     
     private let imageGenerator: ImageGenerating
+    private let imageSaver: ImageSaving
     private let router: GenerateImageRouting
     
     init(
         imageGenerator: ImageGenerating = ImageGenerator(),
+        imageSaver: ImageSaving = ImageSaver(),
         router: GenerateImageRouting = GenerateImageRouter()
     ) {
         self.imageGenerator = imageGenerator
+        self.imageSaver = imageSaver
         self.router = router
         
         router.publisher
@@ -97,7 +100,22 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     }
     
     private func tappedSaveImage() {
+        setError(nil)
         
+        imageTask = Task {
+            guard let generatedImage else {
+                errorText = "No image to save"
+                return
+            }
+            
+            do {
+                try await imageSaver.saveToPhotoAlbum(image: generatedImage)
+                
+                // show message saving succeeded
+            } catch {
+                setError(error)
+            }
+        }
     }
     
     private func setLoading(_ value: Bool) {
