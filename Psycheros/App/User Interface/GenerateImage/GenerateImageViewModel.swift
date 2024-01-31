@@ -100,9 +100,14 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     }
     
     private func tappedSaveImage() {
+        setLoading(true)
         setError(nil)
         
         imageTask = Task {
+            defer {
+                setLoading(false)
+            }
+            
             guard let generatedImage else {
                 errorText = "No image to save"
                 return

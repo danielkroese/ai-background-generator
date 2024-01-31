@@ -140,15 +140,36 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         XCTAssertFalse(sut.isLoading)
     }
+    
+    func test_tappedSaveImage() async {
+        let mockImageSaver = MockImageSaver()
+        let sut = createSut(imageSaver: mockImageSaver)
+        
+        await expectedGeneratedImage(in: sut) {
+            sut.tapped(on: .generate)
+        }
+        
+        await expectedValue(from: sut.$isLoading) {
+            sut.tapped(on: .save)
+        }
+        
+        XCTAssertEqual(mockImageSaver.saveToPhotoAlbumCallCount, 1)
+        XCTAssertEqual(mockImageSaver.saveToPhotoAlbumImage, sut.generatedImage)
+    }
 }
 
 // MARK: - Test helpers
 extension GenerateImageViewModelTests {
     private func createSut(
         imageGenerator: ImageGenerating = MockImageGenerator(),
+        imageSaver: ImageSaving = MockImageSaver(),
         router: GenerateImageRouting = GenerateImageRouter() // TODO: Mock?
     ) -> GenerateImageViewModel {
-        GenerateImageViewModel(imageGenerator: imageGenerator, router: router)
+        GenerateImageViewModel(
+            imageGenerator: imageGenerator,
+            imageSaver: imageSaver,
+            router: router
+        )
     }
     
     private func expectedError(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
@@ -172,5 +193,21 @@ extension GenerateImageViewModelTests {
         action()
         
         await fulfillment(of: [expectation], timeout: 0.1)
+    }
+}
+
+final class MockImageSaver: NSObject, ImageSaving {
+    private(set) var saveToPhotoAlbumImage: UIImage?
+    private(set) var saveToPhotoAlbumCallCount = 0
+    
+    var saveToPhotoAlbumError: Error?
+    
+    func saveToPhotoAlbum(image: UIImage) async throws {
+        saveToPhotoAlbumCallCount += 1
+        saveToPhotoAlbumImage = image
+        
+        if let saveToPhotoAlbumError {
+            throw saveToPhotoAlbumError
+        }
     }
 }
