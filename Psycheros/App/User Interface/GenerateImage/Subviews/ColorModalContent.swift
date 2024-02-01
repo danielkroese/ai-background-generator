@@ -12,16 +12,18 @@ struct ColorModalContent: View {
             LazyVGrid(columns: columnItems, spacing: 8) {
                 ForEach(AllowedColor.allCases, id: \.self) { color in
                     Button {
-                        selectedColor = color
+                        selected(color)
                     } label: {
                         RoundedRectangle(cornerRadius: 32)
                             .fill(color.suiColor)
-                            .strokeBorder(
-                                color == selectedColor ? .accent : .clear,
-                                lineWidth: 4
-                            )
                             .frame(width: 64, height: 64)
                             .shadowModifier()
+                            .modifier(
+                                Shadow(
+                                    color: color.suiColor,
+                                    isActive: selectedColor == color
+                                )
+                            )
                     }
                     .padding(8)
                 }
@@ -29,4 +31,26 @@ struct ColorModalContent: View {
             .padding()
         }
     }
+    
+    private func selected(_ color: AllowedColor) {
+        selectedColor = color
+    }
+    
+    private struct Shadow: ViewModifier {
+        let color: Color
+        let isActive: Bool
+        
+        func body(content: Content) -> some View {
+            Group {
+                if isActive {
+                    content
+                        .shadow(color: color, radius: 30)
+                } else {
+                    content
+                }
+            }
+            .transition(.opacity)
+        }
+    }
+
 }

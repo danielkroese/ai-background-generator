@@ -7,7 +7,6 @@ struct SchadowModifier: ViewModifier {
     
     private var isDark: Bool { colorScheme == .dark }
     private var topLeadingColor: Color { isDark ? .black : .white }
-    private var bottomTrailingColor: Color { isDark ? .black : .black }
     
     func body(content: Content) -> some View {
         content
@@ -16,7 +15,7 @@ struct SchadowModifier: ViewModifier {
                 radius: 15, x: -5, y: -5
             )
             .shadow(
-                color: bottomTrailingColor.opacity(opacity),
+                color: .black.opacity(opacity),
                 radius: 10, x: 5, y: 5
             )
     }

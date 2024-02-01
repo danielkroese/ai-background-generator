@@ -20,11 +20,7 @@ protocol GenerateImageViewModeling: ObservableObject {
 final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published var currentSubviews: Set<GenerateImageDestination> = []
     @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
-    @Published var selectedColor: AllowedColor = .blue {
-        didSet {
-            router.dismiss(.colors)
-        }
-    }
+    @Published var selectedColor: AllowedColor = .blue { didSet { didSelectColor() } }
     
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorText: String?
@@ -120,6 +116,12 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
             } catch {
                 setError(error)
             }
+        }
+    }
+    
+    private func didSelectColor() {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
+            self?.router.dismiss(.colors)
         }
     }
     
