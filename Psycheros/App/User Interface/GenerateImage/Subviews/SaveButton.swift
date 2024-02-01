@@ -10,7 +10,5 @@ struct SaveButton: View {
             action: action
         )
         .frame(maxWidth: 64)
-        .frame(maxWidth: .infinity, alignment: .trailing)
-        .padding(32)
     }
 }

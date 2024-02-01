@@ -6,16 +6,19 @@ struct Toolbar<ToolsContent: View>: ViewModifier {
     
     @ViewBuilder let toolsContent: () -> ToolsContent
     
+    @State var maxWidth = 0.0
     @State var toolsHeight = 0.0
     
     func body(content: Content) -> some View {
         ZStack {
             content
+                .geometryReader { maxWidth = $0.size.width}
             
             toolsContent()
                 .geometryReader { toolsHeight = $0.size.height }
+                .padding(32)
                 .frame(
-                    maxWidth: .infinity,
+                    maxWidth: maxWidth,
                     maxHeight: .infinity,
                     alignment: Alignment(horizontal: .center, vertical: alignment)
                 )

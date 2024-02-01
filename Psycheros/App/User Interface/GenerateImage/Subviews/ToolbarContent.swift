@@ -42,6 +42,5 @@ struct ToolbarContent: View {
             .transition(.scale)
             .animation(.bouncy(duration: 0.5), value: isLoading)
         }
-        .padding(.horizontal, 32)
     }
 }

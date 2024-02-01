@@ -21,6 +21,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             SaveButton {
                 viewModel.tapped(on: .save)
             }
+            .frame(maxWidth: .infinity, alignment: .trailing)
             
         }
         .toolbar(isPresented: .constant(viewModel.isPresenting(.tools))) {
