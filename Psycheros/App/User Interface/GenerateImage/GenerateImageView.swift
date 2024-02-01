@@ -44,6 +44,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 selectedThemes: $viewModel.selectedThemes
             )
         }
+        .preferredColorScheme(.dark)
     }
 }
 

@@ -14,7 +14,7 @@ struct Modal<ModalContent: View>: ViewModifier {
                 .geometryReader { contentSize = $0.size }
             
             RoundedRectangle(cornerRadius: 32)
-                .fill(.background)
+                .fill(Material.regularMaterial)
                 .frame(
                     maxWidth: modalContentSize.width,
                     maxHeight: modalContentSize.height
