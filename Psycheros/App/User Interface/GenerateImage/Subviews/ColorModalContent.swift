@@ -9,7 +9,7 @@ struct ColorModalContent: View {
     
     var body: some View {
         ScrollView {
-            LazyVGrid(columns: columnItems, spacing: 32) {
+            LazyVGrid(columns: columnItems, spacing: 8) {
                 ForEach(AllowedColor.allCases, id: \.self) { color in
                     Button {
                         selectedColor = color
@@ -23,9 +23,10 @@ struct ColorModalContent: View {
                             .frame(width: 64, height: 64)
                             .shadowModifier()
                     }
+                    .padding(8)
                 }
             }
-            .padding(32)
+            .padding()
         }
     }
 }
