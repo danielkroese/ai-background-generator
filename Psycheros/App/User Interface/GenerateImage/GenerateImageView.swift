@@ -21,6 +21,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             SaveButton {
                 viewModel.tapped(on: .save)
             }
+            .padding(32)
             .frame(maxWidth: .infinity, alignment: .trailing)
             
         }
@@ -30,6 +31,8 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 isLoading: viewModel.isLoading,
                 tappedSubviewButton: viewModel.tapped(on:)
             )
+            .padding(32)
+            .frame(maxWidth: .infinity)
         }
         .modal(isPresented: .constant(viewModel.isPresenting(.colors))) {
             ColorModalContent(

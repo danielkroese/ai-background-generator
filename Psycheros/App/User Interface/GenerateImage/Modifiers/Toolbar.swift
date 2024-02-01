@@ -16,7 +16,6 @@ struct Toolbar<ToolsContent: View>: ViewModifier {
             
             toolsContent()
                 .geometryReader { toolsHeight = $0.size.height }
-                .padding(32)
                 .frame(
                     maxWidth: maxWidth,
                     maxHeight: .infinity,
