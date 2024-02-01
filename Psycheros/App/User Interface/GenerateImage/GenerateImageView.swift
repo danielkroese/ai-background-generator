@@ -14,27 +14,21 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
         .onAppear {
             viewModel.onAppear()
         }
+        .toolbar(
+            isPresented: .constant(viewModel.isPresenting(.tools)),
+            alignment: .top
+        ) {
+            SaveButton {
+                viewModel.tapped(on: .save)
+            }
+            
+        }
         .toolbar(isPresented: .constant(viewModel.isPresenting(.tools))) {
             ToolbarContent(
                 errorText: viewModel.errorText,
                 isLoading: viewModel.isLoading,
                 tappedSubviewButton: viewModel.tapped(on:)
             )
-        }
-        .toolbar(
-            isPresented: .constant(viewModel.isPresenting(.tools)),
-            alignment: .top
-        ) {
-            PillButton(
-                rounded: .all,
-                imageName: "square.and.arrow.down"
-            ) {
-                viewModel.tapped(on: .save)
-            }
-            .frame(maxWidth: 64)
-            .frame(maxWidth: .infinity, alignment: .trailing)
-            .padding(32)
-            
         }
         .modal(isPresented: .constant(viewModel.isPresenting(.colors))) {
             ColorModalContent(

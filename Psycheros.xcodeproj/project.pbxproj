@@ -76,6 +76,7 @@
 		7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */; };
 		7BBA31AD2B65AF5500358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
 		7BBA31B02B65AFD400358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
+		7BC1DEEF2B6C287600046CE7 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC1DEEE2B6C287600046CE7 /* SaveButton.swift */; };
 		7BCB68F62B44AB5600CD700E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB68F52B44AB5600CD700E /* Toolbar.swift */; };
 /* End PBXBuildFile section */
 
@@ -147,6 +148,7 @@
 		7B9928E72B2F4047008667AB /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonShape.swift; sourceTree = "<group>"; };
 		7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
+		7BC1DEEE2B6C287600046CE7 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		7BCB68F52B44AB5600CD700E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -431,6 +433,7 @@
 			isa = PBXGroup;
 			children = (
 				7B042D732B52A1A700385BD8 /* ColorModalContent.swift */,
+				7BC1DEEE2B6C287600046CE7 /* SaveButton.swift */,
 				7B042D7F2B5427E100385BD8 /* ToolbarContent.swift */,
 				7B042D752B52A1CA00385BD8 /* ThemeModalContent.swift */,
 				7B042D7D2B54243C00385BD8 /* GeneratedImage.swift */,
@@ -572,6 +575,7 @@
 				7B042D7C2B52D88E00385BD8 /* GenerateImageRouter.swift in Sources */,
 				65E034DA2B23CC05001B5F99 /* ImageDataParser.swift in Sources */,
 				659A92CF2AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
+				7BC1DEEF2B6C287600046CE7 /* SaveButton.swift in Sources */,
 				7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */,
 				659A92C72AFAD77D00A6F351 /* ImageServiceRequest.swift in Sources */,
 				7B0301712B4F33D1005DD8DC /* Modal.swift in Sources */,
