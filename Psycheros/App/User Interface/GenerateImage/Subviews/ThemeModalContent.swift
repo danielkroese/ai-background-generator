@@ -7,8 +7,8 @@ struct ThemeModalContent: View {
         Array(repeating: GridItem(.flexible()), count: 2)
     }
     
-    private func strokeBorder(for theme: Theme) -> Color {
-        selectedThemes.contains(theme) ? .accentColor : .clear
+    private func isActive(_ theme: Theme) -> Bool {
+        selectedThemes.contains(theme)
     }
     
     var body: some View {
@@ -19,11 +19,12 @@ struct ThemeModalContent: View {
                         selectedThemes.toggle(theme)
                     } label: {
                         RoundedRectangle(cornerRadius: 32)
-                            .strokeBorder(strokeBorder(for: theme), lineWidth: 4)
+                            .fill(isActive(theme) ? .accentColor : Color.clear)
                             .frame(width: 128, height: 76)
                             .overlay {
                                 Text(theme.rawValue)
                                     .font(.title2)
+                                    .foregroundStyle(isActive(theme) ? .white : .accentColor)
                             }
                             .shadowModifier()
                     }
