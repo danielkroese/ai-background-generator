@@ -1,53 +1,53 @@
 import Combine
 
 protocol GenerateImageRouting {
-    var publisher: AnyPublisher<Set<GenerateImageDestination>, Never> { get }
+    var publisher: AnyPublisher<Set<GenerateImageElement>, Never> { get }
     
-    func toggle(_ subview: GenerateImageDestination)
-    func present(_ subview: GenerateImageDestination)
-    func dismiss(_ subview: GenerateImageDestination)
-    func dismissAll(except subview: GenerateImageDestination?)
-    func isPresenting(_ subview: GenerateImageDestination) -> Bool
+    func toggle(_ element: GenerateImageElement)
+    func present(_ element: GenerateImageElement)
+    func dismiss(_ element: GenerateImageElement)
+    func dismissAll(except element: GenerateImageElement?)
+    func isPresenting(_ element: GenerateImageElement) -> Bool
 }
 
 extension GenerateImageRouting {
-    func dismissAll(except subview: GenerateImageDestination? = nil) {
-        dismissAll(except: subview)
+    func dismissAll(except element: GenerateImageElement? = nil) {
+        dismissAll(except: element)
     }
 }
 
-enum GenerateImageDestination {
+enum GenerateImageElement {
     case tools, colors, themes, generate, save
 }
 
 final class GenerateImageRouter: GenerateImageRouting {
-    var publisher: AnyPublisher<Set<GenerateImageDestination>, Never> {
-        $presentedSubviews.eraseToAnyPublisher()
+    var publisher: AnyPublisher<Set<GenerateImageElement>, Never> {
+        $presentedElements.eraseToAnyPublisher()
     }
     
-    @Published private var presentedSubviews: Set<GenerateImageDestination>
+    @Published private var presentedElements: Set<GenerateImageElement>
     
-    init(presentedSubviews: Set<GenerateImageDestination> = []) {
-        self.presentedSubviews = presentedSubviews
+    init(presentedElements: Set<GenerateImageElement> = []) {
+        self.presentedElements = presentedElements
     }
     
-    func toggle(_ subview: GenerateImageDestination) {
-        presentedSubviews.toggle(subview)
+    func toggle(_ element: GenerateImageElement) {
+        presentedElements.toggle(element)
     }
     
-    func present(_ subview: GenerateImageDestination) {
-        presentedSubviews.insert(subview)
+    func present(_ element: GenerateImageElement) {
+        presentedElements.insert(element)
     }
     
-    func dismiss(_ subview: GenerateImageDestination) {
-        presentedSubviews.remove(subview)
+    func dismiss(_ element: GenerateImageElement) {
+        presentedElements.remove(element)
     }
     
-    func dismissAll(except subview: GenerateImageDestination? = nil) {
-        presentedSubviews = presentedSubviews.filter { $0 == subview}
+    func dismissAll(except element: GenerateImageElement? = nil) {
+        presentedElements = presentedElements.filter { $0 == element}
     }
     
-    func isPresenting(_ subview: GenerateImageDestination) -> Bool {
-        presentedSubviews.contains(subview)
+    func isPresenting(_ element: GenerateImageElement) -> Bool {
+        presentedElements.contains(element)
     }
 }
