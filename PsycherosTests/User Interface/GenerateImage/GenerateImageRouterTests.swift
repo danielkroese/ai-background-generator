@@ -60,6 +60,15 @@ final class GenerateImageRouterTests: XCTestCase {
         XCTAssertTrue(sut.isPresenting(.colors))
         XCTAssertFalse(sut.isPresenting(.themes))
     }
+    
+    func test_presentColorsAfterThemes_dismissesThemes() {
+        let sut = createSut()
+        sut.present(.themes)
+        sut.present(.colors)
+        
+        XCTAssertTrue(sut.isPresenting(.colors))
+        XCTAssertFalse(sut.isPresenting(.themes))
+    }
 }
 
 // MARK: - Test helpers

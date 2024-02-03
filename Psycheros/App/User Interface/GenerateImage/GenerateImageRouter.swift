@@ -40,8 +40,10 @@ final class GenerateImageRouter: GenerateImageRouting {
     }
     
     func present(_ element: GenerateImageElement) {
-        var elements = presentedElements
+        var elements = presentedElements.filter { $0 == .tools }
+        
         elements.insert(element)
+        
         set(elements)
     }
     
@@ -58,8 +60,6 @@ final class GenerateImageRouter: GenerateImageRouting {
     }
     
     private func set(_ presentedElements: Set<GenerateImageElement>) {
-        Task { @MainActor in
-            self.presentedElements = presentedElements
-        }
+        self.presentedElements = presentedElements
     }
 }
