@@ -60,7 +60,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     
     func tappedBackground() {
         if isLoading == false {
-            router.toggle(.tools)
+            router.tappedBackground()
         }
     }
     

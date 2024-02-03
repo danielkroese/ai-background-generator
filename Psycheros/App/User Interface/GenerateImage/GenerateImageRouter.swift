@@ -7,6 +7,7 @@ protocol GenerateImageRouting {
     func present(_ element: GenerateImageElement)
     func dismiss(_ element: GenerateImageElement)
     func dismissAll(except element: GenerateImageElement?)
+    func tappedBackground()
     func isPresenting(_ element: GenerateImageElement) -> Bool
 }
 
@@ -53,6 +54,14 @@ final class GenerateImageRouter: GenerateImageRouting {
     
     func dismissAll(except element: GenerateImageElement? = nil) {
         set(presentedElements.filter { $0 == element} )
+    }
+    
+    func tappedBackground() {
+        if presentedElements.contains(.tools) {
+            dismissAll()
+        } else {
+            present(.tools)
+        }
     }
     
     func isPresenting(_ element: GenerateImageElement) -> Bool {

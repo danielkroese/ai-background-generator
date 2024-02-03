@@ -61,6 +61,22 @@ final class GenerateImageRouterTests: XCTestCase {
         XCTAssertFalse(sut.isPresenting(.themes))
     }
     
+    func test_tappedBackground_closesAll() async {
+        let sut = createSut(initialSubviews: [.tools, .themes])
+        
+        await setsExpected(value: [], on: sut.publisher) {
+            sut.tappedBackground()
+        }
+    }
+    
+    func test_tappedBackground_opensOnlyTools() async {
+        let sut = createSut(initialSubviews: [])
+        
+        await setsExpected(value: [.tools], on: sut.publisher) {
+            sut.tappedBackground()
+        }
+    }
+    
     func test_presentColorsAfterThemes_dismissesThemes() {
         let sut = createSut()
         sut.present(.themes)
