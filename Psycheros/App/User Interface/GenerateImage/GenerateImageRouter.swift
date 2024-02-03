@@ -32,22 +32,34 @@ final class GenerateImageRouter: GenerateImageRouting {
     }
     
     func toggle(_ element: GenerateImageElement) {
-        presentedElements.toggle(element)
+        if presentedElements.contains(element) {
+            dismiss(element)
+        } else {
+            present(element)
+        }
     }
     
     func present(_ element: GenerateImageElement) {
-        presentedElements.insert(element)
+        var elements = presentedElements
+        elements.insert(element)
+        set(elements)
     }
     
     func dismiss(_ element: GenerateImageElement) {
-        presentedElements.remove(element)
+        set(presentedElements.filter { $0 != element} )
     }
     
     func dismissAll(except element: GenerateImageElement? = nil) {
-        presentedElements = presentedElements.filter { $0 == element}
+        set(presentedElements.filter { $0 == element} )
     }
     
     func isPresenting(_ element: GenerateImageElement) -> Bool {
         presentedElements.contains(element)
+    }
+    
+    private func set(_ presentedElements: Set<GenerateImageElement>) {
+        Task { @MainActor in
+            self.presentedElements = presentedElements
+        }
     }
 }
