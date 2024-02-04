@@ -2,6 +2,7 @@ import Foundation
 import SwiftUI
 import Combine
 
+@MainActor
 protocol GenerateImageViewModeling: ObservableObject {
     var selectedColor: AllowedColor { get set }
     var selectedThemes: Set<Theme> { get set }
@@ -17,6 +18,7 @@ protocol GenerateImageViewModeling: ObservableObject {
     func tappedBackground()
 }
 
+@MainActor
 final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published var currentSubviews: Set<GenerateImageElement> = []
     @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
@@ -25,7 +27,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var errorText: String?
     @Published private(set) var generatedImage: UIImage?
-        
+    
     private(set) var imageTask: Task<(), Never>?
     
     private let imageGenerator: ImageGenerating
