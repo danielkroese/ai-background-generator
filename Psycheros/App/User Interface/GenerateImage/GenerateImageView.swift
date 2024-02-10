@@ -26,11 +26,9 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             
         }
         .toolbar(isPresented: .constant(viewModel.isPresenting(.tools))) {
-            ToolbarContent(
-                errorText: viewModel.errorText,
-                isLoading: viewModel.isLoading,
-                tappedSubviewButton: viewModel.tapped(on:)
-            )
+            ToolbarContent(isLoading: viewModel.isLoading) { element in
+                viewModel.tapped(on: element)
+            }
             .padding(32)
             .frame(maxWidth: .infinity)
         }
@@ -43,6 +41,11 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             ThemeModalContent(
                 selectedThemes: $viewModel.selectedThemes
             )
+        }
+        .alert("Something happened", isPresented: .constant(viewModel.errorText != nil)) {
+            Text("Close")
+        } message: {
+            Text(viewModel.errorText ?? "unknown error")
         }
         .preferredColorScheme(.dark)
     }
