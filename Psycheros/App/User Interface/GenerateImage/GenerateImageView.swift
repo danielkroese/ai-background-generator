@@ -42,10 +42,10 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 selectedThemes: $viewModel.selectedThemes
             )
         }
-        .alert("Something happened", isPresented: .constant(viewModel.errorText != nil)) {
+        .alert("Something happened", isPresented: .constant(viewModel.messageText != nil)) {
             Text("Close")
         } message: {
-            Text(viewModel.errorText ?? "unknown error")
+            Text(viewModel.messageText ?? "unknown error")
         }
         .preferredColorScheme(.dark)
     }

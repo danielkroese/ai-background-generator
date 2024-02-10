@@ -9,7 +9,7 @@ protocol GenerateImageViewModeling: ObservableObject {
     var currentSubviews: Set<GenerateImageElement>{ get set }
     
     var isLoading: Bool { get }
-    var errorText: String? { get }
+    var messageText: String? { get }
     var generatedImage: UIImage? { get }
     
     func onAppear()
@@ -25,7 +25,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published var selectedColor: AllowedColor = .blue { didSet { didSelectColor() } }
     
     @Published private(set) var isLoading: Bool = false
-    @Published private(set) var errorText: String?
+    @Published private(set) var messageText: String?
     @Published private(set) var generatedImage: UIImage?
     
     private(set) var imageTask: Task<(), Never>?
@@ -87,7 +87,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         }
         
         guard selectedThemes.isEmpty == false else {
-            errorText = "Theme required"
+            messageText = "Theme required"
             return
         }
         
@@ -107,14 +107,14 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
             }
             
             guard let generatedImage else {
-                errorText = "No image to save"
+                messageText = "No image to save"
                 return
             }
             
             do {
                 try await imageSaver.saveToPhotoAlbum(image: generatedImage)
                 
-                // show message saving succeeded
+                messageText = "Image saved to your gallery"
             } catch {
                 setError(error)
             }
@@ -142,11 +142,11 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     private func setError(_ error: Error?) {
         Task { @MainActor in
             guard let error else {
-                errorText = nil
+                messageText = nil
                 return
             }
             
-            errorText = (error as? ImageGeneratingError)?.rawValue ?? error.localizedDescription
+            messageText = (error as? ImageGeneratingError)?.rawValue ?? error.localizedDescription
         }
     }
     
