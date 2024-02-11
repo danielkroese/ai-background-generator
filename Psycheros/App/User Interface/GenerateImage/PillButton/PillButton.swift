@@ -32,7 +32,7 @@ struct PillButton<Label>: View where Label: View{
                 
                 label()
             }
-            .frame(maxWidth: .infinity, maxHeight: 16)
+            .frame(maxHeight: 16)
         }
         .buttonStyle(
             ShapeButtonStyle(

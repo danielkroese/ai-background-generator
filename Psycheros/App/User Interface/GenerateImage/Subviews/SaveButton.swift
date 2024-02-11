@@ -12,7 +12,5 @@ struct SaveButton: View {
             Text("Save")
                 .fixedSize(horizontal: true, vertical: false)
         }
-        .frame(maxWidth: 32)
-        .frame(maxWidth: .infinity)
     }
 }
