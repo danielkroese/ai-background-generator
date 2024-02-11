@@ -29,9 +29,11 @@ struct Modal<ModalContent: View>: ViewModifier {
                         .geometryReader { modalContentSize = $0.size }
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 32))
-                .offset(y: isPresented.wrappedValue ? .zero : contentSize.height)
+                .opacity(isPresented.wrappedValue ? 1.0 : 0.0)
+                .animation(.easeInOut(duration: 0.2), value: isPresented.wrappedValue)
+                .offset(y: isPresented.wrappedValue ? .zero : modalContentSize.height / 8)
                 .transition(.scale)
-                .animation(.bouncy, value: isPresented.wrappedValue)
+                .animation(.bouncy(duration: 1.5), value: isPresented.wrappedValue)
                 .shadowModifier()
         }
     }
