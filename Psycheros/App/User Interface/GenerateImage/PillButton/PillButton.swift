@@ -24,15 +24,15 @@ struct PillButton<Label>: View where Label: View{
     
     var body: some View {
         Button(action: action) {
-            HStack(spacing: 16) {
+            HStack(spacing: 12) {
                 Image(systemName: imageName)
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: 32, height: 32)
+                    .frame(width: 16, height: 16)
                 
                 label()
             }
-            .frame(maxWidth: .infinity, maxHeight: 32)
+            .frame(maxWidth: .infinity, maxHeight: 16)
         }
         .buttonStyle(
             ShapeButtonStyle(
@@ -40,7 +40,7 @@ struct PillButton<Label>: View where Label: View{
                 shape: PillButtonShape(
                     rounded: rounded,
                     innerCornerRadius: 8,
-                    outerCornerRadius: 32
+                    outerCornerRadius: 24
                 )
             )
         )

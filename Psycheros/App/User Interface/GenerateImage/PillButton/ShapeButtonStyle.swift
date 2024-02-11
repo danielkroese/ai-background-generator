@@ -6,7 +6,7 @@ struct ShapeButtonStyle<S: Shape>: ButtonStyle {
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
-            .padding(24)
+            .padding(16)
             .shimmer(isLoading)
             .foregroundStyle(.foreground.opacity(0.8))
             .background(.regularMaterial)

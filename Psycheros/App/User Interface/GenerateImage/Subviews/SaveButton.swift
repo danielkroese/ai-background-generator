@@ -8,7 +8,11 @@ struct SaveButton: View {
             rounded: .all,
             imageName: "square.and.arrow.down",
             action: action
-        )
-        .frame(maxWidth: 64)
+        ) {
+            Text("Save")
+                .fixedSize(horizontal: true, vertical: false)
+        }
+        .frame(maxWidth: 32)
+        .frame(maxWidth: .infinity)
     }
 }

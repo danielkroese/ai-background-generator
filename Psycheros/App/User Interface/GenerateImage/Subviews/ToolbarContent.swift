@@ -5,14 +5,20 @@ struct ToolbarContent: View {
     let tappedSubviewButton: (GenerateImageElement) -> Void
     
     var body: some View {
-        HStack(spacing: 16) {
+        HStack(spacing: 12) {
             PillButton(rounded: .leading, imageName: "paintbrush.fill") {
                 tappedSubviewButton(.colors)
+            } label: {
+                Text("Color")
+                    .fixedSize(horizontal: true, vertical: false)
             }
             .disabled(isLoading)
             
             PillButton(rounded: .center, imageName: "scope") {
                 tappedSubviewButton(.themes)
+            } label: {
+                Text("Theme")
+                    .fixedSize(horizontal: true, vertical: false)
             }
             .disabled(isLoading)
             
@@ -25,6 +31,9 @@ struct ToolbarContent: View {
             } label: {
                 if isLoading {
                     Text("Loading...")
+                        .fixedSize(horizontal: true, vertical: false)
+                } else {
+                    Text("Generate")
                         .fixedSize(horizontal: true, vertical: false)
                 }
             }
