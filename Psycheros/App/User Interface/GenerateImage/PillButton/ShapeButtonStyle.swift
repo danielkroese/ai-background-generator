@@ -9,7 +9,7 @@ struct ShapeButtonStyle<S: Shape>: ButtonStyle {
             .padding(16)
             .shimmer(isLoading)
             .foregroundStyle(.foreground.opacity(0.8))
-            .background(.regularMaterial)
+            .background(.thinMaterial)
             .clipShape(shape)
             .opacity(configuration.isPressed ? 0.8 : 1.0)
             .shadowModifier(opacity: configuration.isPressed ? .zero : 0.1)

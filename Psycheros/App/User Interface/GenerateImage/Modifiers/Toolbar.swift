@@ -21,14 +21,16 @@ struct Toolbar<ToolsContent: View>: ViewModifier {
                     maxHeight: .infinity,
                     alignment: Alignment(horizontal: .center, vertical: alignment)
                 )
+                .opacity(isPresented.wrappedValue ? 1.0 : 0.0)
+                .animation(.easeInOut(duration: 0.2), value: isPresented.wrappedValue)
                 .offset(y: yOffset)
                 .transition(.scale)
-                .animation(.bouncy, value: isPresented.wrappedValue)
+                .animation(.bouncy(duration: 0.5).delay(0.1), value: isPresented.wrappedValue)
         }
     }
     
     private var yOffset: CGFloat {
-        (isPresented.wrappedValue ? .zero : 2 * toolsHeight) * (alignment == .top ? -1 : 1)
+        (isPresented.wrappedValue ? .zero : toolsHeight / 2) * (alignment == .top ? -1 : 1)
     }
 }
 

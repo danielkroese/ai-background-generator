@@ -21,7 +21,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             SaveButton {
                 viewModel.tapped(on: .save)
             }
-            .padding(32)
+            .padding(16)
             .frame(maxWidth: .infinity, alignment: .trailing)
             
         }
@@ -29,7 +29,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
             ToolbarContent(isLoading: viewModel.isLoading) { element in
                 viewModel.tapped(on: element)
             }
-            .padding(32)
+            .padding(16)
             .frame(maxWidth: .infinity)
         }
         .modal(isPresented: .constant(viewModel.isPresenting(.colors))) {
