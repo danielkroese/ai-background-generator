@@ -9,7 +9,7 @@ struct GeneratedImage: View {
             imageView
                 .aspectRatio(contentMode: .fill)
                 .ignoresSafeArea()
-                .overlay(Material.ultraThin)
+                .overlay(.thinMaterial)
             
             imageView
                 .aspectRatio(contentMode: .fit)

@@ -78,6 +78,7 @@
 		7BBA31B02B65AFD400358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
 		7BC1DEEF2B6C287600046CE7 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC1DEEE2B6C287600046CE7 /* SaveButton.swift */; };
 		7BCB68F62B44AB5600CD700E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB68F52B44AB5600CD700E /* Toolbar.swift */; };
+		7BFDB1552B7AD7FF0049F0D7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDB1542B7AD7FF0049F0D7 /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +151,7 @@
 		7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		7BC1DEEE2B6C287600046CE7 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		7BCB68F52B44AB5600CD700E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		7BFDB1542B7AD7FF0049F0D7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,6 +439,7 @@
 				7B042D7F2B5427E100385BD8 /* ToolbarContent.swift */,
 				7B042D752B52A1CA00385BD8 /* ThemeModalContent.swift */,
 				7B042D7D2B54243C00385BD8 /* GeneratedImage.swift */,
+				7BFDB1542B7AD7FF0049F0D7 /* Message.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				7B042D762B52A1CA00385BD8 /* ThemeModalContent.swift in Sources */,
 				6550CBDF2B2A2DFE00B27030 /* ShapeButtonStyle.swift in Sources */,
 				7B0F26EE2B51D7D60037F32D /* AllowedColor.swift in Sources */,
+				7BFDB1552B7AD7FF0049F0D7 /* Message.swift in Sources */,
 				652406882AFEEB5C00AE193D /* NetworkResponseValidator.swift in Sources */,
 				65F97E0E2AF669A000C0E501 /* GenerateImageView.swift in Sources */,
 				7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */,
