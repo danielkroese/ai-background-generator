@@ -4,8 +4,14 @@ protocol ImageServicing {
     func fetchImage(model: ImageRequestModel) async throws -> URL
 }
 
-enum ImageServicingError: Error {
+enum ImageServicingError: LocalizedError {
     case missingApiKey
+    
+    var errorDescription: String? {
+        switch self {
+        case .missingApiKey: "Missing required API key in config (STABILITY_API_KEY)."
+        }
+    }
 }
 
 final class ImageService: ImageServicing {

@@ -5,10 +5,10 @@ struct Message: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .alert(message ?? "unknown error", isPresented: .constant(message != nil)) {
+            .alert("", isPresented: .constant(message != nil)) {
                 Text("Close")
             } message: {
-                Text("")
+                Text(message ?? "unknown error")
             }
     }
 }

@@ -1,10 +1,17 @@
 import Foundation
 
-enum ImageServiceResponseError: Error, Equatable {
+enum ImageServiceResponseError: LocalizedError, Equatable {
     case invalidJsonResponse(DecodingError?),
          emptyResponse,
-         artifactIndexNotFound,
          finishedUnsuccesfully(ImageServiceResponse.FinishReason)
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidJsonResponse(let error): "Invalid JSON response: \(String(describing: error?.errorDescription))."
+        case .emptyResponse: "Response from server was empty."
+        case .finishedUnsuccesfully(let reason): "Finished with unsuccessful server response: \(reason.rawValue)."
+        }
+    }
     
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.localizedDescription == rhs.localizedDescription
@@ -52,12 +59,9 @@ struct ImageServiceResponse: Codable, Equatable {
     static func artifact(_ index: Int, of data: Data) throws -> Artifact {
         let artifacts = try decode(data).artifacts
         
-        guard artifacts.isEmpty == false else {
+        guard artifacts.isEmpty == false,
+              artifacts.indices.contains(index) else {
             throw ImageServiceResponseError.emptyResponse
-        }
-        
-        guard artifacts.indices.contains(index) else {
-            throw ImageServiceResponseError.artifactIndexNotFound
         }
         
         let artifact = artifacts[index]

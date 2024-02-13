@@ -4,9 +4,16 @@ protocol DataParsing {
     func parse(_ data: String) throws -> URL
 }
 
-enum DataParsingError: Error {
+enum DataParsingError: LocalizedError {
     case invalidImageData,
          saveDirectoryNotFound
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidImageData: "Could not decode image data."
+        case .saveDirectoryNotFound: "Could not find save directory."
+        }
+    }
 }
 
 final class ImageDataParser: DataParsing {

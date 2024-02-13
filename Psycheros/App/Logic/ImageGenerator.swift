@@ -5,9 +5,16 @@ protocol ImageGenerating {
     func generate(from: ImageQuery) async throws -> UIImage
 }
 
-enum ImageGeneratingError: String, Error {
+enum ImageGeneratingError: LocalizedError {
     case incompleteQuery,
          inPreviewMode
+    
+    var errorDescription: String? {
+        switch self {
+        case .incompleteQuery: "Query incomplete, check color and theme."
+        case .inPreviewMode: "In preview mode. Not actually requesting an image."
+        }
+    }
 }
 
 final class ImageGenerator: ImageGenerating {

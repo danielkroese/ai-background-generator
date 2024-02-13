@@ -40,7 +40,7 @@ final class GenerateImageViewModelTests: XCTestCase {
             sut.tapped(on: .generate)
         }
         
-        XCTAssertEqual(sut.errorText, "Theme required")
+        XCTAssertEqual(sut.messageText, "Theme required")
     }
     
     func test_selectedTheme_setsSelectedThemesToQuery() async {
@@ -77,7 +77,7 @@ final class GenerateImageViewModelTests: XCTestCase {
             sut.tapped(on: .generate)
         }
         
-        XCTAssertNil(sut.errorText)
+        XCTAssertNil(sut.messageText)
         XCTAssertFalse(sut.isLoading)
     }
     
@@ -93,7 +93,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         }
         
         XCTAssertNil(sut.generatedImage)
-        XCTAssertEqual(sut.errorText, dummyError.rawValue)
+        XCTAssertEqual(sut.messageText, dummyError.errorDescription)
         XCTAssertFalse(sut.isLoading)
     }
     
@@ -114,7 +114,7 @@ final class GenerateImageViewModelTests: XCTestCase {
             sut.tapped(on: .generate)
         }
         
-        XCTAssertNil(sut.errorText)
+        XCTAssertNil(sut.messageText)
     }
     
     func test_tappedGenerateImage_togglesIsLoading() {
@@ -173,7 +173,7 @@ extension GenerateImageViewModelTests {
     }
     
     private func expectedError(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
-        await expectedValue(from: sut.$errorText, action: action)
+        await expectedValue(from: sut.$messageText, action: action)
     }
     
     private func expectedGeneratedImage(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {

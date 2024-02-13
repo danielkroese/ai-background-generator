@@ -6,8 +6,14 @@ protocol ImageServiceRequesting {
     func requestImage(_ imageRequest: ImageRequestModel) throws -> Self
 }
 
-enum ImageServiceRequestingError: Error {
+enum ImageServiceRequestingError: LocalizedError {
     case invalidEndpoint
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidEndpoint: "Endpoint is not a valid URL."
+        }
+    }
 }
 
 final class ImageServiceRequest: ImageServiceRequesting {

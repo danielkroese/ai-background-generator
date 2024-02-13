@@ -87,7 +87,7 @@ final class ImageServiceResponseTests: XCTestCase {
     }
     
     func test_artifact_invalidIndex_throws() {
-        assertThrows(expected: Error.artifactIndexNotFound) {
+        assertThrows(expected: Error.emptyResponse) {
             let mockResponse = createReponse()
             let encodedResponse = try JSONEncoder().encode(mockResponse)
             
