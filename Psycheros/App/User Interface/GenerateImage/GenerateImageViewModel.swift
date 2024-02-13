@@ -146,7 +146,9 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
                 return
             }
             
-            messageText = (error as? ImageGeneratingError)?.rawValue ?? error.localizedDescription
+            let errorText = (error as? ImageGeneratingError)?.rawValue ?? error.localizedDescription
+            
+            messageText = "Error: \(errorText)"
         }
     }
     
