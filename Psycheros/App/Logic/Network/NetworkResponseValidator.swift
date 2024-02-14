@@ -4,10 +4,18 @@ protocol NetworkResponseValidating {
     static func validate(_ response: URLResponse?) throws
 }
 
-enum NetworkResponseValidatingError: Error, Equatable {
+enum NetworkResponseValidatingError: LocalizedError, Equatable {
     case invalidResponseType
     case invalidMimeType
     case serverError(statusCode: Int)
+    
+    var errorDescription: String? {
+        switch self {
+        case .invalidResponseType: "Invalid response type, should be an HTTP response.."
+        case .invalidMimeType: "Invalid reponse MIME type, should be application/json."
+        case .serverError(let statusCode): "Server error: \(statusCode)."
+        }
+    }
 }
 
 struct NetworkResponseValidator: NetworkResponseValidating {

@@ -4,8 +4,14 @@ protocol PromptGenerating {
     static func writePrompt(with query: ImageQuery) throws -> String
 }
 
-enum PromptGeneratingError: Error {
+enum PromptGeneratingError: LocalizedError {
     case incompleteQuery
+    
+    var errorDescription: String? {
+        switch self {
+        case .incompleteQuery: "Query incomplete, check if color and theme are filled."
+        }
+    }
 }
 
 struct PromptGenerator: PromptGenerating {

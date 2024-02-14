@@ -1,8 +1,15 @@
 import Foundation
 
-enum ImageRequestModelError: Error {
+enum ImageRequestModelError: LocalizedError {
     case emptyPrompt,
          invalidSeed
+    
+    var errorDescription: String? {
+        switch self {
+        case .emptyPrompt: "Request incomplete, one or more fields are empty."
+        case .invalidSeed: "Invalid seed, should be 0 - 4294967295."
+        }
+    }
 }
 
 struct ImageRequestModel: Codable, Equatable {

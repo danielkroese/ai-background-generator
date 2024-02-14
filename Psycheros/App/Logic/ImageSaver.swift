@@ -4,10 +4,6 @@ protocol ImageSaving: NSObject {
     func saveToPhotoAlbum(image: UIImage) async throws
 }
 
-enum ImageSavingError: Error {
-    case invalidImage
-}
-
 final class ImageSaver: NSObject, ImageSaving {
     func saveToPhotoAlbum(image: UIImage) async throws {
         try await withCheckedThrowingContinuation { continuation in
