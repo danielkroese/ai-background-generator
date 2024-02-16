@@ -22,13 +22,15 @@ protocol GenerateImageViewModeling: ObservableObject {
 final class GenerateImageViewModel: GenerateImageViewModeling {
     @Published var currentSubviews: Set<GenerateImageElement> = []
     @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
-    @Published var selectedColor: AllowedColor = .blue { didSet { didSelectColor() } }
+    @Published var selectedColor: AllowedColor = .blue
     
     @Published private(set) var isLoading: Bool = false
     @Published private(set) var messageText: String?
     @Published private(set) var generatedImage: UIImage?
     
     private(set) var imageTask: Task<(), Never>?
+    
+    private var subscriptions = Set<AnyCancellable>()
     
     private let imageGenerator: ImageGenerating
     private let imageSaver: ImageSaving
@@ -43,9 +45,20 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
         self.imageSaver = imageSaver
         self.router = router
         
+        setupSubscriptions()
+    }
+    
+    private func setupSubscriptions() {
         router.publisher
             .receive(on: DispatchQueue.main)
             .assign(to: &$currentSubviews)
+        
+        $selectedColor
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] _ in
+                self?.didSelectColor()
+            }
+            .store(in: &subscriptions)
     }
     
     deinit {
