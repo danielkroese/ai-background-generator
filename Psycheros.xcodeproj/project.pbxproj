@@ -70,6 +70,7 @@
 		7B0F26EC2B51D7C20037F32D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F26EA2B51D7B80037F32D /* Theme.swift */; };
 		7B0F26EE2B51D7D60037F32D /* AllowedColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0F26ED2B51D7D60037F32D /* AllowedColor.swift */; };
 		7B3C1B5A2B4C8EC10009409B /* PillButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B3C1B592B4C8EC10009409B /* PillButton.swift */; };
+		7B4EE5CB2B80D2C1006B4126 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDB1542B7AD7FF0049F0D7 /* Message.swift */; };
 		7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A96C62B475A1A00B9B112 /* GeoReader.swift */; };
 		7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A986A2B49A94900B9B112 /* Shimmer.swift */; };
 		7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E72B2F4047008667AB /* ShadowModifier.swift */; };
@@ -630,6 +631,7 @@
 				65250CBC2AF7F3B3006BB662 /* ImageGenerator.swift in Sources */,
 				7B0F26EC2B51D7C20037F32D /* Theme.swift in Sources */,
 				6524068B2AFEEB7D00AE193D /* NetworkResponseValidatorTests.swift in Sources */,
+				7B4EE5CB2B80D2C1006B4126 /* Message.swift in Sources */,
 				652406902AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
 				65E034DD2B23CC9F001B5F99 /* ImageDataParser.swift in Sources */,
 				659A92C82AFAD77D00A6F351 /* ImageServiceRequest.swift in Sources */,

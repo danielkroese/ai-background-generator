@@ -42,7 +42,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 selectedThemes: $viewModel.selectedThemes
             )
         }
-        .message(viewModel.messageText)
+        .message(viewModel.messageModel)
         .preferredColorScheme(.dark)
     }
 }

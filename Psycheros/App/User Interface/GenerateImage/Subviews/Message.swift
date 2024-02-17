@@ -1,20 +1,25 @@
 import SwiftUI
 
 struct Message: ViewModifier {
-    let message: String?
+    struct Model: Equatable {
+        let title: String
+        let message: String
+    }
+    
+    let model: Model?
     
     func body(content: Content) -> some View {
         content
-            .alert("", isPresented: .constant(message != nil)) {
+            .alert(model?.title ?? "", isPresented: .constant(model != nil)) {
                 Text("Close")
             } message: {
-                Text(message ?? "unknown error")
+                Text(model?.message ?? "")
             }
     }
 }
 
 extension View {
-    func message(_ text: String?) -> some View {
-        modifier(Message(message: text))
+    func message(_ model: Message.Model?) -> some View {
+        modifier(Message(model: model))
     }
 }
