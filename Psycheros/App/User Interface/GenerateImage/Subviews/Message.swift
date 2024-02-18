@@ -1,17 +1,17 @@
 import SwiftUI
 
 struct Message: ViewModifier {
-    struct Model: Equatable {
-        let title: String
-        let message: String
-    }
-    
-    let model: Model?
+    @Binding var model: MessageModel?
     
     func body(content: Content) -> some View {
         content
             .alert(model?.title ?? "", isPresented: .constant(model != nil)) {
-                Text("Close")
+                Button(role: .cancel) {
+                    model = nil
+                } label: {
+                    Text("Close")
+                }
+                
             } message: {
                 Text(model?.message ?? "")
             }
@@ -19,7 +19,12 @@ struct Message: ViewModifier {
 }
 
 extension View {
-    func message(_ model: Message.Model?) -> some View {
+    func message(_ model: Binding<MessageModel?>) -> some View {
         modifier(Message(model: model))
     }
+}
+
+#Preview {
+    Text("Hello")
+        .message(.constant(.init(title: "title", message: "message")))
 }

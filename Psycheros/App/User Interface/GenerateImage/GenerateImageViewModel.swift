@@ -3,29 +3,13 @@ import SwiftUI
 import Combine
 
 @MainActor
-protocol GenerateImageViewModeling: ObservableObject {
-    var selectedColor: AllowedColor { get set }
-    var selectedThemes: Set<Theme> { get set }
-    var currentSubviews: Set<GenerateImageElement>{ get set }
-    
-    var isLoading: Bool { get }
-    var messageModel: Message.Model? { get }
-    var generatedImage: UIImage? { get }
-    
-    func onAppear()
-    func isPresenting(_ element: GenerateImageElement) -> Bool
-    func tapped(on destination: GenerateImageElement)
-    func tappedBackground()
-}
-
-@MainActor
-final class GenerateImageViewModel: GenerateImageViewModeling {
+final class GenerateImageViewModel: ObservableObject {
     @Published var currentSubviews: Set<GenerateImageElement> = []
     @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
     @Published var selectedColor: AllowedColor = .blue
+    @Published var messageModel: MessageModel?
     
     @Published private(set) var isLoading: Bool = false
-    @Published private(set) var messageModel: Message.Model?
     @Published private(set) var generatedImage: UIImage?
     
     private(set) var imageTask: Task<(), Never>?
@@ -181,7 +165,7 @@ final class GenerateImageViewModel: GenerateImageViewModeling {
     
     private func setMessage(title: String, message: String) {
         Task { @MainActor in
-            messageModel = Message.Model(title: title, message: message)
+            messageModel = MessageModel(title: title, message: message)
         }
     }
     

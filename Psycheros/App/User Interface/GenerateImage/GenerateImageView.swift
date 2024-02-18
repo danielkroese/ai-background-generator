@@ -1,7 +1,7 @@
 import SwiftUI
 
-struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewModeling & ObservableObject {
-    @ObservedObject private(set) var viewModel: ViewModel
+struct GenerateImageView: View {
+    @ObservedObject private(set) var viewModel: GenerateImageViewModel
     
     var body: some View {
         GeneratedImage(
@@ -42,7 +42,7 @@ struct GenerateImageView<ViewModel>: View where ViewModel: GenerateImageViewMode
                 selectedThemes: $viewModel.selectedThemes
             )
         }
-        .message(viewModel.messageModel)
+        .message($viewModel.messageModel)
         .preferredColorScheme(.dark)
     }
 }
