@@ -136,37 +136,29 @@ final class GenerateImageViewModel: ObservableObject {
     }
     
     private func setLoading(_ value: Bool) {
-        Task { @MainActor in
-            isLoading = value
-        }
+        isLoading = value
     }
     
     private func setImage(from image: UIImage) {
-        Task { @MainActor in
-            generatedImage = image
-        }
+        generatedImage = image
     }
     
     private func setError(_ error: Error?) {
-        Task { @MainActor in
-            guard let error else {
-                messageModel = nil
-                return
-            }
-            
-            let errorMessage = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
-            
-            setMessage(
-                title: "Something went wrong",
-                message: errorMessage
-            )
+        guard let error else {
+            messageModel = nil
+            return
         }
+        
+        let errorMessage = (error as? LocalizedError)?.errorDescription ?? error.localizedDescription
+        
+        setMessage(
+            title: "Something went wrong",
+            message: errorMessage
+        )
     }
     
     private func setMessage(title: String, message: String) {
-        Task { @MainActor in
-            messageModel = MessageModel(title: title, message: message)
-        }
+        messageModel = MessageModel(title: title, message: message)
     }
     
     private func generateImage(from query: ImageQuery) {
