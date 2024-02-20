@@ -43,6 +43,7 @@ struct GenerateImageView: View {
             )
         }
         .message($viewModel.messageModel)
+        .loadingScreen(isActive: viewModel.isLoading)
         .preferredColorScheme(.dark)
     }
 }

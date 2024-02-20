@@ -69,9 +69,11 @@ final class GenerateImageViewModel: ObservableObject {
             router.toggle(destination)
         case .generate:
             router.dismissAll(except: .tools)
+            
             tappedGenerateImage()
         case .save:
             router.dismissAll(except: .tools)
+            
             tappedSaveImage()
         case .tools:
             break

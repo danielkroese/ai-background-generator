@@ -74,6 +74,7 @@
 		7B4EE5CF2B82821E006B4126 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4EE5CD2B82821E006B4126 /* MessageModel.swift */; };
 		7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A96C62B475A1A00B9B112 /* GeoReader.swift */; };
 		7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A986A2B49A94900B9B112 /* Shimmer.swift */; };
+		7B8720162B851DB200FCD6D0 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8720152B851DB200FCD6D0 /* LoadingScreen.swift */; };
 		7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E72B2F4047008667AB /* ShadowModifier.swift */; };
 		7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */; };
 		7BBA31AD2B65AF5500358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
@@ -149,6 +150,7 @@
 		7B4EE5CD2B82821E006B4126 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		7B7A96C62B475A1A00B9B112 /* GeoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReader.swift; sourceTree = "<group>"; };
 		7B7A986A2B49A94900B9B112 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
+		7B8720152B851DB200FCD6D0 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		7B9928E72B2F4047008667AB /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonShape.swift; sourceTree = "<group>"; };
 		7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
@@ -444,6 +446,7 @@
 				7B042D7D2B54243C00385BD8 /* GeneratedImage.swift */,
 				7BFDB1542B7AD7FF0049F0D7 /* Message.swift */,
 				7B4EE5CD2B82821E006B4126 /* MessageModel.swift */,
+				7B8720152B851DB200FCD6D0 /* LoadingScreen.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -603,6 +606,7 @@
 				652406882AFEEB5C00AE193D /* NetworkResponseValidator.swift in Sources */,
 				65F97E0E2AF669A000C0E501 /* GenerateImageView.swift in Sources */,
 				7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */,
+				7B8720162B851DB200FCD6D0 /* LoadingScreen.swift in Sources */,
 				65F97E0C2AF669A000C0E501 /* PsycherosApp.swift in Sources */,
 				7B042D802B5427E100385BD8 /* ToolbarContent.swift in Sources */,
 				65250CB62AF7DA87006BB662 /* ImageQuery.swift in Sources */,
