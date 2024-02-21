@@ -10,10 +10,11 @@ struct LoadingScreen: ViewModifier {
             if isActive {
                 Rectangle().fill(Material.thin)
                     .ignoresSafeArea()
+                    .zIndex(1)
             }
         }
         .transition(.opacity)
-        .animation(.easeInOut(duration: 1.0), value: isActive)
+        .animation(.easeInOut(duration: 0.5), value: isActive)
     }
 }
 
