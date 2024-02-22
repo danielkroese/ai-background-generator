@@ -163,7 +163,7 @@ extension GenerateImageViewModelTests {
     private func createSut(
         imageGenerator: ImageGenerating = MockImageGenerator(),
         imageSaver: ImageSaving = MockImageSaver(),
-        router: GenerateImageRouting = GenerateImageRouter() // TODO: Mock?
+        router: GenerateImageRouting = MockGenerateImageRouter()
     ) -> GenerateImageViewModel {
         GenerateImageViewModel(
             imageGenerator: imageGenerator,

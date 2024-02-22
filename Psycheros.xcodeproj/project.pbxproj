@@ -81,6 +81,7 @@
 		7BBA31B02B65AFD400358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
 		7BC1DEEF2B6C287600046CE7 /* SaveButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BC1DEEE2B6C287600046CE7 /* SaveButton.swift */; };
 		7BCB68F62B44AB5600CD700E /* Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BCB68F52B44AB5600CD700E /* Toolbar.swift */; };
+		7BDFE49E2B877E9D00D7B117 /* MockGenerateImageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BDFE49D2B877E9D00D7B117 /* MockGenerateImageRouter.swift */; };
 		7BFDB1552B7AD7FF0049F0D7 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFDB1542B7AD7FF0049F0D7 /* Message.swift */; };
 /* End PBXBuildFile section */
 
@@ -156,6 +157,7 @@
 		7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
 		7BC1DEEE2B6C287600046CE7 /* SaveButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveButton.swift; sourceTree = "<group>"; };
 		7BCB68F52B44AB5600CD700E /* Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toolbar.swift; sourceTree = "<group>"; };
+		7BDFE49D2B877E9D00D7B117 /* MockGenerateImageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGenerateImageRouter.swift; sourceTree = "<group>"; };
 		7BFDB1542B7AD7FF0049F0D7 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +184,7 @@
 			children = (
 				652406852AFEC4C100AE193D /* MockNetworkSession.swift */,
 				6550C7F42B28F7B600B27030 /* MockImageGenerator.swift */,
+				7BDFE49D2B877E9D00D7B117 /* MockGenerateImageRouter.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -623,6 +626,7 @@
 				65E034DF2B23D1A4001B5F99 /* SpyImageDataParser.swift in Sources */,
 				652406812AFEBE7B00AE193D /* NetworkSession.swift in Sources */,
 				7B042D792B52D78800385BD8 /* GenerateImageRouter.swift in Sources */,
+				7BDFE49E2B877E9D00D7B117 /* MockGenerateImageRouter.swift in Sources */,
 				65250CD52AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				65250CDA2AF83491006BB662 /* PromptGeneratorTests.swift in Sources */,
 				7B4EE5CF2B82821E006B4126 /* MessageModel.swift in Sources */,
