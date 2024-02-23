@@ -11,12 +11,6 @@ protocol GenerateImageRouting {
     func isPresenting(_ element: GenerateImageElement) -> Bool
 }
 
-extension GenerateImageRouting {
-    func dismissAll(except element: GenerateImageElement? = nil) {
-        dismissAll(except: element)
-    }
-}
-
 enum GenerateImageElement {
     case tools, colors, themes, generate, save
 }

@@ -4,6 +4,7 @@ final class MockGenerateImageRouter: GenerateImageRouting {
     private(set) var calledToggleCount = 0
     private(set) var calledPresentCount = 0
     private(set) var calledDismissCount = 0
+    private(set) var calledDismissAllCount = 0
     private(set) var calledTappedBackgroundCount = 0
     private(set) var calledIsPresentingCount = 0
     
@@ -25,6 +26,10 @@ final class MockGenerateImageRouter: GenerateImageRouting {
     
     func dismiss(_ element: GenerateImageElement) {
         calledDismissCount += 1
+    }
+    
+    func dismissAll(except element: GenerateImageElement?) {
+        calledDismissAllCount += 1
     }
     
     func tappedBackground() {
