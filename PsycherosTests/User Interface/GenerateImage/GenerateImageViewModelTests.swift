@@ -12,23 +12,22 @@ final class GenerateImageViewModelTests: XCTestCase {
     }
     
     func test_onAppear_showsToolbar() async {
-        let sut = createSut()
+        let mockRouter = MockGenerateImageRouter()
+        let sut = createSut(router: mockRouter)
         
-        await setsExpected(value: [.tools], on: sut.$currentSubviews) {
-            sut.onAppear()
-        }
+        sut.onAppear()
+        
+        XCTAssertEqual(mockRouter.calledPresentCount, 1)
+        XCTAssertEqual(mockRouter.calledPresentElement, .tools)
     }
     
-    func test_tappedBackground_togglesToolbar() async {
-        let sut = createSut()
+    func test_tappedBackground_callsRouter() async {
+        let mockRouter = MockGenerateImageRouter()
+        let sut = createSut(router: mockRouter)
         
-        await setsExpected(value: [.tools], on: sut.$currentSubviews) {
-            sut.tappedBackground()
-        }
+        sut.tappedBackground()
         
-        await setsExpected(value: [], on: sut.$currentSubviews) {
-            sut.tappedBackground()
-        }
+        XCTAssertEqual(mockRouter.calledTappedBackgroundCount, 1)
     }
     
     func test_tappedGenerateImage_withNoThemeSelection_setsErrorText() async {
@@ -88,9 +87,9 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         mockImageGenerator.generateImageError = dummyError
         
-        await expectedError(in: sut) {
-            sut.tapped(on: .generate)
-        }
+        sut.tapped(on: .generate)
+        
+        _ = await sut.imageTask?.result
         
         XCTAssertNil(sut.generatedImage)
         XCTAssertEqual(sut.messageModel?.message, dummyError.errorDescription)
@@ -163,7 +162,7 @@ extension GenerateImageViewModelTests {
     private func createSut(
         imageGenerator: ImageGenerating = MockImageGenerator(),
         imageSaver: ImageSaving = MockImageSaver(),
-        router: GenerateImageRouting = GenerateImageRouter() // TODO: Replace with mock and remove implementation thingy
+        router: GenerateImageRouting = MockGenerateImageRouter()
     ) -> GenerateImageViewModel {
         GenerateImageViewModel(
             imageGenerator: imageGenerator,
