@@ -30,6 +30,16 @@ final class GenerateImageViewModelTests: XCTestCase {
         XCTAssertEqual(mockRouter.calledTappedBackgroundCount, 1)
     }
     
+    func test_tappedGenerateImage_callsRouterToCloseViews() async {
+        let mockRouter = MockGenerateImageRouter()
+        let sut = createSut(router: mockRouter)
+        
+        sut.tapped(on: .generate)
+        
+        XCTAssertEqual(mockRouter.calledDismissAllCount, 1)
+        XCTAssertEqual(mockRouter.calledDismissAllExceptElement, .tools)
+    }
+    
     func test_tappedGenerateImage_withNoThemeSelection_setsErrorText() async {
         let sut = createSut()
         
