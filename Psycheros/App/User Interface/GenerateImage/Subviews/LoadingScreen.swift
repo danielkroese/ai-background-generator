@@ -3,7 +3,7 @@ import SwiftUI
 struct LoadingScreen: ViewModifier {
     let isActive: Bool
     
-    let value: Double = 0.5
+    @State private var value: Double = 0.0
     
     func body(content: Content) -> some View {
         ZStack {
@@ -12,6 +12,9 @@ struct LoadingScreen: ViewModifier {
             if isActive {
                 Overlay(value: value)
                     .zIndex(1)
+                    .onAppear {
+                        value = 0.9
+                    }
             }
             
         }
@@ -30,7 +33,30 @@ struct LoadingScreen: ViewModifier {
             ProgressView(value: value) {
                 Text("Generating...")
             }
-            .progressViewStyle(.circular)
+            .progressViewStyle(DonutProgressViewStyle())
+            .padding(128)
+        }
+    }
+    
+    private struct DonutProgressViewStyle: ProgressViewStyle {
+        var strokeColor: Color = .accentColor
+        var strokeWidth: CGFloat = 10.0
+        
+        func makeBody(configuration: Configuration) -> some View {
+            let progress = configuration.fractionCompleted ?? 0
+            return ZStack {
+                Circle()
+                    .stroke(lineWidth: strokeWidth)
+                    .opacity(0.3)
+                    .foregroundColor(strokeColor)
+                
+                Circle()
+                    .trim(from: 0, to: CGFloat(progress))
+                    .stroke(style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
+                    .foregroundColor(strokeColor)
+                    .rotationEffect(Angle(degrees: -90))
+                    .animation(.easeInOut(duration: 8.0), value: progress)
+            }
         }
     }
 }
