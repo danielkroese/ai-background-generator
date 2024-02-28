@@ -3,7 +3,7 @@ import SwiftUI
 struct LoadingScreen: ViewModifier {
     let isActive: Bool
     
-    @State private var value: Double = 0.0
+    @State private var value: Double = .zero
     
     func body(content: Content) -> some View {
         ZStack {
@@ -14,6 +14,9 @@ struct LoadingScreen: ViewModifier {
                     .zIndex(1)
                     .onAppear {
                         value = 0.9
+                    }
+                    .onDisappear {
+                        value = .zero
                     }
             }
             
@@ -43,7 +46,8 @@ struct LoadingScreen: ViewModifier {
         var strokeWidth: CGFloat = 10.0
         
         func makeBody(configuration: Configuration) -> some View {
-            let progress = configuration.fractionCompleted ?? 0
+            let progress = configuration.fractionCompleted ?? .zero
+            
             return ZStack {
                 Circle()
                     .stroke(lineWidth: strokeWidth)
@@ -51,11 +55,11 @@ struct LoadingScreen: ViewModifier {
                     .foregroundColor(strokeColor)
                 
                 Circle()
-                    .trim(from: 0, to: CGFloat(progress))
+                    .trim(from: .zero, to: CGFloat(progress))
                     .stroke(style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
                     .foregroundColor(strokeColor)
                     .rotationEffect(Angle(degrees: -90))
-                    .animation(.easeInOut(duration: 8.0), value: progress)
+                    .animation(.easeIn(duration: 8.0), value: progress)
             }
         }
     }
