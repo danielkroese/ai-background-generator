@@ -1,28 +1,39 @@
 import SwiftUI
 
 struct LoadingScreen: ViewModifier {
-    let isActive: Bool
+    @Binding var isActive: Bool
     
+    @State private var isOverlayVisible = false
     @State private var value: Double = .zero
     
     func body(content: Content) -> some View {
         ZStack {
             content
             
-            if isActive {
+            if isOverlayVisible {
                 Overlay(value: value)
                     .zIndex(1)
-                    .onAppear {
-                        value = 0.9
-                    }
-                    .onDisappear {
-                        value = .zero
-                    }
             }
             
         }
         .transition(.opacity)
-        .animation(.easeInOut(duration: 0.5), value: isActive)
+        .animation(.easeInOut(duration: 0.5), value: isOverlayVisible)
+        .onChange(of: isActive) { _, newValue in // check old value?
+            if newValue {
+                withAnimation {
+                    isOverlayVisible = true
+                } completion: {
+                    value = 0.9
+                }
+            } else {
+                withAnimation {
+                    value = 1.0
+                } completion: {
+                    isOverlayVisible = false
+                    value = .zero
+                }
+            }
+        }
     }
     
     private struct Overlay: View {
@@ -66,7 +77,7 @@ struct LoadingScreen: ViewModifier {
 }
 
 extension View {
-    func loadingScreen(isActive: Bool) -> some View {
+    func loadingScreen(isActive: Binding<Bool>) -> some View {
         modifier(LoadingScreen(isActive: isActive))
     }
 }
@@ -74,5 +85,5 @@ extension View {
 #Preview {
     Text("Hello")
         .font(.system(size: 160))
-        .loadingScreen(isActive: true)
+        .loadingScreen(isActive: .constant(true))
 }
