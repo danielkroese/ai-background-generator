@@ -13,25 +13,26 @@ struct LoadingScreen: ViewModifier {
             if isOverlayVisible {
                 Overlay(value: value)
                     .zIndex(1)
+                    .onDisappear {
+                        value = .zero
+                    }
             }
-            
         }
         .transition(.opacity)
         .animation(.easeInOut(duration: 0.5), value: isOverlayVisible)
-        .onChange(of: isActive) { _, newValue in // check old value?
+        .onChange(of: isActive) { _, newValue in
             if newValue {
+                isOverlayVisible = true
+                
                 withAnimation {
-                    isOverlayVisible = true
-                } completion: {
                     value = 0.9
                 }
             } else {
                 withAnimation {
                     value = 1.0
-                } completion: {
-                    isOverlayVisible = false
-                    value = .zero
                 }
+                
+                isOverlayVisible = false
             }
         }
     }
