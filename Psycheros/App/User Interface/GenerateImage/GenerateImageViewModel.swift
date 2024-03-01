@@ -104,7 +104,7 @@ final class GenerateImageViewModel: ObservableObject {
         setLoading(true)
         setError(nil)
         
-        imageTask = Task {
+        imageTask = Task(priority: .background) {
             defer {
                 setLoading(false)
             }
@@ -164,7 +164,7 @@ final class GenerateImageViewModel: ObservableObject {
     }
     
     private func generateImage(from query: ImageQuery) {
-        imageTask = Task {
+        imageTask = Task(priority: .background) {
             defer {
                 setLoading(false)
             }
