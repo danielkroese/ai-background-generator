@@ -24,15 +24,15 @@ struct LoadingScreen: ViewModifier {
             if newValue {
                 isOverlayVisible = true
                 
-                withAnimation {
+                withAnimation(.easeInOut(duration: 8)) {
                     value = 0.9
                 }
             } else {
-                withAnimation {
+                withAnimation(.easeInOut(duration: 0.5)) {
                     value = 1.0
+                } completion: {
+                    isOverlayVisible = false
                 }
-                
-                isOverlayVisible = false
             }
         }
     }
@@ -42,7 +42,7 @@ struct LoadingScreen: ViewModifier {
         
         var body: some View {
             Rectangle()
-                .fill(Material.thin)
+                .fill(Material.ultraThin)
                 .ignoresSafeArea()
             
             ProgressView(value: value) {
@@ -71,7 +71,7 @@ struct LoadingScreen: ViewModifier {
                     .stroke(style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
                     .foregroundColor(strokeColor)
                     .rotationEffect(Angle(degrees: -90))
-                    .animation(.easeIn(duration: 8.0), value: progress)
+//                    .animation(.easeIn(duration: 8.0), value: progress)
             }
         }
     }
