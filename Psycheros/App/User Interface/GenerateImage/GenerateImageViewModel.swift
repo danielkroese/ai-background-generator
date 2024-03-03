@@ -2,6 +2,18 @@ import Foundation
 import SwiftUI
 import Combine
 
+enum GenerateImageViewModelError: LocalizedError {
+    case noThemeSelected,
+         noImageToSave
+    
+    var errorDescription: String? {
+        switch self {
+        case .noThemeSelected: "A theme has to be selected."
+        case .noImageToSave: "No image to save"
+        }
+    }
+}
+
 @MainActor
 final class GenerateImageViewModel: ObservableObject {
     @Published var currentSubviews: Set<GenerateImageElement> = []
@@ -86,10 +98,7 @@ final class GenerateImageViewModel: ObservableObject {
         }
         
         guard selectedThemes.isEmpty == false else {
-            setMessage(
-                title: "Something went wrong",
-                message: "A theme has to be selected."
-            )
+            setError(GenerateImageViewModelError.noThemeSelected)
             
             return
         }
@@ -110,10 +119,7 @@ final class GenerateImageViewModel: ObservableObject {
             }
             
             guard let generatedImage else {
-                setMessage(
-                    title: "Something went wrong",
-                    message: "No image to save"
-                )
+                setError(GenerateImageViewModelError.noImageToSave)
                 
                 return
             }
