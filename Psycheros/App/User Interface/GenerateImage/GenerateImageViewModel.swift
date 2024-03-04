@@ -113,28 +113,7 @@ final class GenerateImageViewModel: ObservableObject {
         setLoading(true)
         setError(nil)
         
-        imageTask = Task(priority: .background) {
-            defer {
-                setLoading(false)
-            }
-            
-            guard let generatedImage else {
-                setError(GenerateImageViewModelError.noImageToSave)
-                
-                return
-            }
-            
-            do {
-                try await imageSaver.saveToPhotoAlbum(image: generatedImage)
-                
-                setMessage(
-                    title: "Success!",
-                    message: "Image saved to your gallery."
-                )
-            } catch {
-                setError(error)
-            }
-        }
+        saveImage()
     }
     
     private func didSelectColor() {
@@ -181,6 +160,31 @@ final class GenerateImageViewModel: ObservableObject {
                 try Task.checkCancellation()
                 
                 setImage(from: image)
+            } catch {
+                setError(error)
+            }
+        }
+    }
+    
+    private func saveImage() {
+        imageTask = Task(priority: .background) {
+            defer {
+                setLoading(false)
+            }
+            
+            guard let generatedImage else {
+                setError(GenerateImageViewModelError.noImageToSave)
+                
+                return
+            }
+            
+            do {
+                try await imageSaver.saveToPhotoAlbum(image: generatedImage)
+                
+                setMessage(
+                    title: "Success!",
+                    message: "Image saved to your gallery."
+                )
             } catch {
                 setError(error)
             }
