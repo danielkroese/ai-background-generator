@@ -5,8 +5,6 @@ App for iOS to generate a background image. This app let's you select a color an
 - Select a color
 - Select one or more themes
 - Generate an image
-
-## Not included
 - Saving the generated image
 
 ## Technical details
