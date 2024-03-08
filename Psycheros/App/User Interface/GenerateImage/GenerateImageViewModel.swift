@@ -149,42 +149,44 @@ final class GenerateImageViewModel: ObservableObject {
     }
     
     private func generateImage(from query: ImageQuery) {
-        imageTask = Task(priority: .background) {
-            defer {
-                setLoading(false)
-            }
+        imageTask { [weak self] in
+            guard let self else { return }
             
-            do {
-                let image = try await imageGenerator.generate(from: query)
-                
-                try Task.checkCancellation()
-                
-                setImage(from: image)
-            } catch {
-                setError(error)
-            }
+            let image = try await imageGenerator.generate(from: query)
+            
+            try Task.checkCancellation()
+            
+            setImage(from: image)
         }
     }
     
     private func saveImage() {
+        guard let generatedImage else {
+            setError(GenerateImageViewModelError.noImageToSave)
+            
+            return
+        }
+        
+        imageTask { [weak self] in
+            guard let self else { return }
+            
+            try await imageSaver.saveToPhotoAlbum(image: generatedImage)
+            
+            setMessage(
+                title: "Success!",
+                message: "Image saved to your gallery."
+            )
+        }
+    }
+    
+    private func imageTask(action: @escaping () async throws -> Void ) {
         imageTask = Task(priority: .background) {
             defer {
                 setLoading(false)
             }
             
-            guard let generatedImage else {
-                setError(GenerateImageViewModelError.noImageToSave)
-                
-                return
-            }
-            
             do {
-                try await imageSaver.saveToPhotoAlbum(image: generatedImage)
-                
-                setMessage(
-                    title: "Success!",
-                    message: "Image saved to your gallery."
-                )
+                try await action()
             } catch {
                 setError(error)
             }
