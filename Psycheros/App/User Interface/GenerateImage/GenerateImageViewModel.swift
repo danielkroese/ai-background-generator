@@ -161,6 +161,10 @@ final class GenerateImageViewModel: ObservableObject {
     }
     
     private func saveImage() {
+        defer {
+            setLoading(false)
+        }
+        
         guard let generatedImage else {
             setError(GenerateImageViewModelError.noImageToSave)
             
@@ -180,11 +184,11 @@ final class GenerateImageViewModel: ObservableObject {
     }
     
     private func imageTask(action: @escaping () async throws -> Void ) {
+        defer {
+            setLoading(false)
+        }
+        
         imageTask = Task(priority: .background) {
-            defer {
-                setLoading(false)
-            }
-            
             do {
                 try await action()
             } catch {

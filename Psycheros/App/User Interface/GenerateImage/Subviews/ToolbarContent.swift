@@ -24,18 +24,12 @@ struct ToolbarContent: View {
             
             PillButton(
                 rounded: .trailing,
-                imageName: "wand.and.stars",
-                isLoading: isLoading
+                imageName: "wand.and.stars"
             ) {
                 tappedSubviewButton(.generate)
             } label: {
-                if isLoading {
-                    Text("Loading...")
-                        .fixedSize(horizontal: true, vertical: false)
-                } else {
-                    Text("Generate")
-                        .fixedSize(horizontal: true, vertical: false)
-                }
+                Text("Generate")
+                    .fixedSize(horizontal: true, vertical: false)
             }
             .disabled(isLoading)
         }

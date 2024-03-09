@@ -1,13 +1,11 @@
 import SwiftUI
 
 struct ShapeButtonStyle<S: Shape>: ButtonStyle {
-    var isLoading = false
     let shape: S
     
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .padding(16)
-            .shimmer(isLoading)
             .foregroundStyle(.foreground.opacity(0.8))
             .background(.thinMaterial)
             .clipShape(shape)

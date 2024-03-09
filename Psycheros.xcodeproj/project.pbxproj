@@ -73,7 +73,6 @@
 		7B4EE5CE2B82821E006B4126 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4EE5CD2B82821E006B4126 /* MessageModel.swift */; };
 		7B4EE5CF2B82821E006B4126 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4EE5CD2B82821E006B4126 /* MessageModel.swift */; };
 		7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A96C62B475A1A00B9B112 /* GeoReader.swift */; };
-		7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A986A2B49A94900B9B112 /* Shimmer.swift */; };
 		7B8720162B851DB200FCD6D0 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8720152B851DB200FCD6D0 /* LoadingScreen.swift */; };
 		7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E72B2F4047008667AB /* ShadowModifier.swift */; };
 		7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */; };
@@ -150,7 +149,6 @@
 		7B3C1B592B4C8EC10009409B /* PillButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButton.swift; sourceTree = "<group>"; };
 		7B4EE5CD2B82821E006B4126 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		7B7A96C62B475A1A00B9B112 /* GeoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReader.swift; sourceTree = "<group>"; };
-		7B7A986A2B49A94900B9B112 /* Shimmer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shimmer.swift; sourceTree = "<group>"; };
 		7B8720152B851DB200FCD6D0 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
 		7B9928E72B2F4047008667AB /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonShape.swift; sourceTree = "<group>"; };
@@ -260,7 +258,6 @@
 			children = (
 				7BCB68F52B44AB5600CD700E /* Toolbar.swift */,
 				7B0301702B4F33D1005DD8DC /* Modal.swift */,
-				7B7A986A2B49A94900B9B112 /* Shimmer.swift */,
 				7B9928E72B2F4047008667AB /* ShadowModifier.swift */,
 				7B7A96C62B475A1A00B9B112 /* GeoReader.swift */,
 				7B0CC2A32B30DFD000268FFF /* AnimatedHue.swift */,
@@ -581,7 +578,6 @@
 				7B0CC2A42B30DFD000268FFF /* AnimatedHue.swift in Sources */,
 				6524068F2AFF8EEC00AE193D /* ImageServiceResponse.swift in Sources */,
 				7BCB68F62B44AB5600CD700E /* Toolbar.swift in Sources */,
-				7B7A986B2B49A94900B9B112 /* Shimmer.swift in Sources */,
 				6550C7EE2B28F3E800B27030 /* GenerateImageViewModel.swift in Sources */,
 				65250CD42AF83425006BB662 /* PromptGenerator.swift in Sources */,
 				7B4EE5CE2B82821E006B4126 /* MessageModel.swift in Sources */,

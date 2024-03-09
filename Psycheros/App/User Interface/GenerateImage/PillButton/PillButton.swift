@@ -3,7 +3,6 @@ import SwiftUI
 struct PillButton<Label>: View where Label: View{
     let rounded: PillButtonPart
     let imageName: String
-    let isLoading: Bool
     let action: () -> Void
     
     @ViewBuilder let label: () -> Label
@@ -11,13 +10,11 @@ struct PillButton<Label>: View where Label: View{
     init(
         rounded: PillButtonPart,
         imageName: String,
-        isLoading: Bool = false,
         action: @escaping () -> Void,
         @ViewBuilder label: @escaping () -> Label = { EmptyView() }
     ) {
         self.rounded = rounded
         self.imageName = imageName
-        self.isLoading = isLoading
         self.action = action
         self.label = label
     }
@@ -36,7 +33,6 @@ struct PillButton<Label>: View where Label: View{
         }
         .buttonStyle(
             ShapeButtonStyle(
-                isLoading: isLoading,
                 shape: PillButtonShape(
                     rounded: rounded,
                     innerCornerRadius: 8,
