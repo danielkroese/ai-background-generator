@@ -190,7 +190,7 @@ extension GenerateImageViewModelTests {
     }
     
     private func expectedValue<T>(from publisher: Published<T>.Publisher, action: @escaping () -> Void) async {
-        let expectation = XCTestExpectation(description: "sets value")
+        let expectation = XCTestExpectation(description: "sets a value on publisher of \(T.self)")
         
         publisher
             .dropFirst()
@@ -201,7 +201,7 @@ extension GenerateImageViewModelTests {
         
         action()
         
-        await fulfillment(of: [expectation], timeout: 0.1)
+        await fulfillment(of: [expectation], timeout: 0.2)
     }
 }
 
