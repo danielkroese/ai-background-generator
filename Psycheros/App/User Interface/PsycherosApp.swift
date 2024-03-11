@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 @main
 struct PsycherosApp: App {
