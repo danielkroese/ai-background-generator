@@ -20,8 +20,8 @@ final class GenerateImageViewModel: ObservableObject {
     @Published var selectedThemes: Set<Theme> = [.cyberpunk, .space]
     @Published var selectedColor: AllowedColor = .blue
     @Published var messageModel: MessageModel?
+    @Published var isLoading: Bool = false
     
-    @Published private(set) var isLoading: Bool = false
     @Published private(set) var generatedImage: UIImage?
     
     private(set) var imageTask: Task<(), Never>?
@@ -123,7 +123,9 @@ final class GenerateImageViewModel: ObservableObject {
     }
     
     private func setLoading(_ value: Bool) {
-        isLoading = value
+        withAnimation {
+            isLoading = value
+        }
     }
     
     private func setImage(from image: UIImage) {

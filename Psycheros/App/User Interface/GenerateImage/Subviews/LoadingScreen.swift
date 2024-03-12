@@ -71,7 +71,7 @@ struct LoadingScreen: ViewModifier {
                     .stroke(style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
                     .foregroundColor(strokeColor)
                     .rotationEffect(Angle(degrees: -90))
-//                    .animation(.easeIn(duration: 8.0), value: progress)
+                    .animation(.easeIn(duration: 8.0), value: progress)
             }
         }
     }
