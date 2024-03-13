@@ -74,6 +74,7 @@
 		7B4EE5CF2B82821E006B4126 /* MessageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B4EE5CD2B82821E006B4126 /* MessageModel.swift */; };
 		7B7A96C72B475A1A00B9B112 /* GeoReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7A96C62B475A1A00B9B112 /* GeoReader.swift */; };
 		7B8720162B851DB200FCD6D0 /* LoadingScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8720152B851DB200FCD6D0 /* LoadingScreen.swift */; };
+		7B9090B72BA227CE00B66ABE /* MockImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9090B62BA227CE00B66ABE /* MockImageSaver.swift */; };
 		7B9928E82B2F4047008667AB /* ShadowModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E72B2F4047008667AB /* ShadowModifier.swift */; };
 		7B9928EA2B2F9BA3008667AB /* PillButtonShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */; };
 		7BBA31AD2B65AF5500358A2E /* ImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */; };
@@ -150,6 +151,7 @@
 		7B4EE5CD2B82821E006B4126 /* MessageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageModel.swift; sourceTree = "<group>"; };
 		7B7A96C62B475A1A00B9B112 /* GeoReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoReader.swift; sourceTree = "<group>"; };
 		7B8720152B851DB200FCD6D0 /* LoadingScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreen.swift; sourceTree = "<group>"; };
+		7B9090B62BA227CE00B66ABE /* MockImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockImageSaver.swift; sourceTree = "<group>"; };
 		7B9928E72B2F4047008667AB /* ShadowModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowModifier.swift; sourceTree = "<group>"; };
 		7B9928E92B2F9BA3008667AB /* PillButtonShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PillButtonShape.swift; sourceTree = "<group>"; };
 		7BBA31AC2B65AF5500358A2E /* ImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSaver.swift; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				652406852AFEC4C100AE193D /* MockNetworkSession.swift */,
 				6550C7F42B28F7B600B27030 /* MockImageGenerator.swift */,
+				7B9090B62BA227CE00B66ABE /* MockImageSaver.swift */,
 				7BDFE49D2B877E9D00D7B117 /* MockGenerateImageRouter.swift */,
 			);
 			path = Mock;
@@ -630,6 +633,7 @@
 				65B545ED2AFD92EE00B75EDE /* SpyImageService.swift in Sources */,
 				65250CC02AF7F3D2006BB662 /* ImageGeneratorTests.swift in Sources */,
 				65B545EA2AFD6D3000B75EDE /* Extensions.swift in Sources */,
+				7B9090B72BA227CE00B66ABE /* MockImageSaver.swift in Sources */,
 				65250CD82AF8346B006BB662 /* ImageService.swift in Sources */,
 				7B042D7B2B52D82B00385BD8 /* GenerateImageRouterTests.swift in Sources */,
 				659A92D02AFAF4FC00A6F351 /* ImageRequestModel.swift in Sources */,
