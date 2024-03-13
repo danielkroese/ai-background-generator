@@ -44,10 +44,9 @@ final class GenerateImageViewModelTests: XCTestCase {
         let sut = createSut()
         
         sut.selectedThemes = []
+        sut.tapped(on: .generate)
         
-        await expectedError(in: sut) {
-            sut.tapped(on: .generate)
-        }
+        _ = await sut.imageTask?.result
         
         XCTAssertEqual(sut.messageModel?.message, "A theme has to be selected.")
     }
@@ -58,10 +57,9 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         let dummyThemes: Set<Theme> = [.cyberpunk, .nature]
         sut.selectedThemes = dummyThemes
+        sut.tapped(on: .generate)
         
-        await expectedGeneratedImage(in: sut) {
-            sut.tapped(on: .generate)
-        }
+        _ = await sut.imageTask?.result
         
         XCTAssertEqual(mockImageGenerator.passedImageQuery?.themes, dummyThemes)
     }
@@ -71,10 +69,9 @@ final class GenerateImageViewModelTests: XCTestCase {
         let sut = createSut(imageGenerator: mockImageGenerator)
         
         sut.selectedColor = .red
+        sut.tapped(on: .generate)
         
-        await expectedGeneratedImage(in: sut) {
-            sut.tapped(on: .generate)
-        }
+        _ = await sut.imageTask?.result
         
         XCTAssertEqual(mockImageGenerator.passedImageQuery?.color, "red")
     }
@@ -82,9 +79,9 @@ final class GenerateImageViewModelTests: XCTestCase {
     func test_tappedGenerateImage_withSuccess_setsImage() async {
         let sut = createSut()
         
-        await expectedGeneratedImage(in: sut) {
-            sut.tapped(on: .generate)
-        }
+        sut.tapped(on: .generate)
+        
+        _ = await sut.imageTask?.result
         
         XCTAssertNil(sut.messageModel)
         XCTAssertFalse(sut.isLoading)
@@ -113,15 +110,13 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         mockImageGenerator.generateImageError = dummyError
         
-        await expectedError(in: sut) {
-            sut.tapped(on: .generate)
-        }
+        sut.tapped(on: .generate)
         
         mockImageGenerator.generateImageError = nil
         
-        await expectedGeneratedImage(in: sut) {
-            sut.tapped(on: .generate)
-        }
+        sut.tapped(on: .generate)
+        
+        _ = await sut.imageTask?.result
         
         XCTAssertNil(sut.messageModel)
     }
@@ -154,13 +149,13 @@ final class GenerateImageViewModelTests: XCTestCase {
         let mockImageSaver = MockImageSaver()
         let sut = createSut(imageSaver: mockImageSaver)
         
-        await expectedGeneratedImage(in: sut) {
-            sut.tapped(on: .generate)
-        }
+        sut.tapped(on: .generate)
         
-        await expectedValue(from: sut.$isLoading) {
-            sut.tapped(on: .save)
-        }
+        _ = await sut.imageTask?.result
+        
+        sut.tapped(on: .save)
+        
+        _ = await sut.imageTask?.result
         
         XCTAssertEqual(mockImageSaver.saveToPhotoAlbumCallCount, 1)
         XCTAssertEqual(mockImageSaver.saveToPhotoAlbumImage, sut.generatedImage)
@@ -179,28 +174,5 @@ extension GenerateImageViewModelTests {
             imageSaver: imageSaver,
             router: router
         )
-    }
-    
-    private func expectedError(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
-        await expectedValue(from: sut.$messageModel, action: action)
-    }
-    
-    private func expectedGeneratedImage(in sut: GenerateImageViewModel, action: @escaping () -> Void) async {
-        await expectedValue(from: sut.$generatedImage, action: action)
-    }
-    
-    private func expectedValue<T>(from publisher: Published<T>.Publisher, action: @escaping () -> Void) async {
-        let expectation = XCTestExpectation(description: "sets a value on publisher of \(T.self)")
-        
-        publisher
-            .dropFirst()
-            .sink { _ in
-                expectation.fulfill()
-            }
-            .store(in: &subscriptions)
-        
-        action()
-        
-        await fulfillment(of: [expectation], timeout: 0.2)
     }
 }
