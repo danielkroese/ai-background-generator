@@ -46,7 +46,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         sut.selectedThemes = []
         sut.tapped(on: .generate)
         
-        _ = await sut.imageTask?.result
+        await imageTaskCompletion(in: sut)
         
         XCTAssertEqual(sut.messageModel?.message, "A theme has to be selected.")
     }
@@ -59,7 +59,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         sut.selectedThemes = dummyThemes
         sut.tapped(on: .generate)
         
-        _ = await sut.imageTask?.result
+        await imageTaskCompletion(in: sut)
         
         XCTAssertEqual(mockImageGenerator.passedImageQuery?.themes, dummyThemes)
     }
@@ -71,7 +71,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         sut.selectedColor = .red
         sut.tapped(on: .generate)
         
-        _ = await sut.imageTask?.result
+        await imageTaskCompletion(in: sut)
         
         XCTAssertEqual(mockImageGenerator.passedImageQuery?.color, "red")
     }
@@ -81,7 +81,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         sut.tapped(on: .generate)
         
-        _ = await sut.imageTask?.result
+        await imageTaskCompletion(in: sut)
         
         XCTAssertNil(sut.messageModel)
         XCTAssertFalse(sut.isLoading)
@@ -96,7 +96,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         sut.tapped(on: .generate)
         
-        _ = await sut.imageTask?.result
+        await imageTaskCompletion(in: sut)
         
         XCTAssertNil(sut.generatedImage)
         XCTAssertEqual(sut.messageModel?.message, dummyError.errorDescription)
@@ -116,7 +116,7 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         sut.tapped(on: .generate)
         
-        _ = await sut.imageTask?.result
+        await imageTaskCompletion(in: sut)
         
         XCTAssertNil(sut.messageModel)
     }
@@ -151,11 +151,11 @@ final class GenerateImageViewModelTests: XCTestCase {
         
         sut.tapped(on: .generate)
         
-        _ = await sut.imageTask?.result
+        await imageTaskCompletion(in: sut)
         
         sut.tapped(on: .save)
         
-        _ = await sut.imageTask?.result
+        await imageTaskCompletion(in: sut)
         
         XCTAssertEqual(mockImageSaver.saveToPhotoAlbumCallCount, 1)
         XCTAssertEqual(mockImageSaver.saveToPhotoAlbumImage, sut.generatedImage)
@@ -174,5 +174,9 @@ extension GenerateImageViewModelTests {
             imageSaver: imageSaver,
             router: router
         )
+    }
+    
+    private func imageTaskCompletion(in sut: GenerateImageViewModel) async {
+        _ = await sut.imageTask?.result
     }
 }
