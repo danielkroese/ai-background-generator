@@ -18,19 +18,23 @@ struct ThemeModalContent: View {
                     Button {
                         selectedThemes.toggle(theme)
                     } label: {
-                        RoundedRectangle(cornerRadius: 32)
-                            .fill(isActive(theme) ? .accentColor : Color.clear)
-                            .frame(width: 128, height: 76)
-                            .overlay {
-                                Text(theme.rawValue)
-                                    .font(.title2)
-                                    .foregroundStyle(isActive(theme) ? .white : .accentColor)
-                            }
-                            .shadowModifier()
+                        button(for: theme)
                     }
                 }
             }
             .padding(32)
         }
+    }
+    
+    private func button(for theme: Theme) -> some View {
+        RoundedRectangle(cornerRadius: 32)
+            .fill(isActive(theme) ? .accentColor : Color.clear)
+            .frame(width: 128, height: 76)
+            .overlay {
+                Text(theme.rawValue)
+                    .font(.title2)
+                    .foregroundStyle(isActive(theme) ? .white : .accentColor)
+            }
+            .shadowModifier()
     }
 }
