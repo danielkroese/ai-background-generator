@@ -1,4 +1,4 @@
-# AI Background generator
+# WallGen, an AI Background generator
 App for iOS to generate a background image. This app let's you select a color and a few themes and then generates an image for you through stability.ai's API. _Key not included._
 
 ## Included
