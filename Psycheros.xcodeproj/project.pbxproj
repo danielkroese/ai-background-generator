@@ -812,7 +812,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Psycheros/Config/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Wallgen;
+				INFOPLIST_KEY_CFBundleDisplayName = WallGen;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save your generated background";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
@@ -854,7 +854,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Psycheros/Config/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = Wallgen;
+				INFOPLIST_KEY_CFBundleDisplayName = WallGen;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.graphics-design";
 				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Save your generated background";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;

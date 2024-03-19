@@ -5,7 +5,7 @@ struct SaveButton: View {
     
     var body: some View {
         PillButton(
-            rounded: .all,
+            rounded: .trailing,
             imageName: "square.and.arrow.down",
             action: action
         ) {

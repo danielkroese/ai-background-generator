@@ -18,8 +18,18 @@ struct GenerateImageView: View {
             isPresented: .constant(viewModel.isPresenting(.tools)),
             alignment: .top
         ) {
-            SaveButton {
-                viewModel.tapped(on: .save)
+            HStack {
+                PillButton(
+                    rounded: .leading,
+                    imageName: "square.and.arrow.up") { viewModel.tapped(on: .save) // .share
+                    } label: {
+                        Text("Share")
+                            .fixedSize(horizontal: true, vertical: false)
+                    }
+                
+                SaveButton {
+                    viewModel.tapped(on: .save)
+                }
             }
             .padding()
             .frame(maxWidth: .infinity, alignment: .trailing)
