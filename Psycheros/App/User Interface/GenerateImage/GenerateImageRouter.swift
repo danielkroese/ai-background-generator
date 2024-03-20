@@ -12,7 +12,7 @@ protocol GenerateImageRouting {
 }
 
 enum GenerateImageElement {
-    case tools, colors, themes, generate, save
+    case tools, colors, themes, generate, save, share
 }
 
 final class GenerateImageRouter: GenerateImageRouting {

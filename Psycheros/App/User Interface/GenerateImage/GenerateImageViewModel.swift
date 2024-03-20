@@ -87,6 +87,10 @@ final class GenerateImageViewModel: ObservableObject {
             router.dismissAll(except: .tools)
             
             tappedSaveImage()
+        case .share:
+            router.dismissAll(except: .tools)
+            
+            tappedShareImage()
         case .tools:
             break
         }
@@ -114,6 +118,11 @@ final class GenerateImageViewModel: ObservableObject {
         setError(nil)
         
         saveImage()
+    }
+    
+    private func tappedShareImage() {
+        // prepare generatedImage
+        // open system share sheet
     }
     
     private func didSelectColor() {

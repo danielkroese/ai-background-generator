@@ -21,7 +21,7 @@ struct GenerateImageView: View {
             HStack {
                 PillButton(
                     rounded: .leading,
-                    imageName: "square.and.arrow.up") { viewModel.tapped(on: .save) // .share
+                    imageName: "square.and.arrow.up") { viewModel.tapped(on: .share)
                     } label: {
                         Text("Share")
                             .fixedSize(horizontal: true, vertical: false)
