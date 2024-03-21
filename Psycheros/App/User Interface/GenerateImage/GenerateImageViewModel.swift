@@ -199,7 +199,7 @@ final class GenerateImageViewModel: ObservableObject {
             setLoading(false)
         }
         
-        imageTask = Task(priority: .background) {
+        imageTask = Task(priority: .userInitiated) {
             do {
                 try await action()
             } catch {
