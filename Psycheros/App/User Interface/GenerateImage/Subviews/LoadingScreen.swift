@@ -28,7 +28,7 @@ struct LoadingScreen: ViewModifier {
                     value = 0.9
                 }
             } else {
-                withAnimation(.easeInOut(duration: 0.5)) {
+                withAnimation(.easeInOut(duration: 0.1)) {
                     value = 1.0
                 } completion: {
                     isOverlayVisible = false
@@ -71,6 +71,7 @@ struct LoadingScreen: ViewModifier {
                     .stroke(style: StrokeStyle(lineWidth: strokeWidth, lineCap: .round))
                     .foregroundColor(strokeColor)
                     .rotationEffect(Angle(degrees: -90))
+                    .transition(.scale)
                     .animation(.easeIn(duration: 8.0), value: progress)
             }
         }

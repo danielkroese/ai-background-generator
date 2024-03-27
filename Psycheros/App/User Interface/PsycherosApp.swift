@@ -5,7 +5,6 @@ struct PsycherosApp: App {
     var body: some Scene {
         WindowGroup {
             GenerateImageView(viewModel: GenerateImageViewModel())
-                .preferredColorScheme(.dark)
         }
     }
 }
