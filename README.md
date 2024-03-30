@@ -7,6 +7,10 @@ App for iOS to generate a background image. This app let's you select a color an
 - Generate an image
 - Saving the generated image
 
+## Not included
+- API key for stability.ai
+    - Add file `config.xcconfig` in the folder Config with content: `STABILITY_API_KEY = api-key`.
+
 ## Technical details
 For this project I wanted to test my skills and build an app from the ground up.
 - Business logic is under test, code coverage > 90%
